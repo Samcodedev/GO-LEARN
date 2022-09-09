@@ -1,0 +1,48 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    background-color: rgb(244, 244, 248);
+    /* color: #efeff0; */
+    overflow-x: hidden;
+}
+p{
+    color: #606060;
+    margin-bottom: 15px;
+    line-height: 1.7;
+    font-size: 16px;
+}
+a{
+    text-decoration: none;
+    color: #027dff;
+    box-shadow: none;
+    background-color: transparent;
+}
+span{
+    color: #027dff;
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Nunito', sans-serif;
+    color: #221638;
+    line-height: 1.2;
+    margin-top: 0;
+    font-weight: 800;
+}
+h2{
+    font-size: 36px;
+    font-weight: 900 !important;
+}
+
+@media screen and (max-width: 400px){
+    h1, h2, h3, h4, h5, h6{
+        font-size: 12px;
+    }
+    h2{
+        font-size: 26px;
+    }
+}

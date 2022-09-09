@@ -1,0 +1,22 @@
+.title{
+    display: flex;
+    justify-content: center;
+}
+.title .sub-title{
+    width: 90%;
+    /* background-color: blueviolet; */
+    display: flex;
+    padding-top: 80px;
+}
+.title .sub-title .detail{
+    width: 50%;
+}
+.title .sub-title .shear-save{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.title .sub-title .shear-save a{
+    margin-left: 15px;
+}

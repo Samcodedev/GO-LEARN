@@ -1,0 +1,204 @@
+/* general */
+
+
+
+.head{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.head .sub-head{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    background-position: bottom right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 100px;
+    margin-left: 0;
+    margin-right: 0;
+}
+.head .sub-head .head-text{
+    width: 40%;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.head .sub-head .head-text h1{
+    margin-bottom: 18px;
+    font-size: 48px;
+    color: #221638;
+    font-family: 'Nunito',sans-serif;
+    line-height: 1.2;
+    margin-top: 0;
+}
+.head .sub-head .head-text p{
+    font-family: "Nunito Sans",Sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: #606060;
+    margin-bottom: 15px;
+}
+.head .sub-head .head-text a button{
+    padding: 10px 20px;
+    color: #ffffff;
+    background: #027DFF;
+    border-radius: 5px;
+    border: 2px solid #027DFF;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+.head .sub-head .head-card{
+    width: 58%;
+    display: flex;
+    padding-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+.head .sub-head .head-card .card-wrapper{
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+    width: 50%;
+}
+.head .sub-head .head-card .card-wrapper:last-child .card{
+    margin-top: 90px;
+    margin-bottom: 0;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff;
+    -webkit-box-shadow: 0 8px 16px 0 rgb(146 184 255 / 20%);
+    box-shadow: 0 8px 16px 0 rgb(146 184 255 / 20%);
+}
+.head .sub-head .head-card .card-wrapper:first-child .card{
+    margin-bottom: 0;
+    margin-bottom: 90;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff;
+    -webkit-box-shadow: 0 8px 16px 0 rgb(146 184 255 / 20%);
+    box-shadow: 0 8px 16px 0 rgb(146 184 255 / 20%);
+}
+
+/* i still need to style the card-prof and the card-img */
+.head .sub-head .head-card .card-wrapper .card .card-img{
+    width: 100%;
+    position: relative;
+}
+.head .sub-head .head-card .card-wrapper .card .card-img img{
+    position: relative;
+    width: 100%;
+}
+.head .sub-head .head-card .card-wrapper .card .cont{
+    padding: 20px;
+}
+.head .sub-head .head-card .card-wrapper .card .cont .card-prof{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+    height: 30px;
+    /* background-color: red; */
+}
+.head .sub-head .head-card .card-wrapper .card .cont .card-prof img{
+    position: relative;
+    height: 70%;
+    margin-right: 10px;
+}
+/* .head .sub-head .head-card .card-wrapper .card .card-prof span{
+    
+} */
+.head .sub-head .head-card .card-wrapper .card .cont .card-content h1 a{
+    display: inline-block;
+    text-decoration: none;
+    color: #221638;
+    box-shadow: none;
+    background-color: transparent;
+
+    line-height: 1.3;
+    font-size: 24px;
+    font-weight: 800;
+}
+.head .sub-head .head-card .card-wrapper .card .cont .card-content h1 a:hover{
+    color: #0056b3;
+}
+
+.head .sub-head .head-card .card-wrapper .card .cont .card-bottom{
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+.head .sub-head .head-card .card-wrapper .card .cont .card-bottom ul{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    width: 100%;
+    position: relative;
+    padding-inline-start: 0;
+}
+.head .sub-head .head-card .card-wrapper .card .cont .card-bottom ul li{
+    color: #606060;
+    font-size: 15px;
+    position: relative;
+    color: #000000;
+    /* padding-left: 25px;
+    padding-right: 7px; */
+}
+.head .sub-head .head-card .card-wrapper .card .cont .card-bottom ul li a{
+    color: #000000;
+}
+
+
+
+@media screen and (max-width: 1100PX){
+    .head .sub-head{
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+        /* background-color: brown; */
+    }
+    .head .sub-head .head-text{
+        width: 90%;
+        padding-top: 0px;
+        /* background-color: #0056b3; */
+    }
+    .head .sub-head .head-card{
+        width: 100%;
+        margin-top: 50px;
+    }
+}
+@media screen and (max-width: 990PX){
+    .head .sub-head{
+        align-items: center;
+    }
+    .head .sub-head .head-text{
+        text-align: center;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 767PX){
+    .head .sub-head .head-card{
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .head .sub-head .head-card .card-wrapper{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 580PX){
+    .head .sub-head .head-card .card-wrapper{
+        width: 90%;
+    }
+}

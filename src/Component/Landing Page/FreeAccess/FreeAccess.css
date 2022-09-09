@@ -1,0 +1,13 @@
+.Online{
+    margin-bottom: 20px;
+}
+.sub-Online{
+    flex-direction: row-reverse;
+    background-color: #ffffff;
+}
+.sub-Online .Sub-Online-img{
+    justify-content: flex-end;
+}
+.cont{
+    margin-left: 20px;
+}

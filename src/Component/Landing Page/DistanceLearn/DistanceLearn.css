@@ -1,0 +1,26 @@
+.OnlineBlog .sub-OnlineBlog .distance-img-div{
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+.OnlineBlog .sub-OnlineBlog .distance-img-div img{
+    position: relative;
+    width: 150%;
+    left: -250px;
+}
+
+@media screen and (max-width: 992px){
+    .OnlineBlog .sub-OnlineBlog .distance-img-div{
+        width: 80%;
+        justify-content: center;
+        overflow: visible;
+        /* background-color: brown; */
+    }
+    .OnlineBlog .sub-OnlineBlog .distance-img-div img{
+        left: 0px;
+        width: 100%;
+    }
+}
