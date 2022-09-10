@@ -24,12 +24,12 @@ const Title = () => {
             <div className="sub-title">
                 <div className="detail">
                     <span>{star}</span>
-                    <a href=""><h3>{details}</h3></a>
-                    <p>Categories: <a href="">{cate1}</a> <a href="">{cate2}</a> <a href="">{cate3}</a> </p>
+                    <a href="/construction"><h3>{details}</h3></a>
+                    <p>Categories: <a href="/construction">{cate1}</a> <a href="/construction">{cate2}</a> <a href="/construction">{cate3}</a> </p>
                 </div>
                 <div className="shear-save">
-                    <a href="">Share</a>
-                    <a href="">Wishlist</a>
+                    <a href="/construction">Share</a>
+                    <a href="/construction">Wishlist</a>
                 </div>
             </div>
         </div>

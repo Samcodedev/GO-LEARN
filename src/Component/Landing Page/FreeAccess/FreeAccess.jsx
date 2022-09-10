@@ -14,7 +14,7 @@ const FreeAccess = () => {
                     <span>Get Instant Access For Free</span>
                     <h2>Self Development Course</h2>
                     <p>Go-Learn Self Development Course can assist you in bringing the significant changes in personal understanding and reshaping the confidence to achieve the best from your career! We trust that learning should be enjoyable, and only that can make substantial changes to someone!</p>
-                    <a href=""><button>Start For Free</button></a>
+                    <a href="/construction"><button>Start For Free</button></a>
                 </div>
             </div>
         </div>

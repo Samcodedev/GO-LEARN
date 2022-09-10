@@ -9,12 +9,12 @@ const Card = (props) => {
                 <img src={img} alt=""/>
             </div>
             <div className="content">
-                <a href=""><h3>{props.title}</h3></a>
+                <a href="/construction"><h3>{props.title}</h3></a>
                 <p>{props.content}</p>
                 <div className="buttom">
                     <ul>
-                        <li><a href="">{props.author}</a></li>
-                        <li><a href="">{props.date}</a></li>
+                        <li><a href="/construction">{props.author}</a></li>
+                        <li><a href="/construction">{props.date}</a></li>
                     </ul>
                 </div>
             </div>

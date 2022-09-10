@@ -109,7 +109,49 @@
             "tag2": "Crypto",
             "tag3": "DeFi"
         },
-        "link": "/DecFinance"
+        "link": "/DecFinance",
+        "about": {
+            "description": "This course is designed to help you understand decentralised finance and how to navigate and benefit from protocols built for DeFI on the blockchain.",
+            "knowledge": {
+                "first": "Anyone with a basic understanding of cryptocurrencies can take this course.",
+                "second": "Interested students also need to possess familiarity with cryptocurrency wallets and cyber security best practices"
+            }
+        },
+        "gain": {
+            "learn": {
+                "first": "At the end of this course you will have been taught the following:",
+                "second": "What DeFi is at a fundamental level",
+                "third": "What DeFi is at a fundamental level",
+                "forth": "How to set up a Binance wallet",
+                "fifth": "How to use the safest and most popular DeFi tools and services for earning profit in this exciting new space!"
+            }
+        },
+        "content": {
+            "module1": {
+                "head": "Module 1: What is DEFI",
+                "body": "What is DeFi"
+            },
+            "module2": {
+                "head": "Module 2: Bitcoin as a DEFI",
+                "body": "Bitcoin as DeFi"
+            },
+            "module3": {
+                "head": "Module 3: Liquidity Mining",
+                "body": "Liquidity Mining"
+            },
+            "module4": {
+                "head": "Module 4: DAPPS and DEXES",
+                "body": "Decentralized Exchanges"
+            },
+            "module5": {
+                "head": "Module 5: Liquidity Mining and Yield Farming",
+                "body": "DeFi Impermament Loss"
+            },
+            "module6": {
+                "head": "Join the Go-Learn DeFi Community",
+                "body": "Join Community"
+            }
+        }
     },
     {
         "id": "007",

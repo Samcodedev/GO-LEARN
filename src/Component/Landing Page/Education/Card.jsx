@@ -9,7 +9,7 @@ const Card = (props) => {
             </div>
             <h3>{props.title}</h3>
             <p>{props.content}</p>
-            <a href=""><span>!Start Now</span></a>
+            <a href="/construction"><span>!Start Now</span></a>
         </div>
     )
 }

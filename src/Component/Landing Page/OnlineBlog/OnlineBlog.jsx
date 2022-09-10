@@ -23,7 +23,7 @@ const OnlineBlog = () => {
                             <li> Self Development</li>
                         </ul>
                     </div>
-                    <a href=""><button>View All Courses</button></a>
+                    <a href="/construction"><button>View All Courses</button></a>
                 </div>
             </div>
         </div>

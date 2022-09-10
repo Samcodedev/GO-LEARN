@@ -14,7 +14,7 @@ const Olubori = () => {
                     <span>Cheap access to courses </span>
                     <h2>Get Access To All Available Courses For 1,000 Naira</h2>
                     <p>You get a chance to access all our courses for a thousand naira. This thousand naira gives you access to our courses for a year.</p>
-                    <a href=""><button>Start For Free</button></a>
+                    <a href="/construction"><button>Start For Free</button></a>
                 </div>
             </div>
         </div>

@@ -58,6 +58,7 @@
 }
 .education .sub-education .education-cards .box:hover{
     bottom: 20px;
+    transition: 500ms ease-in;
 }
 .education .sub-education .education-cards .box .icons{
     margin-bottom: 20px;

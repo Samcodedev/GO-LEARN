@@ -9,7 +9,7 @@ const Affiliate = () => {
                     <span>GoLearn Affiliates</span>
                     <h2>Earn and Get Quality Skills Through Our Affiliate Program</h2>
                     <p>We pride ourselves in being the only eLearning platform that enables students on our platform to earn while they improve their skill.</p>
-                    <a href=""><button> Get Started Now</button></a>
+                    <a href="/construction"><button> Get Started Now</button></a>
                 </div>
             </div>
         </div>

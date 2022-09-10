@@ -8,6 +8,8 @@ import About from './About/About'
 import Blog from './Blog/Blog'
 import Courses from './Courses/Courses'
 import DecFinance from './DecFinance/DecFinance'
+import Contact from './Contact/Contact'
+import Construction from './Construction'
 
 
 function Component(){
@@ -22,6 +24,8 @@ function Component(){
                         <Route path="Blog" element={<Blog />} />
                         <Route path="Courses" element={<Courses />} />
                         <Route path="DecFinance" element={<DecFinance />} />
+                        <Route path="Contact-Us" element={<Contact />} />
+                        <Route path="construction" element={<Construction />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

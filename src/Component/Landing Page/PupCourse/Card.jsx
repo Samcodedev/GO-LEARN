@@ -14,7 +14,7 @@ const Card = (props) => {
                 <div className="cont">
                     <div className="card-prof">
                         <img src={prof} alt=""/>
-                        <span><a href="">{props.author}</a></span>
+                        <span><a href="/construction">{props.author}</a></span>
                     </div>
                     <div className="card-content">
                         <h1><a href={props.link}>{props.title}</a></h1>
@@ -22,8 +22,8 @@ const Card = (props) => {
                     </div>
                      <div className="card-bottom">
                         <ul>
-                            <li><a href="#">Lesson {props.lesson}</a></li>
-                            <li><a href="#">Students {props.students}</a></li>
+                            <li><a href="/construction">Lesson {props.lesson}</a></li>
+                            <li><a href="/construction">Students {props.students}</a></li>
                         </ul>
                     </div>
                 </div>

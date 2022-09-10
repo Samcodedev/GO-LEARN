@@ -9,7 +9,7 @@
     width: 100%;
     top: 0;
     /* overflow-x: hidden; */
-    z-index: 5;
+    z-index: 10;
 }
 .navbar .sub-navbar{
     width: 95%;
@@ -144,4 +144,22 @@
 }
 .navbar .sub-navbar .register a button:hover{
     background-color: #221638;
+}
+
+
+
+
+@media screen and (max-width: 600px){
+    .navbar .sub-navbar .register{
+        display: none;
+    }
+    .navbar .sub-navbar .logo-search input{
+        display: none;
+    }
+    .navbar .sub-navbar .logo-search{
+        width: 30%;
+    }
+    .navbar .sub-navbar .navigation{
+        width: 75%;
+    }
 }

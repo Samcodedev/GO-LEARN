@@ -11,7 +11,7 @@ const Head = () => {
                 <div className="head-text">
                     <h1>Nigeria's foremost Learning and Earning Platform</h1>
                     <p>At Go-Learn, we believe that flexible and easy to access learning opportunities can bring a significant change in how individuals prefer to learn! Therefore, we offers you the possibility of earning while you enjoy the beauty of eLearning!</p>
-                    <a href=""><button>Join For Free</button></a>
+                    <a href="/construction"><button>Join For Free</button></a>
                 </div>
                 <div className="head-card">
                     <div className="card-wrapper">
@@ -22,16 +22,16 @@ const Head = () => {
                             <div className="cont">
                                 <div className="card-prof">
                                     <img src={prof} alt=""/>
-                                    <span><a href="">Trader Hack</a></span>
+                                    <span><a href="/construction">Trader Hack</a></span>
                                 </div>
                                 <div className="card-content">
-                                    <h1><a href="">Cryptocurrency Trading Course</a></h1>
+                                    <h1><a href="/construction">Cryptocurrency Trading Course</a></h1>
                                     <p>This course is built for persons in search of clarity on the workings of the cyptocurrencies market and those who are relatively new to crypto.</p>
                                 </div>
                                 <div className="card-bottom">
                                     <ul>
-                                        <li><a href="">Lesson 9</a></li>
-                                        <li><a href="">Students 288</a></li>
+                                        <li><a href="/construction">Lesson 9</a></li>
+                                        <li><a href="/construction">Students 288</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -45,16 +45,16 @@ const Head = () => {
                             <div className="cont">
                                 <div className="card-prof">
                                     <img src={prof} alt=""/>
-                                    <span><a href="">ABOKI</a></span>
+                                    <span><a href="/construction">ABOKI</a></span>
                                 </div>
                                 <div className="card-content">
-                                    <h1><a href="">Affiliate Marketing Course</a></h1>
+                                    <h1><a href="/construction">Affiliate Marketing Course</a></h1>
                                     <p>This course will teach you strategies to make money with affiliate Marketing today and help you create a great passive income revenue system.</p>
                                 </div>
                                 <div className="card-bottom">
                                 <ul>
-                                    <li><a href="">Lesson 11</a></li>
-                                    <li><a href="">Students 377</a></li>
+                                    <li><a href="/construction">Lesson 11</a></li>
+                                    <li><a href="/construction">Students 377</a></li>
                                 </ul>
                                 </div>
                             </div>

@@ -91,17 +91,33 @@
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail{
     margin-top: 24px;
 
+
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 350px;
+    height: -moz-fit-content;
+    height: fit-content;
+    max-width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #cdcfd5;
+    position: relative;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    /* overflow: hidden; */
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-top{
     padding-top: 24px;
     padding-bottom: 24px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    width: 285px;
+    position: relative;
     padding: 16px 32px;
     margin: 0;
     background-color: #FCFCFD;
-    border: 1px solid #cdcfd5;
+    border-bottom: 1px solid #cdcfd5;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-top h3{
     color: #606060;
@@ -129,10 +145,10 @@
 
 
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer{
-    width: fit-content;
-    border: 1px solid #cdcfd5;
+    /* width: fit-content; */
+    /* border: 1px solid #cdcfd5; */
     border-top: none;
-    width: 349px;
+    /* width: 100%; */
     position: relative;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
@@ -141,7 +157,6 @@
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first{
     padding-top: 24px;
     padding-bottom: 24px;
-    width: 285px;
     padding: 16px 32px;
     margin: 0;
     background-color: #FCFCFD;
@@ -156,6 +171,7 @@
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first .tags{
     /* background-color: burlywood; */
+    width: 100%;
     display: flex;
     justify-content: space-around;
 }
@@ -167,7 +183,6 @@
     padding: 7px 23px;
     border: 1px solid #cdcfd5;
     color: #41454F;
-    margin-left: 15px;
     border-radius: 6px;
     transition: 200ms;
     cursor: pointer;
@@ -301,6 +316,7 @@
     border: 1px solid #E0E2EA;
     border-radius: 6px;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content .tutor-according .tutor-according-item .tutor-according-head{
     position: relative;
@@ -330,11 +346,56 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 16px;
-    transition: 300ms ease-in;
+    transition: 500ms ease-in;
+    border-top: 1px solid #E0E2EA;
+}
+.DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content .tutor-according .tutor-according-item .tutor-according-body:hover{
+    background-color: #eff1f6;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content .tutor-according .tutor-according-item .tutor-according-body h5{
     margin-block-end: 0;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content .tutor-according .tutor-according-item:hover .tutor-according-body{
     display: flex;
+    transition: 500ms ease-in;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1097px){
+    .DecFinanceDetails .sub-DecFinanceDetails{
+        flex-direction: column;
+    }
+    .DecFinanceDetails .sub-DecFinanceDetails .main-detail{
+        width: 100%;
+    }
+    .DecFinanceDetails .sub-DecFinanceDetails .sub-detail{
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-top: 50px;
+    }
+    .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail{
+        margin-top: 0px;
+    }
+}
+@media screen and (max-width: 811px){
+    .DecFinanceDetails .sub-DecFinanceDetails .sub-detail{
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 50px;
+    }
+    .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail{
+        margin-top: 24px;
+    }
 }
