@@ -2,7 +2,7 @@ import React from 'react'
 import LandingPage from './Landing Page/LandingPage'
 import Layout from './Layout'
 
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { HashRouter, Routes, Route } from "react-router-dom"
 
 import About from './About/About'
 import Blog from './Blog/Blog'
@@ -15,7 +15,7 @@ import Construction from './Construction'
 function Component(){
     return(
         <div>
-            <BrowserRouter>
+            <HashRouter>
                 <Routes>
                     <Route element={<Layout />}>
                         {/* <Route path="NavBar" element={<NavBar />} /> */}
@@ -28,7 +28,7 @@ function Component(){
                         <Route path="construction" element={<Construction />} />
                     </Route>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     )
 }
