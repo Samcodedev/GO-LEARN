@@ -2,7 +2,6 @@ import React from 'react';
 import './PupCourse.css'
 import PupCryto from '../Data/PupCrypto'
 import Card from './Card.jsx'
-import ClassesData from '../../Courses/Data/ClassesData'
 
 const PupCourse = () => {
 
