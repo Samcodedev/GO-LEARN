@@ -30,7 +30,7 @@ const PupCourse = () => {
                     {cards}
                 </div>
                 <div className="pupcourse-bottom-text">
-                    <p>Enjoy the top notch learning methods and achieve next level skills! You are the creator of your own career & we will guide you through that. <a href="">Register Free Now!</a> </p>
+                    <p>Enjoy the top notch learning methods and achieve next level skills! You are the creator of your own career & we will guide you through that. <a href="/construction">Register Free Now!</a> </p>
                     <a href="/construction"><button>VIEW MORE COURSES</button></a>
                 </div>
             </div>
