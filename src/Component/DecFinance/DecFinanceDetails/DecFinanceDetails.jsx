@@ -151,7 +151,7 @@ const DecFinanceDetails = () => {
                             <div className="profile">
                                 <img src={profile} alt=""/>
                                 <div className="content">
-                                    <a href="">{name}</a>
+                                    <a href="/construction">{name}</a>
                                     <span>{experience}</span>
                                 </div>
                             </div>
