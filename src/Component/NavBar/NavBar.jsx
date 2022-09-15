@@ -66,7 +66,6 @@ const NavBar = () => {
                     </div>
                 </div>
                 <div className="register">
-<<<<<<< HEAD
                     <div className="group">
                         <Link to="/register"><button>Login/register</button></Link>
                         <input type="text" placeholder="Search for anything" className='search'/>
@@ -74,9 +73,6 @@ const NavBar = () => {
                     <div className="option">
                         <img src={option} alt="" />
                     </div>
-=======
-                    <a href="/construction"><button>Login/register</button></a>
->>>>>>> 459cd684714a1564a95a1e540734be9d85559a87
                 </div>
             </div>
         </div>
