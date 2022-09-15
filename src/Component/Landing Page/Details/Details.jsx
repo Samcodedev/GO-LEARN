@@ -1,19 +1,19 @@
 import './Details.css'
-import React, { useEffect } from "react"
+// import React, { useEffect } from "react"
 
 const Details = () => {
 
-    const [value, func] = React.useState(0)
+    // const [value, func] = React.useState(0)
 
-    useEffect(() => {
-        setInterval(() => {
-            func(prevCount => {
-                return(
-                    prevCount + 1
-                )
-            })
-        }, 2000)
-    }, [])
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         func(prevCount => {
+    //             return(
+    //                 prevCount + 1
+    //             )
+    //         })
+    //     }, 2000)
+    // }, [])
     
     // console.log(value)
 

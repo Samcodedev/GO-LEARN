@@ -1,10 +1,10 @@
 html,body{
     margin: 0;
     padding: 0;
-    width: 100vw;
+    /* width: 100vw; */
     background-color: rgb(244, 244, 248);
     /* color: #efeff0; */
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 p{
     color: #606060;

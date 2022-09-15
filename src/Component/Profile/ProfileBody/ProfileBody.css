@@ -244,7 +244,6 @@
 }
 .profilebody .sub-profilebody .dashboard .dashboard-main .course .img-div{
     width: 35%;
-    height: 100%;
     display: flex;
     align-items: center;
 }
@@ -285,4 +284,86 @@
     width: 20%;
     height: 4px;
     background-color: #007bff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1132px) {
+    .profilebody .sub-profilebody .dashboard .dashboard-main{
+        width: 70%;
+    }
+    .profilebody .sub-profilebody .dashboard .dashboard-nav{
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 994px) {
+    .profilebody .sub-profilebody .dashboard .dashboard-main .properties .box{
+        width: 100%;
+    }
+
+    .profilebody .sub-profilebody .dashboard .dashboard-main .course{
+        flex-direction: column;
+    }
+    .profilebody .sub-profilebody .dashboard .dashboard-main .course .img-div{
+        width: 100%;
+    }
+    .profilebody .sub-profilebody .dashboard .dashboard-main .upload{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 756px) {
+    .profilebody .sub-profilebody .dashboard{
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .profilebody .sub-profilebody .dashboard .dashboard-main{
+        width: 100%;
+    }
+    .profilebody .sub-profilebody .dashboard .dashboard-nav{
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .profilebody .sub-profilebody .dashboard .dashboard-nav ul{
+        border: 1px solid #cdcfd5;
+    }
+    
+
+
+
+    .profilebody .sub-profilebody .top{
+        width: 100%;
+        flex-direction: column-reverse;
+    }
+    .profilebody .sub-profilebody .top .alert{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .profilebody .sub-profilebody .top .details{
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 502px) {
+    .profilebody .sub-profilebody .dashboard .dashboard-nav{
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+    }
+    .profilebody .sub-profilebody .dashboard .dashboard-nav ul{
+        /* width: ; */
+        margin-right: 0px;
+    }
 }

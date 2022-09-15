@@ -1,6 +1,6 @@
 import React from 'react';
 import './RegisterBody.css'
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 
 const RegisterBody = () => {
@@ -14,31 +14,30 @@ const RegisterBody = () => {
     //     console.log(formValue)
     // }
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    // const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    // const onSubmit = data => console.log(data);
 
-    console.log(watch("example")); 
+    // console.log(watch("example")); 
 
     return(
         <div className='registerbody'>
             <div className="sub-registerbody">
-                <form action="">
+                <form action="/profile">
                     <label htmlFor="">First Name</label>
                     <input type="text" placeholder='First Name' required />
                     <label htmlFor="">Last Name</label>
                     <input type="text" placeholder='Last Name' required />
                     <label htmlFor="">User Name</label>
-                    <input type="text" placeholder='User Name' {...register("User Name", { required: true })}  />
+                    <input type="text" placeholder='User Name'   />
 
                     <label htmlFor="">E-mail</label>
-                    <input type="email" placeholder='E-mail' {...register("E-mail", { required: true })} />
+                    <input type="email" placeholder='E-mail'  />
 
                     <label htmlFor="" >Password</label>
-                    <input type="password" placeholder='Password' {...register("Password", { required: true })} />
+                    <input type="password" placeholder='Password' />
                     <label htmlFor="">Confirm Password</label>
                     <input type="password" placeholder='Confirm Password' id='com_password' required />
-                    {errors.exampleRequired && <span>This field is required</span>}
-                    <input type="submit" value="Register" className='submit'  onSubmit={handleSubmit(onSubmit)} />
+                    <input type="submit" value="Register" className='submit' />
                 </form>
             </div>
         </div>

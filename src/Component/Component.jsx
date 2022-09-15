@@ -16,7 +16,7 @@ import Profile from './Profile/Profile'
 
 function Component(){
     return(
-        <div>
+        <>
             <HashRouter>
                 <Routes>
                     <Route element={<Layout />}>
@@ -33,7 +33,7 @@ function Component(){
                     </Route>
                 </Routes>
             </HashRouter>
-        </div>
+        </>
     )
 }
 
