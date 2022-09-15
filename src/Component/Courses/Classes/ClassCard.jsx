@@ -2,7 +2,6 @@ import React from 'react';
 import './Classes.css'
 import img from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 import profile from './img/Group 1.png'
-import { Link } from 'react-router-dom';
 
 const ClassCard = (props) => {
     return(

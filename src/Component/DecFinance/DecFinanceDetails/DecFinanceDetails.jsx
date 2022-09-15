@@ -152,7 +152,11 @@ const DecFinanceDetails = () => {
                             <div className="profile">
                                 <img src={profile} alt=""/>
                                 <div className="content">
+<<<<<<< HEAD
                                     <Link to="/construction">{name}</Link>
+=======
+                                    <a href="/construction">{name}</a>
+>>>>>>> 459cd684714a1564a95a1e540734be9d85559a87
                                     <span>{experience}</span>
                                 </div>
                             </div>
