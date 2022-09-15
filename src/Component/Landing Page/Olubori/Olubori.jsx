@@ -2,6 +2,7 @@ import React from 'react';
 import './Olubori.css'
 import '../OnlineBlog/OnlineBlog.css'
 import img from './img/olubori-free.png'
+import { Link } from 'react-router-dom';
 
 const Olubori = () => {
     return(
@@ -14,7 +15,7 @@ const Olubori = () => {
                     <span>Cheap access to courses </span>
                     <h2>Get Access To All Available Courses For 1,000 Naira</h2>
                     <p>You get a chance to access all our courses for a thousand naira. This thousand naira gives you access to our courses for a year.</p>
-                    <a href="/construction"><button>Start For Free</button></a>
+                    <Link to=""><button>Start For Free</button></Link>
                 </div>
             </div>
         </div>

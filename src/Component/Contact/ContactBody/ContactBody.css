@@ -70,6 +70,9 @@
     margin-top: 2px;
     color: #202020;
 }
+.contactbody .sub-contactbody .content-area ul li:hover .icon{
+    background-color: #027dff;
+}
 
 
 
@@ -115,7 +118,7 @@
     display: block;
     width: 100%;
     border: none;
-    color: #ffffff !important;
+    color: #6d6c6c;
     background-color: #EAF4FF;
     height: 50px;
     padding-left: 15px;
@@ -190,7 +193,7 @@
         align-items: center;
     }
     .contactbody .sub-contactbody .content-area{
-        width: 70%;
+        width: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -208,5 +211,6 @@
     }
     .contactbody .sub-contactbody .content-area ul li .icon{
         margin-right: 0;
+        margin-bottom: 20px;
     }
 }

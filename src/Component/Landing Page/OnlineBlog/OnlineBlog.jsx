@@ -1,6 +1,7 @@
 import React from 'react';
 import './OnlineBlog.css'
 import img from './img/olubori-free2.png'
+import { Link } from 'react-router-dom';
 
 const OnlineBlog = () => {
     return(
@@ -23,7 +24,7 @@ const OnlineBlog = () => {
                             <li> Self Development</li>
                         </ul>
                     </div>
-                    <a href="/construction"><button>View All Courses</button></a>
+                    <Link to="/profile"><button>View All Courses</button></Link>
                 </div>
             </div>
         </div>

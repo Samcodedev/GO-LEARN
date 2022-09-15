@@ -1,7 +1,22 @@
-import React from 'react';
 import './Details.css'
+import React, { useEffect } from "react"
 
 const Details = () => {
+
+    const [value, func] = React.useState(0)
+
+    useEffect(() => {
+        setInterval(() => {
+            func(prevCount => {
+                return(
+                    prevCount + 1
+                )
+            })
+        }, 2000)
+    }, [])
+    
+    // console.log(value)
+
     return(
         <div className="details">
             <div className="sub-details">
@@ -13,7 +28,7 @@ const Details = () => {
                 <div className="details-box">
                     <div className="detail-wrapper">
                         <div className="card">
-                            <h1>3,279</h1>
+                            <h1>115</h1>
                             <p>Enrolled Learners</p>
                         </div>
                         <div className="card">

@@ -82,6 +82,9 @@
     line-height: 1.7;
     font-size: 16px;
 }
+.education .sub-education .education-cards .box span{
+    cursor: pointer;
+}
 
 
 @media screen and (max-width: 1221px){

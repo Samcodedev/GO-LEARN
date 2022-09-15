@@ -2,6 +2,7 @@ import React from 'react';
 import '../OnlineBlog/OnlineBlog.css'
 import './DistanceLearn.css'
 import img from './img/man-with-laptop-olubori.png'
+import { Link } from "react-router-dom"
 
 const DistanceLearn = () => {
     return(
@@ -14,7 +15,7 @@ const DistanceLearn = () => {
                     <span>Distant Learning</span>
                     <h2>Feel Like You Are Attending Your Classes Physically</h2>
                     <p>Go-Learn training programs can bring you a super exciting experience of learning through online! You never face any negative experience while enjoying your classes virtually by sitting in your comfort zone. Our flexible learning initiatives will help you to learn better and quicker than the traditional ways of learning skills.</p>
-                    <a href="/construction"><button>View Courses</button></a>
+                    <Link to="/Courses"><button>View Courses</button></Link>
                 </div>
             </div>
         </div>

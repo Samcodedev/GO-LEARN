@@ -11,7 +11,7 @@ const About = () => {
         <div>
             <Header />
             <Executive />
-            <Details />
+            {/* <Details /> */}
             <Education />
             <Instructors />
             <Affiliate />

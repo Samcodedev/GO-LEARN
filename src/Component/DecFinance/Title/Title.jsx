@@ -1,5 +1,6 @@
 import React from 'react';
 import './Title.css'
+import { Link } from 'react-router-dom';
 import ClassesData from '../../Courses/Data/ClassesData.json'
 
 const Title = () => {
@@ -24,12 +25,12 @@ const Title = () => {
             <div className="sub-title">
                 <div className="detail">
                     <span>{star}</span>
-                    <a href="/construction"><h3>{details}</h3></a>
-                    <p>Categories: <a href="/construction">{cate1}</a> <a href="/construction">{cate2}</a> <a href="/construction">{cate3}</a> </p>
+                    <Link to="/construction"><h3>{details}</h3></Link>
+                    <p>Categories: <Link to="/construction">{cate1}</Link> <Link to="/construction">{cate2}</Link> <Link to="/construction">{cate3}</Link> </p>
                 </div>
                 <div className="shear-save">
-                    <a href="/construction">Share</a>
-                    <a href="/construction">Wishlist</a>
+                    <Link to="/construction">Share</Link>
+                    <Link to="/construction">Wishlist</Link>
                 </div>
             </div>
         </div>

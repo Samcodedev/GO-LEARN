@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ContactBody.css'
 import icon from './img/Group 1.png'
 
@@ -59,7 +60,9 @@ const ContactBody = () => {
                         <input type="email" placeholder="Your Email Address" required/>
                         <input type="text" placeholder="Your Subject" required/>
                         <textarea cols="30" rows="10" placeholder="Write Your Message" required></textarea>
-                        <small>Accept <a href="/construction"> Teams </a> and <a href="/construction"> Private Policy </a><input type="checkbox" required/></small>
+                        <small>Accept 
+                            <Link to="/construction"> Teams </Link> and 
+                            <Link to="/construction"> Private Policy </Link><input type="checkbox" required/></small>
                         <input className="submit" type="submit" value="Send Message"/>
                     </form>
                 </div>

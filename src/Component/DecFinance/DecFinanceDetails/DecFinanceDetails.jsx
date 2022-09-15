@@ -3,6 +3,7 @@ import './DecFinanceDetails.css'
 import img from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 import profile from './img/Group 1.png'
 import ClassesData from '../../Courses/Data/ClassesData.json'
+import { Link } from 'react-router-dom';
 
 const DecFinanceDetails = () => {
 
@@ -151,7 +152,7 @@ const DecFinanceDetails = () => {
                             <div className="profile">
                                 <img src={profile} alt=""/>
                                 <div className="content">
-                                    <a href="">{name}</a>
+                                    <Link to="/construction">{name}</Link>
                                     <span>{experience}</span>
                                 </div>
                             </div>

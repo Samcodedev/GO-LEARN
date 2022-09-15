@@ -1,6 +1,7 @@
 .DecFinanceDetails{
     display: flex;
     justify-content: center;
+    background-color: #ffffff;
 }
 .DecFinanceDetails .sub-DecFinanceDetails{
     width: 90%;
@@ -174,6 +175,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first .tags button{
     display: block;
@@ -186,6 +188,7 @@
     border-radius: 6px;
     transition: 200ms;
     cursor: pointer;
+    margin-bottom: 5px;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first .tags button:hover{
     border: 1px solid #027dff;

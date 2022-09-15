@@ -1,17 +1,16 @@
 import React from 'react';
+import '../../Blog/BlogHead/BlogHead'
 import { Link } from 'react-router-dom';
-import './BlogHead.css'
-// import { Link } from 'react-router-dom';
 
-const BlogHead = () => {
+const ProfileTop = () => {
     return(
         <div className="bloghead">
             <div className="sub-bloghead">
                 <div className="text">
-                    <h1>Blog</h1>
+                    <h1>Dashboard</h1>
                     <span>
                         <Link to="/">Home</Link> / 
-                        <Link to="/Blog"> Blog</Link>
+                        <Link to="/profile"> DashBoard</Link>
                     </span>
                 </div>
             </div>
@@ -19,4 +18,4 @@ const BlogHead = () => {
     )
 }
 
-export default BlogHead;
+export default ProfileTop;

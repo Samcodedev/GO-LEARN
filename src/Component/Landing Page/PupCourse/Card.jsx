@@ -3,6 +3,7 @@ import './PupCourse.css'
 // import forex from './img/Forex.png'
 import crypt from './img/download 2.png'
 import prof from './img/Group 1.png'
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
     return(
@@ -14,16 +15,16 @@ const Card = (props) => {
                 <div className="cont">
                     <div className="card-prof">
                         <img src={prof} alt=""/>
-                        <span><a href="/construction">{props.author}</a></span>
+                        <span><Link to="/profile">{props.author}</Link></span>
                     </div>
                     <div className="card-content">
-                        <h1><a href={props.link}>{props.title}</a></h1>
+                        <h1><Link to="/profile">{props.title}</Link></h1>
                          <p>{props.content}</p>
                     </div>
                      <div className="card-bottom">
                         <ul>
-                            <li><a href="/construction">Lesson {props.lesson}</a></li>
-                            <li><a href="/construction">Students {props.students}</a></li>
+                            <li><Link to="/profile">Lesson {props.lesson}</Link></li>
+                            <li><Link to="/profile">Students {props.students}</Link></li>
                         </ul>
                     </div>
                 </div>

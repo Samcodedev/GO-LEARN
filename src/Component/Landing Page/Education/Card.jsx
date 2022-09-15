@@ -1,5 +1,6 @@
 import React from 'react';
 import icons from './img/Vector (4).png'
+import { Link } from "react-router-dom"
 
 const Card = (props) => {
     return(
@@ -9,7 +10,7 @@ const Card = (props) => {
             </div>
             <h3>{props.title}</h3>
             <p>{props.content}</p>
-            <a href="/construction"><span>!Start Now</span></a>
+            <Link to=""><span>Start Now!</span></Link>
         </div>
     )
 }

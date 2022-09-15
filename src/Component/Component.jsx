@@ -10,6 +10,8 @@ import Courses from './Courses/Courses'
 import DecFinance from './DecFinance/DecFinance'
 import Contact from './Contact/Contact'
 import Construction from './Construction'
+import Register from './Register/Register'
+import Profile from './Profile/Profile'
 
 
 function Component(){
@@ -26,6 +28,8 @@ function Component(){
                         <Route path="DecFinance" element={<DecFinance />} />
                         <Route path="Contact-Us" element={<Contact />} />
                         <Route path="construction" element={<Construction />} />
+                        <Route path="register" element={<Register />} />
+                        <Route path="profile" element={<Profile />} />
                     </Route>
                 </Routes>
             </HashRouter>

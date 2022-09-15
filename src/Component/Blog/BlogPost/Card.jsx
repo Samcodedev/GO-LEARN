@@ -1,6 +1,7 @@
 import React from 'react';
 import './BlogPost.css'
 import img from './img/blog-img-1.jpg'
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
     return(
@@ -9,12 +10,12 @@ const Card = (props) => {
                 <img src={img} alt=""/>
             </div>
             <div className="content">
-                <a href="/construction"><h3>{props.title}</h3></a>
+                <Link to="/construction"><h3>{props.title}</h3></Link>
                 <p>{props.content}</p>
                 <div className="buttom">
                     <ul>
-                        <li><a href="/construction">{props.author}</a></li>
-                        <li><a href="/construction">{props.date}</a></li>
+                        <li><Link to="/construction">{props.author}</Link></li>
+                        <li><Link to="/construction">{props.date}</Link></li>
                     </ul>
                 </div>
             </div>

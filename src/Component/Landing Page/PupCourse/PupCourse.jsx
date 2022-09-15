@@ -2,7 +2,8 @@ import React from 'react';
 import './PupCourse.css'
 import PupCryto from '../Data/PupCrypto'
 import Card from './Card.jsx'
-import ClassesData from '../../Courses/Data/ClassesData'
+// import ClassesData from '../../Courses/Data/ClassesData'
+import { Link } from 'react-router-dom';
 
 const PupCourse = () => {
 
@@ -32,7 +33,7 @@ const PupCourse = () => {
                 </div>
                 <div className="pupcourse-bottom-text">
                     <p>Enjoy the top notch learning methods and achieve next level skills! You are the creator of your own career & we will guide you through that. <a href="">Register Free Now!</a> </p>
-                    <a href=""><button>VIEW MORE COURSES</button></a>
+                    <Link to="/profile"><button>VIEW MORE COURSES</button></Link>
                 </div>
             </div>
         </div>

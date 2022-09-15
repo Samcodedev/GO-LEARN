@@ -18,8 +18,8 @@ const ClassCard = (props) => {
                     <p>{props.member}</p>
                 </div>
                 <div className="author">
-                    <p>By <a href="/construction">{props.name}</a> in <a href="/construction">{props.job1}</a> <a href="/construction">{props.job2}</a> <a href="/construction">{props.job3}</a></p>
-                    <a href="/construction"><img src={profile} alt="/construction"/></a>
+                    <p>By <Link to="/construction">{props.name}</Link> in <Link to="/construction">{props.job1}</Link> <Link to="/construction">{props.job2}</Link> <Link to="/construction">{props.job3}</Link></p>
+                    <Link to="/construction"><img src={profile} alt="/construction"/></Link>
                 </div>
             </div>
             <div className="enrol-div">

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Executive.css'
+import { Link } from 'react-router-dom';
 import img from './img/olubori-free2.png'
 
 const Executive = () => {
@@ -23,7 +24,7 @@ const Executive = () => {
                             <li> Self Development</li>
                         </ul>
                     </div>
-                    <a href="/construction"><button>View All Courses</button></a>
+                    <Link to="/construction"><button>View All Courses</button></Link>
                 </div>
             </div>
         </div>

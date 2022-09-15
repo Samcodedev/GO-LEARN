@@ -106,17 +106,17 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 15px;
-    height: 30px;
+    height: 40px;
     /* background-color: red; */
 }
 .head .sub-head .head-card .card-wrapper .card .cont .card-prof img{
     position: relative;
-    height: 70%;
+    height: 100%;
     margin-right: 10px;
 }
-/* .head .sub-head .head-card .card-wrapper .card .card-prof span{
-    
-} */
+.head .sub-head .head-card .card-wrapper .card .card-prof span{
+    margin-bottom: 0px;
+}
 .head .sub-head .head-card .card-wrapper .card .cont .card-content h1 a{
     display: inline-block;
     text-decoration: none;
