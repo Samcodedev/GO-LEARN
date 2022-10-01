@@ -1,0 +1,32 @@
+[
+    {
+        "module": "Module 1: What is DEFI",
+        "title": "What is DeFi",
+        "time": "11:10"
+    },
+    {
+        "module": "Module 2: Bitcoin as a DEFI",
+        "title": "Bitcoin as DeFi",
+        "time": "13:59"
+    },
+    {
+        "module": "Module 3: Liquidity Mining",
+        "title": "Liquidity Mining",
+        "time": "44:22"
+    },
+    {
+        "module": "Module 4: DAPPS and DEXES",
+        "title": "Decentralized Exchanges",
+        "time": "14:14"
+    },
+    {
+        "module": "Module 5: Liquidity Mining and Yield Farming",
+        "title": "DeFi Impermament Loss",
+        "time": "13:16"
+    },
+    {
+        "module": "Join the Go-Learn DeFi Community",
+        "title": "Join Community",
+        "time": "00:00"
+    }
+]
