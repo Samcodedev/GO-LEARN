@@ -30,6 +30,7 @@ function Component(){
                         <Route path="construction" element={<Construction />} />
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
+                        {/* hello go-learn */}
                     </Route>
                 </Routes>
             </HashRouter>
