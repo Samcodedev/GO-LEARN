@@ -12,6 +12,7 @@ import Contact from './Contact/Contact'
 import Construction from './Construction'
 import Register from './Register/Register'
 import Profile from './Profile/Profile'
+import Login from './Login/Login'
 
 
 function Component(){
@@ -30,6 +31,7 @@ function Component(){
                         <Route path="construction" element={<Construction />} />
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
+                        <Route path="login" element={<Login />} />
                         {/* hello go-learn */}
                     </Route>
                 </Routes>

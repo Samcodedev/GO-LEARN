@@ -48,7 +48,7 @@ const NavBar = () => {
                                 <span><Link to="DecFinance">Financial Trading Courses</Link></span>
                                 <span>Personal Development Courses</span>
                                 <span>Marketing Courses</span>
-                                <span>Design and IT Courses</span>
+                                <span><Link to="/login">Design and IT Courses</Link></span>
                                 <span><Link to="/profile">Profile</Link></span>
                             </ul>
                         </li>
