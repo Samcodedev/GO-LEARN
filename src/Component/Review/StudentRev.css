@@ -1,11 +1,12 @@
 .studentrev{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    /* width: 100%; */
     /* background-color: aqua; */
     border-left: 1px solid #E0E2EA;
     border-right: 1px solid #E0E2EA;
     border-bottom: 1px solid #E0E2EA;
+    position: relative;
 }
 .studentrev .top{
     display: flex;

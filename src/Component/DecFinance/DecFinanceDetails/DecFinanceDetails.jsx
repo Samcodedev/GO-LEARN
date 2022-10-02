@@ -3,7 +3,11 @@ import './DecFinanceDetails.css'
 import img from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 import profile from './img/Group 1.png'
 import ClassesData from '../../Courses/Data/ClassesData.json'
+import Module from '../../Class/Card/Module';
+import ModuleData from '../../Class/Card/ModuleData.json'
+import ReviewData from '../../Review/data/ReviewData.json'
 import { Link } from 'react-router-dom';
+import StudentRev from '../../Review/StudentRev';
 
 const DecFinanceDetails = () => {
 
@@ -36,6 +40,43 @@ const DecFinanceDetails = () => {
         tag_3 = ClassesData[5].tags.tag3
     }
 
+    
+
+    function info(){
+        document.getElementById("info").style.display="flex"
+        document.getElementById("review").style.display="none"
+        document.getElementById("inf").style.borderBottom="2.5px solid #027dff"
+        document.getElementById("rev").style.borderBottom="2.5px solid transparent"
+    }
+
+    function review(){
+        document.getElementById("info").style.display="none"
+        document.getElementById("review").style.display="block"
+        document.getElementById("inf").style.borderBottom="2.5px solid transparent"
+        document.getElementById("rev").style.borderBottom="2.5px solid #027dff"
+    }
+    
+
+    const mode = ModuleData.map((item) =>{
+        return(
+            <Module 
+                module={item.module}
+                time={item.time}
+                title={item.title}
+            />
+        )
+    })
+
+    const stu = ReviewData.map((item) =>{
+        return(
+            <StudentRev 
+                name={item.name}
+                time={item.time}
+                review={item.review}
+            />
+        )
+    })
+
     return(
         <div className="DecFinanceDetails">
              <div className="sub-DecFinanceDetails">
@@ -44,10 +85,10 @@ const DecFinanceDetails = () => {
                         <img src={img} alt=""/>
                     </div>
                     <nav>
-                        <li>Course Info</li>
-                        <li>Reviews</li>
+                        <li id='inf' onClick={info}>Course Info</li>
+                        <li id='rev' onClick={review}>Reviews</li>
                     </nav>
-                    <div className="course-info">
+                    <div className="course-info" id='info'>
                         <div className="about">
                             <h2>About Course</h2>
                             <h3>Course Description</h3>
@@ -69,65 +110,92 @@ const DecFinanceDetails = () => {
                         <div className="course-content">
                             <h3>Course Content</h3>
                             <div className="tutor-according">
-                                <div className="tutor-according-item">
-                                    <div className="tutor-according-head">
-                                        <h4>Module 1: What is DEFI</h4>
+                                {mode}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="reviews" id='review'>
+                        <h3>Student Ratings & Reviews</h3>
+                        <div className="chat">
+                            <div className="total-rating">
+                                <h1>3.0</h1>
+                                <span>⭐⭐⭐⭐⭐</span>
+                                <p>Total 5 Ratings</p>
+                            </div>
+                            <div className="rating-bar">
+                                <div className="column">
+                                    <div className="star">
+                                        <span>⭐</span>
+                                        <p>5</p>
                                     </div>
-                                    <div className="tutor-according-body">
-                                        <span>11:10</span>
-                                        <h5>What is DeFi</h5>
+                                    <div className="bar">
+                                        <div className="prog">
+
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="tutor-according-item">
-                                    <div className="tutor-according-head">
-                                        <h4>Module 2: Bitcoin as a DEFI</h4>
-                                    </div>
-                                    <div className="tutor-according-body">
-                                        <span>13:59</span>
-                                        <h5>Bitcoin as DeFi</h5>
-                                    </div>
-                                </div>
-                                <div className="tutor-according-item">
-                                    <div className="tutor-according-head">
-                                        <h4>Module 3: Liquidity Mining</h4>
-                                    </div>
-                                    <div className="tutor-according-body">
-                                        <span>44:22</span>
-                                        <h5>Liquidity Mining</h5>
-                                    </div>
-                                </div>
-                                <div className="tutor-according-item">
-                                    <div className="tutor-according-head">
-                                        <h4>Module 4: DAPPS and DEXES</h4>
-                                    </div>
-                                    <div className="tutor-according-body">
-                                        <span>14:14</span>
-                                        <h5>Decentralized Exchanges	</h5>
+                                    <div className="rate">
+                                        <p>1 Rating</p>
                                     </div>
                                 </div>
-                                <div className="tutor-according-item">
-                                    <div className="tutor-according-head">
-                                        <h4>Module 5: Liquidity Mining and Yield Farming</h4>
+                                <div className="column">
+                                    <div className="star">
+                                        <span>⭐</span>
+                                        <p>4</p>
                                     </div>
-                                    <div className="tutor-according-body">
-                                        <span>13:16</span>
-                                        <h5>DeFi Impermament Loss</h5>
+                                    <div className="bar">
+                                        <div className="prog">
+                                            
+                                        </div>
+                                    </div>
+                                    <div className="rate">
+                                        <p>1 Rating</p>
                                     </div>
                                 </div>
-                                <div className="tutor-according-item">
-                                    <div className="tutor-according-head">
-                                        <h4>Join the Go-Learn DeFi Community</h4>
+                                <div className="column">
+                                    <div className="star">
+                                        <span>⭐</span>
+                                        <p>3</p>
                                     </div>
-                                    <div className="tutor-according-body">
-                                        <span>00:00</span>
-                                        <h5>Join Community</h5>
+                                    <div className="bar">
+                                        <div className="prog">
+                                            
+                                        </div>
+                                    </div>
+                                    <div className="rate">
+                                        <p>0 Rating</p>
+                                    </div>
+                                </div>
+                                <div className="column">
+                                    <div className="star">
+                                        <span>⭐</span>
+                                        <p>2</p>
+                                    </div>
+                                    <div className="bar">
+                                        <div className="prog">
+                                            
+                                        </div>
+                                    </div>
+                                    <div className="rate">
+                                        <p>0 Rating</p>
+                                    </div>
+                                </div>
+                                <div className="column">
+                                    <div className="star">
+                                        <span>⭐</span>
+                                        <p>1</p>
+                                    </div>
+                                    <div className="bar">
+                                        <div className="prog">
+                                            
+                                        </div>
+                                    </div>
+                                    <div className="rate">
+                                        <p>1 Rating</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="reviews">
-                        
+                        {stu}
                     </div>
                  </div>
                  <div className="sub-detail">

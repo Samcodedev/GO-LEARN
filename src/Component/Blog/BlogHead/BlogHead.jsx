@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import './BlogHead.css'
 // import { Link } from 'react-router-dom';
 
-const BlogHead = () => {
+const BlogHead = (props) => {
     return(
         <div className="bloghead">
             <div className="sub-bloghead">
                 <div className="text">
-                    <h1>Blog</h1>
+                    <h1>{props.title}</h1>
                     <span>
-                        <Link to="/">Home</Link> / 
-                        <Link to="/Blog"> Blog</Link>
+                        <Link to={props.link2}>{props.nav1}</Link> / 
+                        <Link to={props.link}>{props.nav2}</Link>
                     </span>
                 </div>
             </div>

@@ -55,6 +55,7 @@ const Forget = () => {
                 nav1="Home"
                 nav2=" Forget Password"
                 link="/forget"
+                link2="/"
             />
             <div className="forget">
                 <div className="sub-forget">

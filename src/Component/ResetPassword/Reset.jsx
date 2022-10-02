@@ -49,6 +49,7 @@ const Reset = () => {
                 nav1="back"
                 nav2=" Login"
                 link="/login"
+                link2="/"
             />
             <div className="forget">
                 <div className="sub-forget">

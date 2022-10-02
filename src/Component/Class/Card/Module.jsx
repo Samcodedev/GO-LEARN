@@ -5,7 +5,7 @@ const Module = (props) => {
     return(
         <div className="tutor-according-item">
             <div className="tutor-according-head">
-                <h4>{props.Module}</h4>
+                <h4>{props.module}</h4>
             </div>
             <div className="tutor-according-body">
                 <span>{props.time}</span>

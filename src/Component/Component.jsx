@@ -2,7 +2,7 @@ import React from 'react'
 import LandingPage from './Landing Page/LandingPage'
 import Layout from './Layout'
 
-import { HashRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import About from './About/About'
 import Blog from './Blog/Blog'
@@ -13,12 +13,15 @@ import Construction from './Construction'
 import Register from './Register/Register'
 import Profile from './Profile/Profile'
 import Login from './Login/Login'
+import Forget from './ForgetPassword/Forget'
+import Reset from './ResetPassword/Reset'
 
 
 function Component(){
+    const API = 'https://mysterious-waters-58153.herokuapp.com/api/v1/auth/'
     return(
         <>
-            <HashRouter>
+            <BrowserRouter>
                 <Routes>
                     <Route element={<Layout />}>
                         {/* <Route path="NavBar" element={<NavBar />} /> */}
@@ -31,11 +34,12 @@ function Component(){
                         <Route path="construction" element={<Construction />} />
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
-                        <Route path="login" element={<Login />} />
-                        {/* hello go-learn */}
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/forget" element={<Forget />} />
+                        <Route path={`${API}resetpassword/:token`} element={<Reset />} />
                     </Route>
                 </Routes>
-            </HashRouter>
+            </BrowserRouter>
         </>
     )
 }

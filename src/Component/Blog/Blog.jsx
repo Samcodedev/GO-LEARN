@@ -5,7 +5,13 @@ import BlogPost from './BlogPost/BlogPost';
 const Blog = () => {
     return(
         <>
-            <BlogHead />
+            <BlogHead 
+                title="Blog"
+                nav1="Home"
+                nav2=" Blog"
+                link="/blog"
+                link2="/"
+            />
             <BlogPost />
         </>
     )
