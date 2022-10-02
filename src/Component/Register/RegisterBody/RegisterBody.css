@@ -67,3 +67,7 @@
     width: fit-content;
     text-indent: 0px;
 }
+.registerbody .sub-registerbody form #message{
+    text-transform: lowercase;
+    font-size: 13px;
+}

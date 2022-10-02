@@ -1,42 +1,85 @@
 import React from 'react';
 import './RegisterBody.css'
-// import { useForm } from "react-hook-form";
 
 
 const RegisterBody = () => {
 
-    // const initialValue = { username: "", email: "", password: ""}
-    // const [formValue, setFormValue] = React.useState(initialValue)
+    const [firstName, ffunc] = React.useState('')
+    const [lastName, lfunc] = React.useState('')
+    const [userName, ufunc] = React.useState('')
+    const [email, efunc] = React.useState('')
+    const [password, pfunc] = React.useState('')
+    const [confirm, cfunc] = React.useState('')
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormValue({ ...formValue, name: value})
-    //     console.log(formValue)
-    // }
+    // let valid1 = document.getElementById("valid1")
+    // let valid2 = document.getElementById("valid2")
+    // let error = document.getElementById("error")
 
-    // const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    // const onSubmit = data => console.log(data);
+    const handleLogin = async (e) =>{
+        e.preventDefault()
+        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/auth',{
+            method:'post',
+            credencials: 'include',
+            body:JSON.stringify({firstName, lastName, userName, email, password}),
+            headers: {
+                'content-Type': 'application/json'
+            }
+            
+        })
+        result = await result.json()
+        console.warn(result)
+        console.log(result)
+        let error = result.success
+        let token = result.token
 
-    // console.log(watch("example")); 
+        if ( result.success == false){
+            document.getElementById("message").innerHTML={error}
+            document.getElementById("message").style.color="red"
+        }
+        else if( result.success === true){
+            localStorage.setItem("token", token )
+            document.getElementById("message").innerHTML="You have successfully Registered"
+        }
+    }
+
+    function valid_Call(){
+        if( confirm === password ){
+            document.getElementById("message").innerHTML="Password match"
+            document.getElementById("message").style.color="green"
+        }
+        else{
+            document.getElementById("message").innerHTML="Password does not match"
+            document.getElementById("message").style.color="red"
+        }
+    }
+
+    setTimeout(() => {
+        valid_Call()
+    });
 
     return(
         <div className='registerbody'>
             <div className="sub-registerbody">
-                <form action="/profile">
+                <form onSubmit={handleLogin} action="/profile">
                     <label htmlFor="">First Name</label>
-                    <input type="text" placeholder='First Name' required />
+                    <input type="text" placeholder='First Name' onChange={(e) => ffunc(e.target.value)} required />
+
                     <label htmlFor="">Last Name</label>
-                    <input type="text" placeholder='Last Name' required />
+                    <input type="text" placeholder='Last Name' onChange={(e) => lfunc(e.target.value)} required />
+
                     <label htmlFor="">User Name</label>
-                    <input type="text" placeholder='User Name'   />
+                    <input type="text" placeholder='User Name' onChange={(e) => ufunc(e.target.value)} required />
 
                     <label htmlFor="">E-mail</label>
-                    <input type="email" placeholder='E-mail'  />
+                    <input type="email" placeholder='E-mail' onChange={(e) => efunc(e.target.value)} required />
 
                     <label htmlFor="" >Password</label>
-                    <input type="password" placeholder='Password' />
+                    <input type="password" placeholder='Password' onChange={(e) => pfunc(e.target.value)} required />
+
                     <label htmlFor="">Confirm Password</label>
-                    <input type="password" placeholder='Confirm Password' id='com_password' required />
+                    <input type="password" placeholder='Confirm Password' id='com_password' onChange={(e) => cfunc(e.target.value)} required />
+
+                    <span id='message'></span>
                     <input type="submit" value="Register" className='submit' />
                 </form>
             </div>
