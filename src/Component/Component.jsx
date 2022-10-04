@@ -15,6 +15,7 @@ import Profile from './Profile/Profile'
 import Login from './Login/Login'
 import Forget from './ForgetPassword/Forget'
 import Reset from './ResetPassword/Reset'
+import Class from './Class/Class'
 
 
 function Component(){
@@ -36,6 +37,7 @@ function Component(){
                         <Route path="profile" element={<Profile />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/forget" element={<Forget />} />
+                        <Route path="/class" element={<Class />} />
                         <Route path={`${API}resetpassword/:token`} element={<Reset />} />
                     </Route>
                 </Routes>

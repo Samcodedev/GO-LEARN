@@ -5,8 +5,6 @@ import './Forget.css'
 const Forget = () => {
 
     let [email, efunc] = React.useState('')
-    let alert = document.getElementById("alert")
-    let message = document.getElementById("message")
 
     const handleForget = async (e) =>{
         e.preventDefault()
@@ -24,24 +22,24 @@ const Forget = () => {
         console.log(email)
         
         if( result.success === true){
-            message.innerHTML=`${result.msg}`
-            message.style.color="green"
-            message.style.textAlign="center"
-            message.style.textTransform="lowercase"
+            document.getElementById("message").innerHTML=`${result.msg}`
+            document.getElementById("message").style.color="green"
+            document.getElementById("message").style.textAlign="center"
+            document.getElementById("message").style.textTransform="lowercase"
             localStorage.setItem('reset', result.token)
 
-            alert.style.display="flex"
-            alert.style.backgroundColor="#a0f7a0"
-            alert.style.border="1px solid green"
+            document.getElementById("alert").style.display="flex"
+            document.getElementById("alert").style.backgroundColor="#a0f7a0"
+            document.getElementById("alert").style.border="1px solid green"
         }else if(result.success === false ){
-            message.innerHTML=`${result.error}`
-            message.style.color="red"
-            message.style.textAlign="center"
-            message.style.textTransform="lowercase"
+            document.getElementById("message").innerHTML=`${result.error}`
+            document.getElementById("message").style.color="red"
+            document.getElementById("message").style.textAlign="center"
+            document.getElementById("message").style.textTransform="lowercase"
 
-            alert.style.display="flex"
-            alert.style.backgroundColor="#f79494"
-            alert.style.border="1px solid red"
+            document.getElementById("alert").style.display="flex"
+            document.getElementById("alert").style.backgroundColor="#f79494"
+            document.getElementById("alert").style.border="1px solid red"
         }
 
         // alert("hello working")

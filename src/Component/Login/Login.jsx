@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter, Link, Navigate } from 'react-router-dom';
 import './Login.css'
 
 const Login = () => {
@@ -11,7 +11,8 @@ const Login = () => {
     let valid2 = document.getElementById("valid2")
     let error = document.getElementById("error")
 
-    const handleLogin = async () =>{
+    const handleLogin = async (e) =>{
+        e.preventDefault()
         let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/auth/login',{
             method:'post',
             credencials: 'include',
@@ -33,6 +34,7 @@ const Login = () => {
             valid2.style.border="1px solid green"
             error.innerHTML="Welcome Back"
             error.style.color="green"
+            // BrowserHistory.push('/profile')
             localStorage.setItem('token', result.token)
         }else if( result.success === false){
             valid1.style.border="1px solid red"
@@ -45,7 +47,7 @@ const Login = () => {
 
     return(
         <div className="login">
-            <form action="">
+            <form onSubmit={handleLogin} Navigate="/profile">
                 <p>Hi, Welcome back!</p>
                 <input type="text" placeholder='Username or Email Address' value={userName} id="valid1"
                      onChange={(e) => efunc(e.target.value)}
@@ -59,10 +61,10 @@ const Login = () => {
                         <input type="checkbox" />
                         <p>keep me signin</p>
                     </div>
-                    <Link to="forget"><p>Forgot?</p></Link>
+                    <Link to="/forget"><p>Forgot?</p></Link>
                 </div>
                     
-                <input type="button" className='submit'  value="Submit" onClick={handleLogin} />
+                <input type="submit" className='submit'  value="Submit" />
 
                 <p>Don't have an account? <Link to="/register"><span>Register Now</span></Link></p>
                 <small id='error'> </small>

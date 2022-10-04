@@ -8,7 +8,7 @@ const Class = () => {
     const mode = ModuleData.map((item) =>{
         return(
             <Module 
-                Module={item.module}
+                module={item.module}
                 title={item.title}
                 time={item.time}
             />

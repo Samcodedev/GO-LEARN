@@ -51,12 +51,12 @@
     display: flex !important;
     margin-left: auto;
     align-items: center !important;
-
+    justify-content: flex-end;
+    flex-wrap: wrap;
 }
 .class .sub-class .video .video-head .second span{
     line-height: 1.6;
     font-size: .875rem;
-    margin-right: 20px;
     color: #fff;
     margin-bottom: 0;
     cursor: default;
@@ -64,7 +64,7 @@
 .class .sub-class .video .video-head .second button{
     color: #fff;
     background-color: #fff;
-
+    margin-left: 20px;
     display: inline-flex;
     align-items: center;
     font-weight: 400;
@@ -183,4 +183,26 @@
     background-color: #221638;
     border-color: #221638;
     color: #fff;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 980px) {
+.class .sub-class{
+    flex-direction: column;
+}
+.class .sub-class .content{
+    width: 100%;
+}
+.class .sub-class .video{
+    width: 100%;
+}
+.class .sub-class .video .video-head .first p{
+    margin-left: 0px;
+    font-size: .7rem;
+}
 }

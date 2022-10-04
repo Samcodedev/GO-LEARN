@@ -5,6 +5,7 @@ import img2 from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 
 import ClassesData from '../../Courses/Data/ClassesData.json'
 import { Link } from "react-router-dom"
+import { useEffect } from 'react';
 
 const ProfileBody = () => {
 
@@ -16,7 +17,53 @@ const ProfileBody = () => {
         title = ClassesData[5].title
     }
 
+    let [det, efunc] = React.useState('')
+    const handleLogin = async () =>{
+        const config ={
+            headers:{
+                'content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        }
+        console.log(config.headers)
+        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/auth', config, {
+            method:'get',
+            credencials: 'include'
+            
+        })
+        result = await result.json()
+        console.warn(result)
+        console.log(result)
+        let deta = result.data
+        efunc(
+            det = deta
+        )
+    }
+    console.log(det)
 
+
+    useEffect(() => {
+        return () => {
+            handleLogin()
+        };
+    }, [])
+
+    function dashboard(){
+        document.getElementById("dashboard").style.display="flex"
+        document.getElementById("profile").style.display="none"
+        document.getElementById("first").style.backgroundColor="#007bff"
+        document.getElementById("first").style.color="#ffffff"
+        document.getElementById("second").style.backgroundColor="transparent"
+    }
+
+    function profile(){
+        document.getElementById("dashboard").style.display="none"
+        document.getElementById("profile").style.display="block"
+        document.getElementById("first").style.backgroundColor="transparent"
+        document.getElementById("second").style.backgroundColor="#007bff"
+    }
+
+    
     return(
         <div className='profilebody'>
             <div className="sub-profilebody">
@@ -30,7 +77,7 @@ const ProfileBody = () => {
                         </div>
                         <div className="text-div">
                             <h5>Hello,</h5>
-                            <h3>Obanla Samuel</h3>
+                            <h3>{det.firstName} {det.lastName}</h3>
                         </div>
                     </div>
                 </div>
@@ -38,8 +85,8 @@ const ProfileBody = () => {
                 <div className="dashboard">
                     <div className="dashboard-nav">
                         <ul>
-                            <li className='first'><span className='span'>Dashboard</span></li>
-                            <li><span className='span'>My Profile</span></li>
+                            <li onClick={dashboard} id='first'><span className='span'>Dashboard</span></li>
+                            <li onClick={profile} id='second'><span className='span'>My Profile</span></li>
                             <li><span className='span'>Enrolled Courses</span></li>
                             <li><span className='span'>Wishlist</span></li>
                             <li><span className='span'>Reviews</span></li>
@@ -50,7 +97,7 @@ const ProfileBody = () => {
                             <li><span className='span'>Logout</span></li>
                         </ul>
                     </div>
-                    <div className="dashboard-main">
+                    <div className="dashboard-main" id='dashboard'>
                         <div className="upload">
                             <div className="alert">
                                 <span>Set Your Profile Photo</span>
@@ -106,6 +153,44 @@ const ProfileBody = () => {
                                 </div>
                             </div>
                         </Link>
+                    </div>
+                    <div className="profile" id='profile'>
+                        <div className="data">
+                            <h2>Profile</h2>
+                            <ul>
+                                <li>Registered Date</li>
+                                <li>{det.createdAt}</li>
+                            </ul>
+                            <ul>
+                                <li>First Name</li>
+                                <li>{det.firstName}</li>
+                            </ul>
+                            <ul>
+                                <li>LastName</li>
+                                <li>{det.lastName}</li>
+                            </ul>
+                            <ul>
+                                <li>UserName</li>
+                                <li>{det.userName}</li>
+                            </ul>
+                            <ul>
+                                <li>Email</li>
+                                <li>{det.email}</li>
+                            </ul>
+                            <ul>
+                                <li>Phone Number</li>
+                                <li>+234 9067925333</li>
+                            </ul>
+                            <ul>
+                                <li>id</li>
+                                <li>{det._id}</li>
+                            </ul>
+                            <ul>
+                                <li>Role</li>
+                                <li>{det.role}</li>
+                            </ul>
+
+                        </div>
                     </div>
                 </div>
             </div>

@@ -202,7 +202,7 @@ const DecFinanceDetails = () => {
                     <div className="free">
                         <div className="free-head">
                             <span>Free</span>
-                            <button>Enroll Now</button>
+                            <Link to="/class"><button>Enroll Now</button></Link>
                             <p>Free access this course</p>
                         </div>
                         <div className="free-footer">
