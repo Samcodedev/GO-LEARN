@@ -45,11 +45,11 @@ const NavBar = () => {
                         <li>
                             <Link to="Courses">Courses</Link>
                             <ul className="dd">
-                                <span><Link to="DecFinance">Financial Trading Courses</Link></span>
+                                <span><Link to="DecFinance">Decentralized Finance</Link></span>
                                 <span>Personal Development Courses</span>
-                                <span><Link to="forget">Marketing Courses</Link></span>
-                                <span><Link to="/profile">Design and IT Courses</Link></span>
-                                <span><Link to="/login">Profile</Link></span>
+                                <span><Link to="forget">Forget Password</Link></span>
+                                <span><Link to="/profile">Profile</Link></span>
+                                <span><Link to="/login">Login</Link></span>
                             </ul>
                         </li>
                         <li>
