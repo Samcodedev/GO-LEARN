@@ -42,11 +42,11 @@ const ProfileBody = () => {
     console.log(det)
 
 
-    useEffect(() => {
-        return () => {
+    // useEffect(() => {
+    //     return () => {
             handleLogin()
-        };
-    })
+    //     };
+    // })
 
     function dashboard(){
         document.getElementById("dashboard").style.display="flex"
