@@ -46,7 +46,7 @@ const ProfileBody = () => {
         return () => {
             handleLogin()
         };
-    }, [])
+    })
 
     function dashboard(){
         document.getElementById("dashboard").style.display="flex"

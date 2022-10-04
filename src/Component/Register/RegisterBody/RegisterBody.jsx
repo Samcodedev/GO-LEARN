@@ -32,7 +32,7 @@ const RegisterBody = () => {
         let error = result.success
         let token = result.token
 
-        if ( result.success == false){
+        if ( result.success === false){
             document.getElementById("message").innerHTML={error}
             document.getElementById("message").style.color="red"
         }
