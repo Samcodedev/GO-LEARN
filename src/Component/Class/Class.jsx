@@ -2,7 +2,7 @@ import React from 'react';
 import './Class.css'
 import Module from './Card/Module';
 import ModuleData from './Card/ModuleData.json'
-import video from './video/React and node JS project #16 Login API integration.mp4'
+// import video from './video/React and node JS project #16 Login API integration.mp4'
 
 const Class = () => {
     const mode = ModuleData.map((item) =>{
@@ -53,7 +53,7 @@ const Class = () => {
                             <button>Mark as Complete</button>
                         </div>
                     </div>
-                    <video src={video} type="video/mp4" controls />
+                    <video src="https://youtu.be/xsQyr77SR08" type="video/mp4" controls />
                     <div className="course-details">
                         <ul>
                             <li id='link1' onClick={overview}>Overview</li>
