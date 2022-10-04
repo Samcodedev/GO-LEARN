@@ -5,7 +5,7 @@ import img2 from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 
 import ClassesData from '../../Courses/Data/ClassesData.json'
 import { Link } from "react-router-dom"
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 const ProfileBody = () => {
 
