@@ -5,7 +5,7 @@ import img2 from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 
 import ClassesData from '../../Courses/Data/ClassesData.json'
 import { Link } from "react-router-dom"
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const ProfileBody = () => {
 
@@ -25,28 +25,69 @@ const ProfileBody = () => {
                 Authorization: 'Bearer ' + localStorage.getItem('token')
             }
         }
-        console.log(config.headers)
+        // console.log(config.headers)
         let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/auth', config, {
             method:'get',
             credencials: 'include'
             
         })
         result = await result.json()
-        console.warn(result)
-        console.log(result)
+        // console.warn(result)
+        // console.log(result)
         let deta = result.data
         efunc(
             det = deta
         )
     }
-    console.log(det)
+    // console.log(det)
 
-
-    // useEffect(() => {
-    //     return () => {
+    useEffect(() => {
+        return () => {
             handleLogin()
-    //     };
-    // })
+        };
+    })
+
+    
+
+// courseTitle
+// courseDescription
+// courseDuration
+// category
+// whatToLearn
+// requirement
+// audience
+// materials
+
+
+    let [courseTitle, ctfunc] = React.useState('')
+    let [courseDescription, cdtfunc] = React.useState('')
+    let [courseDuration, cdfunc] = React.useState('')
+    let [category, cfunc] = React.useState('')
+    let [whatToLearn, wlfunc] = React.useState('')
+    let [requirement, rfunc] = React.useState('')
+    let [audience, afunc] = React.useState('')
+    let [materials, mfunc] = React.useState('')
+
+
+    const handleCreateCourse = async (e) =>{
+        e.preventDefault()
+        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/course', {
+            method:'post',
+            credencials: 'include',
+            body:JSON.stringify({courseTitle, courseDescription, courseDuration, category, whatToLearn, requirement, audience, materials}),
+            headers:{
+                'content-Type': 'application/json'
+            }
+            
+        })
+        result = await result.json()
+        console.warn(result)
+        console.log(result)
+    }
+    // console.log(det)
+    
+
+
 
     function dashboard(){
         document.getElementById("dashboard").style.display="flex"
@@ -192,10 +233,42 @@ const ProfileBody = () => {
 
                         </div>
                     </div>
+                    <div className="create-course" id="create">
+                        <h2>Create Course</h2>
+                        <form onSubmit={handleCreateCourse} action="">
+                            <label>Course Title</label>
+                            <input type="text" value={courseTitle} onChange={(e) => ctfunc(e.target.value)} />
+
+                            <label>Course Description</label>
+                            <input type="text" value={courseDescription} onChange={(e) => cdtfunc(e.target.value)} />
+
+                            <label>Course Duration</label>
+                            <input type="text" value={courseDuration} onChange={(e) => cdfunc(e.target.value)}  />
+
+                            <label>Category</label>
+                            <input type="text" value={category} onChange={(e) => cfunc(e.target.value)}  />
+
+                            <label>What To Learn</label>
+                            <input type="text" value={whatToLearn} onChange={(e) => wlfunc(e.target.value)}  />
+
+                            <label>Requirement</label>
+                            <input type="text" value={requirement} onChange={(e) => rfunc(e.target.value)}  />
+
+                            <label>Audience</label>
+                            <input type="text"  value={audience} onChange={(e) => afunc(e.target.value)} />
+
+                            <label>Materials</label>
+                            <input type="text" value={materials} onChange={(e) => mfunc(e.target.value)}  />
+
+                            <input type="submit" value="Create" className='submit'/>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
+
+
 
 export default ProfileBody;

@@ -43,7 +43,7 @@ const NavBar = () => {
                     <ul className="main" id='list'>
                         <li><Link to="/">Home</Link></li>
                         <li>
-                            <Link to="Courses">Courses</Link>
+                            <Link to="Courses">Courses<i class="fa fa-caret-down" aria-hidden="true"></i></Link>
                             <ul className="dd">
                                 <span><Link to="DecFinance">Decentralized Finance</Link></span>
                                 <span>Personal Development Courses</span>
