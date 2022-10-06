@@ -115,18 +115,31 @@ const ProfileBody = () => {
     function dashboard(){
         document.getElementById("dashboard").style.display="flex"
         document.getElementById("profile").style.display="none"
+        document.getElementById("create").style.display="none"
         document.getElementById("first").style.backgroundColor="#007bff"
         document.getElementById("first").style.color="#ffffff"
         document.getElementById("second").style.backgroundColor="transparent"
+        document.getElementById("sixth").style.backgroundColor="transparent"
     }
 
     function profile(){
         document.getElementById("dashboard").style.display="none"
         document.getElementById("profile").style.display="block"
+        document.getElementById("create").style.display="none"
         document.getElementById("first").style.backgroundColor="transparent"
         document.getElementById("second").style.backgroundColor="#007bff"
+        document.getElementById("sixth").style.backgroundColor="transparent"
     }
 
+    function create(){
+        document.getElementById("dashboard").style.display="none"
+        document.getElementById("profile").style.display="none"
+        document.getElementById("create").style.display="block"
+        document.getElementById("first").style.backgroundColor="transparent"
+        document.getElementById("second").style.backgroundColor="transparent"
+        document.getElementById("sixth").style.backgroundColor="#007bff"
+    }
+    // sixth
     
     return(
         <div className='profilebody'>
@@ -154,7 +167,7 @@ const ProfileBody = () => {
                             <li><span className='span'>Enrolled Courses</span></li>
                             <li><span className='span'>Wishlist</span></li>
                             <li><span className='span'>Reviews</span></li>
-                            <li><span className='span'>My Quiz Attempts</span></li>
+                            <li onClick={create} id='sixth'><span className='span'>Create Course</span></li>
                             <li><span className='span'>Order History</span></li>
                             <li><span className='span'>Question & Answer</span></li>
                             <li><span className='span'>Settings</span></li>
