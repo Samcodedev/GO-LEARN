@@ -6,6 +6,7 @@ import img2 from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 import ClassesData from '../../Courses/Data/ClassesData.json'
 import { Link } from "react-router-dom"
 import { useEffect } from 'react';
+// import axios from 'axios';
 
 const ProfileBody = () => {
 
@@ -17,36 +18,32 @@ const ProfileBody = () => {
         title = ClassesData[5].title
     }
 
-    let [det, efunc] = React.useState('')
+
+    // fetching user data and also sending a unique token to the header
+
+    const [det, effunc] = React.useState('')
     const handleLogin = async () =>{
-        const config ={
-            headers:{
-                'content-Type': 'application/json',
-                Authorization: 'Bearer ' + localStorage.getItem('token')
+            const config ={
+                headers:{
+                    'content-Type': 'application/json',
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
             }
-        }
-        // console.log(config.headers)
         let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/auth', config, {
             method:'get',
             credencials: 'include'
             
         })
         result = await result.json()
-        // console.warn(result)
-        // console.log(result)
-        let deta = result.data
-        efunc(
-            det = deta
-        )
+        console.warn(result)
+        console.log(result)
+        effunc(result.data)
     }
-    // console.log(det)
 
     useEffect(() => {
-        return () => {
-            handleLogin()
-        };
-    })
-
+        handleLogin()
+    }, [])
+    console.log(det)
     
 
 // courseTitle
@@ -71,12 +68,19 @@ const ProfileBody = () => {
 
     const handleCreateCourse = async (e) =>{
         e.preventDefault()
+        // const config2 ={
+        //     headers:{
+        //         'content-Type': 'application/json',
+        //         Authorization: 'Bearer ' + localStorage.getItem('token')
+        //     }
+        // }
         let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/course', {
             method:'post',
             credencials: 'include',
             body:JSON.stringify({courseTitle, courseDescription, courseDuration, category, whatToLearn, requirement, audience, materials}),
-            headers:{
-                'content-Type': 'application/json'
+            headers: {
+                'content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('token')
             }
             
         })
@@ -84,10 +88,29 @@ const ProfileBody = () => {
         console.warn(result)
         console.log(result)
     }
-    // console.log(det)
     
+    // const handleCreateCourse = () => {
+    //     const config2 = {
+    //         Headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('token'),
+    //             body:JSON.stringify({courseTitle, courseDescription, courseDuration, category, whatToLearn, requirement, audience, materials})
+    //         }
+    //     }
+    //     axios.post('https://mysterious-waters-58153.herokuapp.com/api/v1/course', config2).then(
+    //         res => {
+    //             console.log(res)
+    //         }
+    //     ),
+    //     err => {
+    //         console.log(err)
+    //     }
 
+    // }
+    // useEffect(() => {
+    //     handleCreateCourse()
+    // }, [])
 
+    // {courseTitle, courseDescription, courseDuration, category, whatToLearn, requirement, audience, materials}
 
     function dashboard(){
         document.getElementById("dashboard").style.display="flex"
