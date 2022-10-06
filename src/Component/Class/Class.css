@@ -207,6 +207,17 @@
     cursor: pointer;
     font-size: 1rem;
     margin-top: 10px;
+    float: right;
+}
+.class .sub-class .video .course-details .course-content .review form #star{
+    width: 82px;
+    background-color: transparent;
+    border: 1px solid #CDCFD5;
+    float: left;
+    color: #41454f;
+}
+.class .sub-class .video .course-details .course-content .review form #star:focus{
+    outline: 1px solid #027dff;
 }
 
 

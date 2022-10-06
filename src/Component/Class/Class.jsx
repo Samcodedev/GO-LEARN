@@ -77,6 +77,15 @@ const Class = () => {
         console.log(result2)
     }
 
+    // setInterval(() => {
+    //     let stra = document.getElementById("star").value
+        if( rating > 5 ){
+            rating = 5
+        }else if(rating < 0){
+            rating = 0
+        }
+    // }, 1000);
+
     return(
         <div className='class'>
             <div className="sub-class">
@@ -118,7 +127,8 @@ const Class = () => {
                                 <h2>Your Experience</h2>
                                 <form onSubmit={handlereview} action="">
                                     <textarea value={review} onChange={(e) => refunc(e.target.value)} cols="30" rows="10" placeholder="Let's know your experience about the course here..."></textarea>
-                                    <input type="number" value={rating} onChange={(e) => rafunc(e.target.value)} />
+                                    <span></span>
+                                    <input type="number" value={rating} onChange={(e) => rafunc(e.target.value)} id="star" placeholder='rate 0 - 5' />
                                     <input type="submit" />
                                 </form>
                             </div>
