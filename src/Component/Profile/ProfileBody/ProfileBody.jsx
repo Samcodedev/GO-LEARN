@@ -87,6 +87,14 @@ const ProfileBody = () => {
         result = await result.json()
         console.warn(result)
         console.log(result)
+
+        if( result.success === true ){
+            document.getElementById("message").innerHTML=`You have successfully created ${courseTitle} course.`
+            document.getElementById("message").style.color="green"
+        }else if( result.success === false){
+            document.getElementById("message").innerHTML=`${result.error}`
+            document.getElementById("message").style.color="red"
+        }
     }
     
     // const handleCreateCourse = () => {
@@ -296,6 +304,7 @@ const ProfileBody = () => {
                             <label>Materials</label>
                             <input type="text" value={materials} onChange={(e) => mfunc(e.target.value)}  />
 
+                            <span id='message'></span>
                             <input type="submit" value="Create" className='submit'/>
                         </form>
                     </div>
