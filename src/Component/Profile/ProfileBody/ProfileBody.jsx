@@ -38,23 +38,27 @@ const ProfileBody = () => {
         console.warn(result)
         console.log(result)
         effunc(result.data)
+
+
+        
     }
 
     useEffect(() => {
         handleLogin()
     }, [])
     console.log(det)
+
+    setTimeout(() => {
+        if (det.role = "publisher"){
+            document.getElementById("sixth").style.display="block"
+        }else if(det.role = "user"){
+            document.getElementById("create").style.display="none"
+            document.getElementById("sixth").style.display="none"
+        }
+    });
     
 
-// courseTitle
-// courseDescription
-// courseDuration
-// category
-// whatToLearn
-// requirement
-// audience
-// materials
-
+    // create new course for only admin and publishers
 
     let [courseTitle, ctfunc] = React.useState('')
     let [courseDescription, cdtfunc] = React.useState('')
@@ -65,15 +69,8 @@ const ProfileBody = () => {
     let [audience, afunc] = React.useState('')
     let [materials, mfunc] = React.useState('')
 
-
     const handleCreateCourse = async (e) =>{
         e.preventDefault()
-        // const config2 ={
-        //     headers:{
-        //         'content-Type': 'application/json',
-        //         Authorization: 'Bearer ' + localStorage.getItem('token')
-        //     }
-        // }
         let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/course', {
             method:'post',
             credencials: 'include',
@@ -96,29 +93,6 @@ const ProfileBody = () => {
             document.getElementById("message").style.color="red"
         }
     }
-    
-    // const handleCreateCourse = () => {
-    //     const config2 = {
-    //         Headers: {
-    //             Authorization: 'Bearer ' + localStorage.getItem('token'),
-    //             body:JSON.stringify({courseTitle, courseDescription, courseDuration, category, whatToLearn, requirement, audience, materials})
-    //         }
-    //     }
-    //     axios.post('https://mysterious-waters-58153.herokuapp.com/api/v1/course', config2).then(
-    //         res => {
-    //             console.log(res)
-    //         }
-    //     ),
-    //     err => {
-    //         console.log(err)
-    //     }
-
-    // }
-    // useEffect(() => {
-    //     handleCreateCourse()
-    // }, [])
-
-    // {courseTitle, courseDescription, courseDuration, category, whatToLearn, requirement, audience, materials}
 
     function dashboard(){
         document.getElementById("dashboard").style.display="flex"
@@ -147,7 +121,6 @@ const ProfileBody = () => {
         document.getElementById("second").style.backgroundColor="transparent"
         document.getElementById("sixth").style.backgroundColor="#007bff"
     }
-    // sixth
     
     return(
         <div className='profilebody'>

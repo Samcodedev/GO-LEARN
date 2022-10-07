@@ -121,6 +121,9 @@
 .profilebody .sub-profilebody .dashboard .dashboard-nav ul li:hover .span{
     color: #ffffff;
 }
+.profilebody .sub-profilebody .dashboard .dashboard-nav ul #sixth{
+    display: none;
+}
 /* .profilebody .sub-profilebody .dashboard .dashboard-nav ul li:first-child .span{
     color: #ffffff;
 } */

@@ -2,7 +2,8 @@ import React from 'react';
 import './Class.css'
 import Module from './Card/Module';
 import ModuleData from './Card/ModuleData.json'
-// import video from './video/React and node JS project #16 Login API integration.mp4'
+import ReviewData from '../Review/data/ReviewData.json'
+import StudentRev from '../Review/StudentRev'
 
 const Class = () => {
     const mode = ModuleData.map((item) =>{
@@ -55,16 +56,9 @@ const Class = () => {
     let [rating, rafunc] = React.useState('')
     const handlereview = async (e) =>{
         e.preventDefault()
-        // const config ={
-        //     Headers:{
-        //         Authorization: 'Bearer ' + localStorage.getItem('token')
-        //     }
-        // }
         let result2 = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/course/6329e50c075b1dc8aef4fb85/reviews', 
          {
             method:'post',
-            // credencials: 'include',
-            // 'content-Type': 'application/json',
             body:JSON.stringify({review, rating}),
             headers:{
                 'content-Type': 'application/json',
@@ -77,14 +71,22 @@ const Class = () => {
         console.log(result2)
     }
 
-    // setInterval(() => {
-    //     let stra = document.getElementById("star").value
-        if( rating > 5 ){
-            rating = 5
-        }else if(rating < 0){
-            rating = 0
-        }
-    // }, 1000);
+    if( rating > 5 ){
+        rating = 5
+    }else if(rating < 0){
+        rating = 0
+    }
+
+    const rev = ReviewData.map((item) => {
+        return(
+            <StudentRev 
+                course={item.course}
+                name={item.name}
+                time={item.time}
+                review={item.review}
+            />
+        )
+    }) 
 
     return(
         <div className='class'>
@@ -126,11 +128,14 @@ const Class = () => {
                             <div className="review" id='review'>
                                 <h2>Your Experience</h2>
                                 <form onSubmit={handlereview} action="">
-                                    <textarea value={review} onChange={(e) => refunc(e.target.value)} cols="30" rows="10" placeholder="Let's know your experience about the course here..."></textarea>
+                                    <textarea value={review} onChange={(e) => refunc(e.target.value)} rows="10" placeholder="Let's know your experience about the course here..."></textarea>
                                     <span></span>
                                     <input type="number" value={rating} onChange={(e) => rafunc(e.target.value)} id="star" placeholder='rate 0 - 5' />
                                     <input type="submit" />
                                 </form>
+                                <div className="comments">
+                                    {rev}
+                                </div>
                             </div>
                         </div>
                     </div>

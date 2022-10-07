@@ -6,7 +6,7 @@ const StudentRev = (props) => {
     return(
         <div className='studentrev'>
             <div className="top">
-                <div className="content">
+                <div className="cont">
                     <div className="img-div">
                         <img src={profile} alt="" />
                     </div>
