@@ -1,29 +1,49 @@
 import React from 'react';
 import './Classes.css'
+import { useEffect } from 'react';
 import ClassCard from './ClassCard';
-import ClassesData from '../Data/ClassesData'
+// import ClassesData from '../Data/ClassesData'
 
 const Classes = () => {
-    const container = ClassesData.map((item)  =>{
+    const [courses, courseFunction] = React.useState([])
+    const handleLogin = async () =>{
+        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/course', {
+            method:'get',
+            credencials: 'include'
+            
+        })
+        result = await result.json()
+        console.warn(result)
+        console.log(result)
+        courseFunction(result.data)
+
+        
+    }
+    // handleLogin()
+    useEffect(() => {
+        handleLogin()
+    }, [])
+
+    
+
+
+    const datas = courses.map((items) =>{
         return(
             <ClassCard 
-                id={item.id}
-                title={item.title}
-                duration={item.details.duration}
-                member={item.details.members}
-                star={item.star}
-                name={item.author.name}
-                job1={item.author.job1}
-                job2={item.author.job2}
-                job3={item.author.job3}
-                link={item.link}
+                title={items.courseTitle}
+                time={items.courseDuration}
+                audience={items.audience}
+                category={items.category}
+                author={items.publisherName}
             />
         )
     })
+
+
     return(
         <div className="classes">
             <div className="sub-classes">
-                {container}
+                {datas}
             </div>
         </div>
     )

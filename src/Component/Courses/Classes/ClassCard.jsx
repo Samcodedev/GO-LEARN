@@ -14,11 +14,11 @@ const ClassCard = (props) => {
                 <span>{props.star}</span>
                 <a href={props.link}><h3>{props.title}</h3></a>
                 <div className="details">
-                    <p>{props.duration}</p>
-                    <p>{props.member}</p>
+                    <p>{props.time}</p>
+                    <p>{props.audience}</p>
                 </div>
                 <div className="author">
-                    <p>By <Link to="/construction">{props.name}</Link> in <Link to="/construction">{props.job1}</Link> <Link to="/construction">{props.job2}</Link> <Link to="/construction">{props.job3}</Link></p>
+                    <p>By <Link to="/construction">{props.author}</Link> in <Link to="/construction">{props.category}</Link> <Link to="/construction">{props.category}</Link> <Link to="/construction">{props.category}</Link></p>
                     <Link to="/construction"><img src={profile} alt="/construction"/></Link>
                 </div>
             </div>

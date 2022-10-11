@@ -6,7 +6,6 @@ import img2 from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 import ClassesData from '../../Courses/Data/ClassesData.json'
 import { Link } from "react-router-dom"
 import { useEffect } from 'react';
-// import axios from 'axios';
 
 const ProfileBody = () => {
 
@@ -48,14 +47,14 @@ const ProfileBody = () => {
     }, [])
     console.log(det)
 
-    setTimeout(() => {
-        if (det.role = "publisher"){
-            document.getElementById("sixth").style.display="block"
-        }else if(det.role = "user"){
-            document.getElementById("create").style.display="none"
-            document.getElementById("sixth").style.display="none"
-        }
-    });
+    // setTimeout(() => {
+    //     if (det.role = "publisher"){
+    //         document.getElementById("sixth").style.display="block"
+    //     }else if(det.role = "user"){
+    //         document.getElementById("create").style.display="none"
+    //         document.getElementById("sixth").style.display="none"
+    //     }
+    // });
     
 
     // create new course for only admin and publishers

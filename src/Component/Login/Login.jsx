@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'
 
 const Login = () => {
@@ -10,6 +10,8 @@ const Login = () => {
     let valid1 = document.getElementById("valid1")
     let valid2 = document.getElementById("valid2")
     let error = document.getElementById("error")
+
+    const navigate = useNavigate();
 
     const handleLogin = async (e) =>{
         e.preventDefault()
@@ -28,13 +30,15 @@ const Login = () => {
 
         
         
-
+        
         if( result.success === true){
             valid1.style.border="1px solid green"
             valid2.style.border="1px solid green"
             error.innerHTML="Welcome Back"
             error.style.color="green"
-            // BrowserHistory.push('/profile')
+            setTimeout(() => {
+                navigate('/profile')
+            }, 3000);
             localStorage.setItem('token', result.token)
         }else if( result.success === false){
             valid1.style.border="1px solid red"

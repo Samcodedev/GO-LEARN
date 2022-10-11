@@ -1,5 +1,7 @@
 import React from 'react';
 import './RegisterBody.css'
+import { useNavigate } from 'react-router-dom';
+
 
 
 const RegisterBody = () => {
@@ -10,6 +12,8 @@ const RegisterBody = () => {
     const [email, efunc] = React.useState('')
     const [password, pfunc] = React.useState('')
     const [confirm, cfunc] = React.useState('')
+    
+    const navigate = useNavigate();
 
     // let valid1 = document.getElementById("valid1")
     // let valid2 = document.getElementById("valid2")
@@ -37,6 +41,9 @@ const RegisterBody = () => {
             document.getElementById("message").style.color="red"
         }
         else if( result.success === true){
+            setTimeout(() => {
+                navigate('/profile')
+            }, 3000);
             localStorage.setItem("token", token )
             document.getElementById("message").innerHTML="You have successfully Registered"
         }
