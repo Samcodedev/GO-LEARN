@@ -236,7 +236,7 @@ const DecFinanceDetails = (props) => {
                                 <li><span>Intermediate</span></li>
                                 <li><span>{members} Total Enrolled</span></li>
                                 <li><span> Duration: {data.courseDuration}</span></li>
-                                <li><span>{data.updatedAt} Last Updated</span></li>
+                                <li><span>{data.updatedAt}  Last Updated</span></li>
                             </ul>
                         </div>
                     </div>
