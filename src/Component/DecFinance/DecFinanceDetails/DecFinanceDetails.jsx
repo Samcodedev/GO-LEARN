@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './DecFinanceDetails.css'
 import img from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 import profile from './img/Group 1.png'
 import ClassesData from '../../Courses/Data/ClassesData.json'
 import Module from '../../Class/Card/Module';
 import ModuleData from '../../Class/Card/ModuleData.json'
-import ReviewData from '../../Review/data/ReviewData.json'
+// import ReviewData from '../../Review/data/ReviewData.json'
 import { Link } from 'react-router-dom';
 import StudentRev from '../../Review/StudentRev';
+import { useState } from 'react';
 
 const DecFinanceDetails = () => {
 
@@ -67,12 +68,34 @@ const DecFinanceDetails = () => {
         )
     })
 
-    const stu = ReviewData.map((item) =>{
+    const [revew, refunc] =  useState([])
+    const handlereview = async () =>{
+        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/reviews', 
+         {
+            method:'get'
+        })
+        result = await result.json()
+        console.warn(result)
+        console.log(result)
+
+        refunc(
+            result.data
+        )
+    }
+    console.log(revew)
+
+    useEffect(() => {
+        handlereview()
+    }, [])
+
+    const stu = revew.map((item) =>{
+        
         return(
             <StudentRev 
-                name={item.name}
-                time={item.time}
+                name={item._id}
+                time={item.createdAt}
                 review={item.review}
+                star={item.rating}
             />
         )
     })
