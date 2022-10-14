@@ -3,7 +3,7 @@ import './Title.css'
 import { Link } from 'react-router-dom';
 import ClassesData from '../../Courses/Data/ClassesData.json'
 
-const Title = () => {
+const Title = (props) => {
 
     let details = []
     let cate1 = []
@@ -19,14 +19,16 @@ const Title = () => {
         cate3 = ClassesData[5].author.job3
         star = ClassesData[5].star
     }
+    let data = props.data
+    console.log(data)
 
     return(
         <div className="title">
             <div className="sub-title">
                 <div className="detail">
                     <span>{star}</span>
-                    <Link to="/construction"><h3>{details}</h3></Link>
-                    <p>Categories: <Link to="/construction">{cate1}</Link> <Link to="/construction">{cate2}</Link> <Link to="/construction">{cate3}</Link> </p>
+                    <Link to="/construction"><h3>{data.courseTitle}</h3></Link>
+                    <p>Categories: <Link to="/construction">{data.category}</Link> <Link to="/construction">{cate2}</Link> <Link to="/construction">{cate3}</Link> </p>
                 </div>
                 <div className="shear-save">
                     <Link to="/construction">Share</Link>

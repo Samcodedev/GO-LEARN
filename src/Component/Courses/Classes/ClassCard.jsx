@@ -5,6 +5,8 @@ import profile from './img/Group 1.png'
 import { Link } from "react-router-dom"
 
 const ClassCard = (props) => {
+    let sss = props.data
+    console.log(sss)
     return(
         <div className="card">
             <div className="img-div">
@@ -23,7 +25,7 @@ const ClassCard = (props) => {
                 </div>
             </div>
             <div className="enrol-div">
-                <a href={props.link}><button>Enroll Course</button></a>
+                <Link to="/DecFinance" state={{id: props.data}}><button>Enroll Course</button></Link>
             </div>
         </div>
     )

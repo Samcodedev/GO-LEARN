@@ -28,6 +28,7 @@ const Classes = () => {
 
 
     const datas = courses.map((items) =>{
+        // console.log(items)
         return(
             <ClassCard 
                 title={items.courseTitle}
@@ -35,6 +36,7 @@ const Classes = () => {
                 audience={items.audience}
                 category={items.category}
                 author={items.publisherName}
+                data={items}
             />
         )
     })

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import StudentRev from '../../Review/StudentRev';
 import { useState } from 'react';
 
-const DecFinanceDetails = () => {
+const DecFinanceDetails = (props) => {
 
 
     let experience = []
@@ -100,6 +100,9 @@ const DecFinanceDetails = () => {
         )
     })
 
+    let data = props.data
+    console.log(data)
+
     return(
         <div className="DecFinanceDetails">
              <div className="sub-DecFinanceDetails">
@@ -115,7 +118,7 @@ const DecFinanceDetails = () => {
                         <div className="about">
                             <h2>About Course</h2>
                             <h3>Course Description</h3>
-                            <p>This course is designed to help you understand decentralised finance and how to navigate and benefit from protocols built for DeFI on the blockchain.</p>
+                            <p>{data.courseDescription}</p>
                             <h3>Who This Course is for</h3>
                             <p>Anyone with a basic understanding of cryptocurrencies can take this course.</p>
                             <p>Interested students also need to possess familiarity with cryptocurrency wallets and cyber security best practices</p>
@@ -232,8 +235,8 @@ const DecFinanceDetails = () => {
                             <ul>
                                 <li><span>Intermediate</span></li>
                                 <li><span>{members} Total Enrolled</span></li>
-                                <li><span> Duration: {duration}</span></li>
-                                <li><span>April 3, 2022 Last Updated</span></li>
+                                <li><span> Duration: {data.courseDuration}</span></li>
+                                <li><span>{data.updatedAt} Last Updated</span></li>
                             </ul>
                         </div>
                     </div>
@@ -243,7 +246,7 @@ const DecFinanceDetails = () => {
                             <div className="profile">
                                 <img src={profile} alt=""/>
                                 <div className="content">
-                                    <Link to="/construction">{name}</Link>
+                                    <Link to="/construction">{data.publisherName}</Link>
                                     <span>{experience}</span>
                                 </div>
                             </div>
