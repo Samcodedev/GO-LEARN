@@ -47,7 +47,7 @@ const ProfileBody = () => {
     }, [])
     console.log(det)
 
-    
+    // 
     // setTimeout(() => {
     //     if (det.role = "publisher"){
     //         document.getElementById("sixth").style.display="block"
