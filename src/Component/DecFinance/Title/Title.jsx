@@ -5,16 +5,16 @@ import ClassesData from '../../Courses/Data/ClassesData.json'
 
 const Title = (props) => {
 
-    let details = []
-    let cate1 = []
+    // let details = []
+    // let cate1 = []
     let cate2 = []
     let cate3 = []
     let star = []
     
     for( let i=0; i<ClassesData.length; i++){
         // console.log(ClassesData[5].title)
-        details = ClassesData[5].title
-        cate1 = ClassesData[5].author.job1
+        // details = ClassesData[5].title
+        // cate1 = ClassesData[5].author.job1
         cate2 = ClassesData[5].author.job2
         cate3 = ClassesData[5].author.job3
         star = ClassesData[5].star

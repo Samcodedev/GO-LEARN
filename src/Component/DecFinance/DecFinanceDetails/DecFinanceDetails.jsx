@@ -14,9 +14,9 @@ const DecFinanceDetails = (props) => {
 
 
     let experience = []
-    let name = []
+    // let name = []
     let members = []
-    let duration = []
+    // let duration = []
     let mate_1 = []
     let mate_2 = []
     let mate_3 = []
@@ -28,9 +28,9 @@ const DecFinanceDetails = (props) => {
 
     for( let i=0; i < ClassesData.length; i++){
         experience = ClassesData[5].details.experience
-        name = ClassesData[5].author.name
+    //     name = ClassesData[5].author.name
         members = ClassesData[5].details.members
-        duration = ClassesData[5].details.duration
+    //     duration = ClassesData[5].details.duration
         mate_1 = ClassesData[5].materials.mate_1
         mate_2 = ClassesData[5].materials.mate_2
         mate_3 = ClassesData[5].materials.mate_3
