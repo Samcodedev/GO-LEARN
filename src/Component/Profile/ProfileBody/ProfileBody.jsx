@@ -60,46 +60,48 @@ const ProfileBody = () => {
     // create new course for only admin and publishers
 
 
-    let [audience, stafunc] = React.useState([])
-    let [category, cfunc] = React.useState('')
-    let [courseContent, stccfunc]  = React.useState([])
-    let [courseDescription, cdtfunc] = React.useState('')
+    let [audience, aufunc] = React.useState([])
+    let [category, cafunc] = React.useState('')
+    let [courseContent, cofunc]  = React.useState([])
+    let [courseDescription, codfunc] = React.useState('')
     let [courseDuration, cdfunc] = React.useState('')
     let [courseTitle, ctfunc] = React.useState('')
-    let [materials, stmfunc] = React.useState([])
-    let [requirement, strfunc] = React.useState([])
-    let [tags, sttfunc] = React.useState([])
-    let [whatToLearn, stwlfunc] = React.useState([])
+    let [materials, mafunc] = React.useState([])
+    let [requirement, refunc] = React.useState([])
+    let [tags, tafunc] = React.useState([])
+    let [whatToLearn, whfunc] = React.useState([])
     
-    // alert(audience)
+    // // alert(audience)
 
-    let [audienceSt, afunc] = React.useState([])
-    let [courseContentSt, ccfunc] = React.useState([])
-    let [materialsSt, mfunc] = React.useState([])
-    let [requirementSt, rfunc] = React.useState([])
-    let [tagsSt, tfunc] = React.useState([])
-    let [whatToLearnSt, wlfunc] = React.useState([])
+    // let audienceSt = []
+    // let [courseContentSt, ccfunc] = React.useState([])
+    // let [materialsSt, mfunc] = React.useState([])
+    // let [requirementSt, rfunc] = React.useState([])
+    // let [tagsSt, tfunc] = React.useState([])
+    // let [whatToLearnSt, wlfunc] = React.useState([])
 
 
-    function audi(){
-        stafunc(current => [current, audienceSt])
-        console.log(audience)
-    }
-    function cour(){
-        courseContent.push(courseContentSt)
-    }
-    function mate(){
-        materials.push(materialsSt)
-    }
-    function requ(){
-        requirement.push(requirementSt)
-    }
-    function tage(){
-        tags.push(tagsSt)
-    }
-    function what(){
-        whatToLearn.push(whatToLearnSt)
-    }
+    // function audi(){
+    //     // stafunc(() => JSON.stringify(audienceSt))
+    //     audienceSt.push("samuel")
+    //     console.log(audienceSt)
+    // }
+    // function cour(){
+    //     courseContent.push(courseContentSt)
+    //     console.log(audience)
+    // }
+    // function mate(){
+    //     materials.push(materialsSt)
+    // }
+    // function requ(){
+    //     requirement.push(requirementSt)
+    // }
+    // function tage(){
+    //     tags.push(tagsSt)
+    // }
+    // function what(){
+    //     whatToLearn.push(whatToLearnSt)
+    // }
 
 
     
@@ -292,48 +294,48 @@ const ProfileBody = () => {
                             <input type="text" value={courseTitle} onChange={(e) => ctfunc(e.target.value)} />
 
                             <label>Course Description</label>
-                            <input type="text" value={courseDescription} onChange={(e) => cdtfunc(e.target.value)} />
+                            <input type="text" value={courseDescription} onChange={(e) => codfunc(e.target.value)} />
 
                             <label>Course Duration</label>
                             <input type="text" value={courseDuration} onChange={(e) => cdfunc(e.target.value)}  />
 
                             <label>Category</label>
-                            <input type="text" value={category} onChange={(e) => cfunc(e.target.value)}  />
+                            <input type="text" value={category} onChange={(e) => cafunc(e.target.value)}  />
 
                             <label>Course Content</label>
                             <div className="array-input">
-                                <input type="text"  value={courseContentSt} onChange={(e) => ccfunc(e.target.value)}  />
-                                <span onClick={cour}>Add</span>
+                                <input type="text"  value={courseContent} onChange={(e) => cofunc(e.target.value)}  />
+                                <span>Add</span>
                             </div>
 
                             <label>What To Learn</label>
                             <div className="array-input">
-                                <input type="text" value={whatToLearnSt} onChange={(e) => wlfunc(e.target.value)}  />
-                                <span onClick={what}>Add</span>
+                                <input type="text" value={whatToLearn} onChange={(e) => whfunc(e.target.value)}  />
+                                <span>Add</span>
                             </div>
 
                             <label>Requirement</label>
                             <div className="array-input">
-                                <input type="text" value={requirementSt} onChange={(e) => rfunc(e.target.value)}  />
-                                <span onClick={requ}>Add</span>
+                                <input type="text" value={requirement} onChange={(e) => refunc(e.target.value)}  />
+                                <span>Add</span>
                             </div>
 
                             <label>Audience</label>
-                            <div className="array-input">
-                                <input type="text"  value={audienceSt} onChange={(e) => afunc(e.target.value)} />
-                                <span onClick={audi}>Add</span>
+                            <div className="array-input" >
+                                <input type="text"  value={audience} onChange={(e) => aufunc(e.target.value)} />
+                                <span>Add</span>
                             </div>
 
                             <label>Materials</label>
                             <div className="array-input">
-                                <input type="text" value={materialsSt} onChange={(e) => mfunc(e.target.value)}  />
-                                <span onClick={mate}>Add</span>
+                                <input type="text" value={materials} onChange={(e) => mafunc(e.target.value)}  />
+                                <span>Add</span>
                             </div>
 
                             <label>Tags</label>
                             <div className="array-input">
-                                <input type="text" value={tagsSt} onChange={(e) => tfunc(e.target.value)}  />
-                                <span onClick={tage}>Add</span>
+                                <input type="text" value={tags} onChange={(e) => tafunc(e.target.value)}  />
+                                <span>Add</span>
                             </div>
 
                             <span id='message'></span>
