@@ -84,8 +84,9 @@
     padding-bottom: 25px;
     margin-left: 14px;
     margin-right: 14px;
-    display: flex;
+    /* display: flex;
     align-items: center;
+    justify-content: center; */
 }
 .navbar .sub-navbar .navigation .main li svg{
     margin-bottom: -6px;
