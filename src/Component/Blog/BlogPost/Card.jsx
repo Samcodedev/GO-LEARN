@@ -2,6 +2,7 @@ import React from 'react';
 import './BlogPost.css'
 import img from './img/blog-img-1.jpg'
 import { Link } from 'react-router-dom';
+import { AiOutlineCalendar } from 'react-icons/ai'
 
 const Card = (props) => {
     return(
@@ -15,7 +16,7 @@ const Card = (props) => {
                 <div className="buttom">
                     <ul>
                         <li><Link to="/construction">{props.author}</Link></li>
-                        <li><Link to="/construction">{props.date}</Link></li>
+                        <li><Link to="/construction"> <AiOutlineCalendar fontSize="18px" /> {props.date}</Link></li>
                     </ul>
                 </div>
             </div>

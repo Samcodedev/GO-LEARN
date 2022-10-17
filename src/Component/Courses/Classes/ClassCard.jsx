@@ -3,6 +3,7 @@ import './Classes.css'
 import img from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 import profile from './img/Group 1.png'
 import { Link } from "react-router-dom"
+import { FaStar } from 'react-icons/fa'
 
 const ClassCard = (props) => {
     let sss = props.data
@@ -13,7 +14,7 @@ const ClassCard = (props) => {
                 <img src={img} alt=""/>
             </div>
             <div className="content-div">
-                <span>{props.star}</span>
+                <span><FaStar fill='yellow' /></span>
                 <a href={props.link}><h3>{props.title}</h3></a>
                 <div className="details">
                     <p>{props.time}</p>

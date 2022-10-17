@@ -2,6 +2,11 @@ import React from 'react';
 import './OnlineBlog.css'
 import img from './img/olubori-free2.png'
 import { Link } from 'react-router-dom';
+import { BsFillJournalBookmarkFill } from 'react-icons/bs'
+import { FaChalkboardTeacher } from 'react-icons/fa'
+import { RiRemoteControlLine } from 'react-icons/ri'
+import { MdOutlineAccessTime } from 'react-icons/md'
+import { GrGrow } from 'react-icons/gr'
 
 const OnlineBlog = () => {
     return(
@@ -16,15 +21,15 @@ const OnlineBlog = () => {
                     <p>At Go-Learn, we understand better that online-based learning can make a significant change to reach students from all over the world! Giving options to learn better always can offer the best outcomes!</p>
                     <div className="online-props">
                         <ul>
-                            <li> Expert Trainers</li>
-                            <li> Lifetime Access</li>
+                            <li> <FaChalkboardTeacher /> Expert Trainers</li>
+                            <li> <MdOutlineAccessTime /> Lifetime Access</li>
                         </ul>
                         <ul>
-                            <li> Remote Learning</li>
-                            <li> Self Development</li>
+                            <li> <RiRemoteControlLine /> Remote Learning</li>
+                            <li> <GrGrow stroke='#7A7A7A' /> Self Development</li>
                         </ul>
                     </div>
-                    <Link to="/profile"><button>View All Courses</button></Link>
+                    <Link to="/profile"><button> <BsFillJournalBookmarkFill fontSize="20px" /> View All Courses</button></Link>
                 </div>
             </div>
         </div>

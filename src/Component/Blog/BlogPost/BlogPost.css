@@ -46,3 +46,10 @@
     padding-inline-start: 0;
     list-style: none;
 }
+.blogpost .sub-blogpost .card .content ul li{
+    display: flex;
+    align-items: center;
+}
+.blogpost .sub-blogpost .card .content ul li svg{
+    margin-bottom: -3px;
+}

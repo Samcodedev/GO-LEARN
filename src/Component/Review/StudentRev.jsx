@@ -1,6 +1,7 @@
 import React from 'react';
 import './StudentRev.css'
 import profile from './img/Group 1.png'
+import { FaStar } from 'react-icons/fa'
 
 const StudentRev = (props) => {
     let stars = ""
@@ -37,6 +38,8 @@ const StudentRev = (props) => {
                 </div>
                 <div className="star">
                     <p>{stars}</p>
+                    <FaStar fill='yellow' />
+                    <FaStar fill='yellow' />
                 </div>
             </div>
             <div className="body">

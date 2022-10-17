@@ -16,6 +16,7 @@ import Login from './Login/Login'
 import Forget from './ForgetPassword/Forget'
 import Reset from './ResetPassword/Reset'
 import Class from './Class/Class'
+import Error from './ErrorPage/Error'
 
 
 function Component(){
@@ -39,6 +40,7 @@ function Component(){
                         <Route path="/forget" element={<Forget />} />
                         <Route path="/class" element={<Class />} />
                         <Route path={`${API}resetpassword/:token`} element={<Reset />} />
+                        <Route path='/error' element={<Error />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

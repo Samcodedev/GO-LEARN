@@ -152,6 +152,9 @@
 }
 .pupcourse .sub-pupcourse .wrapper .card-wrapper .card .cont .card-bottom ul li a{
     color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 @media screen and (max-width: 916px){

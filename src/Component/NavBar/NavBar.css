@@ -84,6 +84,11 @@
     padding-bottom: 25px;
     margin-left: 14px;
     margin-right: 14px;
+    display: flex;
+    align-items: center;
+}
+.navbar .sub-navbar .navigation .main li svg{
+    margin-bottom: -6px;
 }
 .navbar .sub-navbar .navigation .main li:hover{
     color: #027dff;

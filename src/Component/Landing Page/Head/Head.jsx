@@ -5,6 +5,9 @@ import crypt from './img/download 2.png'
 import prof from './img/Group 1.png'
 import { Link } from 'react-router-dom';
 import Course from '../.././Courses'
+import { BiBookAlt } from 'react-icons/bi'
+import { HiUserGroup } from 'react-icons/hi'
+import { BsPerson } from 'react-icons/bs'
 
 const Head = () => {
 
@@ -32,7 +35,7 @@ const Head = () => {
                 <div className="head-text">
                     <h1>Nigeria's foremost Learning and Earning Platform</h1>
                     <p>At Go-Learn, we believe that flexible and easy to access learning opportunities can bring a significant change in how individuals prefer to learn! Therefore, we offers you the possibility of earning while you enjoy the beauty of eLearning!</p>
-                    <Link to="/construction"><button>Join For Free</button></Link>
+                    <Link to="/construction"><button> <BsPerson fontSize="20px" /> Join For Free</button></Link>
                 </div>
                 <div className="head-card">
                     <div className="card-wrapper">
@@ -51,8 +54,8 @@ const Head = () => {
                                 </div>
                                 <div className="card-bottom">
                                     <ul>
-                                        <li><Link to="">Lesson 9</Link></li>
-                                        <li><Link to="">Students 288</Link></li>
+                                        <li><Link to=""> <BiBookAlt fontSize="20px" color='#007bff' /> Lesson 9</Link></li>
+                                        <li><Link to=""> <HiUserGroup fontSize="20px" color='#007bff' /> Students 288</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -74,8 +77,8 @@ const Head = () => {
                                 </div>
                                 <div className="card-bottom">
                                 <ul>
-                                    <li><Link to="">Lesson 11</Link></li>
-                                    <li><Link to="">Students 377</Link></li>
+                                    <li><Link to=""> <BiBookAlt fontSize="20px" color='#007bff' /> Lesson 9</Link></li>
+                                    <li><Link to=""> <HiUserGroup fontSize="20px" color='#007bff' /> Students 288</Link></li>
                                 </ul>
                                 </div>
                             </div>

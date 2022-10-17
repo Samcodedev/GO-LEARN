@@ -37,6 +37,9 @@
     padding: 11px;
     background-color: #027dff;
 }
+.sub-goalumni .goalumni-content button svg{
+    margin-bottom: -4px;
+}
 .sub-goalumni .goalumni-content button:hover{
     background-color: #221638;
 

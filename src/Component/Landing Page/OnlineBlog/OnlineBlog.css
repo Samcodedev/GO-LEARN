@@ -58,6 +58,9 @@
     margin-top: 10px;
     color: #7A7A7A;
 }
+/* .OnlineBlog .sub-OnlineBlog .OnlineBlog-content .online-props ul li svg{
+    color: #7A7A7A;
+} */
 .OnlineBlog .sub-OnlineBlog .OnlineBlog-content a{
     /* padding: 20px 5px 22px 5px; */
     border-radius: 29px;
@@ -72,7 +75,8 @@
 .OnlineBlog .sub-OnlineBlog .OnlineBlog-content a button{
     border: none;
     position: relative;
-    display: inline-block;
+    display: flex;
+    gap: 5px;
     text-align: center;
     overflow: hidden;
     z-index: 1;
@@ -87,6 +91,10 @@
     padding-bottom: 15px;
     cursor: pointer;
     margin: 5px 5px 5px 5px;
+    align-items: flex-end;
+}
+.OnlineBlog .sub-OnlineBlog .OnlineBlog-content a button svg{
+    margin-bottom: -3px;
 }
 .OnlineBlog .sub-OnlineBlog .OnlineBlog-content a:hover{
     background-color: #027dff;

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import logo from './img/GoLearnFull Color.png'
 import nav from './img/hamburger (1).png'
 import option from './img/options.png'
+import { RiArrowDownSLine } from 'react-icons/ri'
 
 
 
@@ -43,7 +44,7 @@ const NavBar = () => {
                     <ul className="main" id='list'>
                         <li><Link to="/">Home</Link></li>
                         <li>
-                            <Link to="Courses">Courses<i class="fa fa-caret-down" aria-hidden="true"></i></Link>
+                            <Link to="Courses">Courses <RiArrowDownSLine fontSize="20px" /> <i class="fa fa-caret-down" aria-hidden="true"></i></Link>
                             <ul className="dd">
                                 <span><Link to="DecFinance">Decentralized Finance</Link></span>
                                 <span>Personal Development Courses</span>
@@ -53,7 +54,7 @@ const NavBar = () => {
                             </ul>
                         </li>
                         <li>
-                            <Link to="Blog">Go-Learn</Link>
+                            <Link to="Blog">Go-Learn <RiArrowDownSLine fontSize="20px" /> </Link>
                             <ul className="dd">
                                 <span><Link to="About">About</Link></span>
                                 <span><Link to="Contact-Us">Contact Us</Link></span>

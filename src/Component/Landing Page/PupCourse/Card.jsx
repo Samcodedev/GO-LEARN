@@ -4,6 +4,8 @@ import './PupCourse.css'
 import crypt from './img/download 2.png'
 import prof from './img/Group 1.png'
 import { Link } from 'react-router-dom';
+import { BiBookAlt } from 'react-icons/bi'
+import { HiUserGroup } from 'react-icons/hi'
 
 const Card = (props) => {
     return(
@@ -23,8 +25,8 @@ const Card = (props) => {
                     </div>
                      <div className="card-bottom">
                         <ul>
-                            <li><Link to="/profile">Lesson {props.lesson}</Link></li>
-                            <li><Link to="/profile">Students {props.students}</Link></li>
+                            <li><Link to=""> <BiBookAlt fontSize="20px" color='#007bff' /> Lesson 9</Link></li>
+                            <li><Link to=""> <HiUserGroup fontSize="20px" color='#007bff' /> Students 288</Link></li>
                         </ul>
                     </div>
                 </div>
