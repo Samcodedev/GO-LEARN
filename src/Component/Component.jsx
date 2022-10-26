@@ -40,7 +40,7 @@ function Component(){
                         <Route path="/forget" element={<Forget />} />
                         <Route path="/class" element={<Class />} />
                         <Route path={`${API}resetpassword/:token`} element={<Reset />} />
-                        <Route path='/error' element={<Error />} />
+                        <Route path='*' element={<Error />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

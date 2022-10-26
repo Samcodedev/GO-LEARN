@@ -69,7 +69,7 @@ const NavBar = () => {
                 <div className="register">
                     <div className="group">
                         <Link to="/register"><button>Login/register</button></Link>
-                        <input type="text" placeholder="Search for anything" className='search'/>
+                        <input type="search" placeholder="Search for anything" className='search'/>
                     </div>
                     <div className="option">
                         <img src={option} alt="" />

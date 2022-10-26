@@ -1,4 +1,5 @@
 import React from 'react';
+import {BsPersonCircle} from 'react-icons/bs'
 
 const Card = (props) => {
     return(
@@ -8,7 +9,7 @@ const Card = (props) => {
             </div>
             <div className="content-div">
                 <a href="/construction">
-                    <span> + </span>
+                    <span><BsPersonCircle fontSize="120%" /></span>
                 </a>
                 <h3>{props.name}</h3>
                 <span>{props.work}</span>

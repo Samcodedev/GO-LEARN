@@ -30,7 +30,7 @@ const OnlineBlog = () => {
                             <li> <GrGrow stroke='#7A7A7A' /> Self Development</li>
                         </ul>
                     </div>
-                    <Link to="/profile"><button> <BsFillJournalBookmarkFill fontSize="20px" /> View All Courses</button></Link>
+                    <Link to="/Courses"><button> <BsFillJournalBookmarkFill fontSize="20px" /> View All Courses</button></Link>
                 </div>
             </div>
         </div>

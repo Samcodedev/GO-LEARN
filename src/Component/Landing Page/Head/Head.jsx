@@ -35,7 +35,7 @@ const Head = () => {
                 <div className="head-text">
                     <h1>Nigeria's foremost Learning and Earning Platform</h1>
                     <p>At Go-Learn, we believe that flexible and easy to access learning opportunities can bring a significant change in how individuals prefer to learn! Therefore, we offers you the possibility of earning while you enjoy the beauty of eLearning!</p>
-                    <Link to="/construction"><button> <BsPerson fontSize="20px" /> Join For Free</button></Link>
+                    <Link to="/register"><button> <BsPerson fontSize="20px" /> Join For Free</button></Link>
                 </div>
                 <div className="head-card">
                     <div className="card-wrapper">

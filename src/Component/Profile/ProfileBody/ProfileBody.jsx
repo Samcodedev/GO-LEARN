@@ -6,6 +6,8 @@ import img2 from './img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png'
 import ClassesData from '../../Courses/Data/ClassesData.json'
 import { Link } from "react-router-dom"
 import { useEffect } from 'react';
+import { GiBookmarklet, GiNotebook } from 'react-icons/gi'
+import { RiBookmark3Fill } from 'react-icons/ri'
 
 const ProfileBody = () => {
 
@@ -205,7 +207,7 @@ const ProfileBody = () => {
                         <div className="properties">
                             <div className="box">
                                 <div className="img-div">
-                                    <img src={img} alt="" />
+                                    <GiBookmarklet fontSize="55px" color='#027dff' />
                                 </div>
                                 <div className="text-div">
                                     <h1>1</h1>
@@ -214,7 +216,7 @@ const ProfileBody = () => {
                             </div>
                             <div className="box">
                                 <div className="img-div">
-                                    <img src={img} alt="" />
+                                    <GiNotebook fontSize="55px" color='#027dff' />
                                 </div>
                                 <div className="text-div">
                                     <h1>1</h1>
@@ -223,7 +225,7 @@ const ProfileBody = () => {
                             </div>
                             <div className="box">
                                 <div className="img-div">
-                                    <img src={img} alt="" />
+                                    <RiBookmark3Fill fontSize="55px" color='#027dff' />
                                 </div>
                                 <div className="text-div">
                                     <h1>0</h1>
