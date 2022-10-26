@@ -3,7 +3,7 @@ import './Education.css'
 // import EducationDetail from '../Data/EducationDetail.json'
 import Card from './Card';
 import { MdGroups } from 'react-icons/md'
-import { GrMoney } from 'react-icons/gr'
+// import { GrMoney } from 'react-icons/gr'
 import { FaGlobeAfrica } from 'react-icons/fa'
 import { GiReceiveMoney } from 'react-icons/gi'
 
