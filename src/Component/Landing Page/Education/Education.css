@@ -55,10 +55,11 @@
     padding-left: 30px;
     margin-right: 15px;
     margin-left: 15px;
+    /* border: 1px solid; */
+    transition: all 300ms ease-in;
 }
 .education .sub-education .education-cards .box:hover{
-    bottom: 20px;
-    transition: 500ms ease-in;
+    transform: translateY(-20px);
 }
 .education .sub-education .education-cards .box .icons{
     margin-bottom: 20px;

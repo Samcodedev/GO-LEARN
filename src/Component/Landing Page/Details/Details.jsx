@@ -19,7 +19,7 @@ const Details = () => {
 
     return(
         <div className="details">
-            <div className="sub-details">
+            {/* <div className="sub-details"> */}
                 <div className="details-text">
                     <span>Distance learning</span>
                     <h2>Flexible Study at Your Own Pace, According to Your Own Needs</h2>
@@ -47,7 +47,7 @@ const Details = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            {/* </div> */}
         </div>
     )
 }
