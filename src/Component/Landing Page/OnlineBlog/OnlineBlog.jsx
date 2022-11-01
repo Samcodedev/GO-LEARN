@@ -6,7 +6,7 @@ import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { RiRemoteControlLine } from "react-icons/ri";
 import { MdOutlineAccessTime } from "react-icons/md";
-import { GrGrow } from "react-icons/gr";
+//import { GrGrow } from "react-icons/gr";
 import { TbPlant } from "react-icons/tb";
 
 const OnlineBlog = () => {
