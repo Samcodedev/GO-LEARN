@@ -1,8 +1,15 @@
 .Online-bori{
     background-color: #ffffff;
     margin-top: 50px;
+    padding: 0 64px;
     padding-bottom: 20px;
+    width: auto !important;
 }
 .sub-Online-bori{
     flex-direction: row-reverse;
+    width: 100% !important;
+}
+
+.sub-Online-bori .OnlineBlog-content h2 {
+    font-weight: 800 !important;
 }
