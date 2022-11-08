@@ -387,7 +387,7 @@ const ProfileBody = () => {
               <div className="array-input">
                 <div className="array-input-course-content">
                   {courseContentInput.map((eachContent, index) => (
-                    <>
+                    <div key={index}>
                       {courseContentInput[index].visibility && (
                         <input
                           type="text"
@@ -395,7 +395,7 @@ const ProfileBody = () => {
                           onChange={(e) => cofunc(e.target.value)}
                         />
                       )}
-                    </>
+                    </div>
                   ))}
                 </div>
                 {courseContentInput[0].visibility && (
