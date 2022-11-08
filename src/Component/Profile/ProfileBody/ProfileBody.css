@@ -435,6 +435,14 @@
 }
 
 
+.array-input-course-content {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+.array-input-course-content input {
+    width: 100% !important;
+}
 
 
 
