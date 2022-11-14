@@ -17,6 +17,7 @@ import Forget from './ForgetPassword/Forget'
 import Reset from './ResetPassword/Reset'
 import Class from './Class/Class'
 import Error from './ErrorPage/Error'
+import InstructorProfile from './InstructorProfile/InstructorProfile'
 
 
 function Component(){
@@ -33,6 +34,7 @@ function Component(){
                         <Route path="Courses" element={<Courses />} />
                         <Route path="DecFinance" element={<DecFinance />} />
                         <Route path="Contact-Us" element={<Contact />} />
+                        <Route path="instructor" element={<InstructorProfile />} />
                         <Route path="construction" element={<Construction />} />
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
