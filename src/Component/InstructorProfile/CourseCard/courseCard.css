@@ -127,3 +127,12 @@
     background-color: #221638;
     transition: all 500ms ease;
 }
+
+
+
+
+@media screen and (max-width: 580px) {
+    .cardContainer {
+      width: 100%;
+    }
+  }
