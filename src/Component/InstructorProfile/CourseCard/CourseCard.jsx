@@ -22,6 +22,7 @@ const CourseCard = () => {
       <div className="cardContainer__details">
         <div className="ratings">
           {/* Ratings */}
+          ⭐⭐⭐⭐⭐
           <p>2.64 (11)</p>
         </div>
         <div className="courseInfo">
@@ -37,7 +38,7 @@ const CourseCard = () => {
         </div>
         <div className="tutorInfo">
           <div className="tutorInfo__image">
-            <img src="https://go-learn.online/wp-content/uploads/2021/05/golearn-walter-150x150.jpg" />
+            <img src="https://go-learn.online/wp-content/uploads/2021/05/golearn-walter-150x150.jpg" alt="" />
           </div>
           <span>By Traderhack in Blockchain, Cryptocurreny</span>
         </div>
