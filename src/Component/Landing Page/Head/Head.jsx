@@ -46,7 +46,7 @@ const Head = () => {
                             <div className="cont">
                                 <div className="card-prof">
                                     <img src={prof} alt=""/>
-                                    <span><Link to="">Trader Hack</Link></span>
+                                    <span><Link to="/instructor">Trader Hack</Link></span>
                                 </div>
                                 <div className="card-content">
                                     <h1><Link to="">Cryptocurrency Trading Course</Link></h1>
