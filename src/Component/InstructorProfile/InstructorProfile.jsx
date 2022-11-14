@@ -2,7 +2,7 @@ import React from "react";
 import CourseCard from "./CourseCard/CourseCard";
 import Footer from "../Landing Page/Footer/Footer";
 import "./instructorProfile.css";
-import StarRating from "../StarRating/StarRating";
+// import StarRating from "../StarRating/StarRating";
 
 const InstructorProfile = () => {
   return (
@@ -25,7 +25,7 @@ const InstructorProfile = () => {
               </span>
             </div>
             <div className="right">
-              ⭐⭐⭐⭐⭐;
+              ⭐⭐⭐⭐⭐
               {/* <StarRating /> */}
               <span className="rating">
                 2.64
