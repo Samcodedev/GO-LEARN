@@ -118,13 +118,16 @@
   gap: 24px;
 }
 
-
-
-
 @media screen and (max-width: 580px) {
   .instructorProfile__profileArea {
     padding: 0 24px;
     padding-top: 100px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .instructorProfile__profileArea .coverArea {
+    height: 220px;
   }
 }
 
@@ -146,7 +149,7 @@
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 140%;
+    top: 165%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: fit-content;
