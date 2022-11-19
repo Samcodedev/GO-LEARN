@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import './App.css'
 import Component from "./Component/Component";
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log('Login status: ', isLoggedIn);
   return(
     <div className="app">
-      <Component />
+      <Component setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>
     </div>
   )
 }
