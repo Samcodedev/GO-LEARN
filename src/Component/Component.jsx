@@ -36,7 +36,15 @@ function Component({ setIsLoggedIn, isLoggedIn }) {
             <Route path="instructor" element={<InstructorProfile />} />
             <Route path="construction" element={<Construction />} />
             <Route path="register" element={<Register />} />
-            <Route path="profile" element={<Profile />} />
+            <Route
+              path="profile"
+              element={
+                <Profile
+                  setIsLoggedIn={setIsLoggedIn}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
             <Route
               path="/login"
               element={<Login setIsLoggedIn={setIsLoggedIn} />}
