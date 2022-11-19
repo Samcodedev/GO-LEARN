@@ -5,8 +5,9 @@ import logo from "./img/GoLearnFull Color.png";
 import nav from "./img/hamburger (1).png";
 import option from "./img/options.png";
 import { RiArrowDownSLine } from "react-icons/ri";
+import { HiOutlineUserCircle } from "react-icons/hi";
 
-const NavBar = () => {
+const NavBar = ({ isLoggedIn }) => {
   console.log(window.innerWidth);
 
   // function list(){
@@ -50,15 +51,6 @@ const NavBar = () => {
               <span>
                 <Link to="DecFinance">Personal Development Courses</Link>
               </span>
-              <span>
-                <Link to="forget">Forget Password</Link>
-              </span>
-              <span>
-                <Link to="/profile">Profile</Link>
-              </span>
-              <span>
-                <Link to="/login">Login</Link>
-              </span>
             </ul>
           </li>
           <li>
@@ -83,16 +75,29 @@ const NavBar = () => {
         </div>
       </div>
       <div className="register">
-        <div className="group">
-          <Link to="/register">
-            <button>Login/register</button>
+        {/* Conditional rendering using login status  */}
+        {isLoggedIn ? (
+          <Link to="/profile">
+            <button className="profileBtn">
+              <HiOutlineUserCircle fontSize='22'/>
+              Profile
+            </button>
           </Link>
-          <input
-            type="search"
-            placeholder="Search for anything"
-            className="search"
-          />
-        </div>
+        ) : (
+          <div className="group">
+            <Link to="/login">
+              <button className="loginBtn">Login</button>
+            </Link>
+            <Link to="/register">
+              <button>Register</button>
+            </Link>
+            <input
+              type="search"
+              placeholder="Search for anything"
+              className="search"
+            />
+          </div>
+        )}
         <div className="option">
           <img src={option} alt="" />
         </div>
