@@ -208,7 +208,7 @@ const ProfileBody = () => {
           <div className="alert">
             <span>Your Application is pending as of 10 September, 2022</span>
           </div>
-          <div className="details">
+          <div className="profileDetails">
             <div className="img-div">
               <img src={img} alt="" />
             </div>
