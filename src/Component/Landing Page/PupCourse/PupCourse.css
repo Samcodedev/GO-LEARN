@@ -47,6 +47,9 @@
     margin-right: auto;
     margin-top: 55px;
 }
+.pupcourse .sub-pupcourse .pupcourse-bottom-text a {
+    font-weight: 700;
+}
 .pupcourse .sub-pupcourse .pupcourse-bottom-text button{
     font-family: "Nunito Sans", Sans-serif;
     font-weight: 700;

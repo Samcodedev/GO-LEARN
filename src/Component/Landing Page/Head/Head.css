@@ -49,6 +49,10 @@
   font-size: 18px;
   cursor: pointer;
 }
+.head .head-text a button:hover {
+  background-color: #221638;
+  border-color: #221638;
+}
 .head .head-text a button svg {
   margin-bottom: -3px;
 }
