@@ -181,13 +181,14 @@
 }
 .class .sub-class .video .course-details .course-content .control button:hover{
     background-color: #221638;
-    border-color: #221638;
+    border: 1px solid #221638;
     color: #fff;
 }
 .class .sub-class .video .course-details .course-content .review form{
     width: 100%;
     border-bottom: 1px solid #CDCFD5;
     padding-bottom: 20px;
+    color: rgb(226, 194, 12);
 }
 .class .sub-class .video .course-details .course-content .review form textarea{
     width: 97.5%;

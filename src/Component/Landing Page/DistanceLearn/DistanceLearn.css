@@ -24,3 +24,8 @@
         width: 100%;
     }
 }
+/* @media screen and (max-width: 580PX){
+    .OnlineBlog .sub-OnlineBlog .OnlineBlog-content h2{
+        font-size: 10px;
+    }
+} */

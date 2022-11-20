@@ -118,3 +118,8 @@
         text-align: center;
     }
 }
+@media screen and (max-width: 580PX){
+    .OnlineBlog .sub-OnlineBlog .OnlineBlog-content h2{
+        font-size: 30px;
+    }
+}

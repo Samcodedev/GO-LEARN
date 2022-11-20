@@ -5,7 +5,7 @@ import ClassCard from './ClassCard';
 // import ClassesData from '../Data/ClassesData'
 
 const Classes = () => {
-    const [courses, courseFunction] = React.useState([])
+    let [courses, courseFunction] = React.useState([])
     const handleLogin = async () =>{
         let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/course', {
             method:'get',
@@ -24,9 +24,6 @@ const Classes = () => {
         handleLogin()
     }, [])
 
-    
-
-
     const datas = courses.map((items) =>{
         // console.log(items)
         return(
@@ -44,9 +41,12 @@ const Classes = () => {
 
     return(
         <div className="classes">
-            <div className="sub-classes">
-                {datas}
-            </div>
+            {courses && (
+                <div className="sub-classes">
+                    {datas}
+                </div>
+            )}
+            {!courses && <div className='loading'><h1>Loading...</h1></div>}
         </div>
     )
 }

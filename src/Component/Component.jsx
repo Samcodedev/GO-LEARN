@@ -9,7 +9,7 @@ import Blog from './Blog/Blog'
 import Courses from './Courses/Courses'
 import DecFinance from './DecFinance/DecFinance'
 import Contact from './Contact/Contact'
-import Construction from './Construction'
+// import Construction from './Construction'
 import Register from './Register/Register'
 import Profile from './Profile/Profile'
 import Login from './Login/Login'
@@ -33,7 +33,7 @@ function Component(){
                         <Route path="Courses" element={<Courses />} />
                         <Route path="DecFinance" element={<DecFinance />} />
                         <Route path="Contact-Us" element={<Contact />} />
-                        <Route path="construction" element={<Construction />} />
+                        {/* <Route path="construction" element={<Construction />} /> */}
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
                         <Route path="/login" element={<Login />} />

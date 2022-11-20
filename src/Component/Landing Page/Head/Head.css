@@ -206,4 +206,10 @@
     .head .sub-head .head-card .card-wrapper{
         width: 90%;
     }
+    .head .sub-head .head-text h1{
+        font-size: 30px;
+    }
+    .OnlineBlog .sub-OnlineBlog .OnlineBlog-content h2{
+        font-size: 30px;
+    }
 }

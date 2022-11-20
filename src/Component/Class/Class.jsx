@@ -51,7 +51,7 @@ const Class = () => {
         document.getElementById("link3").style.color="#027dff"
     }
 
-
+    let [pup, pupf] = React.useState('')
     let [review, refunc] = React.useState('')
     let [rating, rafunc] = React.useState('')
     const handlereview = async (e) =>{
@@ -69,6 +69,16 @@ const Class = () => {
         result2 = await result2.json()
         console.warn(result2)
         console.log(result2)
+
+        if(result2.success === true){
+            pupf(
+                "You just created a review " + result2.data.review + " rated " + result2.data.raing || result2.error
+            )
+        }else{
+            pupf(
+                result2.error
+            )
+        }
     }
 
     if( rating > 5 ){
@@ -129,7 +139,7 @@ const Class = () => {
                                 <h2>Your Experience</h2>
                                 <form onSubmit={handlereview} action="">
                                     <textarea value={review} onChange={(e) => refunc(e.target.value)} rows="10" placeholder="Let's know your experience about the course here..."></textarea>
-                                    <span></span>
+                                    <span id='err'>{pup}</span>
                                     <input type="number" value={rating} onChange={(e) => rafunc(e.target.value)} id="star" placeholder='rate 0 - 5' />
                                     <input type="submit" />
                                 </form>

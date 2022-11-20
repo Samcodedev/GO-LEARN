@@ -4,10 +4,13 @@ import profile from './img/Group 1.png'
 import { FaStar } from 'react-icons/fa'
 
 const StudentRev = (props) => {
+    let sta = {
+        one: <FaStar />
+    }
     let stars = ""
     function reload(){
         if( props.star === 5 ){
-            stars = "⭐⭐⭐⭐⭐"
+            stars = sta.one
         } else if( props.star === 4 ){
             stars = "⭐⭐⭐⭐"
         } else if( props.star === 3 ){
@@ -38,8 +41,8 @@ const StudentRev = (props) => {
                 </div>
                 <div className="star">
                     <p>{stars}</p>
-                    <FaStar fill='yellow' />
-                    <FaStar fill='yellow' />
+                    <FaStar fill='rgb(226, 194, 12)' />
+                    <FaStar fill='rgb(226, 194, 12)' />
                 </div>
             </div>
             <div className="body">

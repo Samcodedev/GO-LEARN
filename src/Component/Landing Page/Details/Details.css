@@ -120,4 +120,7 @@
         width: 100%;
         align-items: center;
     }
+    .details .sub-details .details-text h2{
+        font-size: 30px;
+    }
 }
