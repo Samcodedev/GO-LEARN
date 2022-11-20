@@ -11,6 +11,9 @@
     justify-content: space-around;
     align-items: center;
 }
+.OnlineBlog .sub-OnlineBlog .OnlineBlog-content h2 {
+    font-weight: 800 !important;
+}
 .OnlineBlog .sub-OnlineBlog .OnlineBlog-img-div{
     width: 50%;
     position: relative;
@@ -54,10 +57,39 @@
     padding-right: 40px;
     display: block;
     position: relative;
-    font-weight: 700;
+    font-weight: 600 !important;
     margin-top: 10px;
-    color: #7A7A7A;
+    color: #221638;
+    display: flex !important;
+    gap: 8px;
 }
+
+.OnlineBlog .sub-OnlineBlog .OnlineBlog-content .online-props ul li:hover span {
+    background-color: #fff;
+    border: 2px solid #a3c5bb;
+}
+.OnlineBlog .sub-OnlineBlog .OnlineBlog-content .online-props ul li:hover span svg {
+    color: #a3c5bb;
+}
+
+.OnlineBlog .sub-OnlineBlog .OnlineBlog-content .online-props ul li span {
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a3c5bb;
+    border: 2px solid #fff;
+    margin: 0;
+    transition: all 300ms ease;
+}
+.OnlineBlog .sub-OnlineBlog .OnlineBlog-content .online-props ul li span svg {
+    color: #fff;
+}
+/* .OnlineBlog .sub-OnlineBlog .OnlineBlog-content .online-props ul li span svg {
+    stroke: #ffffff !important;
+} */
 /* .OnlineBlog .sub-OnlineBlog .OnlineBlog-content .online-props ul li svg{
     color: #7A7A7A;
 } */

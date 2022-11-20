@@ -1,11 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+
 html,body{
     margin: 0;
     padding: 0;
     /* width: 100vw; */
+<<<<<<< HEAD
     background-color: rgb(244, 244, 248);
     scroll-behavior: smooth;
+=======
+    background-color: rgba(255, 255, 255, 0.05);
+>>>>>>> 30ef92bfaf1427db41c0731eb61da41698443654
     /* color: #efeff0; */
     /* overflow-x: hidden; */
+    transition: all 300ms ease;
+    user-select: none;
+    font-family: 'Nunito', sans-serif;
 }
 p{
     color: #606060;

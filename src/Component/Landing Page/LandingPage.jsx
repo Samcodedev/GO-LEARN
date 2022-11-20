@@ -9,6 +9,7 @@ import FreeAccess from './FreeAccess/FreeAccess'
 import GoAlumni from './GoAlumni/GoAlumni'
 import DistanceLearn from './DistanceLearn/DistanceLearn'
 import Subscribe from './Subscribe/Subscribe'
+import Footer from './Footer/Footer'
 
 
 function LandingPage(){
@@ -24,6 +25,7 @@ function LandingPage(){
             <GoAlumni />
             <DistanceLearn />
             <Subscribe />
+            <Footer />
         </div>
     )
 }
