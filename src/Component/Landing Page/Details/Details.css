@@ -150,22 +150,3 @@
     padding: 48px 0px;
   }
 }
-<<<<<<< HEAD
-
-@media screen and (max-width: 676px){
-    .details .sub-details .details-box .detail-wrapper:last-child{
-        margin-top: 0px;
-    }
-}
-@media screen and (max-width: 640px){
-    .details .sub-details .details-box{
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-    }
-    .details .sub-details .details-text h2{
-        font-size: 30px;
-    }
-}
-=======
->>>>>>> 30ef92bfaf1427db41c0731eb61da41698443654

@@ -4,12 +4,7 @@ html,body{
     margin: 0;
     padding: 0;
     /* width: 100vw; */
-<<<<<<< HEAD
-    background-color: rgb(244, 244, 248);
-    scroll-behavior: smooth;
-=======
     background-color: rgba(255, 255, 255, 0.05);
->>>>>>> 30ef92bfaf1427db41c0731eb61da41698443654
     /* color: #efeff0; */
     /* overflow-x: hidden; */
     transition: all 300ms ease;
