@@ -239,9 +239,10 @@
   }
   .navbar .navigation {
     width: 40%;
+    justify-content: flex-end;
   }
   .navbar .logo-search {
-    width: 40%;
+    width: 50%;
   }
   .navbar .navigation:hover .main {
     display: flex;
@@ -272,7 +273,8 @@
     position: relative;
   }
   .navbar .register {
-    width: 20%;
+    width: fit-content;
+    margin-left: 20px;
   }
 }
 
@@ -319,5 +321,8 @@
     width: 250px;
     background-color: #ffffff;
     box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 10%);
+  }
+  .navbar .register .group{
+    display: none;
   }
 }

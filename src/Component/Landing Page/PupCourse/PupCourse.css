@@ -68,14 +68,17 @@
     cursor: pointer;
 }
 .pupcourse .sub-pupcourse .wrapper{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: center;
+    /* gap: 10px; */
+    flex-wrap: wrap;
 }
 
 .pupcourse .sub-pupcourse .wrapper .card-wrapper{
     padding-left: 15px!important;
     padding-right: 15px!important;
     max-width: 380px;
+    margin-bottom: 20px;
 }
 .pupcourse .sub-pupcourse .wrapper .card-wrapper .card{
     position: relative;
