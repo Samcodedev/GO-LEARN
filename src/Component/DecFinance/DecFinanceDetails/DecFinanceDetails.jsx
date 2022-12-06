@@ -9,6 +9,7 @@ import ModuleData from '../../Class/Card/ModuleData.json'
 import { Link } from 'react-router-dom';
 import StudentRev from '../../Review/StudentRev';
 import { useState } from 'react';
+import { FaStar } from 'react-icons/fa'
 
 const DecFinanceDetails = (props) => {
 
@@ -68,9 +69,12 @@ const DecFinanceDetails = (props) => {
         )
     })
 
-    const [revew, refunc] =  useState([])
+    let data = props.data
+    console.log(data)
+
+    let [revew, refunc] =  useState([])
     const handlereview = async () =>{
-        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/reviews', 
+        let result = await fetch(`https://golearn.onrender.com/api/v1/course/${data._id}/reviews`, 
          {
             method:'get'
         })
@@ -81,17 +85,69 @@ const DecFinanceDetails = (props) => {
         refunc(
             result.data
         )
+
     }
     console.log(revew)
+    let stars = []
+
+    revew.map((item) =>{
+        return(
+            stars.push(item.rating)
+        )
+        
+    })
+    console.log(stars)
+    
+    let starSum = stars.reduce((add, value) =>{
+        return add + value
+    }, 0)
+
+    let starSumValues = (( (starSum / (stars.length * 5)) ) * 100).toFixed(1)
+    let starSumValue 
+
+    if( starSumValues > 0  ){
+        starSumValue = starSumValues
+    }else{
+        starSumValue = 0
+    }
+    // console.log(starSumValue)
+
+    let count5 = 0
+    let count4 = 0
+    let count3 = 0
+    let count2 = 0
+    let count1 = 0
+    stars.forEach(Element => {
+        if (Element === 5){
+            count5 += 1
+        }else if (Element === 4){
+            count4 += 1
+        }else if (Element === 3){
+            count3 += 1
+        }else if (Element === 2){
+            count2 += 1
+        }else if (Element === 1){
+            count1 += 1
+        }
+    })
+
+    let bar5 = ((count5 / (count5 + 1)) * 100)
+    let bar4 = ((count4 / (count4 + 1)) * 100)
+    let bar3 = ((count3 / (count3 + 1)) * 100)
+    let bar2 = ((count2 / (count2 + 1)) * 100)
+    let bar1 = ((count1 / (count1 + 1)) * 100)
+    console.log(bar5)
+    
 
     useEffect(() => {
         handlereview()
-    }, [])
+    },[])
 
     const stu = revew.map((item) =>{
         
         return(
             <StudentRev 
+                key={item._id}
                 name={item._id}
                 time={item.createdAt}
                 review={item.review}
@@ -99,9 +155,6 @@ const DecFinanceDetails = (props) => {
             />
         )
     })
-
-    let data = props.data
-    console.log(data)
 
     return(
         <div className="DecFinanceDetails">
@@ -144,79 +197,85 @@ const DecFinanceDetails = (props) => {
                         <h3>Student Ratings & Reviews</h3>
                         <div className="chat">
                             <div className="total-rating">
-                                <h1>3.0</h1>
-                                <span>⭐⭐⭐⭐⭐</span>
+                                <h1>{starSumValue}</h1>
+                                <span>
+                                    <FaStar fill='rgb(226, 194, 12)' />
+                                    <FaStar fill='rgb(226, 194, 12)' />
+                                    <FaStar fill='rgb(226, 194, 12)' />
+                                    <FaStar fill='rgb(226, 194, 12)' />
+                                    <FaStar fill='rgb(226, 194, 12)' />
+                                </span>
                                 <p>Total 5 Ratings</p>
                             </div>
                             <div className="rating-bar">
                                 <div className="column">
                                     <div className="star">
-                                        <span>⭐</span>
+                                        <span><FaStar fill='rgb(226, 194, 12)' /></span>
                                         <p>5</p>
                                     </div>
                                     <div className="bar">
-                                        <div className="prog">
+                                        <div className="prog" style={{width: bar5}}>
 
                                         </div>
                                     </div>
                                     <div className="rate">
-                                        <p>1 Rating</p>
+                                        <p>{count5} Rating</p>
                                     </div>
                                 </div>
                                 <div className="column">
                                     <div className="star">
-                                        <span>⭐</span>
+                                        <span><FaStar fill='rgb(226, 194, 12)' /></span>
                                         <p>4</p>
                                     </div>
                                     <div className="bar">
-                                        <div className="prog">
+                                        <div className="prog" style={{width: bar4}}>
                                             
                                         </div>
                                     </div>
                                     <div className="rate">
-                                        <p>1 Rating</p>
+                                        <p>{count4} Rating</p>
                                     </div>
                                 </div>
                                 <div className="column">
                                     <div className="star">
-                                        <span>⭐</span>
+                                        <span><FaStar fill='rgb(226, 194, 12)' /></span>
                                         <p>3</p>
                                     </div>
                                     <div className="bar">
-                                        <div className="prog">
+                                        <div className="prog" style={{width: bar3}}>
                                             
                                         </div>
                                     </div>
                                     <div className="rate">
-                                        <p>0 Rating</p>
+                                        <p>{count3} Rating</p>
                                     </div>
                                 </div>
                                 <div className="column">
                                     <div className="star">
-                                        <span>⭐</span>
+                                        <span><FaStar fill='rgb(226, 194, 12)' /></span>
                                         <p>2</p>
                                     </div>
                                     <div className="bar">
-                                        <div className="prog">
+                                        <div className="prog" style={{width: bar2}}>
                                             
                                         </div>
                                     </div>
                                     <div className="rate">
-                                        <p>0 Rating</p>
+                                        <p>{count2} Rating</p>
                                     </div>
                                 </div>
                                 <div className="column">
                                     <div className="star">
-                                        <span>⭐</span>
+                                        <span><FaStar fill='rgb(226, 194, 12)' /></span>
                                         <p>1</p>
                                     </div>
                                     <div className="bar">
-                                        <div className="prog">
+                                        <div className="prog" style={{width: bar1}}>
                                             
                                         </div>
                                     </div>
                                     <div className="rate">
-                                        <p>1 Rating</p>
+                                        <p>{count1} Rating</p>
                                     </div>
                                 </div>
                             </div>
@@ -228,7 +287,7 @@ const DecFinanceDetails = (props) => {
                     <div className="free">
                         <div className="free-head">
                             <span>Free</span>
-                            <Link to="/class"><button>Enroll Now</button></Link>
+                            <Link to="/class" state={{ id: data }}><button>Enroll Now</button></Link>
                             <p>Free access this course</p>
                         </div>
                         <div className="free-footer">

@@ -5,9 +5,10 @@ import ClassCard from './ClassCard';
 // import ClassesData from '../Data/ClassesData'
 
 const Classes = () => {
+    let [va, vaFunc] = React.useState(false)
     let [courses, courseFunction] = React.useState([])
     const handleLogin = async () =>{
-        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/course', {
+        let result = await fetch('https://golearn.onrender.com/api/v1/course', {
             method:'get',
             credencials: 'include'
             
@@ -17,6 +18,7 @@ const Classes = () => {
         console.log(result)
         courseFunction(result.data)
 
+        vaFunc(!va)
         
     }
     // handleLogin()
@@ -24,7 +26,7 @@ const Classes = () => {
         handleLogin()
     }, [])
 
-    const datas = courses.map((items) =>{
+    let datas = courses.map((items) =>{
         // console.log(items)
         return(
             <ClassCard 
@@ -41,12 +43,9 @@ const Classes = () => {
 
     return(
         <div className="classes">
-            {courses && (
-                <div className="sub-classes">
-                    {datas}
-                </div>
-            )}
-            {!courses && <div className='loading'><h1>Loading...</h1></div>}
+            <div className="sub-classes">
+                {va === true ? datas : <h1>LOADING...</h1>}
+            </div>
         </div>
     )
 }

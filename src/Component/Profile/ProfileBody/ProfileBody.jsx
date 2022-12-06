@@ -30,7 +30,7 @@ const ProfileBody = () => {
       },
     };
     let result = await fetch(
-      "https://mysterious-waters-58153.herokuapp.com/api/v1/auth",
+      "https://golearn.onrender.com/api/v1/auth",
       config,
       {
         method: "get",
@@ -106,7 +106,7 @@ const ProfileBody = () => {
   const handleCreateCourse = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "https://mysterious-waters-58153.herokuapp.com/api/v1/course",
+      "https://golearn.onrender.com/api/v1/course",
       {
         method: "post",
         credencials: "include",

@@ -8,7 +8,7 @@ const Forget = () => {
 
     const handleForget = async (e) =>{
         e.preventDefault()
-        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/auth/generatetoken',{
+        let result = await fetch('https://golearn.onrender.com/api/v1/auth/generatetoken',{
             method:'post',
             credencials: 'include',
             body:JSON.stringify({email}),
@@ -73,7 +73,7 @@ const Forget = () => {
 }
 
 
-// https://mysterious-waters-58153.herokuapp.com/api/v1/auth/generatetoken
+// https://golearn.onrender.com/api/v1/auth/generatetoken
 // if( result.success === true){
 //     message.innerHTML=`${result.msg}`
 //     message.style.color="green"

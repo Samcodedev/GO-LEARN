@@ -15,7 +15,7 @@ const Login = ({ setIsLoggedIn }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "https://mysterious-waters-58153.herokuapp.com/api/v1/auth/login",
+      "https://golearn.onrender.com/api/v1/auth/login",
       {
         method: "post",
         credencials: "include",

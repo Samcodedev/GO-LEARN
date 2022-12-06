@@ -20,7 +20,7 @@ import Error from "./ErrorPage/Error";
 import InstructorProfile from "./InstructorProfile/InstructorProfile";
 
 function Component({ setIsLoggedIn, isLoggedIn }) {
-  const API = "https://mysterious-waters-58153.herokuapp.com/api/v1/auth/";
+  const API = "https://golearn.onrender.com/api/v1/auth/";
   return (
     <>
       <BrowserRouter>
