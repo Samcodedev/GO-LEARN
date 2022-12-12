@@ -2,7 +2,6 @@ import React from 'react';
 import './Classes.css'
 import { useEffect } from 'react';
 import ClassCard from './ClassCard';
-// import ClassesData from '../Data/ClassesData'
 
 const Classes = () => {
     let [va, vaFunc] = React.useState(false)
@@ -18,16 +17,16 @@ const Classes = () => {
         console.log(result)
         courseFunction(result.data)
 
+        
         vaFunc(!va)
         
     }
-    // handleLogin()
+
     useEffect(() => {
         handleLogin()
-    }, [])
+      }, []);
 
     let datas = courses.map((items) =>{
-        // console.log(items)
         return(
             <ClassCard 
                 title={items.courseTitle}

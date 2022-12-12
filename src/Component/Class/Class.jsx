@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './Class.css'
 import Module from './Card/Module';
 import ModuleData from './Card/ModuleData.json'
 // import ReviewData from '../Review/data/ReviewData.json'
 import StudentRev from '../Review/StudentRev'
-import {  useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const Class = () => {
 
@@ -77,9 +77,6 @@ const Class = () => {
     }
     console.log(revew)
 
-    useEffect(() => {
-        handlerev()
-    },[])
 
     let [pup, pupf] = React.useState('')
     let [review, refunc] = React.useState('')

@@ -68,9 +68,33 @@ const DecFinanceDetails = (props) => {
             />
         )
     })
-
     let data = props.data
     console.log(data)
+
+    const courseId = data._id
+    const handleCart = async (e) => {
+        e.preventDefault();
+        let result = await fetch(
+          "https://golearn.onrender.com/api/v1/cart",
+          {
+            method: "post",
+            credencials: "include",
+            body: JSON.stringify({
+              courseId
+            }),
+            headers: {
+              "content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        result = await result.json();
+        console.warn(result);
+        console.log(result);
+      };
+
+
+
 
     let [revew, refunc] =  useState([])
     const handlereview = async () =>{
@@ -85,7 +109,6 @@ const DecFinanceDetails = (props) => {
         refunc(
             result.data
         )
-
     }
     console.log(revew)
     let stars = []
@@ -155,6 +178,8 @@ const DecFinanceDetails = (props) => {
             />
         )
     })
+
+
 
     return(
         <div className="DecFinanceDetails">
@@ -286,8 +311,8 @@ const DecFinanceDetails = (props) => {
                  <div className="sub-detail">
                     <div className="free">
                         <div className="free-head">
-                            <span>Free</span>
-                            <Link to="/class" state={{ id: data }}><button>Enroll Now</button></Link>
+                            <span onClick={handleCart}>Free</span>
+                            <Link to="/class" state={{ id: data }} ><button>Enroll Now</button></Link>
                             <p>Free access this course</p>
                         </div>
                         <div className="free-footer">

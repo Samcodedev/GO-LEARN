@@ -22,7 +22,7 @@ const StudentRev = (props) => {
         } else if( props.star === 2 ){
             stars = sta.slice(1,2,3)
         } else if( props.star === 1 ){
-            stars = sta.slice(1,2,3)
+            stars = sta.slice(1,2,3,4)
         } else if( props.star > 5 ){
             stars = sta
         }

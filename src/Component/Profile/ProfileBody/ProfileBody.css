@@ -107,7 +107,7 @@
     /* background-color: aqua; */
 }
 
-.profilebody .sub-profilebody .dashboard .dashboard-nav ul li:nth-child(9){
+.profilebody .sub-profilebody .dashboard .dashboard-nav ul li:nth-child(6){
     margin-top: 20px;
     border-top: 1px solid #cdcfd5;
 }
@@ -115,10 +115,10 @@
     color: #606060;
     margin-bottom: 0;
 }
-.profilebody .sub-profilebody .dashboard .dashboard-nav ul li:hover{
+.profilebody .sub-profilebody .dashboard .dashboard-nav ul li:is(:active, :focus, :hover){
     background-color: #007bff;
 }
-.profilebody .sub-profilebody .dashboard .dashboard-nav ul li:hover .span{
+.profilebody .sub-profilebody .dashboard .dashboard-nav ul li:is(:active, :focus, :hover) .span{
     color: #ffffff;
 }
 .profilebody .sub-profilebody .dashboard .dashboard-nav ul #sixth{
