@@ -4,8 +4,9 @@ import DecFinanceDetails from './DecFinanceDetails/DecFinanceDetails';
 import { useLocation } from 'react-router-dom';
 
 const DecFinance = () => {
-    const location = useLocation()
-    console.log(location)
+    const location = useLocation();
+    console.log(location);
+    
     return(
         <>
             <Title 

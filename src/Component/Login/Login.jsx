@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
   // const [email, efunc] = React.useState('')
   const [userName, efunc] = React.useState("");
   const [password, pfunc] = React.useState("");
@@ -15,7 +15,7 @@ const Login = ({ setIsLoggedIn }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "https://mysterious-waters-58153.herokuapp.com/api/v1/auth/login",
+      "https://golearn.onrender.com/api/v1/auth/login",
       {
         method: "post",
         credencials: "include",
@@ -30,8 +30,6 @@ const Login = ({ setIsLoggedIn }) => {
     console.log(result);
 
     if (result.success === true) {
-      // Set login status to true
-      setIsLoggedIn(true);
       valid1.style.border = "1px solid green";
       valid2.style.border = "1px solid green";
       error.innerHTML = "Welcome Back";

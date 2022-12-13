@@ -429,9 +429,10 @@
     margin-left: 12px;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat .rating-bar .column .bar .prog{
-    width: 60%;
+    /* width: 60%; */
     height: 8px;
-    background-color: chocolate;
+    background-color: rgb(226, 194, 12);
+    border-radius: 10px;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat .rating-bar .column .rate{
     flex: 0 0 auto;
@@ -483,5 +484,18 @@
     }
     .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail{
         margin-top: 24px;
+    }
+}
+@media screen and (max-width: 600px){
+    .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat{
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat .rating-bar{
+        width: 100%;
+        margin-left: 0;
+        padding-right: 0;
+        position: relative;
     }
 }

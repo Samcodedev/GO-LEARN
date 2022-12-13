@@ -21,7 +21,7 @@ const RegisterBody = () => {
 
     const handleLogin = async (e) =>{
         e.preventDefault()
-        let result = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/auth',{
+        let result = await fetch('https://golearn.onrender.com/api/v1/auth',{
             method:'post',
             credencials: 'include',
             body:JSON.stringify({firstName, lastName, userName, email, password}),

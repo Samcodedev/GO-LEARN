@@ -1,23 +1,14 @@
 import React from "react";
 import "./ProfileBody.css";
 import img from "./img/Group 1.png";
-import img2 from "./img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png";
 
-import ClassesData from "../../Courses/Data/ClassesData.json";
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { GiBookmarklet, GiNotebook } from "react-icons/gi";
 import { RiBookmark3Fill } from "react-icons/ri";
-import { useState } from "react";
+import { useState } from "react"
+import ProfileCard from "./ProfileCard";
 
 const ProfileBody = () => {
-  let star = "";
-  let title = "";
-
-  for (let i = 0; i < ClassesData.length; i++) {
-    star = ClassesData[5].star;
-    title = ClassesData[5].title;
-  }
 
   // fetching user data and also sending a unique token to the header
 
@@ -30,7 +21,7 @@ const ProfileBody = () => {
       },
     };
     let result = await fetch(
-      "https://mysterious-waters-58153.herokuapp.com/api/v1/auth",
+      "https://golearn.onrender.com/api/v1/auth",
       config,
       {
         method: "get",
@@ -43,22 +34,51 @@ const ProfileBody = () => {
     effunc(result.data);
   };
 
+
+
+
+  const [cart, cartfunc] = React.useState([]);
+  const handlecart = async () => {
+    const config = {
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    let result = await fetch(
+      "https://golearn.onrender.com/api/v1/cart",
+      config,
+      {
+        method: "get",
+        credencials: "include",
+      }
+    );
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+    cartfunc(result.data.course);
+  };
+
+  
+  
+  const carts = cart.map((item)=>{
+    return(
+      <ProfileCard 
+        title={item.courseTitle}
+        dta={item.courseId}
+        data={item}
+      />
+    )
+  })
+
+
   useEffect(() => {
-    handleLogin();
-  }, []);
+    handleLogin()
+    handlecart()
+  }, [])
+
+
   console.log(det);
-
-  //
-  // setTimeout(() => {
-  //     if (det.role = "publisher"){
-  //         document.getElementById("sixth").style.display="block"
-  //     }else if(det.role = "user"){
-  //         document.getElementById("create").style.display="none"
-  //         document.getElementById("sixth").style.display="none"
-  //     }
-  // });
-
-  // create new course for only admin and publishers
 
   let [audience, aufunc] = React.useState([]);
   let [category, cafunc] = React.useState("");
@@ -106,7 +126,7 @@ const ProfileBody = () => {
   const handleCreateCourse = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "https://mysterious-waters-58153.herokuapp.com/api/v1/course",
+      "https://golearn.onrender.com/api/v1/course",
       {
         method: "post",
         credencials: "include",
@@ -145,28 +165,32 @@ const ProfileBody = () => {
     document.getElementById("dashboard").style.display = "flex";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "none";
-    document.getElementById("first").style.backgroundColor = "#007bff";
-    document.getElementById("first").style.color = "#ffffff";
-    document.getElementById("second").style.backgroundColor = "transparent";
-    document.getElementById("sixth").style.backgroundColor = "transparent";
+    document.getElementById("cart").style.display = "none"
+  //   document.getElementById("first").style.backgroundColor = "#007bff";
+  //   document.getElementById("first").style.color = "#ffffff";
+  //   document.getElementById("second").style.backgroundColor = "transparent";
+  //   document.getElementById("sixth").style.backgroundColor = "transparent";
   }
 
   function profile() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "block";
     document.getElementById("create").style.display = "none";
-    document.getElementById("first").style.backgroundColor = "transparent";
-    document.getElementById("second").style.backgroundColor = "#007bff";
-    document.getElementById("sixth").style.backgroundColor = "transparent";
+    document.getElementById("cart").style.display = "none"
   }
 
   function create() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "block";
-    document.getElementById("first").style.backgroundColor = "transparent";
-    document.getElementById("second").style.backgroundColor = "transparent";
-    document.getElementById("sixth").style.backgroundColor = "#007bff";
+    document.getElementById("cart").style.display = "none"
+  }
+
+  function course(){
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("create").style.display = "none";
+    document.getElementById("cart").style.display = "block"
   }
 
   const [courseContentInput, setCourseContentInput] = useState([
@@ -201,6 +225,10 @@ const ProfileBody = () => {
     }
   }
 
+
+
+  
+
   return (
     <div className="profilebody">
       <div className="sub-profilebody">
@@ -231,22 +259,13 @@ const ProfileBody = () => {
                 <span className="span">My Profile</span>
               </li>
               <li>
-                <span className="span">Enrolled Courses</span>
-              </li>
-              <li>
-                <span className="span">Wishlist</span>
+                <span className="span" onClick={course} >Enrolled Courses</span>
               </li>
               <li>
                 <span className="span">Reviews</span>
               </li>
-              <li onClick={create} id="sixth">
+              <li onClick={create} style={{display: det.role=== "publisher"? "block" : "none"  }}>
                 <span className="span">Create Course</span>
-              </li>
-              <li>
-                <span className="span">Order History</span>
-              </li>
-              <li>
-                <span className="span">Question & Answer</span>
               </li>
               <li>
                 <span className="span">Settings</span>
@@ -270,7 +289,7 @@ const ProfileBody = () => {
                   <GiBookmarklet fontSize="55px" color="#027dff" />
                 </div>
                 <div className="text-div">
-                  <h1>1</h1>
+                  <h1>{cart.length}</h1>
                   <p>Enrolled Courses</p>
                 </div>
               </div>
@@ -279,7 +298,7 @@ const ProfileBody = () => {
                   <GiNotebook fontSize="55px" color="#027dff" />
                 </div>
                 <div className="text-div">
-                  <h1>1</h1>
+                  <h1>{cart.length}</h1>
                   <p>Active Courses</p>
                 </div>
               </div>
@@ -294,26 +313,7 @@ const ProfileBody = () => {
               </div>
             </div>
             <h4>In Progress Courses</h4>
-            <Link to="/DecFinance">
-              <div className="course">
-                <div className="img-div">
-                  <img src={img2} alt="" />
-                </div>
-                <div className="text-div">
-                  <span>{star}</span>
-                  <h3>{title}</h3>
-                  <p>
-                    Completed Lessons: <span> 0 of 6 lesson</span>
-                  </p>
-                  <div className="progress-div">
-                    <span>Complete 20%</span>
-                    <div className="bar">
-                      <div className="progress"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+            {carts}
           </div>
           <div className="profile" id="profile">
             <div className="data">
@@ -492,6 +492,9 @@ const ProfileBody = () => {
               <span id="message"></span>
               <input type="submit" value="Create" className="submit" />
             </form>
+          </div>
+          <div className="cart" id="cart">
+            {carts}
           </div>
         </div>
       </div>

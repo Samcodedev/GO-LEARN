@@ -20,3 +20,9 @@
 .title .sub-title .shear-save a{
     margin-left: 15px;
 }
+@media screen and (max-width: 600px){
+    .title .sub-title .detail{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

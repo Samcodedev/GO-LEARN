@@ -1,11 +1,20 @@
-import React from 'react';
+import React from 'react'
 import './Class.css'
 import Module from './Card/Module';
 import ModuleData from './Card/ModuleData.json'
-import ReviewData from '../Review/data/ReviewData.json'
+// import ReviewData from '../Review/data/ReviewData.json'
 import StudentRev from '../Review/StudentRev'
+import { useLocation } from 'react-router-dom'
 
 const Class = () => {
+
+    
+    const location = useLocation()
+    let datah = location.state.id
+
+    console.log(datah)
+
+
     const mode = ModuleData.map((item) =>{
         return(
             <Module 
@@ -51,12 +60,30 @@ const Class = () => {
         document.getElementById("link3").style.color="#027dff"
     }
 
+
+    const [revew, refunct] =  React.useState([])
+    const handlerev = async () =>{
+        let result = await fetch(`https://golearn.onrender.com/api/v1/course/${datah._id}/reviews`,
+         {
+            method:'get'
+        })
+        result = await result.json()
+        console.warn(result)
+        console.log(result)
+
+        refunct(
+            result.data
+        )
+    }
+    console.log(revew)
+
+
     let [pup, pupf] = React.useState('')
     let [review, refunc] = React.useState('')
     let [rating, rafunc] = React.useState('')
     const handlereview = async (e) =>{
         e.preventDefault()
-        let result2 = await fetch('https://mysterious-waters-58153.herokuapp.com/api/v1/course/6329e50c075b1dc8aef4fb85/reviews', 
+        let result2 = await fetch(`https://golearn.onrender.com/api/v1/course/${datah._id}/reviews`, 
          {
             method:'post',
             body:JSON.stringify({review, rating}),
@@ -79,7 +106,14 @@ const Class = () => {
                 result2.error
             )
         }
+        
+        handlerev()
     }
+
+
+
+
+
 
     if( rating > 5 ){
         rating = 5
@@ -87,13 +121,14 @@ const Class = () => {
         rating = 0
     }
 
-    const rev = ReviewData.map((item) => {
+    const rev = revew.map((item) => {
         return(
             <StudentRev 
-                course={item.course}
-                name={item.name}
-                time={item.time}
+                key={item._id}
+                name={item._id}
+                time={item.createdAt}
                 review={item.review}
+                star={item.rating}
             />
         )
     }) 
@@ -110,7 +145,7 @@ const Class = () => {
                 <div className="video">
                     <div className="video-head">
                         <div className="first">
-                            <p>FOREX Trading Course</p>
+                            <p>{datah.courseTitle}</p>
                         </div>
                         <div className="second">
                             <span>Your Progress: 0 of 11 (0%)</span>

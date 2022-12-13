@@ -181,5 +181,6 @@
     }
     .pupcourse .sub-pupcourse .wrapper .card-wrapper{
         max-width: 100%;
+        min-width: 100%;
     }
 }

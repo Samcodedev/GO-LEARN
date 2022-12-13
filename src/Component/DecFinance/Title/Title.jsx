@@ -22,6 +22,24 @@ const Title = (props) => {
     let data = props.data
     console.log(data)
 
+    // button.addEventListener("click", () => {
+    
+        // select text of input field
+        // inputField.select();
+        // copy the selected text
+        // document.execCommand('copy');
+    // })
+
+    // let button = document.getElementById("button");
+    let inputField = document.getElementById("link")
+
+    function share(){
+        
+        inputField.select();
+        // copy the selected text
+        document.execCommand('share');
+    }
+
     return(
         <div className="title">
             <div className="sub-title">
@@ -31,7 +49,8 @@ const Title = (props) => {
                     <p>Categories: <Link to="/construction">{data.category}</Link> <Link to="/construction">{cate2}</Link> <Link to="/construction">{cate3}</Link> </p>
                 </div>
                 <div className="shear-save">
-                    <Link to="/construction">Share</Link>
+                    <input type="text" id='link' value="https://infopediya.com/create-copy-link-input-field-in-javascript/" />
+                    <span to="" onClick={share}>Share</span>
                     <Link to="/construction">Wishlist</Link>
                 </div>
             </div>
