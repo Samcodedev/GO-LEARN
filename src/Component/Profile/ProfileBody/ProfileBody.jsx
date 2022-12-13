@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { GiBookmarklet, GiNotebook } from "react-icons/gi";
 import { RiBookmark3Fill } from "react-icons/ri";
 import { useState } from "react"
-// import ProfileCard from "./ProfileCard";
+import ProfileCard from "./ProfileCard";
 
 const ProfileBody = () => {
 
@@ -59,51 +59,17 @@ const ProfileBody = () => {
     cartfunc(result.data.course);
   };
 
-
-  let [cardata, cardatafunc] = React.useState([]);
-  // let [enCourse, enCoursefunc] = React.useState([]);
-
-  console.log(cardata)
-  cart.map((item)=>{
+  
+  
+  const carts = cart.map((item)=>{
     return(
-      cardatafunc(
-        item.courseId
-      )
+      <ProfileCard 
+        title={item.courseTitle}
+        dta={item.courseId}
+        data={item}
+      />
     )
   })
-
-  // const handlecourse = async () => {
-  //   const config = {
-  //     headers: {
-  //       "content-Type": "application/json",
-  //     },
-  //   };
-  //   let result = await fetch(
-  //     `https://golearn.onrender.com/api/v1/course/${cardata}`,
-  //     config,
-  //     {
-  //       method: "get",
-  //       credencials: "include",
-  //     }
-  //   );
-  //   result = await result.json();
-  //   console.warn(result.data);
-  //   console.log(result.data);
-  //   // enCoursefunc(
-  //   //   result.data
-  //   // )
-  // };
-
-  
-  
-  // const carts = enCourse.map((item)=>{
-  //   return(
-  //     <ProfileCard 
-  //       title={item.courseTitle}
-  //       dta={item.courseId}
-  //     />
-  //   )
-  // })
 
 
   useEffect(() => {
@@ -111,12 +77,7 @@ const ProfileBody = () => {
     handlecart()
   }, [])
 
-    // setTimeout(() => {
-    //   handlecourse()
-    // }, 1000);
-  // if(cart.length > 1){
-  //   handlecourse()
-  // }
+
   console.log(det);
 
   let [audience, aufunc] = React.useState([]);
@@ -204,6 +165,7 @@ const ProfileBody = () => {
     document.getElementById("dashboard").style.display = "flex";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "none";
+    document.getElementById("cart").style.display = "none"
   //   document.getElementById("first").style.backgroundColor = "#007bff";
   //   document.getElementById("first").style.color = "#ffffff";
   //   document.getElementById("second").style.backgroundColor = "transparent";
@@ -214,18 +176,21 @@ const ProfileBody = () => {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "block";
     document.getElementById("create").style.display = "none";
-  //   document.getElementById("first").style.backgroundColor = "transparent";
-  //   document.getElementById("second").style.backgroundColor = "#007bff";
-  //   document.getElementById("sixth").style.backgroundColor = "transparent";
+    document.getElementById("cart").style.display = "none"
   }
 
   function create() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "block";
-  //   document.getElementById("first").style.backgroundColor = "transparent";
-  //   document.getElementById("second").style.backgroundColor = "transparent";
-  //   document.getElementById("sixth").style.backgroundColor = "#007bff";
+    document.getElementById("cart").style.display = "none"
+  }
+
+  function course(){
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("create").style.display = "none";
+    document.getElementById("cart").style.display = "block"
   }
 
   const [courseContentInput, setCourseContentInput] = useState([
@@ -294,7 +259,7 @@ const ProfileBody = () => {
                 <span className="span">My Profile</span>
               </li>
               <li>
-                <span className="span" >Enrolled Courses</span>
+                <span className="span" onClick={course} >Enrolled Courses</span>
               </li>
               <li>
                 <span className="span">Reviews</span>
@@ -348,7 +313,7 @@ const ProfileBody = () => {
               </div>
             </div>
             <h4>In Progress Courses</h4>
-            {/* {carts} */}
+            {carts}
           </div>
           <div className="profile" id="profile">
             <div className="data">
@@ -529,7 +494,7 @@ const ProfileBody = () => {
             </form>
           </div>
           <div className="cart" id="cart">
-
+            {carts}
           </div>
         </div>
       </div>
