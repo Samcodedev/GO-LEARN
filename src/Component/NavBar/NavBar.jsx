@@ -7,23 +7,13 @@ import option from "./img/options.png";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { HiOutlineUserCircle } from "react-icons/hi";
 
-const NavBar = ({ isLoggedIn }) => {
+const NavBar = () => {
   console.log(window.innerWidth);
 
-  // function list(){
-  //     console.log(window.innerWidth)
-  //     window.innerWidth > 1142 ? document.getElementById("list").style.display="flex" : document.getElementById("list").style.display="none"
-  //     window.innerWidth < 1142 ? document.getElementById("nav").style.display="block" : document.getElementById("nav").style.display="none"
-  // }
-
-  // function pup(){
-  //     document.getElementById("list").style.display="flex"
-  //     document.getElementById("list").style.position="absolute"
-  // }
-
-  // setInterval(function(){
-
-  // }, 1000)
+  // Fetch token from local storage 
+  const userToken = window.localStorage.getItem('token');
+  // If token is fetched successfully, set state 
+  console.log('User token: ', userToken);
 
   return (
     <div className="navbar">
@@ -76,7 +66,7 @@ const NavBar = ({ isLoggedIn }) => {
       </div>
       <div className="register">
         {/* Conditional rendering using login status  */}
-        {isLoggedIn ? (
+        {userToken ? (
           <Link to="/profile">
             <button className="profileBtn">
               <HiOutlineUserCircle fontSize='22'/>

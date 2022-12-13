@@ -6,6 +6,7 @@ import ClassCard from './ClassCard';
 const Classes = () => {
     let [va, vaFunc] = React.useState(false)
     let [courses, courseFunction] = React.useState([])
+
     const handleLogin = async () =>{
         let result = await fetch('https://golearn.onrender.com/api/v1/course', {
             method:'get',
@@ -16,16 +17,15 @@ const Classes = () => {
         console.warn(result)
         console.log(result)
         courseFunction(result.data)
-
         
-        vaFunc(!va)
-        
+        vaFunc(true);        
     }
 
     useEffect(() => {
-        handleLogin()
-    }, [])
-
+        // If va value is not true, run handleLogin function 
+        !va && handleLogin()
+    })
+    
     let datas = courses.map((items) =>{
         return(
             <ClassCard 
