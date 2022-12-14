@@ -25,6 +25,7 @@ const Classes = () => {
     useEffect(() => {
         handleLogin()
     }, [])
+    
 
     let datas = courses.map((items) =>{
         return(
