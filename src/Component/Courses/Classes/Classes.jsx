@@ -1,52 +1,61 @@
-import React from 'react';
-import './Classes.css'
-import { useEffect } from 'react';
-import ClassCard from './ClassCard';
+import React from "react";
+import "./Classes.css";
+import { useEffect } from "react";
+import ClassCard from "./ClassCard";
+import { useNavigate } from "react-router-dom";
 
-const Classes = () => {
-    let [va, vaFunc] = React.useState(false)
-    let [courses, courseFunction] = React.useState([])
+const Classes = ({loginStatus}) => {
 
-    const handleLogin = async () =>{
-        let result = await fetch('https://golearn.onrender.com/api/v1/course', {
-            method:'get',
-            credencials: 'include'
-            
-        })
-        result = await result.json()
-        console.warn(result)
-        console.log(result)
-        courseFunction(result.data)
-        
-        vaFunc(true);        
-    }
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        // If va value is not true, run handleLogin function 
-        !va && handleLogin()
-    })
-    
-    let datas = courses.map((items) =>{
-        return(
-            <ClassCard 
-                title={items.courseTitle}
-                time={items.courseDuration}
-                audience={items.audience}
-                category={items.category}
-                author={items.publisherName}
-                data={items}
-            />
-        )
-    })
+  let [va, vaFunc] = React.useState(false);
+  let [courses, courseFunction] = React.useState([]);
 
+  const handleLogin = async () => {
+    let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+      method: "get",
+      credencials: "include",
+    });
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+    courseFunction(result.data);
 
-    return(
-        <div className="classes">
-            <div className="sub-classes">
-                {va === true ? datas : <h1>LOADING...</h1>}
-            </div>
-        </div>
-    )
-}
+    vaFunc(true);
+  };
+
+  useEffect(() => {
+    // If va value is not true, run handleLogin function
+    !va && handleLogin();
+  });
+
+  let datas = courses.map((items) => {
+    return (
+      <ClassCard
+        title={items.courseTitle}
+        time={items.courseDuration}
+        audience={items.audience}
+        category={items.category}
+        author={items.publisherName}
+        data={items}
+      />
+    );
+  });
+
+  return (
+    <div className="classes">
+      <div className="sub-classes">
+        {loginStatus && <>{va === true ? datas : <h1>LOADING...</h1>}</>}
+        {
+            !loginStatus && (
+                <>
+                {navigate('/register')}
+                </>
+            )
+        }
+      </div>
+    </div>
+  );
+};
 
 export default Classes;

@@ -1,14 +1,14 @@
-import React from 'react';
-import Fetch from './Fetch/Fetch';
-import Classes from './Classes/Classes';
+import React from "react";
+import Fetch from "./Fetch/Fetch";
+import Classes from "./Classes/Classes";
 
-const Courses = () => {
-    return(
-        <>
-            <Fetch />
-            <Classes />
-        </>
-    )
-}
+const Courses = ({ loginStatus }) => {
+  return (
+    <>
+      <Fetch />
+      <Classes loginStatus={loginStatus} />
+    </>
+  );
+};
 
 export default Courses;
