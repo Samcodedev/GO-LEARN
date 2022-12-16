@@ -27,10 +27,9 @@ const Head = () => {
       <div className="head-text">
         <h1>Nigeria's foremost Learning and Earning Platform</h1>
         <p>
-          At Go-Learn, we believe that flexible and easy to access learning
+          At Go-Learn we believe that flexible and easy to access learning
           opportunities can bring a significant change in how individuals prefer
-          to learn! Therefore, we offers you the possibility of earning while
-          you enjoy the beauty of eLearning!
+          to learn. Therefore, we offer you the beauty of eLearning.
         </p>
         <Link to="/register">
           <button>
