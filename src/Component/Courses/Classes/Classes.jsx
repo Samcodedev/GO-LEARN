@@ -3,7 +3,6 @@ import "./Classes.css";
 import { useEffect } from "react";
 import ClassCard from "./ClassCard";
 import { useNavigate } from "react-router-dom";
-import moment from 'moment';
 
 const Classes = ({loginStatus}) => {
 
