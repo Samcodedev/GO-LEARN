@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import StudentRev from "../../Review/StudentRev";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import moment from "moment";
 
 const DecFinanceDetails = (props) => {
   let experience = [];
@@ -321,7 +322,7 @@ const DecFinanceDetails = (props) => {
                   <span> Duration: {data.courseDuration}</span>
                 </li>
                 <li>
-                  <span>{data.updatedAt} Last Updated</span>
+                  <span>{moment(data.updatedAt).format("h:mm A")} Last Updated</span>
                 </li>
               </ul>
             </div>
