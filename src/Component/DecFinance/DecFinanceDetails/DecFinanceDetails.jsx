@@ -322,7 +322,7 @@ const DecFinanceDetails = (props) => {
                   <span> Duration: {data.courseDuration}</span>
                 </li>
                 <li>
-                  <span>{moment(data.updatedAt).format("h:mm A")} Last Updated</span>
+                  <span>{moment(data.updatedAt).format("DD MMM YYYY, h:mm A")} Last Updated</span>
                 </li>
               </ul>
             </div>
