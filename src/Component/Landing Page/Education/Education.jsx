@@ -50,7 +50,7 @@ const Education = () => {
           <p>
             Finding your space and utilizing better learning options can result
             in extraordinary achievements better than conventional ways. Enjoy
-            the beauty and rewards of eLearning!
+            the beauty and rewards of eLearning.
           </p>
         </div>
         <div className="education-cards">{Data}</div>
