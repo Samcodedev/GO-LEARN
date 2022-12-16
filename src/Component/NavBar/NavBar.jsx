@@ -9,13 +9,8 @@ import { BsThreeDots } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUser } from "react-icons/fa";
 
-const NavBar = () => {
+const NavBar = ({loginStatus}) => {
   console.log(window.innerWidth);
-
-  // Fetch token from local storage
-  const userToken = window.localStorage.getItem("token");
-  // If token is fetched successfully, set state
-  console.log("User token: ", userToken);
 
   const onMobile = useResponsive();
 
@@ -37,17 +32,18 @@ const NavBar = () => {
               </li>
               <li>
                 <Link to="Courses">
-                  Courses <RiArrowDownSLine fontSize="20px" />
-                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  Courses 
+                  {/* <RiArrowDownSLine fontSize="20px" /> */}
+                  {/* <i class="fa fa-caret-down" aria-hidden="true"></i> */}
                 </Link>
-                <ul className="dd">
+                {/* <ul className="dd">
                   <span>
                     <Link to="DecFinance">Decentralized Finance</Link>
                   </span>
                   <span>
                     <Link to="DecFinance">Personal Development Courses</Link>
                   </span>
-                </ul>
+                </ul> */}
               </li>
               <li>
                 <Link to="Blog">
@@ -72,10 +68,10 @@ const NavBar = () => {
           </div>
           <div className="register">
             {/* Conditional rendering using login status  */}
-            {userToken ? (
+            {loginStatus ? (
               <Link to="/profile">
                 <button className="profileBtn">
-                  <HiOutlineUserCircle fontSize="22" />
+                  <HiOutlineUserCircle fontSize="22" color="#fff" />
                   Profile
                 </button>
               </Link>
@@ -118,17 +114,18 @@ const NavBar = () => {
               </li>
               <li>
                 <Link to="Courses">
-                  Courses <RiArrowDownSLine fontSize="20px" />
-                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  Courses 
+                  {/* <RiArrowDownSLine fontSize="20px" /> */}
+                  {/* <i class="fa fa-caret-down" aria-hidden="true"></i> */}
                 </Link>
-                <ul className="dd">
+                {/* <ul className="dd">
                   <span>
                     <Link to="DecFinance">Decentralized Finance</Link>
                   </span>
                   <span>
                     <Link to="DecFinance">Personal Development Courses</Link>
                   </span>
-                </ul>
+                </ul> */}
               </li>
               <li>
                 <Link to="Blog">
@@ -157,7 +154,7 @@ const NavBar = () => {
           {/* Account area */}
           <div className="register">
             {/* Conditional rendering using login status  */}
-            {userToken ? (
+            {loginStatus ? (
               <>
                 <Link to="/profile">
                   <FaUser />
