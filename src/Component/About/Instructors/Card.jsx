@@ -1,5 +1,6 @@
 import React from 'react';
 import {BsPersonCircle} from 'react-icons/bs'
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
     return(
@@ -8,9 +9,9 @@ const Card = (props) => {
                 <img src={props.img} alt=""/>
             </div>
             <div className="content-div">
-                <a href="/construction">
+                <Link to="/instructor">
                     <span><BsPersonCircle fontSize="120%" /></span>
-                </a>
+                </Link>
                 <h3>{props.name}</h3>
                 <span>{props.work}</span>
             </div>

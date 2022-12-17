@@ -111,7 +111,7 @@
     margin-bottom: -1px;
     font-size: 16px;
     font-weight: 400;
-    padding: 8px 20px;
+    padding: 8px 10px;
     display: flex;
     align-items: center;
     color: #41454f;
@@ -228,6 +228,9 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+}
+.class .sub-class .video .course-details .course-content .review .comments .studentrev:nth-last-child(odd){
+    background-color: #F4F6F9;
 }
 
 

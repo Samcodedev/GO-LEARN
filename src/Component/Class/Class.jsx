@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Class.css'
 import Module from './Card/Module';
 import ModuleData from './Card/ModuleData.json'
@@ -110,8 +110,9 @@ const Class = () => {
         handlerev()
     }
 
-
-
+    useEffect(() => {
+        handlerev()
+    }, [revew])
 
 
 

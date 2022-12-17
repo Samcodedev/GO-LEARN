@@ -315,9 +315,9 @@
     margin-bottom: 12px;
     list-style: disc;
 }
-.DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content{
-    /* background-color: cornflowerblue; */
-}
+/* .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content{
+    background-color: cornflowerblue;
+} */
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content .tutor-according .tutor-according-item{
     background-color: #fff;
     border: 1px solid #E0E2EA;
@@ -340,6 +340,14 @@
     width: 100%;
     display: none;
     flex-direction: column;
+    align-items: center;
+}
+.DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .studentrev{
+    /* border: 1px solid #E0E2EA; */
+    width: 99.7%;
+}
+.DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .studentrev:nth-last-child(odd){
+    background-color: #f5f5f5;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews h3{
     font-weight: bold;
@@ -489,7 +497,7 @@
 @media screen and (max-width: 600px){
     .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat{
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         padding: 20px;
     }
     .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat .rating-bar{
@@ -497,5 +505,14 @@
         margin-left: 0;
         padding-right: 0;
         position: relative;
+    }
+    .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat .total-rating h1{
+        text-align: left;
+    }
+    .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat .total-rating span{
+        text-align: left;
+    }
+    .DecFinanceDetails .sub-DecFinanceDetails .main-detail .reviews .chat .total-rating p{
+        text-align: left;
     }
 }

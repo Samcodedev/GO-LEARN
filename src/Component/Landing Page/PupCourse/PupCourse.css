@@ -166,6 +166,11 @@
 }
 
 
+@media screen and (max-width: 992px){
+    .pupcourse .sub-pupcourse .pupcourse-top-text h2{
+        font-size: 28px;
+    }
+}
 @media screen and (max-width: 916px){
     .pupcourse .sub-pupcourse .wrapper .card-wrapper{
         width: 80%;
