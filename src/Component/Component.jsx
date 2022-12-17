@@ -19,13 +19,13 @@ import Class from "./Class/Class";
 import Error from "./ErrorPage/Error";
 import InstructorProfile from "./InstructorProfile/InstructorProfile";
 
-function Component({ setIsLoggedIn, isLoggedIn }) {
+function Component() {
   const API = "https://golearn.onrender.com/api/v1/auth/";
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout isLoggedIn={isLoggedIn} />}>
+          <Route element={<Layout />}>
             {/* <Route path="NavBar" element={<NavBar />} /> */}
             <Route index path="/" element={<LandingPage />} />
             <Route path="About" element={<About />} />
@@ -36,19 +36,8 @@ function Component({ setIsLoggedIn, isLoggedIn }) {
             <Route path="instructor" element={<InstructorProfile />} />
             <Route path="construction" element={<Construction />} />
             <Route path="register" element={<Register />} />
-            <Route
-              path="profile"
-              element={
-                <Profile
-                  setIsLoggedIn={setIsLoggedIn}
-                  isLoggedIn={isLoggedIn}
-                />
-              }
-            />
-            <Route
-              path="/login"
-              element={<Login setIsLoggedIn={setIsLoggedIn} />}
-            />
+            <Route path="profile" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/forget" element={<Forget />} />
             <Route path="/class" element={<Class />} />
             <Route path={`${API}resetpassword/:token`} element={<Reset />} />
