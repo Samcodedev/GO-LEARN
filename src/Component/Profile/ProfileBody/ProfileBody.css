@@ -434,7 +434,7 @@
 
 @media screen and (max-width: 756px) {
     .profilebody .sub-profilebody .dashboard{
-        flex-direction: column-reverse;
+        flex-direction: column;
         align-items: center;
     }
     .profilebody .sub-profilebody .dashboard .dashboard-main{
@@ -446,6 +446,10 @@
     }
     .profilebody .sub-profilebody .dashboard .dashboard-nav ul{
         border: 1px solid #cdcfd5;
+        min-width: 100%;
+    }
+    .profilebody .sub-profilebody .dashboard .dashboard-nav ul li{
+        border-radius: 0;
     }
     
 

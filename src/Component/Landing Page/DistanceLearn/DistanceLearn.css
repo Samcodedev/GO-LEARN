@@ -1,5 +1,8 @@
+.OnlineBlog{
+    padding: 0;
+}
 .OnlineBlog .sub-OnlineBlog .distance-img-div{
-    width: 50%;
+    width: 45%;
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -8,13 +11,13 @@
 }
 .OnlineBlog .sub-OnlineBlog .distance-img-div img{
     position: relative;
-    width: 150%;
-    left: -250px;
+    width: 100%;
+    /* left: -250px; */
 }
 
 @media screen and (max-width: 992px){
     .OnlineBlog .sub-OnlineBlog .distance-img-div{
-        width: 80%;
+        width: 100%;
         justify-content: center;
         overflow: visible;
         /* background-color: brown; */
@@ -22,6 +25,9 @@
     .OnlineBlog .sub-OnlineBlog .distance-img-div img{
         left: 0px;
         width: 100%;
+    }
+    .OnlineBlog .sub-OnlineBlog .OnlineBlog-content h2{
+        font-size: 28px;
     }
 }
 /* @media screen and (max-width: 580PX){

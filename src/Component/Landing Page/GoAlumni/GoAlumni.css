@@ -44,3 +44,10 @@
     background-color: #221638;
 
 }
+
+
+@media screen and (max-width: 992px){
+    .sub-goalumni .goalumni-content h2{
+        font-size: 28px;
+    }
+}

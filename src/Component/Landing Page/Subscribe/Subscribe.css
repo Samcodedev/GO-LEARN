@@ -70,3 +70,9 @@
     top: 0;
     height: 50px;
 }
+
+@media screen and (max-width: 992px){
+    .subscribe .sub-subscribe .content h2{
+        font-size: 28px;
+    }
+}
