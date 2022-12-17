@@ -1,3 +1,4 @@
+export default Classes;
 import React from "react";
 import "./Classes.css";
 import { useEffect } from "react";

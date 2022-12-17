@@ -135,6 +135,10 @@
 
 
 @media screen and (max-width: 992px){
+    .OnlineBlog{
+        width: 90%;
+        padding: 0;
+    }
     .OnlineBlog .sub-OnlineBlog{
         flex-direction: column;
     }
@@ -142,16 +146,19 @@
         width: 100%;
     }
     .OnlineBlog .sub-OnlineBlog .OnlineBlog-content{
-        width: 90%;
+        width: 100%;
         margin-top: 50px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
+    .OnlineBlog .sub-OnlineBlog .OnlineBlog-content h2{
+        font-size: 28px;
+    }
 }
 @media screen and (max-width: 580PX){
     .OnlineBlog .sub-OnlineBlog .OnlineBlog-content h2{
-        font-size: 30px;
+        font-size: 28px;
     }
 }

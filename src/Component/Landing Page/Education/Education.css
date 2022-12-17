@@ -100,3 +100,8 @@
     }
 }
 
+@media screen and (max-width: 992px){
+    .education .sub-education .education-text h2{
+        font-size: 28px;
+    }
+}
