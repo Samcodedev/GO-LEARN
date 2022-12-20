@@ -16,11 +16,24 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    display: none;
+    border: 1px solid;
+    gap: 8px;
 }
-.title .sub-title .shear-save a{
+.title .sub-title .shear-save input{
+    border: none;
+    outline: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+}
+.title .sub-title .shear-save span{
+    margin: 0;
+    display: inline-flex;
+    cursor: pointer;
+}
+/* .title .sub-title .shear-save a{
     margin-left: 15px;
-}
+} */
 @media screen and (max-width: 600px){
     .title .sub-title .detail{
         width: 100%;
