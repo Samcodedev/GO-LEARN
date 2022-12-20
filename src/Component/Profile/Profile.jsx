@@ -2,11 +2,11 @@ import React from "react";
 import ProfileBody from "./ProfileBody/ProfileBody";
 import ProfileTop from "./ProfileTop/ProfileTop";
 
-const Profile = () => {
+const Profile = ({setLoginStatus}) => {
   return (
     <>
       <ProfileTop />
-      <ProfileBody />
+      <ProfileBody setLoginStatus={setLoginStatus} />
     </>
   );
 };

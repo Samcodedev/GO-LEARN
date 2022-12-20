@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const RegisterBody = () => {
+const RegisterBody = ({setLoginStatus}) => {
 
     const [firstName, ffunc] = React.useState('')
     const [lastName, lfunc] = React.useState('')
@@ -45,7 +45,9 @@ const RegisterBody = () => {
                 navigate('/profile')
             }, 3000);
             localStorage.setItem("token", token )
-            document.getElementById("message").innerHTML="You have successfully Registered"
+            document.getElementById("message").innerHTML="You have successfully Registered";
+            // Set login status to true 
+            setLoginStatus(true);
         }
     }
 
