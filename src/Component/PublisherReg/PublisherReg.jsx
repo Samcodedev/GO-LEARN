@@ -1,10 +1,10 @@
 import React from 'react';
-import './RegisterBody.css'
+import './PublisherReg.css'
 import { useNavigate } from 'react-router-dom';
 
 
 
-const RegisterBody = () => {
+const PublisherReg = () => {
 
     const [firstName, ffunc] = React.useState('')
     const [lastName, lfunc] = React.useState('')
@@ -12,6 +12,7 @@ const RegisterBody = () => {
     const [email, efunc] = React.useState('')
     const [password, pfunc] = React.useState('')
     const [confirm, cfunc] = React.useState('')
+    const role = "publisher"
     
     const navigate = useNavigate();
     
@@ -20,7 +21,7 @@ const RegisterBody = () => {
         let result = await fetch('https://golearn.onrender.com/api/v1/auth',{
             method:'post',
             credencials: 'include',
-            body:JSON.stringify({firstName, lastName, userName, email, password}),
+            body:JSON.stringify({firstName, lastName, userName, email, password, role}),
             headers: {
                 'content-Type': 'application/json'
             }
@@ -29,11 +30,11 @@ const RegisterBody = () => {
         result = await result.json()
         console.warn(result)
         console.log(result)
-        let error = result.success
+        let error = result.error
         let token = result.token
 
         if ( result.success === false){
-            document.getElementById("message").innerHTML={error}
+            document.getElementById("message").innerHTML= error
             document.getElementById("message").style.color="red"
         }
         else if( result.success === true){
@@ -90,4 +91,4 @@ const RegisterBody = () => {
     )
 }
 
-export default RegisterBody;
+export default PublisherReg;

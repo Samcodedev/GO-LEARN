@@ -1,12 +1,13 @@
 import React from "react";
 import "./ProfileBody.css";
-import img from "./img/Group 1.png";
 
 import { useEffect } from "react";
 import { GiBookmarklet, GiNotebook } from "react-icons/gi";
 import { RiBookmark3Fill } from "react-icons/ri";
+import { HiUserCircle } from 'react-icons/hi'
 import { useState } from "react"
 import ProfileCard from "./ProfileCard";
+import CourseCard from "../../InstructorProfile/CourseCard/CourseCard";
 
 const ProfileBody = () => {
 
@@ -25,7 +26,8 @@ const ProfileBody = () => {
       config,
       {
         method: "get",
-        credencials: "include",
+        mode: "cors",
+        credentials: "include",
       }
     );
     result = await result.json();
@@ -50,6 +52,7 @@ const ProfileBody = () => {
       config,
       {
         method: "get",
+        moded: "cors",
         credencials: "include",
       }
     );
@@ -71,11 +74,41 @@ const ProfileBody = () => {
     )
   })
 
+  const [instructCourse, instructCourseFunc] = useState([])
+  const [instructorError, instructorErrorFunc] = useState([])
+  const handleinstructorCourse = async () => {
+    let result = await fetch(
+      `https://golearn.onrender.com/api/v1/course/publisher/${det._id}`,
+      {
+        method: "get",
+      }
+    );
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+
+    result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result) 
+  };
+
+  const courseCreatedCard = instructCourse.map((item) =>{
+    return(
+      <CourseCard 
+        courseTitle={item.courseTitle}
+        publisher={item.publisherName}
+        duration={item.courseDuration}
+        data={item}
+      />
+    )
+  })
+
 
   useEffect(() => {
     handleLogin()
-    handlecart()
   }, [])
+
+  det.role=== "publisher"? handleinstructorCourse() : console.log("Hello loading");
+  
+  det.role=== "user"? handlecart() : console.log("publisher");
 
 
   console.log(det);
@@ -92,36 +125,6 @@ const ProfileBody = () => {
 
   let [whatToLearn, whfunc] = React.useState([]);
 
-  // // alert(audience)
-
-  // let audienceSt = []
-  // let [courseContentSt, ccfunc] = React.useState([])
-  // let [materialsSt, mfunc] = React.useState([])
-  // let [requirementSt, rfunc] = React.useState([])
-  // let [tagsSt, tfunc] = React.useState([])
-  // let [whatToLearnSt, wlfunc] = React.useState([])
-
-  // function audi(){
-  //     // stafunc(() => JSON.stringify(audienceSt))
-  //     audienceSt.push("samuel")
-  //     console.log(audienceSt)
-  // }
-  // function cour(){
-  //     courseContent.push(courseContentSt)
-  //     console.log(audience)
-  // }
-  // function mate(){
-  //     materials.push(materialsSt)
-  // }
-  // function requ(){
-  //     requirement.push(requirementSt)
-  // }
-  // function tage(){
-  //     tags.push(tagsSt)
-  // }
-  // function what(){
-  //     whatToLearn.push(whatToLearnSt)
-  // }
 
   const handleCreateCourse = async (e) => {
     e.preventDefault();
@@ -129,6 +132,7 @@ const ProfileBody = () => {
       "https://golearn.onrender.com/api/v1/course",
       {
         method: "post",
+        mode: "cors",
         credencials: "include",
         body: JSON.stringify({
           courseTitle,
@@ -190,7 +194,7 @@ const ProfileBody = () => {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "none";
-    document.getElementById("cart").style.display = "block"
+    document.getElementById("cart").style.display = "flex"
   }
 
   const [courseContentInput, setCourseContentInput] = useState([
@@ -238,7 +242,7 @@ const ProfileBody = () => {
           </div>
           <div className="profileDetails">
             <div className="img-div">
-              <img src={img} alt="" />
+              <HiUserCircle />
             </div>
             <div className="text-div">
               <h5>Hello,</h5>
@@ -258,11 +262,11 @@ const ProfileBody = () => {
               <li onClick={profile} id="second">
                 <span className="span">My Profile</span>
               </li>
-              <li>
-                <span className="span" onClick={course} >Enrolled Courses</span>
+              <li onClick={course}>
+                <span className="span" >{det.role=== "publisher"? "Course Created" : "Enrolled Courses"  } </span>
               </li>
               <li>
-                <span className="span">Reviews</span>
+                <span className="span"> {det.role=== "publisher"? "Create Blog" : "Reviews" } </span>
               </li>
               <li onClick={create} style={{display: det.role=== "publisher"? "block" : "none"  }}>
                 <span className="span">Create Course</span>
@@ -289,8 +293,8 @@ const ProfileBody = () => {
                   <GiBookmarklet fontSize="55px" color="#027dff" />
                 </div>
                 <div className="text-div">
-                  <h1>{cart.length}</h1>
-                  <p>Enrolled Courses</p>
+                  <h1>{det.role=== "publisher"? instructCourse.length : cart.length }</h1>
+                <p> {det.role=== "publisher"? "Created Course" : "Enrolled Courses" } </p>
                 </div>
               </div>
               <div className="box">
@@ -299,7 +303,7 @@ const ProfileBody = () => {
                 </div>
                 <div className="text-div">
                   <h1>{cart.length}</h1>
-                  <p>Active Courses</p>
+                  <p> {det.role=== "publisher"? "Created Blogs" : "Active Courses" }</p>
                 </div>
               </div>
               <div className="box">
@@ -493,8 +497,9 @@ const ProfileBody = () => {
               <input type="submit" value="Create" className="submit" />
             </form>
           </div>
-          <div className="cart" id="cart">
-            {carts}
+          <div className="cart" id="cart" style={{justifyContent: instructorError? "center": "space-between", alignItems: instructorError? "center": "flex-start" }} >
+            {det.role=== "publisher"? courseCreatedCard : carts } 
+            <h4 style={{textAlign: "center", marginBlockEnd: 0, height: "fit-content"}}>{instructorError.error}</h4>
           </div>
         </div>
       </div>

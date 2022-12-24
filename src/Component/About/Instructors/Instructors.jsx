@@ -1,17 +1,42 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Instructors.css'
-import InstructorsData from '../Data/InstructorsData'
+// import InstructorsData from '../Data/InstructorsData'
 import Card from './Card'
-import profile from './img/olubori-free3.jpg'
+import { useState } from "react"
 
 const Instructors = () => {
 
-    const prof = InstructorsData.map((item) =>{
+    const [instruct, instructFunc] = useState([]);
+    const handleinstructor = async () => {
+        let result = await fetch(
+          'https://golearn.onrender.com/api/v1/user/publishers',
+          {
+            method: "get",
+          }
+        );
+        result = await result.json();
+        console.warn(result);
+        console.log(result);
+    
+        instructFunc(result.data);
+      };
+
+      useEffect(() => {
+        handleinstructor()
+      }, []);
+
+      console.log(instruct)
+
+    const prof = instruct.map((item)=>{
         return(
             <Card 
-                img={profile}
+                user={item._id}
                 work={item.Work}
-                name={item.Name}
+                firstName={item.firstName}
+                lastName={item.lastName}
+                email={item.email}
+                role={item.role}
+                data={item}
             />
         )
     })

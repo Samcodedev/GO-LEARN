@@ -1,9 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './ContactBody.css'
-import icon from './img/Group 1.png'
+import emailjs from 'emailjs-com';
+import { MdOutlineLocationOn, MdOutlineMail, MdCall, MdEventAvailable } from 'react-icons/md'
 
 const ContactBody = () => {
+
+    function sendEmail(e){
+        e.preventDefault();
+        
+        emailjs.sendForm('service_n8u9esj', 'template_i3u3qxm', e.target, 'kc0dD2RzmpV1gMPY1')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+            e.target.reset()
+    }
     return(
         <div className="contactbody">
             <div className="sub-contactbody">
@@ -14,7 +26,7 @@ const ContactBody = () => {
                     <ul>
                         <li>
                             <div className="icon">
-                                <img src={icon} alt=""/>
+                                <MdOutlineLocationOn />
                             </div>
                             <div className="text">
                                 <h3>Our Address</h3>
@@ -23,7 +35,7 @@ const ContactBody = () => {
                         </li>
                         <li>
                             <div className="icon">
-                                <img src={icon} alt=""/>
+                                <MdOutlineMail />
                             </div>
                             <div className="text">
                                 <h3>E-mail</h3>
@@ -33,17 +45,17 @@ const ContactBody = () => {
                         </li>
                         <li>
                             <div className="icon">
-                                <img src={icon} alt=""/>
+                                <MdCall />
                             </div>
                             <div className="text">
                                 <h3>Contact</h3>
-                                <p>Mobile: <a href="https://go-learn.online/contact/tel:+234-802-156-9242">+234-802-156-9242</a> </p>
-                                <p>Whatsapp: <a href="https://go-learn.online/contact/tel:+234-802-654-5550">+234-802-654-5550</a> </p>
+                                <p>Mobile: <a href="https://tel:+234-802-156-9242">+234-802-156-9242</a> </p>
+                                <p>Whatsapp: <a href="https://tel:+234-802-654-5550">+234-802-654-5550</a> </p>
                             </div>
                         </li>
                         <li>
                             <div className="icon">
-                                <img src={icon} alt=""/>
+                                <MdEventAvailable />
                             </div>
                             <div className="text">
                                 <h3>Hours of Operation</h3>
@@ -55,14 +67,12 @@ const ContactBody = () => {
                 <div className="form">
                     <h2>Ready to Get Started?</h2>
                     <p>Your email address will not be published. Required fields are marked *</p>
-                    <form action="/construction">
-                        <input type="text" placeholder="Your Name" required/>
-                        <input type="email" placeholder="Your Email Address" required/>
-                        <input type="text" placeholder="Your Subject" required/>
-                        <textarea cols="30" rows="10" placeholder="Write Your Message" required></textarea>
-                        <small>Accept 
-                            <Link to="/construction"> Teams </Link> and 
-                            <Link to="/construction"> Private Policy </Link><input type="checkbox" required/></small>
+                    <form onSubmit={sendEmail}>
+                        <input type="text" placeholder="Your Name" name='name' required/>
+                        <input type="email" placeholder="Your Email Address" name='email' required/>
+                        <input type="text" placeholder="Your Subject" name='subject' required/>
+                        <textarea cols="30" rows="10" placeholder="Write Your Message" name='message' required></textarea>
+                        {/* <small><input type="checkbox" /></small> */}
                         <input className="submit" type="submit" value="Send Message"/>
                     </form>
                 </div>

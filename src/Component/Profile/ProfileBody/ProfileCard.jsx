@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import img2 from "./img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png";
 import ClassesData from "../../Courses/Data/ClassesData.json";
 import "./ProfileCard.css";
@@ -36,7 +36,9 @@ const ProfileCard = ({ courseTit, publisherName, data }) => {
   };
   console.log(enCourse);
 
-  handlecourse();
+  useEffect(() => {
+    handlecourse();
+  }, []);
 
   return (
     <div className="course">
