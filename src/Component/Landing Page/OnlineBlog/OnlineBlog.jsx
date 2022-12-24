@@ -20,12 +20,12 @@ const OnlineBlog = () => {
           <span>Online Learning</span>
           <h2>
             Develop Your Skills, Learn Something New, and Grow Your Skills From
-            Anywhere in the World
+            Anywhere In the World
           </h2>
           <p>
-            At Go-Learn, we understand better that online-based learning can
-            make a significant change to reach students from all over the world!
-            Giving options to learn better always can offer the best outcomes!
+            At Go-Learn, we understand that online based learning can make a
+            significant change to reach students from all over the world. Giving
+            options to learn better can always offer the best outcomes.
           </p>
           <div className="online-props">
             <ul>

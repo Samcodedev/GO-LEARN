@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LandingPage from "./Landing Page/LandingPage";
 import Layout from "./Layout";
 
@@ -22,16 +22,30 @@ import PublisherReg from "./PublisherReg/PublisherReg";
 
 function Component() {
   const API = "https://golearn.onrender.com/api/v1/auth/";
+
+  
+  const [loginStatus, setLoginStatus] = useState(false);
+
+  useEffect(() => {
+    if (window.localStorage.getItem("token")) {
+      setLoginStatus(true);
+      console.log("TOKEN IS AVAILABLE");
+    } else {
+      console.log("TOKEN IS NOT AVAILABLE");
+      setLoginStatus(false);
+    }
+  }, []);
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
+          <Route element={<Layout loginStatus={loginStatus} />}>
             {/* <Route path="NavBar" element={<NavBar />} /> */}
             <Route index path="/" element={<LandingPage />} />
             <Route path="About" element={<About />} />
             <Route path="Blog" element={<Blog />} />
-            <Route path="Courses" element={<Courses />} />
+            <Route path="Courses" element={<Courses loginStatus={loginStatus} />} />
             <Route path="DecFinance" element={<DecFinance />} />
             <Route path="Contact-Us" element={<Contact />} />
             <Route path="instructor" element={<InstructorProfile />} />

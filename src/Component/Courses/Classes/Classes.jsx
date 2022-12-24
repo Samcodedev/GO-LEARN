@@ -1,12 +1,13 @@
-import React from 'react';
-import './Classes.css'
-import { useEffect } from 'react';
-import ClassCard from './ClassCard';
+export default Classes;
+import React from "react";
+import "./Classes.css";
+import { useEffect } from "react";
+import ClassCard from "./ClassCard";
+import { useNavigate } from "react-router-dom";
 
-const Classes = () => {
-    let [va, vaFunc] = React.useState(false)
-    let [courses, courseFunction] = React.useState([])
+const Classes = ({loginStatus}) => {
 
+<<<<<<< HEAD
     const handleLogin = async () =>{
         let result = await fetch('https://golearn.onrender.com/api/v1/course', {
             method:'get',
@@ -39,8 +40,27 @@ const Classes = () => {
             />
         )
     })
+=======
+    const navigate = useNavigate();
 
+  let [va, vaFunc] = React.useState(false);
+  let [courses, courseFunction] = React.useState([]);
 
+  const handleLogin = async () => {
+    let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+      method: "get",
+      credencials: "include",
+    });
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+    courseFunction(result.data);
+>>>>>>> 60cf84b6c2021646eea0185d7d60b901000fd378
+
+    vaFunc(true);
+  };
+
+<<<<<<< HEAD
     return(
         <div className="classes">
             <div className="sub-classes">
@@ -66,5 +86,40 @@ const Classes = () => {
         </div>
     )
 }
+=======
+  useEffect(() => {
+    // If va value is not true, run handleLogin function
+    !va && handleLogin();
+  });
+>>>>>>> 60cf84b6c2021646eea0185d7d60b901000fd378
+
+  let datas = courses.map((items) => {
+    return (
+      <ClassCard
+        title={items.courseTitle}
+        time={items.courseDuration}
+        audience={items.audience}
+        category={items.category}
+        author={items.publisherName}
+        data={items}
+      />
+    );
+  });
+
+  return (
+    <div className="classes">
+      <div className="sub-classes">
+        {loginStatus && <>{va === true ? datas : <h1>LOADING...</h1>}</>}
+        {
+            !loginStatus && (
+                <>
+                {navigate('/register')}
+                </>
+            )
+        }
+      </div>
+    </div>
+  );
+};
 
 export default Classes;
