@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./DecFinanceDetails.css";
 import img from "./img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png";
 import profile from "./img/Group 1.png";
@@ -143,9 +143,9 @@ const DecFinanceDetails = (props) => {
   let bar1 = (count1 / (count1 + 1)) * 100;
   console.log(bar5);
 
-//   useEffect(() => {
-//   }, []);
-  handlereview();
+  useEffect(() => {
+    handlereview();
+  }, []);
 
   const stu = revew.map((item) => {
     return (

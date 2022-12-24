@@ -41,8 +41,9 @@
     position: relative;
     margin-right: 10px;
 }
-.profilebody .sub-profilebody .top .profileDetails .img-div img{
-    width: 70px;
+.profilebody .sub-profilebody .top .profileDetails .img-div svg{
+    font-size: 80px;
+    color: #606060;
 }
 .profilebody .sub-profilebody .top .profileDetails .text-div{
     display: flex;
@@ -292,9 +293,9 @@
     width: 100%;
     padding: 10px 20px;
     display: none;
-    /* flex-wrap: wrap; */
-    /* gap: 20px; */
-    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
 }
 .profilebody .sub-profilebody .dashboard .create-course{
     /* background-color: #027dff; */
