@@ -5,12 +5,46 @@ import img from "./img/Group 1.png";
 import { useEffect } from "react";
 import { GiBookmarklet, GiNotebook } from "react-icons/gi";
 import { RiBookmark3Fill } from "react-icons/ri";
-import { useState } from "react"
+import { useState } from "react";
 import ProfileCard from "./ProfileCard";
+import { useNavigate } from "react-router-dom";
 
-const ProfileBody = () => {
+const ProfileBody = ({ setLoginStatus }) => {
+  
+  let [savedCourses, setSavedCourses] = React.useState([]);
+
+  const fetchCourses = async () => {
+    let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+      method: "get",
+      mode: 'cors',
+      credencials: "include",
+    });
+    result = await result.json();
+
+    const data = result.data;
+
+    // console.log("RESULT: ", data);
+
+    setSavedCourses(data);
+
+    const savedCoursesArray = savedCourses;
+
+    // console.log("Saved courses: ", savedCoursesArray);
+
+    if (savedCoursesArray && savedCoursesArray !== []) {
+      localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
+
+      // const courses = JSON.parse(localStorage.getItem("courses"));
+
+      // console.log("RETRIEVED COURSES: ", courses);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [])
 
   // fetching user data and also sending a unique token to the header
+
 
   const [det, effunc] = React.useState("");
   const handleLogin = async () => {
@@ -34,9 +68,6 @@ const ProfileBody = () => {
     effunc(result.data);
   };
 
-
-
-
   const [cart, cartfunc] = React.useState([]);
   const handlecart = async () => {
     const config = {
@@ -59,38 +90,29 @@ const ProfileBody = () => {
     cartfunc(result.data.course);
   };
 
-  
-  
-  const carts = cart.map((item)=>{
-    return(
-      <ProfileCard 
-        title={item.courseTitle}
-        dta={item.courseId}
-        data={item}
-      />
-    )
-  })
-
+  const carts = cart.map((item) => {
+    return (
+      <ProfileCard title={item.courseTitle} dta={item.courseId} data={item} />
+    );
+  });
 
   useEffect(() => {
-    handleLogin()
-    handlecart()
-  }, [])
-
+    handleLogin();
+    handlecart();
+  }, []);
 
   console.log(det);
 
-  let [audience, aufunc] = React.useState([]);
-  let [category, cafunc] = React.useState("");
-  let [courseContent, cofunc] = React.useState([]);
+  let [courseTitle, ctfunc] = React.useState("");
   let [courseDescription, codfunc] = React.useState("");
   let [courseDuration, cdfunc] = React.useState("");
-  let [courseTitle, ctfunc] = React.useState("");
-  let [materials, mafunc] = React.useState([]);
-  let [requirement, refunc] = React.useState([]);
-  let [tags, tafunc] = React.useState([]);
-
+  let [category, cafunc] = React.useState("");
+  let [courseContent, cofunc] = React.useState([]);
   let [whatToLearn, whfunc] = React.useState([]);
+  let [requirement, refunc] = React.useState([]);
+  let [audience, aufunc] = React.useState([]);
+  let [materials, mafunc] = React.useState([]);
+  let [tags, tafunc] = React.useState([]);
 
   // // alert(audience)
 
@@ -125,27 +147,47 @@ const ProfileBody = () => {
 
   const handleCreateCourse = async (e) => {
     e.preventDefault();
-    let result = await fetch(
-      "https://golearn.onrender.com/api/v1/course",
-      {
-        method: "post",
-        credencials: "include",
-        body: JSON.stringify({
-          courseTitle,
-          courseDescription,
-          courseDuration,
-          category,
-          whatToLearn,
-          requirement,
-          audience,
-          materials,
-        }),
-        headers: {
-          "content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
+
+    const courseContentValues = Object.values(courseContent);
+    const whatToLearnValues = Object.values(whatToLearn);
+    const requirementValues = Object.values(requirement);
+    const audienceValues = Object.values(audience);
+
+    console.log("Form inputs: ", {
+      courseTitle,
+      courseDescription,
+      courseDuration,
+      category,
+      courseContent,
+      courseContentValues,
+      whatToLearn,
+      whatToLearnValues,
+      requirement,
+      requirementValues,
+      audience,
+      audienceValues,
+      materials,
+    });
+    return;
+
+    let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+      method: "post",
+      credencials: "include",
+      body: JSON.stringify({
+        courseTitle,
+        courseDescription,
+        courseDuration,
+        category,
+        whatToLearn,
+        requirement,
+        audience,
+        materials,
+      }),
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
     result = await result.json();
     console.warn(result);
     console.log(result);
@@ -156,7 +198,7 @@ const ProfileBody = () => {
       ).innerHTML = `You have successfully created ${courseTitle} course.`;
       document.getElementById("message").style.color = "green";
     } else if (result.success === false) {
-      document.getElementById("message").innerHTML = `${result.error}`;
+      document.getElementById("message").innerHTML = `An error occured, please fill in all fields, and try again.`;
       document.getElementById("message").style.color = "red";
     }
   };
@@ -165,34 +207,35 @@ const ProfileBody = () => {
     document.getElementById("dashboard").style.display = "flex";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "none";
-    document.getElementById("cart").style.display = "none"
-  //   document.getElementById("first").style.backgroundColor = "#007bff";
-  //   document.getElementById("first").style.color = "#ffffff";
-  //   document.getElementById("second").style.backgroundColor = "transparent";
-  //   document.getElementById("sixth").style.backgroundColor = "transparent";
+    document.getElementById("cart").style.display = "none";
+    //   document.getElementById("first").style.backgroundColor = "#007bff";
+    //   document.getElementById("first").style.color = "#ffffff";
+    //   document.getElementById("second").style.backgroundColor = "transparent";
+    //   document.getElementById("sixth").style.backgroundColor = "transparent";
   }
 
   function profile() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "block";
     document.getElementById("create").style.display = "none";
-    document.getElementById("cart").style.display = "none"
+    document.getElementById("cart").style.display = "none";
   }
 
   function create() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "block";
-    document.getElementById("cart").style.display = "none"
+    document.getElementById("cart").style.display = "none";
   }
 
-  function course(){
+  function course() {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "none";
-    document.getElementById("cart").style.display = "block"
+    document.getElementById("cart").style.display = "block";
   }
 
+  // State that handles course content input
   const [courseContentInput, setCourseContentInput] = useState([
     {
       visibility: true,
@@ -211,23 +254,137 @@ const ProfileBody = () => {
     },
   ]);
 
-  function addCourseContent() {
-    for (let i = 0; i < courseContentInput.length; i++) {
-      if (!courseContentInput[i].visibility) {
-        const newCourseContentInput = [...courseContentInput];
+  // State that handles what to learn input
+  const [whatToLearnInput, setWhatToLearnInput] = useState([
+    {
+      visibility: true,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+  ]);
 
-        newCourseContentInput[i].visibility = true;
+  // State that handles requirement input
+  const [requirementInput, setRequirementInput] = useState([
+    {
+      visibility: true,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+  ]);
 
-        setCourseContentInput(newCourseContentInput);
+  // State that handles audience input
+  const [audienceInput, setAudienceInput] = useState([
+    {
+      visibility: true,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+  ]);
+
+  // State that handles materials input
+  const [materialsInput, setMaterialsInput] = useState([
+    {
+      visibility: true,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+  ]);
+
+  // State that handles tags input
+  const [tagsInput, setTagsInput] = useState([
+    {
+      visibility: true,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+  ]);
+
+  // Function to add input field
+  function addInputField(contentName, contentNameFunction, temporaryName) {
+    // Create loop 
+    for (let i = 0; i < contentName.length; i++) {
+      // If current iteration visibility status is false 
+      if (!contentName[i].visibility) {
+
+        // Create state instance 
+        const temporaryName = [...contentName];
+
+        // Set current indec value to true 
+        temporaryName[i].visibility = true;
+
+        // Set state
+        contentNameFunction(temporaryName);
 
         return;
       }
     }
   }
 
-
-
+  const navigate = useNavigate();
   
+  /**
+   * Function to logout of application
+   */
+  function logout() {
+    // Clear localStorage
+    localStorage.clear();
+
+    // Navigate to homepage
+    navigate("/");
+
+    // Set login status to true
+    setLoginStatus(false);
+  }
 
   return (
     <div className="profilebody">
@@ -259,18 +416,23 @@ const ProfileBody = () => {
                 <span className="span">My Profile</span>
               </li>
               <li>
-                <span className="span" onClick={course} >Enrolled Courses</span>
+                <span className="span" onClick={course}>
+                  Enrolled Courses
+                </span>
               </li>
               <li>
                 <span className="span">Reviews</span>
               </li>
-              <li onClick={create} style={{display: det.role=== "publisher"? "block" : "none"  }}>
+              <li
+                onClick={create}
+                style={{ display: det.role === "publisher" ? "block" : "none" }}
+              >
                 <span className="span">Create Course</span>
               </li>
               <li>
                 <span className="span">Settings</span>
               </li>
-              <li>
+              <li onClick={logout}>
                 <span className="span">Logout</span>
               </li>
             </ul>
@@ -352,6 +514,7 @@ const ProfileBody = () => {
               </ul>
             </div>
           </div>
+          {/* Form begins here */}
           <div className="create-course" id="create">
             <h2>Create Course</h2>
             <form onSubmit={handleCreateCourse} action="">
@@ -391,92 +554,151 @@ const ProfileBody = () => {
                       {courseContentInput[index].visibility && (
                         <input
                           type="text"
-                          value={courseContent}
-                          onChange={(e) => cofunc(e.target.value)}
+                          value={courseContent[index]}
+                          onChange={(e) =>
+                            cofunc({
+                              ...courseContent,
+                              [index]: e.target.value,
+                            })
+                          }
                         />
                       )}
                     </div>
                   ))}
                 </div>
                 {courseContentInput[0].visibility && (
-                  <span onClick={addCourseContent}>Add</span>
+                  <span onClick={() =>
+                      addInputField(
+                        courseContentInput,
+                        setCourseContentInput
+                      )}>
+                    Add
+                  </span>
                 )}
               </div>
-              {/* <div className="array-input">
-                {courseContentInput[1].visibility && (
-                  <input
-                    type="text"
-                    value={courseContent}
-                    onChange={(e) => cofunc(e.target.value)}
-                  />
-                )}
-              </div>
-              <div className="array-input">
-                {courseContentInput[2].visibility && (
-                  <input
-                    type="text"
-                    value={courseContent}
-                    onChange={(e) => cofunc(e.target.value)}
-                  />
-                )}
-              </div>
-              <div className="array-input">
-                {courseContentInput[3].visibility && (
-                  <input
-                    type="text"
-                    value={courseContent}
-                    onChange={(e) => cofunc(e.target.value)}
-                  />
-                )}
-              </div>
-              <div className="array-input">
-                {courseContentInput[4].visibility && (
-                  <input
-                    type="text"
-                    value={courseContent}
-                    onChange={(e) => cofunc(e.target.value)}
-                  />
-                )}
-              </div> */}
 
               <label>What To Learn</label>
               <div className="array-input">
-                <input
-                  type="text"
-                  value={whatToLearn}
-                  onChange={(e) => whfunc(e.target.value)}
-                />
-                <span>Add</span>
+                <div className="array-input-course-content">
+                  {whatToLearnInput.map((eachContent, index) => (
+                    <div key={index}>
+                      {eachContent.visibility && (
+                        <input
+                          type="text"
+                          value={whatToLearn[index]}
+                          onChange={(e) =>
+                            whfunc({
+                              ...whatToLearn,
+                              [index]: e.target.value,
+                            })
+                          }
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {whatToLearnInput[0].visibility && (
+                  <span onClick={() =>
+                      addInputField(
+                        whatToLearnInput,
+                        setWhatToLearnInput
+                      )}>
+                    Add
+                  </span>
+                )}
               </div>
 
               <label>Requirement</label>
               <div className="array-input">
-                <input
-                  type="text"
-                  value={requirement}
-                  onChange={(e) => refunc(e.target.value)}
-                />
-                <span>Add</span>
+                <div className="array-input-course-content">
+                  {requirementInput.map((eachContent, index) => (
+                    <div key={index}>
+                      {eachContent.visibility && (
+                        <input
+                          type="text"
+                          value={requirement[index]}
+                          onChange={(e) =>
+                            refunc({
+                              ...requirement,
+                              [index]: e.target.value,
+                            })
+                          }
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {requirementInput[0].visibility && (
+                  <span onClick={() =>
+                      addInputField(
+                        requirementInput,
+                        setRequirementInput
+                      )}>
+                    Add
+                  </span>
+                )}
               </div>
 
               <label>Audience</label>
               <div className="array-input">
-                <input
-                  type="text"
-                  value={audience}
-                  onChange={(e) => aufunc(e.target.value)}
-                />
-                <span>Add</span>
+                <div className="array-input-course-content">
+                  {audienceInput.map((eachContent, index) => (
+                    <div key={index}>
+                      {eachContent.visibility && (
+                        <input
+                          type="text"
+                          value={audience[index]}
+                          onChange={(e) =>
+                            aufunc({
+                              ...audience,
+                              [index]: e.target.value,
+                            })
+                          }
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {audienceInput[0].visibility && (
+                  <span onClick={() =>
+                      addInputField(
+                        audienceInput,
+                        setAudienceInput
+                      )}>
+                    Add
+                  </span>
+                )}
               </div>
 
               <label>Materials</label>
               <div className="array-input">
-                <input
-                  type="text"
-                  value={materials}
-                  onChange={(e) => mafunc(e.target.value)}
-                />
-                <span>Add</span>
+                <div className="array-input-course-content">
+                  {materialsInput.map((eachContent, index) => (
+                    <div key={index}>
+                      {eachContent.visibility && (
+                        <input
+                          type="text"
+                          value={materials[index]}
+                          onChange={(e) =>
+                            mafunc({
+                              ...materials,
+                              [index]: e.target.value,
+                            })
+                          }
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {materialsInput[0].visibility && (
+                  <span onClick={() =>
+                      addInputField(
+                        materialsInput,
+                        setMaterialsInput
+                      )}>
+                    Add
+                  </span>
+                )}
               </div>
 
               <label>Tags</label>

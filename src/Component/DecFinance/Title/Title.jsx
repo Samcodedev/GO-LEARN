@@ -2,6 +2,7 @@ import React from 'react';
 import './Title.css'
 import { Link } from 'react-router-dom';
 import ClassesData from '../../Courses/Data/ClassesData.json'
+import { FaShareSquare } from 'react-icons/fa';
 
 const Title = (props) => {
 
@@ -50,7 +51,7 @@ const Title = (props) => {
                 </div>
                 <div className="shear-save">
                     <input type="text" id='link' value="https://infopediya.com/create-copy-link-input-field-in-javascript/" />
-                    <span to="" onClick={share}>Share</span>
+                    <span to="" onClick={share}><FaShareSquare fontSize={18} /></span>
                     <Link to="/construction">Wishlist</Link>
                 </div>
             </div>

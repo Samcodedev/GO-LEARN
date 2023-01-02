@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({setLoginStatus}) => {
   // const [email, efunc] = React.useState('')
   const [userName, efunc] = React.useState("");
   const [password, pfunc] = React.useState("");
@@ -20,6 +20,7 @@ const Login = () => {
         method: "post",
         credencials: "include",
         body: JSON.stringify({ userName, password }),
+        mode: 'cors',
         headers: {
           "content-Type": "application/json",
         },
@@ -34,6 +35,8 @@ const Login = () => {
       valid2.style.border = "1px solid green";
       error.innerHTML = "Welcome Back";
       error.style.color = "green";
+      // Set login status to true 
+      setLoginStatus(true);
       setTimeout(() => {
         navigate("/profile");
       }, 3000);
