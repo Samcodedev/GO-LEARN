@@ -63,7 +63,7 @@ const Class = () => {
 
     const [revew, refunct] =  React.useState([])
     const handlerev = async () =>{
-        let result = await fetch(`https://golearn.onrender.com/api/v1/course/${datah._id}/reviews`,
+        let result = await fetch(`https://golearn.up.railway.app/api/v1/course/${datah._id}/reviews`,
          {
             method:'get'
         })
@@ -83,7 +83,7 @@ const Class = () => {
     let [rating, rafunc] = React.useState('')
     const handlereview = async (e) =>{
         e.preventDefault()
-        let result2 = await fetch(`https://golearn.onrender.com/api/v1/course/${datah._id}/reviews`, 
+        let result2 = await fetch(`https://golearn.up.railway.app/api/v1/course/${datah._id}/reviews`, 
          {
             method:'post',
             body:JSON.stringify({review, rating}),
@@ -112,7 +112,7 @@ const Class = () => {
 
     useEffect(() => {
         handlerev()
-    }, [revew])
+    }, [ ])
 
 
 

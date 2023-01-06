@@ -24,7 +24,7 @@ const Olubori = () => {
             management, savings, budgeting, investment opportunities, financial
             planning template, budgeting template, grants and sponsorships.
           </p>
-          <Link to="">
+          <Link to="/register">
             <button>Start For Free</button>
           </Link>
         </div>

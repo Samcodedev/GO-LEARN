@@ -2,6 +2,8 @@ import React from 'react';
 import './StudentRev.css'
 import profile from './img/Group 1.png'
 import { FaStar } from 'react-icons/fa'
+import moment from "moment";
+// import { useState } from 'react';
 
 const StudentRev = (props) => {
     let sta = [
@@ -18,18 +20,41 @@ const StudentRev = (props) => {
         } else if( props.star === 4 ){
             stars = sta.slice(1)
         } else if( props.star === 3 ){
-            stars = sta.slice(1,2)
+            stars = sta.slice(2)
         } else if( props.star === 2 ){
-            stars = sta.slice(1,2,3)
+            stars = sta.slice(3)
         } else if( props.star === 1 ){
-            stars = sta.slice(1,2,3,4)
+            stars = sta.slice(4)
         } else if( props.star > 5 ){
             stars = sta
         }
     }
     reload()
 
+    // let [user, userfunc] = useState([]);
+    // const handleusers = async () => {
+    //     let result = await fetch(
+    //     'https://golearn.up.railway.app/api/v1/user',
+    //     {
+    //         method: "get",
+    //     }
+    //     );
+    //     result = await result.json();
+    //     console.warn(result);
+    //     console.log(result);
 
+    //     userfunc(result.data);
+    // };
+    // console.log(user);
+
+    // useEffect(() => {
+    //     handleusers();
+    // }, []);
+
+    // const found = user.find(obj =>{
+    //     return obj.id === props.name
+    // })
+    // alert(found)
 
     return(
         <div className='studentrev'>
@@ -40,7 +65,7 @@ const StudentRev = (props) => {
                     </div>
                     <div className="text-div">
                         <span>{props.name}</span>
-                        <p>{props.time} ago</p>
+                        <p>{moment(props.time).format("DD MMM YYYY, h:mm A")}</p>
                     </div>
                 </div>
                 <div className="star">

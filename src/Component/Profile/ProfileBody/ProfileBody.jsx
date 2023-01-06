@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { GiBookmarklet, GiNotebook } from "react-icons/gi";
 import { RiBookmark3Fill } from "react-icons/ri";
 import { HiUserCircle } from 'react-icons/hi'
+import { SlOptionsVertical } from 'react-icons/sl'
 import { useState } from "react"
 import ProfileCard from "./ProfileCard";
 import CourseCard from "../../InstructorProfile/CourseCard/CourseCard";
@@ -18,16 +19,22 @@ const ProfileBody = () => {
     const config = {
       headers: {
         "content-Type": "application/json",
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
     let result = await fetch(
-      "https://golearn.onrender.com/api/v1/auth",
+      "https://golearn.up.railway.app/api/v1/auth",
       config,
       {
         method: "get",
-        mode: "cors",
+        mode: "no-cors",
         credentials: "include",
+        headers: {    
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' },
       }
     );
     result = await result.json();
@@ -44,15 +51,17 @@ const ProfileBody = () => {
     const config = {
       headers: {
         "content-Type": "application/json",
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
     let result = await fetch(
-      "https://golearn.onrender.com/api/v1/cart",
+      "https://golearn.up.railway.app/api/v1/cart",
       config,
       {
         method: "get",
-        moded: "cors",
+        moded: "no-cors",
         credencials: "include",
       }
     );
@@ -74,13 +83,24 @@ const ProfileBody = () => {
     )
   })
 
+  
+  let [pup, pupfunc] = React.useState(true);
+
+  function pupF(){
+    pupfunc(!pup)
+  }
+
   const [instructCourse, instructCourseFunc] = useState([])
   const [instructorError, instructorErrorFunc] = useState([])
   const handleinstructorCourse = async () => {
     let result = await fetch(
-      `https://golearn.onrender.com/api/v1/course/publisher/${det._id}`,
+      `https://golearn.up.railway.app/api/v1/course/publisher/${det._id}`,
       {
         method: "get",
+        headers: {    
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' },
       }
     );
     result = await result.json();
@@ -93,10 +113,13 @@ const ProfileBody = () => {
   const courseCreatedCard = instructCourse.map((item) =>{
     return(
       <CourseCard 
+        id={item._id}
         courseTitle={item.courseTitle}
         publisher={item.publisherName}
         duration={item.courseDuration}
+        icon={<SlOptionsVertical />}
         data={item}
+        del={pupF}
       />
     )
   })
@@ -105,10 +128,9 @@ const ProfileBody = () => {
   useEffect(() => {
     handleLogin()
   }, [])
+    det.role=== "publisher"? handleinstructorCourse() : console.log("Hello loading");
+    det.role=== "user"? handlecart() : console.log("publisher");
 
-  det.role=== "publisher"? handleinstructorCourse() : console.log("Hello loading");
-  
-  det.role=== "user"? handlecart() : console.log("publisher");
 
 
   console.log(det);
@@ -129,10 +151,10 @@ const ProfileBody = () => {
   const handleCreateCourse = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "https://golearn.onrender.com/api/v1/course",
+      "https://golearn.up.railway.app/api/v1/course",
       {
         method: "post",
-        mode: "cors",
+        mode: "no-cors",
         credencials: "include",
         body: JSON.stringify({
           courseTitle,
@@ -146,6 +168,8 @@ const ProfileBody = () => {
         }),
         headers: {
           "content-Type": "application/json",
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
@@ -321,7 +345,7 @@ const ProfileBody = () => {
           </div>
           <div className="profile" id="profile">
             <div className="data">
-              <h2>Profile</h2>
+              <h2 >Profile</h2>
               <ul>
                 <li>Registered Date</li>
                 <li>{det.createdAt}</li>
@@ -358,7 +382,7 @@ const ProfileBody = () => {
           </div>
           <div className="create-course" id="create">
             <h2>Create Course</h2>
-            <form onSubmit={handleCreateCourse} action="">
+            <form action="" onSubmit={handleCreateCourse}>
               <label>Course Title</label>
               <input
                 type="text"
@@ -375,7 +399,7 @@ const ProfileBody = () => {
 
               <label>Course Duration</label>
               <input
-                type="text"
+                type="number"
                 value={courseDuration}
                 onChange={(e) => cdfunc(e.target.value)}
               />
@@ -496,10 +520,34 @@ const ProfileBody = () => {
               <span id="message"></span>
               <input type="submit" value="Create" className="submit" />
             </form>
+            <h2>Upload Videos</h2>
+            <form action="">
+              <label>Video 1</label>
+              <input type="file" value={courseContent} onChange={(e) => tafunc(e.target.value)} />
+              <label>Video 2</label>
+              <input type="file" value={courseContent} onChange={(e) => tafunc(e.target.value)} />
+              <label>Video 3</label>
+              <input type="file" value={courseContent} onChange={(e) => tafunc(e.target.value)} />
+              <label>Video 4</label>
+              <input type="file" value={courseContent} onChange={(e) => tafunc(e.target.value)} />
+              <label>Video 5</label>
+              <input type="file" value={courseContent} onChange={(e) => tafunc(e.target.value)} />
+
+              <input type="submit" value="Upload" className="submit" />
+            </form>
           </div>
           <div className="cart" id="cart" style={{justifyContent: instructorError? "center": "space-between", alignItems: instructorError? "center": "flex-start" }} >
             {det.role=== "publisher"? courseCreatedCard : carts } 
             <h4 style={{textAlign: "center", marginBlockEnd: 0, height: "fit-content"}}>{instructorError.error}</h4>
+          </div>
+          <div className="pup-up" id="pupUp" style={{display: pup? "none" : "flex"}}>
+            <div className="pup-box">
+              <h4>You're about to delete the following course click CONFIRM to delete and CANCEL to abort.</h4>
+              <div className="button">
+                <button>Confirm</button>
+                <button onClick={pupF}>Cancel</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

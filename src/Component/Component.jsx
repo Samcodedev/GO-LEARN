@@ -21,7 +21,7 @@ import InstructorProfile from "./InstructorProfile/InstructorProfile";
 import PublisherReg from "./PublisherReg/PublisherReg";
 
 function Component() {
-  const API = "https://golearn.onrender.com/api/v1/auth/";
+  const API = "https://golearn.up.railway.app/api/v1/auth/";
 
   
   const [loginStatus, setLoginStatus] = useState(false);

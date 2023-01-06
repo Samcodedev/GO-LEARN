@@ -9,9 +9,14 @@ const Instructors = () => {
     const [instruct, instructFunc] = useState([]);
     const handleinstructor = async () => {
         let result = await fetch(
-          'https://golearn.onrender.com/api/v1/user/publishers',
+          'https://golearn.up.railway.app/api/v1/user/publishers',
           {
             method: "get",
+            credencials: "include",
+            headers: {    
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*' },
           }
         );
         result = await result.json();

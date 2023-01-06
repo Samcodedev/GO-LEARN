@@ -1,13 +1,44 @@
 import React from "react";
 // import { Link } from 'react-router-dom';
 import "./courseCard.css";
-import { FiBookmark } from "react-icons/fi";
+// import { FiBookmark } from "react-icons/fi";
 import { HiOutlineUser } from "react-icons/hi";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const CourseCard = (props) => {
   console.log(props.data);
+
+  
+
+  // let [del, delFunc] = React.useState()
+  // const deleteCourse = async () => {
+  //   const config = {
+  //     headers: {
+  //       "content-Type": "application/json",
+  //       'Accept': 'application/json',
+  //       'Access-Control-Allow-Origin': '*',
+  //       Authorization: "Bearer " + localStorage.getItem("token"),
+  //     },
+  //   };
+  //   let result = await fetch(
+  //     `https://golearn.up.railway.app/api/v1/course/${del}`,
+  //     {
+  //       method: "DELETE",
+  //       config,
+  //     }
+  //   );
+  //   result = await result.json();
+  //   console.warn(result);
+  //   console.log(result);
+  // };
+
+
+  // function setDele(){
+  //    delFunc(
+  //     props.id
+  //    )
+  // }
   return (
     <div className="cardContainer">
       <div className="cardContainer__topArea">
@@ -18,7 +49,12 @@ const CourseCard = (props) => {
           />
         </div>
         <div className="bookmarkBox">
-          <FiBookmark />
+          {/* <FiBookmark /> */}
+          {props.icon}
+          <ul>
+            <li onClick={props.del}>Delete</li>
+            <li>Update</li>
+          </ul>
         </div>
       </div>
       <div className="cardContainer__details">

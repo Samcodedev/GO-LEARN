@@ -68,7 +68,7 @@ const NavBar = ({loginStatus}) => {
           </div>
           <div className="register">
             {/* Conditional rendering using login status  */}
-            {loginStatus ? (
+            {loginStatus === true ? (
               <Link to="/profile">
                 <button className="profileBtn">
                   <HiOutlineUserCircle fontSize="22" color="#fff" />

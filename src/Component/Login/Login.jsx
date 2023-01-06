@@ -15,10 +15,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "https://golearn.onrender.com/api/v1/auth/login",
+      "https://golearn.up.railway.app/api/v1/auth/login",
       {
         method: "post",
-        mode: "cors",
         credencials: "include",
         body: JSON.stringify({ userName, password }),
         headers: {

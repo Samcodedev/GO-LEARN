@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./GoAlumni.css";
 import { HiOutlineChatAlt } from "react-icons/hi";
 
@@ -16,12 +16,12 @@ const GoAlumni = () => {
             financial planning template, budgeting template, savings and lots
             more.
           </p>
-          <Link to="">
+          <a href="https://t.me/+c6CH6rULbwdIZjc8">
             <button>
               {" "}
               <HiOutlineChatAlt fontSize="20px" /> Join Go-Learn Community
             </button>
-          </Link>
+          </a>
         </div>
       </div>
     </div>

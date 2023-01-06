@@ -1,48 +1,56 @@
-import React, {useEffect} from "react";
-import CourseCard from "./CourseCard/CourseCard";
+import React from "react";
+// import CourseCard from "./CourseCard/CourseCard";
 import Footer from "../Landing Page/Footer/Footer";
 import "./instructorProfile.css";
 import { useLocation } from 'react-router-dom';
-import { useState } from "react";
+// import { useState } from "react";
 // import StarRating from "../StarRating/StarRating";
 
 const InstructorProfile = () => {
       const location = useLocation();
       let data = location.state.id
 
-      const [instructCourse, instructCourseFunc] = useState([])
-      const handleinstructorCourse = async () => {
-        let result = await fetch(
-          `https://golearn.onrender.com/api/v1/course/publishers/${data._id}`,
-          {
-            method: "get",
-          }
-        );
-        result = await result.json();
-        console.warn(result);
-        console.log(result);
+      console.log(data._id)
+      // const [instructCourse, instructCourseFunc] = useState()
+      // const handleinstructorCourse = async () => {
+      //   let result = await fetch(
+      //     `https://golearn.up.railway.app/api/v1/course/publisher/${data._id}`,
+      //     {
+      //       method: "get",
+      //       credencials: "include",
+      //       headers: {    
+      //           'Accept': 'application/json',
+      //           'Content-Type': 'application/json',
+      //           'Access-Control-Allow-Origin': '*' },
+      //     }
+      //   );
+      //   result = await result.json();
+      //   console.warn(result);
+      //   console.log(result);
     
-        instructCourseFunc(result.data);
-      };
+      //   instructCourseFunc(result.data);
+      // };
 
-      console.log(instructCourse);
+      // console.log(instructCourse);
 
-      const courses = instructCourse.map((item) =>{
-        return(
-          <CourseCard 
-            courseTitle={item.courseTitle}
-            publisher={item.publisherName}
-            duration={item.courseDuration}
-            data={item}
-          />
-        )
-      })
+      // let courses = instructCourse.map((item) =>{
+      //   return(
+      //     // instructCourse ?
+      //     <CourseCard 
+      //       courseTitle={item.courseTitle}
+      //       publisher={item.publisherName}
+      //       duration={item.courseDuration}
+      //       data={item}
+      //     />
+      //     // : <h2>No course</h2>
+      //   )
+      // })
 
-      useEffect(() => {
-        handleinstructorCourse()
-      }, []);
+      // useEffect(() => {
+      //   handleinstructorCourse()
+      // }, []);
 
-      // localStorage.setItem()
+      // localStorage.setItem(
 
   return (
     <div className="instructorProfile">
@@ -67,7 +75,7 @@ const InstructorProfile = () => {
               {/* ⭐⭐⭐⭐⭐ */}
               {/* <StarRating /> */}
               <span className="rating">
-                {instructCourse.length} Courses 
+                {/* {instructCourse.length > 0 ? instructCourse.length : <h1>No course created.</h1> } Courses  */}
                 <span>(11.00)</span>
               </span>
             </div>
@@ -86,13 +94,13 @@ const InstructorProfile = () => {
               Having worked with the who is who in the financial sector, which
               has in turn made him a professional much sought after. */}
 
-              {data.firstName} {data.lastName} ({data.userName}) is one of Go-learn {data.role} you can reach out to him at {data.email}
+              {/* {data.firstName} {data.lastName} ({data.userName}) is one of Go-learn {data.role} you can reach out to him at {data.email} */}
             </p>
           </div>
           <div className="bodyArea__courses">
             <h2>Courses</h2>
             <div className="coursesList">
-              {courses}
+              {/* { courses } */}
             </div>
           </div>
         </div>

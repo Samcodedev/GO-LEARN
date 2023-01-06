@@ -17,7 +17,7 @@ const RegisterBody = () => {
     
     const handleRegister = async (e) =>{
         e.preventDefault()
-        let result = await fetch('https://golearn.onrender.com/api/v1/auth',{
+        let result = await fetch('`https://golearn.up.railway.app/api/v1/auth',{
             method:'post',
             credencials: 'include',
             body:JSON.stringify({firstName, lastName, userName, email, password}),
