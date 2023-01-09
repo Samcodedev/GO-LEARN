@@ -225,7 +225,7 @@
 }
 .class .sub-class .video .course-details .course-content .review .comments{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     width: 100%;
 }

@@ -8,6 +8,7 @@ import { BiBookAlt } from 'react-icons/bi'
 import { HiUserGroup } from 'react-icons/hi'
 
 const Card = (props) => {
+    let data = props.data
     return(
         <div className="card-wrapper">
             <div className="card">
@@ -17,11 +18,11 @@ const Card = (props) => {
                 <div className="cont">
                     <div className="card-prof">
                         <img src={prof} alt=""/>
-                        <span><Link to="/profile">{props.author}</Link></span>
+                        <span><Link to="/profile">{data.publisherName}</Link></span>
                     </div>
                     <div className="card-content">
-                        <h1><Link to="/profile">{props.title}</Link></h1>
-                         <p>{props.content}</p>
+                        <h1><Link  to="/DecFinance" state={{ id: props.data }}>{data.courseTitle}</Link></h1>
+                         <p>{data.courseDescription}</p>
                     </div>
                      <div className="card-bottom">
                         <ul>

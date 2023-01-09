@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./DecFinanceDetails.css";
 import img from "./img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png";
 import profile from "./img/Group 1.png";
@@ -13,29 +13,29 @@ import { FaStar } from "react-icons/fa";
 import moment from "moment";
 
 const DecFinanceDetails = (props) => {
-  let experience = [];
+  // let experience = [];
   // let name = []
   let members = [];
   // let duration = []
-  let mate_1 = [];
-  let mate_2 = [];
-  let mate_3 = [];
-  let mate_4 = [];
-  let Requirement = [];
+  // let mate_1 = [];
+  // let mate_2 = [];
+  // let mate_3 = [];
+  // let mate_4 = [];
+  // let Requirement = [];
   let tag_1 = [];
   let tag_2 = [];
   let tag_3 = [];
 
   for (let i = 0; i < ClassesData.length; i++) {
-    experience = ClassesData[5].details.experience;
+    // experience = ClassesData[5].details.experience;
     //     name = ClassesData[5].author.name
     members = ClassesData[5].details.members;
     //     duration = ClassesData[5].details.duration
-    mate_1 = ClassesData[5].materials.mate_1;
-    mate_2 = ClassesData[5].materials.mate_2;
-    mate_3 = ClassesData[5].materials.mate_3;
-    mate_4 = ClassesData[5].materials.mate_4;
-    Requirement = ClassesData[5].requirement;
+    // mate_1 = ClassesData[5].materials.mate_1;
+    // mate_2 = ClassesData[5].materials.mate_2;
+    // mate_3 = ClassesData[5].materials.mate_3;
+    // mate_4 = ClassesData[5].materials.mate_4;
+    // Requirement = ClassesData[5].requirement;
     tag_1 = ClassesData[5].tags.tag1;
     tag_2 = ClassesData[5].tags.tag2;
     tag_3 = ClassesData[5].tags.tag3;
@@ -63,10 +63,16 @@ const DecFinanceDetails = (props) => {
   let data = props.data;
   console.log(data);
 
+  const materi = (data.materials).map((item) =>{
+    return(
+      <li>{item}</li>
+    )
+  })
+
   const courseId = data._id;
   const handleCart = async (e) => {
     e.preventDefault();
-    let result = await fetch("https://golearn.onrender.com/api/v1/cart", {
+    let result = await fetch("`https://golearn.up.railway.app/api/v1/cart", {
       method: "post",
       credencials: "include",
       body: JSON.stringify({
@@ -85,7 +91,7 @@ const DecFinanceDetails = (props) => {
   let [revew, refunc] = useState([]);
   const handlereview = async () => {
     let result = await fetch(
-      `https://golearn.onrender.com/api/v1/course/${data._id}/reviews`,
+      `https://golearn.up.railway.app/api/v1/course/${data._id}/reviews`,
       {
         method: "get",
       }
@@ -134,25 +140,27 @@ const DecFinanceDetails = (props) => {
       count2 += 1;
     } else if (Element === 1) {
       count1 += 1;
+    } else if (Element === 0) {
+      count1 += 0;
     }
   });
 
-  let bar5 = (count5 / (count5 + 1)) * 100;
-  let bar4 = (count4 / (count4 + 1)) * 100;
-  let bar3 = (count3 / (count3 + 1)) * 100;
-  let bar2 = (count2 / (count2 + 1)) * 100;
-  let bar1 = (count1 / (count1 + 1)) * 100;
+  let bar5 = `${((count5 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
+  let bar4 = `${((count4 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
+  let bar3 = `${((count3 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
+  let bar2 = `${((count2 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
+  let bar1 = `${((count1 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
   console.log(bar5);
 
-//   useEffect(() => {
-//   }, []);
-  handlereview();
+  useEffect(() => {
+    handlereview()
+  }, []);
 
   const stu = revew.map((item) => {
     return (
       <StudentRev
         key={item._id}
-        name={item._id}
+        name={item.userName}
         time={item.createdAt}
         review={item.review}
         star={item.rating}
@@ -298,7 +306,9 @@ const DecFinanceDetails = (props) => {
                 </div>
               </div>
             </div>
-            {stu}
+            <div className="wrap">
+              {stu}
+            </div>
           </div>
         </div>
         <div className="sub-detail">
@@ -334,7 +344,7 @@ const DecFinanceDetails = (props) => {
                 <img src={profile} alt="" />
                 <div className="content">
                   <Link to="/construction">{data.publisherName}</Link>
-                  <span>{experience}</span>
+                  <span>{data.category} instructor</span>
                 </div>
               </div>
             </div>
@@ -342,16 +352,17 @@ const DecFinanceDetails = (props) => {
               <div className="first">
                 <h3>Material Includes</h3>
                 <ul>
-                  <li>{mate_1}</li>
+                  {materi}
+                  {/* <li>{mate_1}</li>
                   <li>{mate_2}</li>
                   <li>{mate_3}</li>
-                  <li>{mate_4}</li>
+                  <li>{mate_4}</li> */}
                 </ul>
               </div>
               <div className="first">
                 <h3>Requirements</h3>
                 <ul>
-                  <li>{Requirement}</li>
+                  <li>{data.requirement}</li>
                 </ul>
               </div>
               <div className="first">

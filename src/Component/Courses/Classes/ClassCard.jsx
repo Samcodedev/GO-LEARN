@@ -3,7 +3,7 @@ import "./Classes.css";
 import img from "./img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png";
 import profile from "./img/Group 1.png";
 import { Link } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
+// import { FaStar } from "react-icons/fa";
 
 const ClassCard = (props) => {
   let sss = props.data;
@@ -14,9 +14,9 @@ const ClassCard = (props) => {
         <img src={img} alt="" />
       </div>
       <div className="content-div">
-        <span>
+        {/* <span>
           <FaStar fill="#fcb303" />
-        </span>
+        </span> */}
         <a href={props.link}>
           <h3>{props.title}</h3>
         </a>
@@ -28,8 +28,6 @@ const ClassCard = (props) => {
           <p>
             By <Link to="/construction">{props.author}</Link> in{" "}
             <Link to="/construction">{props.category}</Link>{" "}
-            <Link to="/construction">{props.category}</Link>{" "}
-            <Link to="/construction">{props.category}</Link>
           </p>
           <Link to="/construction">
             <img src={profile} alt="/construction" />

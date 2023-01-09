@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const RegisterBody = ({setLoginStatus}) => {
+const RegisterBody = () => {
 
     const [firstName, ffunc] = React.useState('')
     const [lastName, lfunc] = React.useState('')
@@ -14,14 +14,10 @@ const RegisterBody = ({setLoginStatus}) => {
     const [confirm, cfunc] = React.useState('')
     
     const navigate = useNavigate();
-
-    // let valid1 = document.getElementById("valid1")
-    // let valid2 = document.getElementById("valid2")
-    // let error = document.getElementById("error")
-
-    const handleLogin = async (e) =>{
+    
+    const handleRegister = async (e) =>{
         e.preventDefault()
-        let result = await fetch('https://golearn.onrender.com/api/v1/auth',{
+        let result = await fetch('`https://golearn.up.railway.app/api/v1/auth',{
             method:'post',
             credencials: 'include',
             body:JSON.stringify({firstName, lastName, userName, email, password}),
@@ -45,9 +41,7 @@ const RegisterBody = ({setLoginStatus}) => {
                 navigate('/profile')
             }, 3000);
             localStorage.setItem("token", token )
-            document.getElementById("message").innerHTML="You have successfully Registered";
-            // Set login status to true 
-            setLoginStatus(true);
+            document.getElementById("message").innerHTML="You have successfully Registered"
         }
     }
 
@@ -69,7 +63,7 @@ const RegisterBody = ({setLoginStatus}) => {
     return(
         <div className='registerbody'>
             <div className="sub-registerbody">
-                <form onSubmit={handleLogin} action="/profile">
+                <form onSubmit={handleRegister} action="/profile">
                     <label htmlFor="">First Name</label>
                     <input type="text" placeholder='First Name' onChange={(e) => ffunc(e.target.value)} required />
 
