@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import "./DecFinanceDetails.css";
 import img from "./img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png";
 import profile from "./img/Group 1.png";
@@ -97,12 +97,13 @@ const DecFinanceDetails = (props) => {
       }
     );
     result = await result.json();
-    console.warn(result);
-    console.log(result);
+    // console.warn(result);
+    // console.log(result);
 
     refunc(result.data);
   };
-  console.log(revew);
+  handlereview();
+  // console.log(revew);
   let stars = [];
 
   revew.map((item) => {
@@ -152,9 +153,9 @@ const DecFinanceDetails = (props) => {
   let bar1 = `${((count1 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
   console.log(bar5);
 
-  useEffect(() => {
-    handlereview()
-  }, []);
+  // useEffect(() => {
+  //   handlereview()
+  // }, []);
 
   const stu = revew.map((item) => {
     return (

@@ -45,7 +45,7 @@ function LandingPage() {
 
   useEffect(() => {
     !courses && fetchCourses();
-  }, [])
+  }, [courses])
 
 
   return (
