@@ -20,13 +20,18 @@ import Error from "./ErrorPage/Error";
 import InstructorProfile from "./InstructorProfile/InstructorProfile";
 
 function Component() {
+
   const API = "https://golearn.up.railway.app/api/v1/auth/";
 
   const [loginStatus, setLoginStatus] = useState(false);
   const [savedCourses, setSavedCourses] = useState([]);
 
   // fetch all courses and stored in LOCAL STORAGE
-  const fetchCourses = async () => {
+  async function fetchCourses()  {
+    console.log('Fetch courses now!');
+    // console.log('Fetch courses now!');
+    // return;
+
     let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
       method: "get",
       credencials: "include",
@@ -36,21 +41,22 @@ function Component() {
 
     console.log("RESULT: ", data);
     setSavedCourses(data);
+    localStorage.setItem("courses", JSON.stringify(data));
 
   };
 
-
+  // fetchCourses();
 
 
   let savedCoursesArray = savedCourses;
   console.log("Saved courses: ", savedCoursesArray);
 
   if (savedCoursesArray && savedCoursesArray !== []) {
-    localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
+    // localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
     const courses = JSON.parse(localStorage.getItem("courses"));
     console.log("RETRIEVED COURSES: ", courses);
-  }
-  console.log("testing", savedCourses)
+  };
+  console.log("testing", savedCourses);
 
 
 
