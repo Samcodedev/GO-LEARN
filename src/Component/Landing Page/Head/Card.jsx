@@ -6,8 +6,10 @@ import forex from "./img/Forex.png";
 import prof from "./img/Group 1.png";
 
 const Card = (props) => {
-    console.log(props.data)
-    let data = props.data
+    console.log('Card props: ', props);
+    // console.log(props.data)
+    let course = props.data;
+    console.log('Course: ', props.data);
   return (
     <div className="card">
         <div className="card-img">
@@ -17,14 +19,14 @@ const Card = (props) => {
             <div className="card-prof">
             <img src={prof} alt="" />
             <span>
-                <Link to="/instructor">{data.publisherName}</Link>
+                <Link to="/instructor">{course.publisherName}</Link>
             </span>
             </div>
             <div className="card-content">
             <h1>
-                <Link to="/DecFinance" state={{ id: data }}>{data.courseTitle}</Link>
+                <Link to="/DecFinance" state={{ id: course }}>{course.courseTitle}</Link>
             </h1>
-            <p>{data.courseDescription}</p>
+            <p>{course.courseDescription}</p>
             </div>
             <div className="card-bottom">
             <ul>

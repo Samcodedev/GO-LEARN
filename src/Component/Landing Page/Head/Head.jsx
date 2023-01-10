@@ -5,7 +5,7 @@ import Course from "../.././Courses";
 import { BsPerson } from "react-icons/bs";
 import Card from "./Card";
 
-const Head = ({landingCourses}) => {
+const Head = ({ landingCourses }) => {
   const data = [
     {
       title: "Cryptocurrency Trading Course",
@@ -17,7 +17,14 @@ const Head = ({landingCourses}) => {
     return <Course title={item.title} star={item.star} />;
   });
 
-  console.log(landingCourses)
+  console.log("landingCourses: ", landingCourses);
+
+  const course = JSON.parse(localStorage.getItem("courses"));
+  let data1 = course[0];
+  let data2 = course[1];
+
+  console.log("Data 1: ", data1);
+  console.log("Data 2: ", data2);
 
   return (
     <div className="head">
@@ -37,16 +44,8 @@ const Head = ({landingCourses}) => {
         </Link>
       </div>
       <div className="head-card">
-        <div className="card-wrapper">
-          <Card 
-            data={landingCourses[0]}
-          />
-        </div>
-        <div className="card-wrapper">
-          <Card 
-            data={landingCourses[1]}
-          />
-        </div>
+        <div className="card-wrapper">{data1 && <Card data={data1} />}</div>
+        <div className="card-wrapper">{data2 && <Card data={data2} />}</div>
       </div>
       {/* </div> */}
     </div>
