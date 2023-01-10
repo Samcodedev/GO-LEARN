@@ -11,6 +11,18 @@
 .title .sub-title .detail{
     width: 50%;
 }
+.title .sub-title .detail h3{
+    margin-block-end: 10px;
+}
+.title .sub-title .detail p{
+    display: flex;
+    align-items: center;
+    margin-block-start: 0px;
+}
+.title .sub-title .detail p span{
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
 .title .sub-title .shear-save{
     width: 50%;
     display: flex;

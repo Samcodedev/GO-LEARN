@@ -20,36 +20,39 @@ import Error from "./ErrorPage/Error";
 import InstructorProfile from "./InstructorProfile/InstructorProfile";
 
 function Component() {
-  const API = "https://golearn.onrender.com/api/v1/auth/";
+  const API = "https://golearn.up.railway.app/api/v1/auth/";
 
   const [loginStatus, setLoginStatus] = useState(false);
-  let [savedCourses, setSavedCourses] = React.useState([]);
+  const [savedCourses, setSavedCourses] = useState([]);
 
+  // fetch all courses and stored in LOCAL STORAGE
   const fetchCourses = async () => {
-    let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
       method: "get",
       credencials: "include",
     });
     result = await result.json();
-
-    const data = result.data;
+    let data = result.data
 
     console.log("RESULT: ", data);
-
     setSavedCourses(data);
 
-    const savedCoursesArray = savedCourses;
-
-    console.log("Saved courses: ", savedCoursesArray);
-
-    if (savedCoursesArray && savedCoursesArray !== []) {
-      localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
-
-      const courses = JSON.parse(localStorage.getItem("courses"));
-
-      console.log("RETRIEVED COURSES: ", courses);
-    }
   };
+
+
+
+
+  let savedCoursesArray = savedCourses;
+  console.log("Saved courses: ", savedCoursesArray);
+
+  if (savedCoursesArray && savedCoursesArray !== []) {
+    localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
+    const courses = JSON.parse(localStorage.getItem("courses"));
+    console.log("RETRIEVED COURSES: ", courses);
+  }
+  console.log("testing", savedCourses)
+
+
 
   useEffect(() => {
     if (window.localStorage.getItem("token")) {
@@ -69,7 +72,7 @@ function Component() {
         <Routes>
           <Route element={<Layout loginStatus={loginStatus} />}>
             {/* <Route path="NavBar" element={<NavBar />} /> */}
-            <Route index path="/" element={<LandingPage />} />
+            <Route index path="/" element={<LandingPage landingCourses={savedCourses} />} />
             <Route path="About" element={<About />} />
             <Route path="Blog" element={<Blog />} />
             <Route

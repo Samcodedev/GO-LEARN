@@ -22,7 +22,7 @@ const ProfileCard = ({ courseTit, publisherName, data }) => {
       },
     };
     let result = await fetch(
-      `https://golearn.onrender.com/api/v1/course/${data.courseId}`,
+      `https://golearn.up.railway.app/api/v1/course/${data.courseId}`,
       config,
       {
         method: "get",

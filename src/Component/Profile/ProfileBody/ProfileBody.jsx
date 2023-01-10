@@ -5,16 +5,19 @@ import img from "./img/Group 1.png";
 import { useEffect } from "react";
 import { GiBookmarklet, GiNotebook } from "react-icons/gi";
 import { RiBookmark3Fill } from "react-icons/ri";
+import { SlOptionsVertical } from 'react-icons/sl'
 import { useState } from "react";
 import ProfileCard from "./ProfileCard";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
+import CourseCard from "../../InstructorProfile/CourseCard/CourseCard";
 
 const ProfileBody = ({ setLoginStatus }) => {
   
   let [savedCourses, setSavedCourses] = React.useState([]);
 
   const fetchCourses = async () => {
-    let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
       method: "get",
       mode: 'cors',
       credencials: "include",
@@ -23,22 +26,16 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     const data = result.data;
 
-    // console.log("RESULT: ", data);
-
     setSavedCourses(data);
 
-    const savedCoursesArray = savedCourses;
-
-    // console.log("Saved courses: ", savedCoursesArray);
-
-    if (savedCoursesArray && savedCoursesArray !== []) {
-      localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
-
-      // const courses = JSON.parse(localStorage.getItem("courses"));
-
-      // console.log("RETRIEVED COURSES: ", courses);
-    }
+    // console.log("RESULT: ", data);
   };
+
+  const savedCoursesArray = savedCourses;
+  if (savedCoursesArray && savedCoursesArray !== []) {
+    localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
+  }
+
   useEffect(() => {
     fetchCourses();
   }, [])
@@ -55,7 +52,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       },
     };
     let result = await fetch(
-      "https://golearn.onrender.com/api/v1/auth",
+      "https://golearn.up.railway.app/api/v1/auth",
       config,
       {
         method: "get",
@@ -77,7 +74,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       },
     };
     let result = await fetch(
-      "https://golearn.onrender.com/api/v1/cart",
+      "https://golearn.up.railway.app/api/v1/cart",
       config,
       {
         method: "get",
@@ -90,16 +87,63 @@ const ProfileBody = ({ setLoginStatus }) => {
     cartfunc(result.data.course);
   };
 
-  const carts = cart.map((item) => {
-    return (
-      <ProfileCard title={item.courseTitle} dta={item.courseId} data={item} />
-    );
-  });
+    
+  const carts = cart.map((item)=>{
+    return(
+      <ProfileCard 
+        title={item.courseTitle}
+        dta={item.courseId}
+        data={item}
+      />
+    )
+  })
 
+  
+  let [pup, pupfunc] = React.useState(true);
+
+  function pupF(){
+    pupfunc(!pup)
+  }
+
+  const [instructCourse, instructCourseFunc] = useState([])
+  const [instructorError, instructorErrorFunc] = useState([])
+  const handleinstructorCourse = async () => {
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/publisher/${det._id}`,
+      {
+        method: "get",
+        headers: {    
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' },
+      }
+    );
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+
+    result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result) 
+  };
+
+  const courseCreatedCard = instructCourse.map((item) =>{
+    return(
+      <CourseCard 
+        id={item._id}
+        courseTitle={item.courseTitle}
+        publisher={item.publisherName}
+        duration={item.courseDuration}
+        icon={<SlOptionsVertical />}
+        data={item}
+        del={pupF}
+      />
+    )
+  })
+ 
   useEffect(() => {
-    handleLogin();
-    handlecart();
-  }, []);
+    handleLogin()
+  }, [])
+    det.role=== "publisher"? handleinstructorCourse() : console.log("Hello loading");
+    det.role=== "user"? handlecart() : console.log("publisher");
 
   console.log(det);
 
@@ -107,11 +151,12 @@ const ProfileBody = ({ setLoginStatus }) => {
   let [courseDescription, codfunc] = React.useState("");
   let [courseDuration, cdfunc] = React.useState("");
   let [category, cafunc] = React.useState("");
-  let [courseContent, cofunc] = React.useState([]);
   let [whatToLearn, whfunc] = React.useState([]);
   let [requirement, refunc] = React.useState([]);
   let [audience, aufunc] = React.useState([]);
   let [materials, mafunc] = React.useState([]);
+
+  let [courseContent, cofunc] = React.useState([]);
   let [tags, tafunc] = React.useState([]);
 
   // // alert(audience)
@@ -158,19 +203,19 @@ const ProfileBody = ({ setLoginStatus }) => {
       courseDescription,
       courseDuration,
       category,
+      whatToLearn,
+      requirement,
+      audience,
+      materials,
+
       courseContent,
       courseContentValues,
-      whatToLearn,
       whatToLearnValues,
-      requirement,
       requirementValues,
-      audience,
       audienceValues,
-      materials,
     });
-    return;
 
-    let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
       method: "post",
       credencials: "include",
       body: JSON.stringify({
@@ -232,7 +277,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("profile").style.display = "none";
     document.getElementById("create").style.display = "none";
-    document.getElementById("cart").style.display = "block";
+    document.getElementById("cart").style.display = "flex";
   }
 
   // State that handles course content input
@@ -415,23 +460,18 @@ const ProfileBody = ({ setLoginStatus }) => {
               <li onClick={profile} id="second">
                 <span className="span">My Profile</span>
               </li>
-              <li>
-                <span className="span" onClick={course}>
-                  Enrolled Courses
-                </span>
+              <li onClick={course}>
+                <span className="span" >{det.role=== "publisher"? "Course Created" : "Enrolled Courses"  } </span>
               </li>
-              <li>
-                <span className="span">Reviews</span>
-              </li>
-              <li
-                onClick={create}
-                style={{ display: det.role === "publisher" ? "block" : "none" }}
-              >
+              {/* <li>
+                <span className="span"> {det.role=== "publisher"? "Create Blog" : "Reviews" } </span>
+              </li> */}
+              <li onClick={create} style={{display: det.role=== "publisher"? "block" : "none"  }}>
                 <span className="span">Create Course</span>
               </li>
-              <li>
+              {/* <li>
                 <span className="span">Settings</span>
-              </li>
+              </li> */}
               <li onClick={logout}>
                 <span className="span">Logout</span>
               </li>
@@ -451,8 +491,8 @@ const ProfileBody = ({ setLoginStatus }) => {
                   <GiBookmarklet fontSize="55px" color="#027dff" />
                 </div>
                 <div className="text-div">
-                  <h1>{cart.length}</h1>
-                  <p>Enrolled Courses</p>
+                  <h1>{det.role=== "publisher"? instructCourse.length : cart.length }</h1>
+                <p> {det.role=== "publisher"? "Course Created " : "Enrolled Courses" } </p>
                 </div>
               </div>
               <div className="box">
@@ -461,7 +501,7 @@ const ProfileBody = ({ setLoginStatus }) => {
                 </div>
                 <div className="text-div">
                   <h1>{cart.length}</h1>
-                  <p>Active Courses</p>
+                  <p> {det.role=== "publisher"? "Created Blogs" : "Active Courses" }</p>
                 </div>
               </div>
               <div className="box">
@@ -482,7 +522,7 @@ const ProfileBody = ({ setLoginStatus }) => {
               <h2>Profile</h2>
               <ul>
                 <li>Registered Date</li>
-                <li>{det.createdAt}</li>
+                <li>{moment(det.createdAt).format("DD MMM YYYY, h:mm A")}</li>
               </ul>
               <ul>
                 <li>First Name</li>
@@ -500,14 +540,14 @@ const ProfileBody = ({ setLoginStatus }) => {
                 <li>Email</li>
                 <li>{det.email}</li>
               </ul>
-              <ul>
+              {/* <ul>
                 <li>Phone Number</li>
                 <li>+234 9067925333</li>
               </ul>
               <ul>
                 <li>id</li>
                 <li>{det._id}</li>
-              </ul>
+              </ul> */}
               <ul>
                 <li>Role</li>
                 <li>{det.role}</li>
@@ -703,20 +743,51 @@ const ProfileBody = ({ setLoginStatus }) => {
 
               <label>Tags</label>
               <div className="array-input">
-                <input
-                  type="text"
-                  value={tags}
-                  onChange={(e) => tafunc(e.target.value)}
-                />
-                <span>Add</span>
+                <div className="array-input-course-content">
+                  {tagsInput.map((eachContent, index) => (
+                    <div key={index}>
+                      {eachContent.visibility && (
+                        <input
+                          type="text"
+                          value={tags[index]}
+                          onChange={(e) =>
+                            tafunc({
+                              ...tags,
+                              [index]: e.target.value,
+                            })
+                          }
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {tagsInput[0].visibility && (
+                  <span onClick={() =>
+                      addInputField(
+                        tagsInput,
+                        setTagsInput
+                      )}>
+                    Add
+                  </span>
+                )}
               </div>
 
               <span id="message"></span>
               <input type="submit" value="Create" className="submit" />
             </form>
           </div>
-          <div className="cart" id="cart">
-            {carts}
+          <div className="cart" id="cart" style={{justifyContent: instructorError? "center": "space-between", alignItems: instructorError? "center": "flex-start" }} >
+            {det.role=== "publisher"? courseCreatedCard : carts } 
+            <h4 style={{textAlign: "center", marginBlockEnd: 0, height: "fit-content"}}>{instructorError.error}</h4>
+          </div>
+          <div className="pup-up" id="pupUp" style={{display: pup? "none" : "flex"}}>
+            <div className="pup-box">
+              <h4>You're about to delete the following course click CONFIRM to delete and CANCEL to abort.</h4>
+              <div className="button">
+                <button>Confirm</button>
+                <button onClick={pupF}>Cancel</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

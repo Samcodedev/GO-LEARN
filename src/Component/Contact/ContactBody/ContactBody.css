@@ -49,9 +49,10 @@
 .contactbody .sub-contactbody .content-area ul li .icon:hover{
     background-color: #027dff;
 }
-.contactbody .sub-contactbody .content-area ul li .icon img{
+.contactbody .sub-contactbody .content-area ul li .icon svg{
     position: relative;
-    width: 60%;
+    font-size: 50px;
+    /* color: #ffffff; */
 }
 .contactbody .sub-contactbody .content-area ul li .text{
     display: flex;

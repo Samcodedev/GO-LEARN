@@ -12,12 +12,12 @@ import Subscribe from './Subscribe/Subscribe'
 import Footer from './Footer/Footer'
 
 
-function LandingPage(){
+function LandingPage({landingCourses}){
     return(
         <div>
-            <Head />
+            <Head landingCourses={landingCourses} />
             <Details />
-            <PupCourse />
+            <PupCourse landingCourses={landingCourses} />
             <Olubori />
             <Education />
             <OnlineBlog />

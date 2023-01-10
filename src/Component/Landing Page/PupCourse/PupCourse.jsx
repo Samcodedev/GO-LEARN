@@ -1,23 +1,10 @@
 import React from "react";
 import "./PupCourse.css";
-import PupCryto from "../Data/PupCrypto";
 import Card from "./Card.jsx";
 // import ClassesData from '../../Courses/Data/ClassesData'
 import { Link } from "react-router-dom";
 
-const PupCourse = () => {
-  const cards = PupCryto.map((items) => {
-    return (
-      <Card
-        title={items.title}
-        content={items.content}
-        author={items.author}
-        lesson={items.details.lesson}
-        students={items.details.students}
-        link={items.link}
-      />
-    );
-  });
+const PupCourse = ({landingCourses}) => {
 
   return (
     <div className="pupcourse">
@@ -31,7 +18,17 @@ const PupCourse = () => {
             it.
           </p>
         </div>
-        <div className="wrapper">{cards}</div>
+        <div className="wrapper">
+          <Card
+            data={landingCourses[2]}
+          />
+          <Card
+            data={landingCourses[3]}
+          />
+          <Card
+            data={landingCourses[4]}
+          />
+        </div>
         <div className="pupcourse-bottom-text">
           <p>
             Enjoy top notch learning methods and achieve next level skills. You
