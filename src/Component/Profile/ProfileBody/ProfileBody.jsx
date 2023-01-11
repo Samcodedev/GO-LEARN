@@ -5,7 +5,7 @@ import img from "./img/Group 1.png";
 import { useEffect } from "react";
 import { GiBookmarklet, GiNotebook } from "react-icons/gi";
 import { RiBookmark3Fill } from "react-icons/ri";
-import { SlOptionsVertical } from 'react-icons/sl'
+import { SlOptionsVertical } from "react-icons/sl";
 import { useState } from "react";
 import ProfileCard from "./ProfileCard";
 import { useNavigate } from "react-router-dom";
@@ -13,13 +13,12 @@ import moment from "moment";
 import CourseCard from "../../InstructorProfile/CourseCard/CourseCard";
 
 const ProfileBody = ({ setLoginStatus }) => {
-  
   let [savedCourses, setSavedCourses] = React.useState([]);
 
   const fetchCourses = async () => {
     let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
       method: "get",
-      mode: 'cors',
+      mode: "cors",
       credencials: "include",
     });
     result = await result.json();
@@ -27,6 +26,8 @@ const ProfileBody = ({ setLoginStatus }) => {
     const data = result.data;
 
     setSavedCourses(data);
+
+    localStorage.setItem("courses", JSON.stringify(data));
 
     // console.log("RESULT: ", data);
   };
@@ -38,10 +39,9 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   useEffect(() => {
     fetchCourses();
-  }, [])
+  }, []);
 
   // fetching user data and also sending a unique token to the header
-
 
   const [det, effunc] = React.useState("");
   const handleLogin = async () => {
@@ -60,7 +60,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       }
     );
     result = await result.json();
-    console.warn(result);
+    // console.warn(result);
     console.log(result);
     effunc(result.data);
   };
@@ -87,47 +87,42 @@ const ProfileBody = ({ setLoginStatus }) => {
     cartfunc(result.data.course);
   };
 
-    
-  const carts = cart.map((item)=>{
-    return(
-      <ProfileCard 
-        title={item.courseTitle}
-        dta={item.courseId}
-        data={item}
-      />
-    )
-  })
+  const carts = cart.map((item, index) => {
+    return (
+      <ProfileCard title={item.courseTitle} dta={item.courseId} data={item} key={index} />
+    );
+  });
 
-  
   let [pup, pupfunc] = React.useState(true);
 
-  function pupF(){
-    pupfunc(!pup)
+  function pupF() {
+    pupfunc(!pup);
   }
 
-  const [instructCourse, instructCourseFunc] = useState([])
-  const [instructorError, instructorErrorFunc] = useState([])
+  const [instructCourse, instructCourseFunc] = useState([]);
+  const [instructorError, instructorErrorFunc] = useState([]);
   const handleinstructorCourse = async () => {
     let result = await fetch(
       `https://golearn.up.railway.app/api/v1/course/publisher/${det._id}`,
       {
         method: "get",
-        headers: {    
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*' },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
       }
     );
     result = await result.json();
-    console.warn(result);
-    console.log(result);
+    // console.warn(result);
+    // console.log(result);
 
-    result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result) 
+    result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result);
   };
 
-  const courseCreatedCard = instructCourse.map((item) =>{
-    return(
-      <CourseCard 
+  const courseCreatedCard = instructCourse.map((item, index) => {
+    return (
+      <CourseCard
         id={item._id}
         courseTitle={item.courseTitle}
         publisher={item.publisherName}
@@ -135,17 +130,21 @@ const ProfileBody = ({ setLoginStatus }) => {
         icon={<SlOptionsVertical />}
         data={item}
         del={pupF}
+        key={index}
       />
-    )
-  })
- 
-  useEffect(() => {
-    handleLogin()
-  }, [])
-    det.role=== "publisher"? handleinstructorCourse() : console.log("Hello loading");
-    det.role=== "user"? handlecart() : console.log("publisher");
+    );
+  });
 
-  console.log(det);
+  useEffect(() => {
+    handleLogin();
+  }, []);
+
+  det.role === "publisher" && handleinstructorCourse();
+    // : console.log("Hello loading");
+  det.role === "user" && handlecart()
+  //  : console.log("publisher");
+
+  // console.log(det);
 
   let [courseTitle, ctfunc] = React.useState("");
   let [courseDescription, codfunc] = React.useState("");
@@ -243,7 +242,9 @@ const ProfileBody = ({ setLoginStatus }) => {
       ).innerHTML = `You have successfully created ${courseTitle} course.`;
       document.getElementById("message").style.color = "green";
     } else if (result.success === false) {
-      document.getElementById("message").innerHTML = `An error occured, please fill in all fields, and try again.`;
+      document.getElementById(
+        "message"
+      ).innerHTML = `An error occured, please fill in all fields, and try again.`;
       document.getElementById("message").style.color = "red";
     }
   };
@@ -396,15 +397,14 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   // Function to add input field
   function addInputField(contentName, contentNameFunction, temporaryName) {
-    // Create loop 
+    // Create loop
     for (let i = 0; i < contentName.length; i++) {
-      // If current iteration visibility status is false 
+      // If current iteration visibility status is false
       if (!contentName[i].visibility) {
-
-        // Create state instance 
+        // Create state instance
         const temporaryName = [...contentName];
 
-        // Set current indec value to true 
+        // Set current indec value to true
         temporaryName[i].visibility = true;
 
         // Set state
@@ -416,7 +416,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   }
 
   const navigate = useNavigate();
-  
+
   /**
    * Function to logout of application
    */
@@ -424,11 +424,13 @@ const ProfileBody = ({ setLoginStatus }) => {
     // Clear localStorage
     localStorage.clear();
 
-    // Navigate to homepage
-    navigate("/");
-
     // Set login status to true
     setLoginStatus(false);
+
+    // Navigate to homepage
+    navigate("/login");
+
+    // window.location.reload(true);
   }
 
   return (
@@ -461,12 +463,19 @@ const ProfileBody = ({ setLoginStatus }) => {
                 <span className="span">My Profile</span>
               </li>
               <li onClick={course}>
-                <span className="span" >{det.role=== "publisher"? "Course Created" : "Enrolled Courses"  } </span>
+                <span className="span">
+                  {det.role === "publisher"
+                    ? "Course Created"
+                    : "Enrolled Courses"}{" "}
+                </span>
               </li>
               {/* <li>
                 <span className="span"> {det.role=== "publisher"? "Create Blog" : "Reviews" } </span>
               </li> */}
-              <li onClick={create} style={{display: det.role=== "publisher"? "block" : "none"  }}>
+              <li
+                onClick={create}
+                style={{ display: det.role === "publisher" ? "block" : "none" }}
+              >
                 <span className="span">Create Course</span>
               </li>
               {/* <li>
@@ -491,8 +500,17 @@ const ProfileBody = ({ setLoginStatus }) => {
                   <GiBookmarklet fontSize="55px" color="#027dff" />
                 </div>
                 <div className="text-div">
-                  <h1>{det.role=== "publisher"? instructCourse.length : cart.length }</h1>
-                <p> {det.role=== "publisher"? "Course Created " : "Enrolled Courses" } </p>
+                  <h1>
+                    {det.role === "publisher"
+                      ? instructCourse.length
+                      : cart.length}
+                  </h1>
+                  <p>
+                    {" "}
+                    {det.role === "publisher"
+                      ? "Course Created "
+                      : "Enrolled Courses"}{" "}
+                  </p>
                 </div>
               </div>
               <div className="box">
@@ -501,7 +519,12 @@ const ProfileBody = ({ setLoginStatus }) => {
                 </div>
                 <div className="text-div">
                   <h1>{cart.length}</h1>
-                  <p> {det.role=== "publisher"? "Created Blogs" : "Active Courses" }</p>
+                  <p>
+                    {" "}
+                    {det.role === "publisher"
+                      ? "Created Blogs"
+                      : "Active Courses"}
+                  </p>
                 </div>
               </div>
               <div className="box">
@@ -607,11 +630,11 @@ const ProfileBody = ({ setLoginStatus }) => {
                   ))}
                 </div>
                 {courseContentInput[0].visibility && (
-                  <span onClick={() =>
-                      addInputField(
-                        courseContentInput,
-                        setCourseContentInput
-                      )}>
+                  <span
+                    onClick={() =>
+                      addInputField(courseContentInput, setCourseContentInput)
+                    }
+                  >
                     Add
                   </span>
                 )}
@@ -638,11 +661,11 @@ const ProfileBody = ({ setLoginStatus }) => {
                   ))}
                 </div>
                 {whatToLearnInput[0].visibility && (
-                  <span onClick={() =>
-                      addInputField(
-                        whatToLearnInput,
-                        setWhatToLearnInput
-                      )}>
+                  <span
+                    onClick={() =>
+                      addInputField(whatToLearnInput, setWhatToLearnInput)
+                    }
+                  >
                     Add
                   </span>
                 )}
@@ -669,11 +692,11 @@ const ProfileBody = ({ setLoginStatus }) => {
                   ))}
                 </div>
                 {requirementInput[0].visibility && (
-                  <span onClick={() =>
-                      addInputField(
-                        requirementInput,
-                        setRequirementInput
-                      )}>
+                  <span
+                    onClick={() =>
+                      addInputField(requirementInput, setRequirementInput)
+                    }
+                  >
                     Add
                   </span>
                 )}
@@ -700,11 +723,11 @@ const ProfileBody = ({ setLoginStatus }) => {
                   ))}
                 </div>
                 {audienceInput[0].visibility && (
-                  <span onClick={() =>
-                      addInputField(
-                        audienceInput,
-                        setAudienceInput
-                      )}>
+                  <span
+                    onClick={() =>
+                      addInputField(audienceInput, setAudienceInput)
+                    }
+                  >
                     Add
                   </span>
                 )}
@@ -731,11 +754,11 @@ const ProfileBody = ({ setLoginStatus }) => {
                   ))}
                 </div>
                 {materialsInput[0].visibility && (
-                  <span onClick={() =>
-                      addInputField(
-                        materialsInput,
-                        setMaterialsInput
-                      )}>
+                  <span
+                    onClick={() =>
+                      addInputField(materialsInput, setMaterialsInput)
+                    }
+                  >
                     Add
                   </span>
                 )}
@@ -762,11 +785,7 @@ const ProfileBody = ({ setLoginStatus }) => {
                   ))}
                 </div>
                 {tagsInput[0].visibility && (
-                  <span onClick={() =>
-                      addInputField(
-                        tagsInput,
-                        setTagsInput
-                      )}>
+                  <span onClick={() => addInputField(tagsInput, setTagsInput)}>
                     Add
                   </span>
                 )}
@@ -776,13 +795,35 @@ const ProfileBody = ({ setLoginStatus }) => {
               <input type="submit" value="Create" className="submit" />
             </form>
           </div>
-          <div className="cart" id="cart" style={{justifyContent: instructorError? "center": "space-between", alignItems: instructorError? "center": "flex-start" }} >
-            {det.role=== "publisher"? courseCreatedCard : carts } 
-            <h4 style={{textAlign: "center", marginBlockEnd: 0, height: "fit-content"}}>{instructorError.error}</h4>
+          <div
+            className="cart"
+            id="cart"
+            style={{
+              justifyContent: instructorError ? "center" : "space-between",
+              alignItems: instructorError ? "center" : "flex-start",
+            }}
+          >
+            {det.role === "publisher" ? courseCreatedCard : carts}
+            <h4
+              style={{
+                textAlign: "center",
+                marginBlockEnd: 0,
+                height: "fit-content",
+              }}
+            >
+              {instructorError.error}
+            </h4>
           </div>
-          <div className="pup-up" id="pupUp" style={{display: pup? "none" : "flex"}}>
+          <div
+            className="pup-up"
+            id="pupUp"
+            style={{ display: pup ? "none" : "flex" }}
+          >
             <div className="pup-box">
-              <h4>You're about to delete the following course click CONFIRM to delete and CANCEL to abort.</h4>
+              <h4>
+                You're about to delete the following course click CONFIRM to
+                delete and CANCEL to abort.
+              </h4>
               <div className="button">
                 <button>Confirm</button>
                 <button onClick={pupF}>Cancel</button>

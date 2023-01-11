@@ -7,7 +7,7 @@ import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const CourseCard = (props) => {
-  console.log(props.data);
+  // console.log(props.data);
 
   
 
