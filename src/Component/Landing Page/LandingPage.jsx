@@ -37,8 +37,9 @@ function LandingPage() {
   
   const courses = window.localStorage.getItem("courses");
 
-  landingCourses = courses;
+  landingCourses = JSON.parse(courses);
   
+  console.log('Courses: ', courses);
   console.log('landingCourses: ', landingCourses);
 
   fetchCourses();
@@ -52,7 +53,7 @@ function LandingPage() {
     <div>
       <Head landingCourses={courses} />
       <Details />
-      <PupCourse landingCourses={courses} />
+      <PupCourse landingCourses={landingCourses} />
       <Olubori />
       <Education />
       <OnlineBlog />
