@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 const PupCourse = ({landingCourses}) => {
 
+  console.log('landingCourses: ', landingCourses);
+
   return (
     <div className="pupcourse">
       <div className="sub-pupcourse">
