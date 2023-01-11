@@ -87,9 +87,9 @@ const ProfileBody = ({ setLoginStatus }) => {
     cartfunc(result.data.course);
   };
 
-  const carts = cart.map((item) => {
+  const carts = cart.map((item, index) => {
     return (
-      <ProfileCard title={item.courseTitle} dta={item.courseId} data={item} />
+      <ProfileCard title={item.courseTitle} dta={item.courseId} data={item} key={index} />
     );
   });
 
@@ -120,7 +120,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result);
   };
 
-  const courseCreatedCard = instructCourse.map((item) => {
+  const courseCreatedCard = instructCourse.map((item, index) => {
     return (
       <CourseCard
         id={item._id}
@@ -130,6 +130,7 @@ const ProfileBody = ({ setLoginStatus }) => {
         icon={<SlOptionsVertical />}
         data={item}
         del={pupF}
+        key={index}
       />
     );
   });

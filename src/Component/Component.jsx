@@ -73,25 +73,25 @@ function Component() {
 
   let [savedCourses, setSavedCourses] = useState();
 
-  const fetchCourses = async () => {
-    let result = await fetch("https://golearn.onrender.com/api/v1/course", {
-      method: "get",
-      credencials: "include",
-    });
-    result = await result.json();
+  // const fetchCourses = async () => {
+  //   let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+  //     method: "get",
+  //     credencials: "include",
+  //   });
+  //   result = await result.json();
 
-    const data = result.data;
+  //   const data = result.data;
 
-    console.log("RESULT: ", data);
+  //   console.log("RESULT: ", data);
 
-    setSavedCourses(data);
+  //   setSavedCourses(data);
 
-    localStorage.setItem("courses", JSON.stringify(data));
+  //   localStorage.setItem("courses", JSON.stringify(data));
 
-    const savedCoursesArray = savedCourses;
+  //   const savedCoursesArray = savedCourses;
 
-    console.log("Saved courses: ", savedCoursesArray);
-  };
+  //   console.log("Saved courses: ", savedCoursesArray);
+  // };
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -100,12 +100,36 @@ function Component() {
       setLoginStatus(true);
       console.log("TOKEN IS AVAILABLE");
       // Call function to fetch courses
-      fetchCourses();
+      const fetchCourses = async () => {
+        let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+          method: "get",
+          credencials: "include",
+        });
+        result = await result.json();
+    
+        const data = result.data;
+    
+        console.log("RESULT: ", data);
+    
+        setSavedCourses(data);
+    
+        localStorage.setItem("courses", JSON.stringify(data));
+    
+        const savedCoursesArray = savedCourses;
+    
+        console.log("Saved courses: ", savedCoursesArray);
+      };
+
+      !savedCourses && fetchCourses();
     } else {
       console.log("TOKEN IS NOT AVAILABLE");
       setLoginStatus(false);
     }
-  }, []);
+
+    return () => {
+      console.log('cleanup');
+    }
+  }, [savedCourses]);
 
   return (
     <>
