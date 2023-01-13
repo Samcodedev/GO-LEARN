@@ -56,18 +56,37 @@ const DecFinanceDetails = (props) => {
       "2.5px solid transparent";
     document.getElementById("rev").style.borderBottom = "2.5px solid #027dff";
   }
-
-  const mode = ModuleData.map((item) => {
-    return <Module module={item.module} time={item.time} title={item.title} />;
-  });
   let data = props.data;
   console.log(data);
+
+  const mode = (ModuleData).map((item) => {
+    return( 
+      <Module 
+        module={item.module} 
+        time={item.time} 
+        title={item.title} 
+      />
+    )
+  });
 
   const materi = (data.materials).map((item) =>{
     return(
       <li>{item}</li>
     )
   })
+
+  const audi = (data.audience).map((item) =>{
+    return(
+      <p>{item}</p>
+    )
+  })
+
+  const whattolearn = (data.whatToLearn).map((item) =>{
+    return(
+      <li>{item}</li>
+    )
+  })
+  // whattolearn
 
   const courseId = data._id;
   const handleCart = async (e) => {
@@ -190,29 +209,12 @@ const DecFinanceDetails = (props) => {
               <h3>Course Description</h3>
               <p>{data.courseDescription}</p>
               <h3>Who This Course is for</h3>
-              <p>
-                Anyone with a basic understanding of cryptocurrencies can take
-                this course.
-              </p>
-              <p>
-                Interested students also need to possess familiarity with
-                cryptocurrency wallets and cyber security best practices
-              </p>
+              {audi}
             </div>
             <div className="gain">
               <h3>What Will You Learn?</h3>
               <ul>
-                <li>
-                  At the end of this course you will have been taught the
-                  following:
-                </li>
-                <li>What DeFi is at a fundamental level</li>
-                <li>What DeFi is at a fundamental level</li>
-                <li>How to set up a Binance wallet</li>
-                <li>
-                  How to use the safest and most popular DeFi tools and services
-                  for earning profit in this exciting new space!
-                </li>
+                {whattolearn}
               </ul>
             </div>
             <div className="course-content">
