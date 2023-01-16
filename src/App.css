@@ -22,6 +22,7 @@ a{
     color: #027dff;
     box-shadow: none;
     background-color: transparent;
+    width: fit-content;
 }
 span{
     color: #027dff;
