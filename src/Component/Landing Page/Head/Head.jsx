@@ -20,8 +20,13 @@ const Head = ({ landingCourses }) => {
   console.log("landingCourses: ", landingCourses);
 
   const course = JSON.parse(localStorage.getItem("courses"));
-  let data1 = course[0];
-  let data2 = course[1];
+
+  const fashionCourses = course.filter(word => word.category == "Forex" || word.category == "Finance");
+
+  console.log('fashionCourses: ', fashionCourses);
+
+  let data1 = fashionCourses[0];
+  let data2 = fashionCourses[1];
 
   console.log("Data 1: ", data1);
   console.log("Data 2: ", data2);
