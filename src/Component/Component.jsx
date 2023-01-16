@@ -18,6 +18,7 @@ import Reset from "./ResetPassword/Reset";
 import Class from "./Class/Class";
 import Error from "./ErrorPage/Error";
 import InstructorProfile from "./InstructorProfile/InstructorProfile";
+import PublisherReg from "./PublisherReg/PublisherReg"
 
 function Component() {
   const API = "https://golearn.up.railway.app/api/v1/auth/";
@@ -162,6 +163,7 @@ function Component() {
             />
             <Route path="/forget" element={<Forget />} />
             <Route path="/class" element={<Class />} />
+            <Route path="/publisher" element={<PublisherReg />} />
             <Route path={`${API}resetpassword/:token`} element={<Reset />} />
             <Route path="*" element={<Error />} />
           </Route>

@@ -89,7 +89,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   const carts = cart.map((item, index) => {
     return (
-      <ProfileCard title={item.courseTitle} dta={item.courseId} data={item} key={index} />
+      <ProfileCard titleValue={item.courseTitle} dta={item.courseId} data={item} key={index} />
     );
   });
 
@@ -150,69 +150,115 @@ const ProfileBody = ({ setLoginStatus }) => {
   let [courseDescription, codfunc] = React.useState("");
   let [courseDuration, cdfunc] = React.useState("");
   let [category, cafunc] = React.useState("");
-  let [whatToLearn, whfunc] = React.useState([]);
-  let [requirement, refunc] = React.useState([]);
-  let [audience, aufunc] = React.useState([]);
-  let [materials, mafunc] = React.useState([]);
+  let [whatToLearnValues, whfunc] = React.useState([]);
+  let [requirementValues, refunc] = React.useState([]);
+  let [audienceValues, aufunc] = React.useState([]);
+  let [materialsValues, mafunc] = React.useState([]);
 
-  let [courseContent, cofunc] = React.useState([]);
+  let [courseContentValues, cofunc] = React.useState([]);
   let [tags, tafunc] = React.useState([]);
+  let [titleValue,titleValuefunc] = React.useState([]);
 
-  // // alert(audience)
+  // // alert(audienceValues)
 
-  // let audienceSt = []
-  // let [courseContentSt, ccfunc] = React.useState([])
-  // let [materialsSt, mfunc] = React.useState([])
-  // let [requirementSt, rfunc] = React.useState([])
+  // let audienceValuesSt = []
+  // let [courseContentValuesSt, ccfunc] = React.useState([])
+  // let [materialsValuesSt, mfunc] = React.useState([])
+  // let [requirementValuesSt, rfunc] = React.useState([])
   // let [tagsSt, tfunc] = React.useState([])
-  // let [whatToLearnSt, wlfunc] = React.useState([])
+  // let [whatToLearnValuesSt, wlfunc] = React.useState([])
 
   // function audi(){
-  //     // stafunc(() => JSON.stringify(audienceSt))
-  //     audienceSt.push("samuel")
-  //     console.log(audienceSt)
+  //     // stafunc(() => JSON.stringify(audienceValuesSt))
+  //     audienceValuesSt.push("samuel")
+  //     console.log(audienceValuesSt)
   // }
   // function cour(){
-  //     courseContent.push(courseContentSt)
-  //     console.log(audience)
+  //     courseContentValues.push(courseContentValuesSt)
+  //     console.log(audienceValues)
   // }
   // function mate(){
-  //     materials.push(materialsSt)
+  //     materialsValues.push(materialsValuesSt)
   // }
   // function requ(){
-  //     requirement.push(requirementSt)
+  //     requirementValues.push(requirementValuesSt)
   // }
   // function tage(){
   //     tags.push(tagsSt)
   // }
   // function what(){
-  //     whatToLearn.push(whatToLearnSt)
+  //     whatToLearnValues.push(whatToLearnValuesSt)
+  // }
+
+  // this is used to get the course id so as to update it with the "coursecontent" and "videos" at handleCourseUpdate
+  const [createCou, createCoufunc] = React.useState()
+
+    const whatToLearn = Object.values(whatToLearnValues);
+    const requirement = Object.values(requirementValues);
+    const audience = Object.values(audienceValues);
+    const materials = Object.values(materialsValues);
+    const title = Object.values(titleValue)
+    const courseContent = Object.values(courseContentValues);
+
+    const handleCourseUpdate = async (e) => {
+      e.preventDefault();
+
+      let result = await fetch(`https://golearn.up.railway.app/api/v1/course/uploadcontent/${createCou}`, {
+        method: "post",
+        credencials: "include",
+        body: JSON.stringify({
+          title,
+          courseContent,
+        }),
+        headers: {
+          "content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      result = await result.json();
+      console.warn(result);
+      console.log(result);
+
+    }
+
+  // function update() {
+    // createCou? handleCourseUpdate() : alert("don't call")
   // }
 
   const handleCreateCourse = async (e) => {
     e.preventDefault();
 
-    const courseContentValues = Object.values(courseContent);
-    const whatToLearnValues = Object.values(whatToLearn);
-    const requirementValues = Object.values(requirement);
-    const audienceValues = Object.values(audience);
+    // console.log("Form inputs: ", {
+    //   courseTitle,
+    //   courseDescription,
+    //   courseDuration,
+    //   category,
+    //   whatToLearnValues,
+    //   requirementValues,
+    //   audienceValues,
+    //   materialsValues,
+
+    //   courseContentValues,
+    //   courseContent,
+    //   whatToLearn,
+    //   requirement,
+    //   audience,
+    // });
 
     console.log("Form inputs: ", {
-      courseTitle,
-      courseDescription,
-      courseDuration,
-      category,
-      whatToLearn,
-      requirement,
-      audience,
-      materials,
-
-      courseContent,
-      courseContentValues,
-      whatToLearnValues,
-      requirementValues,
-      audienceValues,
+        courseTitle,
+        courseDescription,
+        courseDuration,
+        category,
+        whatToLearn,
+        requirement,
+        audience,
+        materials,
+        title,
+        courseContent,
     });
+
+    // return;
 
     let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
       method: "post",
@@ -235,6 +281,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     result = await result.json();
     console.warn(result);
     console.log(result);
+    createCoufunc(result.data._id)
 
     if (result.success === true) {
       document.getElementById(
@@ -247,6 +294,9 @@ const ProfileBody = ({ setLoginStatus }) => {
       ).innerHTML = `An error occured, please fill in all fields, and try again.`;
       document.getElementById("message").style.color = "red";
     }
+
+    // call handleCourseUpdate() to update the course (to upload course content and videos) immediately after course is created
+    createCou? handleCourseUpdate() : console.log("no course created")
   };
 
   function dashboard() {
@@ -282,7 +332,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   }
 
   // State that handles course content input
-  const [courseContentInput, setCourseContentInput] = useState([
+  const [courseContentValuesInput, setCourseContentInput] = useState([
     {
       visibility: true,
     },
@@ -301,7 +351,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   ]);
 
   // State that handles what to learn input
-  const [whatToLearnInput, setWhatToLearnInput] = useState([
+  const [whatToLearnValuesInput, setWhatToLearnInput] = useState([
     {
       visibility: true,
     },
@@ -319,8 +369,8 @@ const ProfileBody = ({ setLoginStatus }) => {
     },
   ]);
 
-  // State that handles requirement input
-  const [requirementInput, setRequirementInput] = useState([
+  // State that handles requirementValues input
+  const [requirementValuesInput, setRequirementInput] = useState([
     {
       visibility: true,
     },
@@ -338,8 +388,8 @@ const ProfileBody = ({ setLoginStatus }) => {
     },
   ]);
 
-  // State that handles audience input
-  const [audienceInput, setAudienceInput] = useState([
+  // State that handles audienceValues input
+  const [audienceValuesInput, setAudienceInput] = useState([
     {
       visibility: true,
     },
@@ -357,8 +407,8 @@ const ProfileBody = ({ setLoginStatus }) => {
     },
   ]);
 
-  // State that handles materials input
-  const [materialsInput, setMaterialsInput] = useState([
+  // State that handles materialsValues input
+  const [materialsValuesInput, setMaterialsInput] = useState([
     {
       visibility: true,
     },
@@ -378,6 +428,25 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   // State that handles tags input
   const [tagsInput, setTagsInput] = useState([
+    {
+      visibility: true,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+    {
+      visibility: false,
+    },
+  ]);
+
+  // State that handle titleValue input
+  const [titleValueInput, settitleValueInput] = useState([
     {
       visibility: true,
     },
@@ -432,6 +501,37 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     // window.location.reload(true);
   }
+
+
+
+  const [displaypicture, displaypictureFunc] = React.useState()
+
+  let profilePic = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData()
+    formData.append('displaypicture', displaypicture)
+
+    let result = await fetch('https://golearn.up.railway.app/api/v1/auth/uploaddisplaypicture', {
+      method: "post",
+      credencials: "include",
+      body: JSON.stringify({
+        displaypicture,
+      }),
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+
+    console.log(displaypicture)
+
+  }
+
+
 
   return (
     <div className="profilebody">
@@ -491,7 +591,17 @@ const ProfileBody = ({ setLoginStatus }) => {
               <div className="alert">
                 <span>Set Your Profile Photo</span>
               </div>
-              <button>Click Here</button>
+
+
+              <form onSubmit={profilePic}>
+                <input type="file" name="file"
+                  // value={displaypicture}
+                  onChange={(e) => displaypictureFunc(e.target.files[0].name)} 
+                />
+
+                  <input type="submit" value="upload" />
+              </form>
+                <button>Click Here</button>
             </div>
             <h4>Dashboard</h4>
             <div className="properties">
@@ -601,6 +711,9 @@ const ProfileBody = ({ setLoginStatus }) => {
                 value={courseDuration}
                 onChange={(e) => cdfunc(e.target.value)}
               />
+              {/*
+                value={displaypicture}
+                onChange={(e) => displaypictureFunc(e.target.value)} */}
 
               <label>Category</label>
               <input
@@ -609,49 +722,18 @@ const ProfileBody = ({ setLoginStatus }) => {
                 onChange={(e) => cafunc(e.target.value)}
               />
 
-              <label>Course Content</label>
-              <div className="array-input">
-                <div className="array-input-course-content">
-                  {courseContentInput.map((eachContent, index) => (
-                    <div key={index}>
-                      {courseContentInput[index].visibility && (
-                        <input
-                          type="text"
-                          value={courseContent[index]}
-                          onChange={(e) =>
-                            cofunc({
-                              ...courseContent,
-                              [index]: e.target.value,
-                            })
-                          }
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-                {courseContentInput[0].visibility && (
-                  <span
-                    onClick={() =>
-                      addInputField(courseContentInput, setCourseContentInput)
-                    }
-                  >
-                    Add
-                  </span>
-                )}
-              </div>
-
               <label>What To Learn</label>
               <div className="array-input">
                 <div className="array-input-course-content">
-                  {whatToLearnInput.map((eachContent, index) => (
+                  {whatToLearnValuesInput.map((eachContent, index) => (
                     <div key={index}>
                       {eachContent.visibility && (
                         <input
                           type="text"
-                          value={whatToLearn[index]}
+                          value={whatToLearnValues[index]}
                           onChange={(e) =>
                             whfunc({
-                              ...whatToLearn,
+                              ...whatToLearnValues,
                               [index]: e.target.value,
                             })
                           }
@@ -660,10 +742,10 @@ const ProfileBody = ({ setLoginStatus }) => {
                     </div>
                   ))}
                 </div>
-                {whatToLearnInput[0].visibility && (
+                {whatToLearnValuesInput[0].visibility && (
                   <span
                     onClick={() =>
-                      addInputField(whatToLearnInput, setWhatToLearnInput)
+                      addInputField(whatToLearnValuesInput, setWhatToLearnInput)
                     }
                   >
                     Add
@@ -674,15 +756,15 @@ const ProfileBody = ({ setLoginStatus }) => {
               <label>Requirement</label>
               <div className="array-input">
                 <div className="array-input-course-content">
-                  {requirementInput.map((eachContent, index) => (
+                  {requirementValuesInput.map((eachContent, index) => (
                     <div key={index}>
                       {eachContent.visibility && (
                         <input
                           type="text"
-                          value={requirement[index]}
+                          value={requirementValues[index]}
                           onChange={(e) =>
                             refunc({
-                              ...requirement,
+                              ...requirementValues,
                               [index]: e.target.value,
                             })
                           }
@@ -691,10 +773,10 @@ const ProfileBody = ({ setLoginStatus }) => {
                     </div>
                   ))}
                 </div>
-                {requirementInput[0].visibility && (
+                {requirementValuesInput[0].visibility && (
                   <span
                     onClick={() =>
-                      addInputField(requirementInput, setRequirementInput)
+                      addInputField(requirementValuesInput, setRequirementInput)
                     }
                   >
                     Add
@@ -705,15 +787,15 @@ const ProfileBody = ({ setLoginStatus }) => {
               <label>Audience</label>
               <div className="array-input">
                 <div className="array-input-course-content">
-                  {audienceInput.map((eachContent, index) => (
+                  {audienceValuesInput.map((eachContent, index) => (
                     <div key={index}>
                       {eachContent.visibility && (
                         <input
                           type="text"
-                          value={audience[index]}
+                          value={audienceValues[index]}
                           onChange={(e) =>
                             aufunc({
-                              ...audience,
+                              ...audienceValues,
                               [index]: e.target.value,
                             })
                           }
@@ -722,10 +804,10 @@ const ProfileBody = ({ setLoginStatus }) => {
                     </div>
                   ))}
                 </div>
-                {audienceInput[0].visibility && (
+                {audienceValuesInput[0].visibility && (
                   <span
                     onClick={() =>
-                      addInputField(audienceInput, setAudienceInput)
+                      addInputField(audienceValuesInput, setAudienceInput)
                     }
                   >
                     Add
@@ -736,15 +818,15 @@ const ProfileBody = ({ setLoginStatus }) => {
               <label>Materials</label>
               <div className="array-input">
                 <div className="array-input-course-content">
-                  {materialsInput.map((eachContent, index) => (
+                  {materialsValuesInput.map((eachContent, index) => (
                     <div key={index}>
                       {eachContent.visibility && (
                         <input
                           type="text"
-                          value={materials[index]}
+                          value={materialsValues[index]}
                           onChange={(e) =>
                             mafunc({
-                              ...materials,
+                              ...materialsValues,
                               [index]: e.target.value,
                             })
                           }
@@ -753,10 +835,10 @@ const ProfileBody = ({ setLoginStatus }) => {
                     </div>
                   ))}
                 </div>
-                {materialsInput[0].visibility && (
+                {materialsValuesInput[0].visibility && (
                   <span
                     onClick={() =>
-                      addInputField(materialsInput, setMaterialsInput)
+                      addInputField(materialsValuesInput, setMaterialsInput)
                     }
                   >
                     Add
@@ -786,6 +868,66 @@ const ProfileBody = ({ setLoginStatus }) => {
                 </div>
                 {tagsInput[0].visibility && (
                   <span onClick={() => addInputField(tagsInput, setTagsInput)}>
+                    Add
+                  </span>
+                )}
+              </div>
+
+              {/* to upload the course content */}
+              <label>Course Content</label>
+              <div className="array-input">
+                <div className="array-input-course-content">
+                  {titleValueInput.map((eachContent, index) => (
+                    <div key={index}>
+                      {eachContent.visibility && (
+                        <input
+                          type="text"
+                          value={titleValue[index]}
+                          onChange={(e) =>
+                            titleValuefunc({
+                              ...titleValue,
+                              [index]: e.target.value,
+                            })
+                          }
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {titleValueInput[0].visibility && (
+                  <span onClick={() => addInputField(titleValueInput, settitleValueInput)}>
+                    Add
+                  </span>
+                )}
+              </div>
+
+              {/* to upload the course videos (send to the API as "coursecontent") */}
+              <label>Upload Videos</label>
+              <div className="array-input">
+                <div className="array-input-course-content">
+                  {courseContentValuesInput.map((eachContent, index) => (
+                    <div key={index}>
+                      {courseContentValuesInput[index].visibility && (
+                        <input
+                          type="file"
+                          value={courseContentValues[index]}
+                          onChange={(e) =>
+                            cofunc({
+                              ...courseContentValues,
+                              [index]: e.target.value,
+                            })
+                          }
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {courseContentValuesInput[0].visibility && (
+                  <span
+                    onClick={() =>
+                      addInputField(courseContentValuesInput, setCourseContentInput)
+                    }
+                  >
                     Add
                   </span>
                 )}
