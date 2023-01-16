@@ -25,7 +25,7 @@ const Head = ({ landingCourses }) => {
 
   const course = JSON.parse(localStorage.getItem("courses"));
 
-  const fashionCourses = course.filter(word => word.category == "Forex" || word.category == "Finance");
+  const fashionCourses = course.filter(word => word.category === "Forex" || word.category === "Finance");
 
   console.log('fashionCourses: ', fashionCourses);
 
