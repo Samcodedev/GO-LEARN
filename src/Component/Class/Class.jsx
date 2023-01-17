@@ -10,6 +10,38 @@ const Class = () => {
   const location = useLocation();
   let datah = location.state.id;
 
+  // videos nesting function
+  let videoData = [
+    "https://www.youtube.com/embed/LRjvSfu0Q1U",
+    "https://www.youtube.com/embed/BnJ2VW4-DiA",
+    "https://www.youtube.com/embed/xDBW8qWPkdc",
+    "https://www.youtube.com/embed/qXCmc_wVA1o",
+    "https://www.youtube.com/embed/RrnSHm6Lh4c",
+    "https://www.youtube.com/embed/gTtGWH8EJfA"
+  ]
+  const [nextForward, nextForwardFunc] = React.useState(0)
+  function next() {
+    nextForwardFunc(
+      nextForward + (nextForward <= 4? 1: 0)
+    )
+    // alert(nextForward)
+  }
+
+  function backward() {
+    nextForwardFunc(
+      nextForward - (nextForward >= 1? 1: 0)
+    )
+    // alert(nextForward)
+  }
+
+  console.log("total length",videoData.length)
+
+
+  // let playVideo = ""
+
+
+
+
   console.log(datah);
 
   const mode = ModuleData.map((item) => {
@@ -129,6 +161,12 @@ const Class = () => {
     );
   });
 
+  const materialsList = (datah.materials).map((item) => {
+    return(
+      <a href={item} target='_blank' rel="noreferrer">{item}</a>
+    )
+  })
+
   return (
     <div className="class">
       <div className="sub-class">
@@ -148,7 +186,7 @@ const Class = () => {
               <button>Mark as Complete</button>
             </div>
           </div>
-          <video src="https://youtu.be/xsQyr77SR08" type="video/mp4" controls />
+          <iframe src={videoData[nextForward]} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           <div className="course-details">
             <ul>
               <li id="link1" onClick={overview}>
@@ -163,14 +201,16 @@ const Class = () => {
             </ul>
             <div className="course-content">
               <div className="control">
-                <button>Previous</button>
-                <button>Next</button>
+                <button onClick={backward}>Previous</button>
+                <button onClick={next}>Next</button>
               </div>
               <div className="overview" id="overview">
                 <h2>About Lesson</h2>
+                <p>{datah.courseDescription}</p>
               </div>
               <div className="file" id="file">
                 <h2>Exercise Files</h2>
+                {materialsList}
               </div>
               <div className="review" id="review">
                 <h2>Your Experience</h2>
