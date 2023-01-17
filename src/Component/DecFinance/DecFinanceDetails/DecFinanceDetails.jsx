@@ -121,7 +121,6 @@ const DecFinanceDetails = (props) => {
 
     refunc(result.data);
   };
-  handlereview();
   // console.log(revew);
   let stars = [];
 
@@ -160,8 +159,6 @@ const DecFinanceDetails = (props) => {
       count2 += 1;
     } else if (Element === 1) {
       count1 += 1;
-    } else if (Element === 0) {
-      count1 += 0;
     }
   });
 
@@ -171,10 +168,6 @@ const DecFinanceDetails = (props) => {
   let bar2 = `${((count2 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
   let bar1 = `${((count1 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
   console.log(bar5);
-
-  // useEffect(() => {
-  //   handlereview()
-  // }, []);
 
   const stu = revew.map((item) => {
     return (
@@ -187,6 +180,10 @@ const DecFinanceDetails = (props) => {
       />
     );
   });
+
+  // useEffect(() => {
+    handlereview()
+  // }, []);
 
   return (
     <div className="DecFinanceDetails">
@@ -245,7 +242,7 @@ const DecFinanceDetails = (props) => {
                     <p>5</p>
                   </div>
                   <div className="bar">
-                    <div className="prog" style={{ width: bar5 }}></div>
+                    <div className="prog" style={{ width: bar5 === "NaN%"? "0%" : bar5 }}></div>
                   </div>
                   <div className="rate">
                     <p>{count5} Rating</p>
@@ -259,7 +256,7 @@ const DecFinanceDetails = (props) => {
                     <p>4</p>
                   </div>
                   <div className="bar">
-                    <div className="prog" style={{ width: bar4 }}></div>
+                    <div className="prog" style={{ width: bar4 === "NaN%"? "0%" : bar4 }}></div>
                   </div>
                   <div className="rate">
                     <p>{count4} Rating</p>
@@ -273,7 +270,7 @@ const DecFinanceDetails = (props) => {
                     <p>3</p>
                   </div>
                   <div className="bar">
-                    <div className="prog" style={{ width: bar3 }}></div>
+                    <div className="prog" style={{ width: bar3 === "NaN%"? "0%" : bar3 }}></div>
                   </div>
                   <div className="rate">
                     <p>{count3} Rating</p>
@@ -287,7 +284,7 @@ const DecFinanceDetails = (props) => {
                     <p>2</p>
                   </div>
                   <div className="bar">
-                    <div className="prog" style={{ width: bar2 }}></div>
+                    <div className="prog" style={{ width: bar2 === "NaN%"? "0%" : bar2 }}></div>
                   </div>
                   <div className="rate">
                     <p>{count2} Rating</p>
@@ -301,7 +298,7 @@ const DecFinanceDetails = (props) => {
                     <p>1</p>
                   </div>
                   <div className="bar">
-                    <div className="prog" style={{ width: bar1 }}></div>
+                    <div className="prog" style={{ width: bar1 === "NaN%"? "0%" : bar1 }}></div>
                   </div>
                   <div className="rate">
                     <p>{count1} Rating</p>

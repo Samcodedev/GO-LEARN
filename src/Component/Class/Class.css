@@ -86,8 +86,9 @@
     color: #027dff;
     background-color: #fff;
 }
-.class .sub-class .video video{
+.class .sub-class .video iframe{
     width: 100%;
+    min-height: 380px;
     position: relative;
 }
 .class .sub-class .video .course-details ul{
