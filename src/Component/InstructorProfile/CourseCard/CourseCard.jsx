@@ -43,6 +43,14 @@ const CourseCard = (props) => {
   //     props.id
   //    )
   // }
+  const setSelectedCourse = props.setSelectedCourse;
+
+  function deleteCourse() {    
+    props.del();
+    setSelectedCourse(props.id);
+    console.log('Selected course id: ', props.id);
+  }
+
   return (
     <div className="cardContainer">
       <div className="cardContainer__topArea">
@@ -56,7 +64,7 @@ const CourseCard = (props) => {
           {/* <FiBookmark /> */}
           {props.icon}
           <ul>
-            <li onClick={pupF}>Delete</li>
+            <li onClick={deleteCourse}>Delete</li>
             <li>Update</li>
           </ul>
         </div>
