@@ -20,8 +20,8 @@
 }
 .OnlineBlog .sub-OnlineBlog .OnlineBlog-img-div img{
     position: relative;
-    width: 100%;
-
+    width: 80%;
+    border-radius: 10px;
 }
 .OnlineBlog .sub-OnlineBlog .OnlineBlog-content{
     width: 50%;

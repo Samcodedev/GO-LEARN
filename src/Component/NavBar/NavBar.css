@@ -250,8 +250,8 @@
   .navbar .logo-search {
     width: 50%;
   }
-  .navbar .navigation:hover .main {
-    display: flex;
+  .navbar .navigation .main {
+    /* display: flex; */
     position: absolute;
     flex-direction: column;
     left: 0;

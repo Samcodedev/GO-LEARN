@@ -1,7 +1,7 @@
 import React from "react";
 import "./Olubori.css";
 import "../OnlineBlog/OnlineBlog.css";
-import img from "./img/olubori-free.png";
+import img from "./img/about-4.jfif";
 import { Link } from "react-router-dom";
 
 const Olubori = () => {
@@ -24,7 +24,7 @@ const Olubori = () => {
             management, savings, budgeting, investment opportunities, financial
             planning template, budgeting template, grants and sponsorships.
           </p>
-          <Link to="">
+          <Link to="/courses">
             <button>Start For Free</button>
           </Link>
         </div>
