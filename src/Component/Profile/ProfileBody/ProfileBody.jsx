@@ -89,14 +89,35 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   const carts = cart.map((item, index) => {
     return (
-      <ProfileCard titleValue={item.courseTitle} dta={item.courseId} data={item} key={index} />
+      <ProfileCard
+        titleValue={item.courseTitle}
+        dta={item.courseId}
+        data={item}
+        key={index}
+      />
     );
   });
 
   let [pup, pupfunc] = React.useState(true);
+  let [selectedCourse, setSelectedCourse] = React.useState();
 
   function pupF() {
     pupfunc(!pup);
+  }
+
+  async function deleteCourse() {
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/${selectedCourse}`,
+      {
+        method: "get",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
+    result = await result.json();
   }
 
   const [instructCourse, instructCourseFunc] = useState([]);
@@ -130,6 +151,7 @@ const ProfileBody = ({ setLoginStatus }) => {
         icon={<SlOptionsVertical />}
         data={item}
         del={pupF}
+        setSelectedCourse={setSelectedCourse}
         key={index}
       />
     );
@@ -140,8 +162,8 @@ const ProfileBody = ({ setLoginStatus }) => {
   }, []);
 
   det.role === "publisher" && handleinstructorCourse();
-    // : console.log("Hello loading");
-  det.role === "user" && handlecart()
+  // : console.log("Hello loading");
+  det.role === "user" && handlecart();
   //  : console.log("publisher");
 
   // console.log(det);
@@ -157,7 +179,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   let [courseContentValues, cofunc] = React.useState([]);
   let [tags, tafunc] = React.useState([]);
-  let [titleValue,titleValuefunc] = React.useState([]);
+  let [titleValue, titleValuefunc] = React.useState([]);
 
   // // alert(audienceValues)
 
@@ -191,19 +213,21 @@ const ProfileBody = ({ setLoginStatus }) => {
   // }
 
   // this is used to get the course id so as to update it with the "coursecontent" and "videos" at handleCourseUpdate
-  const [createCou, createCoufunc] = React.useState()
+  const [createCou, createCoufunc] = React.useState();
 
-    const whatToLearn = Object.values(whatToLearnValues);
-    const requirement = Object.values(requirementValues);
-    const audience = Object.values(audienceValues);
-    const materials = Object.values(materialsValues);
-    const title = Object.values(titleValue)
-    const courseContent = Object.values(courseContentValues);
+  const whatToLearn = Object.values(whatToLearnValues);
+  const requirement = Object.values(requirementValues);
+  const audience = Object.values(audienceValues);
+  const materials = Object.values(materialsValues);
+  const title = Object.values(titleValue);
+  const courseContent = Object.values(courseContentValues);
 
-    const handleCourseUpdate = async (e) => {
-      e.preventDefault();
+  const handleCourseUpdate = async (e) => {
+    e.preventDefault();
 
-      let result = await fetch(`https://golearn.up.railway.app/api/v1/course/uploadcontent/${createCou}`, {
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/uploadcontent/${createCou}`,
+      {
         method: "post",
         credencials: "include",
         body: JSON.stringify({
@@ -214,15 +238,15 @@ const ProfileBody = ({ setLoginStatus }) => {
           "content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
-      });
-      result = await result.json();
-      console.warn(result);
-      console.log(result);
-
-    }
+      }
+    );
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+  };
 
   // function update() {
-    // createCou? handleCourseUpdate() : alert("don't call")
+  // createCou? handleCourseUpdate() : alert("don't call")
   // }
 
   const handleCreateCourse = async (e) => {
@@ -246,16 +270,16 @@ const ProfileBody = ({ setLoginStatus }) => {
     // });
 
     console.log("Form inputs: ", {
-        courseTitle,
-        courseDescription,
-        courseDuration,
-        category,
-        whatToLearn,
-        requirement,
-        audience,
-        materials,
-        title,
-        courseContent,
+      courseTitle,
+      courseDescription,
+      courseDuration,
+      category,
+      whatToLearn,
+      requirement,
+      audience,
+      materials,
+      title,
+      courseContent,
     });
 
     // return;
@@ -281,7 +305,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     result = await result.json();
     console.warn(result);
     console.log(result);
-    createCoufunc(result.data._id)
+    createCoufunc(result.data._id);
 
     if (result.success === true) {
       document.getElementById(
@@ -296,7 +320,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     }
 
     // call handleCourseUpdate() to update the course (to upload course content and videos) immediately after course is created
-    createCou? handleCourseUpdate() : console.log("no course created")
+    createCou ? handleCourseUpdate() : console.log("no course created");
   };
 
   function dashboard() {
@@ -464,7 +488,13 @@ const ProfileBody = ({ setLoginStatus }) => {
     },
   ]);
 
-  // Function to add input field
+  /**
+   * 
+   * @param {state name} contentName holds name of the state
+   * @param {state function} contentNameFunction holds name of function that sets state
+   * @param {nil} temporaryName 
+   * @returns voids
+   */
   function addInputField(contentName, contentNameFunction, temporaryName) {
     // Create loop
     for (let i = 0; i < contentName.length; i++) {
@@ -502,36 +532,46 @@ const ProfileBody = ({ setLoginStatus }) => {
     // window.location.reload(true);
   }
 
+  const [displaypicture, displaypictureFunc] = React.useState(null);
+  const [imageFile, setImageFile] = React.useState(null);
 
+  const handleImageFile = (e) => {
+    setImageFile(e.target.files[0]);
+    const imgURL = URL.createObjectURL(e.target.files[0]);
+    displaypictureFunc(imgURL);
+  };
 
-  const [displaypicture, displaypictureFunc] = React.useState()
-
-  let profilePic = async (e) => {
+  const profilePic = async (e) => {
     e.preventDefault();
+    console.log('Image file: ', imageFile);
 
-    const formData = new FormData()
-    formData.append('displaypicture', displaypicture)
+    const data = new FormData();
+    data.append("File", imageFile);
+    console.log('data: ', data);
 
-    let result = await fetch('https://golearn.up.railway.app/api/v1/auth/uploaddisplaypicture', {
-      method: "post",
-      credencials: "include",
-      body: JSON.stringify({
-        displaypicture,
-      }),
-      headers: {
-        "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+    let result = await fetch(
+      "https://golearn.up.railway.app/api/v1/auth/uploaddisplaypicture",
+      {
+        method: "post",
+        credencials: "include",
+        // body: JSON.stringify({
+        //   data,
+        // }),
+        body: data,   
+        headers: {
+          "content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    console.log('Loading');
     result = await result.json();
     console.warn(result);
     console.log(result);
+    console.log('DATA: ', data);
 
-    console.log(displaypicture)
-
-  }
-
-
+    // console.log(displaypicture);
+  };
 
   return (
     <div className="profilebody">
@@ -588,20 +628,36 @@ const ProfileBody = ({ setLoginStatus }) => {
           </div>
           <div className="dashboard-main" id="dashboard">
             <div className="upload">
-              <div className="alert">
-                <span>Set Your Profile Photo</span>
-              </div>
+              {!displaypicture ? (
+                <div className="alert">
+                  <span>Set Your Profile Photo</span>
+                </div>
+              ) : (
+                <div className="alert">
+                  <span>Selected picture:</span>
+                  <div className="alert__selectedImage">
+                    <img src={displaypicture} alt="selected display photo" />
+                  </div>
+                </div>
+              )}
 
-
-              <form onSubmit={profilePic}>
-                <input type="file" name="file"
-                  // value={displaypicture}
-                  onChange={(e) => displaypictureFunc(e.target.files[0].name)} 
-                />
-
-                  <input type="submit" value="upload" />
-              </form>
-                <button>Click Here</button>
+              {displaypicture ? (
+                <button
+                  className="uploadPictureBtn"
+                  onClick={(e) => profilePic(e)}
+                >
+                  Upload picture
+                </button>
+              ) : (
+                <button className="uploadPictureBtn">
+                  Click Here
+                  <input
+                    type="file"
+                    // onChange={(e) => displaypictureFunc(e.target.files[0])}
+                    onChange={(e) => handleImageFile(e)}
+                  />
+                </button>
+              )}
             </div>
             <h4>Dashboard</h4>
             <div className="properties">
@@ -895,7 +951,11 @@ const ProfileBody = ({ setLoginStatus }) => {
                   ))}
                 </div>
                 {titleValueInput[0].visibility && (
-                  <span onClick={() => addInputField(titleValueInput, settitleValueInput)}>
+                  <span
+                    onClick={() =>
+                      addInputField(titleValueInput, settitleValueInput)
+                    }
+                  >
                     Add
                   </span>
                 )}
@@ -925,7 +985,10 @@ const ProfileBody = ({ setLoginStatus }) => {
                 {courseContentValuesInput[0].visibility && (
                   <span
                     onClick={() =>
-                      addInputField(courseContentValuesInput, setCourseContentInput)
+                      addInputField(
+                        courseContentValuesInput,
+                        setCourseContentInput
+                      )
                     }
                   >
                     Add
@@ -967,7 +1030,7 @@ const ProfileBody = ({ setLoginStatus }) => {
                 delete and CANCEL to abort.
               </h4>
               <div className="button">
-                <button>Confirm</button>
+                <button onClick={deleteCourse}>Confirm</button>
                 <button onClick={pupF}>Cancel</button>
               </div>
             </div>
