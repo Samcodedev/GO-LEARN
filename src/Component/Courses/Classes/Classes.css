@@ -10,14 +10,17 @@
     flex-wrap: wrap;
     
 }
-.classes .loading{
-    /* position: absolute;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center; */
+@keyframes loader {
+    from{
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }
+}
+.classes .sub-classes .loading svg{
+    animation: loader 1s linear infinite;
+    position: absolute;
 }
 .classes .sub-classes .card{
     background-color: #FFFFFF;

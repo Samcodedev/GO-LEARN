@@ -234,6 +234,11 @@
 .profilebody .sub-profilebody .dashboard .dashboard-main .properties .box .img-div img{
     width: 70%;
 }
+.profilebody .sub-profilebody .dashboard .dashboard-main .course-progress{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
 
 

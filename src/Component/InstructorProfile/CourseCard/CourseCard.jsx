@@ -7,31 +7,35 @@ import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const CourseCard = (props) => {
+
+  let [pup, pupfunc] = React.useState(true);
+
+  function pupF() {
+    pupfunc(!pup);
+  }
   // console.log(props.data);
 
   
 
-  // let [del, delFunc] = React.useState()
-  // const deleteCourse = async () => {
-  //   const config = {
-  //     headers: {
-  //       "content-Type": "application/json",
-  //       'Accept': 'application/json',
-  //       'Access-Control-Allow-Origin': '*',
-  //       Authorization: "Bearer " + localStorage.getItem("token"),
-  //     },
-  //   };
-  //   let result = await fetch(
-  //     `https://golearn.up.railway.app/api/v1/course/${del}`,
-  //     {
-  //       method: "DELETE",
-  //       config,
-  //     }
-  //   );
-  //   result = await result.json();
-  //   console.warn(result);
-  //   console.log(result);
-  // };
+  let deleteCourse = async () => {
+    const config = {
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/${props.id}`,
+      config,
+      {
+        credentials: "include",
+        method: 'DELETE',
+      }
+    );
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+  };
 
 
   // function setDele(){
@@ -52,7 +56,7 @@ const CourseCard = (props) => {
           {/* <FiBookmark /> */}
           {props.icon}
           <ul>
-            <li onClick={props.del}>Delete</li>
+            <li onClick={pupF}>Delete</li>
             <li>Update</li>
           </ul>
         </div>
@@ -85,6 +89,25 @@ const CourseCard = (props) => {
         <Link to="/DecFinance" state={{ id: props.data }}>
           <button className="btn">Enroll Course</button>
         </Link>
+      </div>
+
+
+      {/* -- pup up box -- */}
+      <div
+        className="pup-up"
+        id="pupUp"
+        style={{ display: pup ? "none" : "flex" }}
+      >
+        <div className="pup-box">
+          <h4>
+            You're about to delete the following course click CONFIRM to
+            delete and CANCEL to abort.
+          </h4>
+          <div className="button">
+            <button onClick={deleteCourse}>Confirm</button>
+            <button onClick={pupF}>Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
   );

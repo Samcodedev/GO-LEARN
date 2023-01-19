@@ -11,7 +11,8 @@
 }
 .OnlineBlog .sub-OnlineBlog .distance-img-div img{
     position: relative;
-    width: 100%;
+    width: 80%;
+    border-radius: 10px;
     /* left: -250px; */
 }
 

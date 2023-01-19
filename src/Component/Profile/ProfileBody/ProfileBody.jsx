@@ -107,7 +107,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       {
         method: "get",
         headers: {
-          Accept: "application/json",
+          "Accept": "application/json",
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
@@ -159,39 +159,9 @@ const ProfileBody = ({ setLoginStatus }) => {
   let [tags, tafunc] = React.useState([]);
   let [titleValue,titleValuefunc] = React.useState([]);
 
-  // // alert(audienceValues)
-
-  // let audienceValuesSt = []
-  // let [courseContentValuesSt, ccfunc] = React.useState([])
-  // let [materialsValuesSt, mfunc] = React.useState([])
-  // let [requirementValuesSt, rfunc] = React.useState([])
-  // let [tagsSt, tfunc] = React.useState([])
-  // let [whatToLearnValuesSt, wlfunc] = React.useState([])
-
-  // function audi(){
-  //     // stafunc(() => JSON.stringify(audienceValuesSt))
-  //     audienceValuesSt.push("samuel")
-  //     console.log(audienceValuesSt)
-  // }
-  // function cour(){
-  //     courseContentValues.push(courseContentValuesSt)
-  //     console.log(audienceValues)
-  // }
-  // function mate(){
-  //     materialsValues.push(materialsValuesSt)
-  // }
-  // function requ(){
-  //     requirementValues.push(requirementValuesSt)
-  // }
-  // function tage(){
-  //     tags.push(tagsSt)
-  // }
-  // function what(){
-  //     whatToLearnValues.push(whatToLearnValuesSt)
-  // }
 
   // this is used to get the course id so as to update it with the "coursecontent" and "videos" at handleCourseUpdate
-  const [createCou, createCoufunc] = React.useState()
+    const [createCou, createCoufunc] = React.useState()
 
     const whatToLearn = Object.values(whatToLearnValues);
     const requirement = Object.values(requirementValues);
@@ -648,7 +618,9 @@ const ProfileBody = ({ setLoginStatus }) => {
               </div>
             </div>
             <h4>In Progress Courses</h4>
-            {carts}
+            <div className="course-progress">
+              {carts}
+            </div>
           </div>
           <div className="profile" id="profile">
             <div className="data">
