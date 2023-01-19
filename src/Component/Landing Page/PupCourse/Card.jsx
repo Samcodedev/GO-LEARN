@@ -4,8 +4,8 @@ import './PupCourse.css'
 import crypt from './img/download 2.png'
 import prof from './img/Group 1.png'
 import { Link } from 'react-router-dom';
-import { BiBookAlt } from 'react-icons/bi'
-import { HiUserGroup } from 'react-icons/hi'
+// import { BiBookAlt } from 'react-icons/bi'
+// import { HiUserGroup } from 'react-icons/hi'
 
 const Card = (props) => {
     let data = props.data
@@ -24,12 +24,12 @@ const Card = (props) => {
                         <h1><Link  to="/DecFinance" state={{ id: props.data }}>{data.courseTitle}</Link></h1>
                          <p>{data.courseDescription}</p>
                     </div>
-                     <div className="card-bottom">
+                     {/* <div className="card-bottom">
                         <ul>
                             <li><Link to=""> <BiBookAlt fontSize="20px" color='#007bff' /> Lesson 9</Link></li>
                             <li><Link to=""> <HiUserGroup fontSize="20px" color='#007bff' /> Students 288</Link></li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

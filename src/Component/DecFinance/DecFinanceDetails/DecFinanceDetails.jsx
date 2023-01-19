@@ -15,7 +15,7 @@ import moment from "moment";
 const DecFinanceDetails = (props) => {
   // let experience = [];
   // let name = []
-  let members = [];
+  // let members = [];
   // let duration = []
   // let mate_1 = [];
   // let mate_2 = [];
@@ -29,7 +29,7 @@ const DecFinanceDetails = (props) => {
   for (let i = 0; i < ClassesData.length; i++) {
     // experience = ClassesData[5].details.experience;
     //     name = ClassesData[5].author.name
-    members = ClassesData[5].details.members;
+    // members = ClassesData[5].details.members;
     //     duration = ClassesData[5].details.duration
     // mate_1 = ClassesData[5].materials.mate_1;
     // mate_2 = ClassesData[5].materials.mate_2;
@@ -69,11 +69,11 @@ const DecFinanceDetails = (props) => {
     )
   });
 
-  const materi = (data.materials).map((item) =>{
-    return(
-      <li>{item}</li>
-    )
-  })
+  // const materi = (data.materials).map((item) =>{
+  //   return(
+  //     <li>{item}</li>
+  //   )
+  // })
 
   const audi = (data.audience).map((item) =>{
     return(
@@ -86,26 +86,32 @@ const DecFinanceDetails = (props) => {
       <li>{item}</li>
     )
   })
+
+  const require = (data.requirement).map((item) =>{
+    return(
+      <li>{item}</li>
+    )
+  })
   // whattolearn
 
-  const courseId = data._id;
-  const handleCart = async (e) => {
-    e.preventDefault();
-    let result = await fetch("`https://golearn.up.railway.app/api/v1/cart", {
-      method: "post",
-      credencials: "include",
-      body: JSON.stringify({
-        courseId,
-      }),
-      headers: {
-        "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-    result = await result.json();
-    console.warn(result);
-    console.log(result);
-  };
+  // const courseId = data._id;
+  // const handleCart = async (e) => {
+  //   e.preventDefault();
+  //   let result = await fetch("`https://golearn.up.railway.app/api/v1/cart", {
+  //     method: "post",
+  //     credencials: "include",
+  //     body: JSON.stringify({
+  //       courseId,
+  //     }),
+  //     headers: {
+  //       "content-Type": "application/json",
+  //       Authorization: "Bearer " + localStorage.getItem("token"),
+  //     },
+  //   });
+  //   result = await result.json();
+  //   console.warn(result);
+  //   console.log(result);
+  // };
 
   let [revew, refunc] = useState([]);
   const handlereview = async () => {
@@ -314,7 +320,7 @@ const DecFinanceDetails = (props) => {
         <div className="sub-detail">
           <div className="free">
             <div className="free-head">
-              <span onClick={handleCart}>Free</span>
+              <span>Free</span>
               <Link to="/class" state={{ id: data }}>
                 <button>Enroll Now</button>
               </Link>
@@ -325,14 +331,14 @@ const DecFinanceDetails = (props) => {
                 <li>
                   <span>Intermediate</span>
                 </li>
-                <li>
+                {/* <li>
                   <span>{members} Total Enrolled</span>
-                </li>
+                </li> */}
                 <li>
                   <span> Duration: {data.courseDuration}</span>
                 </li>
                 <li>
-                  <span>{moment(data.updatedAt).format("DD MMM YYYY, h:mm A")} Last Updated</span>
+                  <span>Last Updated {moment(data.updatedAt).format("DD MMM YYYY, h:mm A")}</span>
                 </li>
               </ul>
             </div>
@@ -350,19 +356,19 @@ const DecFinanceDetails = (props) => {
             </div>
             <div className="course-footer">
               <div className="first">
-                <h3>Material Includes</h3>
-                <ul>
-                  {materi}
+                {/* <h3>Material Includes</h3>
+                <ul> */}
+                  {/* {materi} */}
                   {/* <li>{mate_1}</li>
                   <li>{mate_2}</li>
                   <li>{mate_3}</li>
                   <li>{mate_4}</li> */}
-                </ul>
+                {/* </ul> */}
               </div>
               <div className="first">
                 <h3>Requirements</h3>
                 <ul>
-                  <li>{data.requirement}</li>
+                  {require}
                 </ul>
               </div>
               <div className="first">

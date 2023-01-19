@@ -1,12 +1,11 @@
 import React from "react";
 import "./Header.css";
-import img from "./img/about olubori 2.png";
 const Header = ({ data }) => {
   return (
     <div className="header">
       <div className="sub-header">
         <div className="img-div">
-          <img src={img} alt="" />
+          <img src={data.img} alt="" />
         </div>
         <div className="text-content">
           <h1>{data.title}</h1>

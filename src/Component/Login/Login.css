@@ -65,6 +65,17 @@ button[type="submit"] {
     height: 32px;
     border-radius: 8px;
 }
+@keyframes loader {
+    from{
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }
+}
+.login form button svg{
+    animation: loader 1s linear infinite;
+}
 .login form .detail{
     display: flex;
     justify-content: space-between;
