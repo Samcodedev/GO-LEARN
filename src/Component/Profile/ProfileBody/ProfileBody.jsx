@@ -118,6 +118,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       }
     );
     result = await result.json();
+    console.log(result);
   }
 
   const [instructCourse, instructCourseFunc] = useState([]);
