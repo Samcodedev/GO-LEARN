@@ -115,7 +115,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     );
     result = await result.json();
     // console.warn(result);
-    // console.log(result);
+    // console.log("cart course", result);
 
     result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result);
   };
@@ -130,6 +130,7 @@ const ProfileBody = ({ setLoginStatus }) => {
         icon={<SlOptionsVertical />}
         data={item}
         del={pupF}
+        refresh={handleinstructorCourse}
         key={index}
       />
     );
@@ -137,12 +138,12 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   useEffect(() => {
     handleLogin();
+    // det.role === "publisher" && handleinstructorCourse();
+    // : console.log("Hello loading");
+    det.role === "user" && handlecart()
+    //  : console.log("publisher");
   }, []);
 
-  det.role === "publisher" && handleinstructorCourse();
-    // : console.log("Hello loading");
-  det.role === "user" && handlecart()
-  //  : console.log("publisher");
 
   // console.log(det);
 
@@ -474,13 +475,13 @@ const ProfileBody = ({ setLoginStatus }) => {
 
 
 
-  const [displaypicture, displaypictureFunc] = React.useState()
+  const [displaypictures, displaypictureFunc] = React.useState()
 
   let profilePic = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData()
-    formData.append('displaypicture', displaypicture)
+    const displaypicture = new FormData()
+    displaypicture.append('displaypicture', displaypictures)
 
     let result = await fetch('https://golearn.up.railway.app/api/v1/auth/uploaddisplaypicture', {
       method: "post",
@@ -566,12 +567,12 @@ const ProfileBody = ({ setLoginStatus }) => {
               <form onSubmit={profilePic}>
                 <input type="file" name="file"
                   // value={displaypicture}
-                  onChange={(e) => displaypictureFunc(e.target.files[0].name)} 
+                  onChange={(e) => displaypictureFunc(e.target.files[0])} 
                 />
 
                   <input type="submit" value="upload" />
               </form>
-                <button>Click Here</button>
+                <button onClick={handleinstructorCourse}>Click Here</button>
             </div>
             <h4>Dashboard</h4>
             <div className="properties">
@@ -928,7 +929,7 @@ const ProfileBody = ({ setLoginStatus }) => {
               {instructorError.error}
             </h4>
           </div>
-          <div
+          {/* <div
             className="pup-up"
             id="pupUp"
             style={{ display: pup ? "none" : "flex" }}
@@ -943,7 +944,7 @@ const ProfileBody = ({ setLoginStatus }) => {
                 <button onClick={pupF}>Cancel</button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

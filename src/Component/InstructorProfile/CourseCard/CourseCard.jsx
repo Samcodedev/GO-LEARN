@@ -5,6 +5,7 @@ import "./courseCard.css";
 import { HiOutlineUser } from "react-icons/hi";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const CourseCard = (props) => {
 
@@ -14,28 +15,43 @@ const CourseCard = (props) => {
     pupfunc(!pup);
   }
   // console.log(props.data);
-
+  let id = props.id
   
 
-  let deleteCourse = async () => {
-    const config = {
-      headers: {
-        "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+  // let deleteCourse = async () => {
+  //   const config = {
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token"),
+  //       'My-Custom-Header': 'foobar',
+  //     },
+  //   };
+  //   let result = await fetch(
+  //     `https://golearn.up.railway.app/api/v1/course/${id}`,
+  //     config,
+  //     {
+  //       method: 'delete',
+  //     }
+  //   );
+  //   result = await result.json();
+  //   console.warn(result);
+  //   console.log(result);
+  // };
+  // const handleinstructorCourse = props.refresh;
+
+
+
+  function deleteCourse(){
+    const headers = { 
+      'Authorization': "Bearer " + localStorage.getItem("token"),
+      'My-Custom-Header': 'foobar'
     };
-    let result = await fetch(
-      `https://golearn.up.railway.app/api/v1/course/${props.id}`,
-      config,
-      {
-        credentials: "include",
-        method: 'DELETE',
-      }
-    );
-    result = await result.json();
-    console.warn(result);
-    console.log(result);
-  };
+    axios.delete(`https://golearn.up.railway.app/api/v1/course/${id}`, { headers })
+      .then(() => console.log(Response)
+      );
+      pupF()
+      // window.location.reload(true)
+      // handleinstructorCourse()
+  }
 
 
   // function setDele(){
@@ -49,7 +65,7 @@ const CourseCard = (props) => {
         <div className="thumbnail">
           <img
             src="https://go-learn.online/wp-content/uploads/2021/04/pexels-worldspectrum-844124-1.jpg"
-            alt="thumbnail"
+            alt="course_image"
           />
         </div>
         <div className="bookmarkBox">
