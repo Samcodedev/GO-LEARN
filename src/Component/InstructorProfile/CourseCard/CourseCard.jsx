@@ -15,13 +15,6 @@ const CourseCard = (props) => {
     pupfunc(!pup);
   }
   // console.log(props.data);
-
-  let [pup, pupfunc] = React.useState(true);
-
-  function pupF() {
-    pupfunc(!pup);
-  }
-  // console.log(props.data);
   let id = props.id
   
 
