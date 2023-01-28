@@ -5,7 +5,7 @@ import "./courseCard.css";
 import { HiOutlineUser } from "react-icons/hi";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 const CourseCard = (props) => {
 
@@ -18,40 +18,25 @@ const CourseCard = (props) => {
   let id = props.id
   
 
-  // let deleteCourse = async () => {
-  //   const config = {
-  //     headers: {
-  //       Authorization: "Bearer " + localStorage.getItem("token"),
-  //       'My-Custom-Header': 'foobar',
-  //     },
-  //   };
-  //   let result = await fetch(
-  //     `https://golearn.up.railway.app/api/v1/course/${id}`,
-  //     config,
-  //     {
-  //       method: 'delete',
-  //     }
-  //   );
-  //   result = await result.json();
-  //   console.warn(result);
-  //   console.log(result);
-  // };
-  // const handleinstructorCourse = props.refresh;
-
-
-
-  function deleteCourse(){
-    const headers = { 
-      'Authorization': "Bearer " + localStorage.getItem("token"),
-      'My-Custom-Header': 'foobar'
+  let deleteCourse = async () => {
+    const config = {
+      headers: {        
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
     };
-    axios.delete(`https://golearn.up.railway.app/api/v1/course/${id}`, { headers })
-      .then(() => console.log(Response)
-      );
-      pupF()
-      // window.location.reload(true)
-      // handleinstructorCourse()
-  }
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/${props.id}`,
+      config,
+      {
+        credentials: "include",
+        method: 'DELETE',
+      }
+    );
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+  };
 
 
   // function setDele(){
