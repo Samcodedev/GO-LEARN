@@ -54,10 +54,6 @@
   /* border-radius: 50%; */
   width: 100%;
 }
-.profilebody .sub-profilebody .top .profileDetails .img-div svg {
-  font-size: 80px;
-  color: #606060;
-}
 .profilebody .sub-profilebody .top .profileDetails .text-div {
   display: flex;
   flex-direction: column;
@@ -288,27 +284,6 @@
   width: 70%;
 }
 .profilebody .sub-profilebody .dashboard .dashboard-main .course-progress{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.profilebody .sub-profilebody .dashboard .profile {
-  /* background-color: #007bff; */
-  display: none;
-  width: 100%;
-}
-.profilebody .sub-profilebody .dashboard .profile .data {
-  margin-top: 10px;
-}
-.profilebody .sub-profilebody .dashboard .profile .data h2 {
-  margin-bottom: 0;
-  font-weight: 700;
-  color: #606060;
-  font-size: 1.5rem;
-}
-.profilebody .sub-profilebody .dashboard .profile .data ul{
-    width: 100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
