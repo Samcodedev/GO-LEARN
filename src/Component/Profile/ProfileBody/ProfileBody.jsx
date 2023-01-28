@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import CourseCard from "../../InstructorProfile/CourseCard/CourseCard";
 import axios from "axios";
+import { BsPlus } from "react-icons/bs";
 
 const ProfileBody = ({ setLoginStatus }) => {
   let [savedCourses, setSavedCourses] = React.useState([]);
@@ -130,7 +131,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       {
         method: "get",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
@@ -163,7 +164,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     handleLogin();
     // det.role === "publisher" && handleinstructorCourse();
     // : console.log("Hello loading");
-    det.role === "user" && handlecart()
+    det.role === "user" && handlecart();
     //  : console.log("publisher");
   }, []);
 
@@ -184,9 +185,9 @@ const ProfileBody = ({ setLoginStatus }) => {
   let [materialsValues, mafunc] = React.useState([]);
 
   let [courseContentValues, cofunc] = React.useState([]);
+  let [videoFiles, setVideoFiles] = React.useState([]);
   let [tags, tafunc] = React.useState([]);
   let [titleValue, titleValuefunc] = React.useState([]);
-
 
   // this is used to get the course id so as to update it with the "coursecontent" and "videos" at handleCourseUpdate
   const [createCou, createCoufunc] = React.useState();
@@ -203,7 +204,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     const data1 = new FormData();
     data1.append("displaypicture", imageFile);
-    console.log('courseContent: ', courseContent);
+    console.log("courseContent: ", courseContent);
 
     let result = await fetch(
       `https://golearn.up.railway.app/api/v1/course/uploadcontent/${createCou}`,
@@ -224,12 +225,6 @@ const ProfileBody = ({ setLoginStatus }) => {
     console.log(result);
   };
 
-
-
-
-
-
-
   const [courseImage, courseImageFunc] = React.useState(null);
   const [courseImageFile, setcourseImageFile] = React.useState(null);
 
@@ -240,18 +235,16 @@ const ProfileBody = ({ setLoginStatus }) => {
   };
 
   const handleCourseImage = async (e) => {
-
     e.preventDefault();
-    console.log('Image file: ', courseImageFile);
-    courseImageFunc(!courseImage)
+    console.log("Image file: ", courseImageFile);
+    courseImageFunc(!courseImage);
 
     // const data = new FormData();
     // data.append("File", imageFile);
 
     const data = new FormData();
     data.append("courseImage", courseImageFile);
-    console.log('data: ', data);
-
+    console.log("data: ", data);
 
     let result = await fetch(
       `https://golearn.up.railway.app/api/v1/course/uploadcourseimage/${det._id}`,
@@ -261,24 +254,21 @@ const ProfileBody = ({ setLoginStatus }) => {
         // body: JSON.stringify({
         //   data,
         // }),
-        body: data,   
+        body: data,
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
-    console.log('Loading');
+    console.log("Loading");
     result = await result.json();
     console.warn(result);
     console.log(result);
-    console.log('DATA: ', data);
+    console.log("DATA: ", data);
 
-    handleLogin()
+    handleLogin();
     // console.log(displaypicture);
   };
-
-
-  
 
   // function update() {
   // createCou? handleCourseUpdate() : alert("don't call")
@@ -357,7 +347,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     // call handleCourseUpdate() to update the course (to upload course content and videos) immediately after course is created
     createCou ? handleCourseUpdate() : console.log("no course created");
 
-    handleCourseImage()
+    handleCourseImage();
   };
 
   function dashboard() {
@@ -397,18 +387,18 @@ const ProfileBody = ({ setLoginStatus }) => {
     {
       visibility: true,
     },
-    {
-      visibility: false,
-    },
-    {
-      visibility: false,
-    },
-    {
-      visibility: false,
-    },
-    {
-      visibility: false,
-    },
+    // {
+    //   visibility: false,
+    // },
+    // {
+    //   visibility: false,
+    // },
+    // {
+    //   visibility: false,
+    // },
+    // {
+    //   visibility: false,
+    // },
   ]);
 
   // State that handles what to learn input
@@ -526,10 +516,10 @@ const ProfileBody = ({ setLoginStatus }) => {
   ]);
 
   /**
-   * 
+   *
    * @param {state name} contentName holds name of the state
    * @param {state function} contentNameFunction holds name of function that sets state
-   * @param {nil} temporaryName 
+   * @param {nil} temporaryName
    * @returns voids
    */
   function addInputField(contentName, contentNameFunction, temporaryName) {
@@ -551,6 +541,30 @@ const ProfileBody = ({ setLoginStatus }) => {
     }
   }
 
+  /**
+   * Function to add new course content field
+   */
+  function addNewCourseContent() {
+    // Create instance of state
+    let _courseContentValuesInput = courseContentValuesInput;
+
+    // Create instance of state object
+    let _courseContentValuesInputObj = {
+      visibility: true,
+    };
+
+    // Push object instance into state instance
+    _courseContentValuesInput.push(_courseContentValuesInputObj);
+
+    // Set state
+    setCourseContentInput(_courseContentValuesInput);
+
+    console.log([{
+      "Title: ": titleValue,
+      "Video: ": courseContentValues,
+    }]);
+  }
+
   const navigate = useNavigate();
 
   /**
@@ -569,8 +583,13 @@ const ProfileBody = ({ setLoginStatus }) => {
     // window.location.reload(true);
   }
 
+  // State that holds display picture info
   const [displaypicture, displaypictureFunc] = React.useState(null);
   const [imageFile, setImageFile] = React.useState(null);
+
+  // State that holds display picture info
+  const [coverImage, setCoverImage] = React.useState(null);
+  const [coverImageFile, setCoverImageFile] = React.useState(null);
 
   const handleImageFile = (e) => {
     setImageFile(e.target.files[0]);
@@ -578,18 +597,73 @@ const ProfileBody = ({ setLoginStatus }) => {
     displaypictureFunc(imgURL);
   };
 
+  const handleCoverImageUpload = (e) => {
+    setCoverImageFile(e.target.files[0]);
+    const imgURL = URL.createObjectURL(e.target.files[0]);
+    setCoverImage(imgURL);
+  };
+
+  const handleCourseVideoUpload = (e) => {
+    // let _courseContentValues = courseContentValues;
+
+    // _courseContentValues.push(e.target.files[0]);
+
+    cofunc([...courseContentValues, e.target.files[0]]);
+
+    const videoURL = URL.createObjectURL(e.target.files[0]);
+
+    setVideoFiles(videoURL);
+
+    // console.log(courseContentValues);
+  };
+
+
+  const submitCourseCoverImage = async (e) => {
+    e.preventDefault();
+
+    console.log("Course cover image file: ", coverImageFile);
+
+    const data = new FormData();
+    data.append("coverImage", coverImageFile);
+    console.log("data: ", data);
+
+    await fetch(
+      "https://golearn.up.railway.app/api/v1/course/uploadcourseimage",
+      {
+        method: "post",
+        credencials: "include",
+        body: data,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // console.log("Loading");
+    // result = await result.json();
+    // console.log(result);
+    // console.log("DATA: ", data);
+
+    // handleLogin();
+    // console.log(displaypicture);
+  };
+
   const profilePic = async (e) => {
     e.preventDefault();
-    console.log('Image file: ', imageFile);
-    displaypictureFunc(!displaypicture)
+    console.log("Image file: ", imageFile);
+    displaypictureFunc(!displaypicture);
 
     // const data = new FormData();
     // data.append("File", imageFile);
 
     const data = new FormData();
     data.append("displaypicture", imageFile);
-    console.log('data: ', data);
-
+    console.log("data: ", data);
 
     let result = await fetch(
       "https://golearn.up.railway.app/api/v1/auth/uploaddisplaypicture",
@@ -599,22 +673,22 @@ const ProfileBody = ({ setLoginStatus }) => {
         // body: JSON.stringify({
         //   data,
         // }),
-        body: data,   
+        body: data,
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
-    console.log('Loading');
+    console.log("Loading");
     result = await result.json();
     console.warn(result);
     console.log(result);
-    console.log('DATA: ', data);
+    console.log("DATA: ", data);
 
-    handleLogin()
+    handleLogin();
     // console.log(displaypicture);
   };
-    
+
   //   const handleFileUpload = async (e) => {
   //     const file = e.target.files[0];
   //     if (file.size > 1000000) {
@@ -646,19 +720,16 @@ const ProfileBody = ({ setLoginStatus }) => {
   //     // setLoadingImage(false)
   // };
 
-
-
-
   return (
     <div className="profilebody">
       <div className="sub-profilebody">
         <div className="top">
           <div className="alert">
-            <span>Your Application is pending as of 10 September, 2022</span>
+            {/* <span>Your Application is pending as of 10 September, 2022</span> */}
           </div>
           <div className="profileDetails">
             <div className="img-div">
-              <img src={ det.displayPicture ? det.displayPicture : img } alt="" />
+              <img src={det.displayPicture ? det.displayPicture : img} alt="" />
             </div>
             <div className="text-div">
               <h5>Hello,</h5>
@@ -780,9 +851,7 @@ const ProfileBody = ({ setLoginStatus }) => {
               </div>
             </div>
             <h4>In Progress Courses</h4>
-            <div className="course-progress">
-              {carts}
-            </div>
+            <div className="course-progress">{carts}</div>
           </div>
           <div className="profile" id="profile">
             <div className="data">
@@ -821,10 +890,40 @@ const ProfileBody = ({ setLoginStatus }) => {
               </ul>
             </div>
           </div>
+
           {/* Form begins here */}
           <div className="create-course" id="create">
             <h2>Create Course</h2>
             <form onSubmit={handleCreateCourse} action="">
+              <label>Course Cover image</label>
+              <div className="content-upload-area">
+                {coverImage ? (
+                  // <p>Cover image uploaded!</p>
+                  <>
+                    <div className="selectedImg">
+                      <img src={coverImage} alt="selected display photo" />
+                    </div>
+                    <button className="changeImg">
+                      <input
+                        type="file"
+                        onChange={(e) => handleCoverImageUpload(e)}
+                      />
+                      Change image
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      <BsPlus fontSize={20} /> Tap to upload file
+                    </p>
+                    <input
+                      type="file"
+                      onChange={(e) => handleCoverImageUpload(e)}
+                    />
+                  </>
+                )}
+              </div>
+
               <label>Course Title</label>
               <input
                 type="text"
@@ -840,11 +939,22 @@ const ProfileBody = ({ setLoginStatus }) => {
               />
 
               <label>Course Duration</label>
-              <input
+              {/* <input
                 type="time"
                 value={courseDuration}
                 onChange={(e) => cdfunc(e.target.value)}
-              />
+              /> */}
+              <select
+                value={courseDuration}
+                onChange={(e) => cdfunc(e.target.value)}
+              >
+                <option value="">Select an option</option>
+                <option value="4 hours">4 hours</option>
+                <option value="8 hours">8 hours</option>
+                <option value="12 hours">12 hours</option>
+                <option value="1 day">1 day</option>
+              </select>
+
               {/*
                 value={displaypicture}
                 onChange={(e) => displaypictureFunc(e.target.value)} */}
@@ -856,14 +966,19 @@ const ProfileBody = ({ setLoginStatus }) => {
                 onChange={(e) => cafunc(e.target.value)}
               /> */}
 
-              <select  value={category} onChange={(e) => cafunc(e.target.value)} >
-                <option value="Personal Development">Personal Development</option>
+              <select value={category} onChange={(e) => cafunc(e.target.value)}>
+                <option value="">Select an option</option>
+                <option value="Personal Development">
+                  Personal Development
+                </option>
                 <option value="Forex">Forex</option>
                 <option value="Affiliate Marketing">Affiliate Marketing</option>
                 <option value="Financial Trading">Financial Trading</option>
                 <option value="Marketing">Marketing</option>
                 <option value="Design and IT">Design and IT</option>
-                <option value="Business and management">Business and Management</option>
+                <option value="Business and management">
+                  Business and Management
+                </option>
               </select>
 
               <label>What To Learn</label>
@@ -1017,69 +1132,98 @@ const ProfileBody = ({ setLoginStatus }) => {
                 )}
               </div>
 
-              {/* to upload the course content */}
-              <label>Course Content</label>
-              <div className="array-input">
-                <div className="array-input-course-content">
-                  {titleValueInput.map((eachContent, index) => (
-                    <div key={index}>
-                      {eachContent.visibility && (
-                        <input
-                          type="text"
-                          value={titleValue[index]}
-                          onChange={(e) =>
-                            titleValuefunc({
-                              ...titleValue,
-                              [index]: e.target.value,
-                            })
-                          }
-                        />
-                      )}
-                    </div>
-                  ))}
+              <div className="double-array-input">
+                <div className="each">
+                  {/* to upload the course content */}
+                  <label>Course Content</label>
+                  {/* <div className="array-input"> */}
+                  <div className="array-input-course-content">
+                    {courseContentValuesInput.map((eachContent, index) => (
+                      <div key={index}>
+                        {eachContent.visibility && (
+                          <input
+                            type="text"
+                            value={titleValue[index]}
+                            onChange={(e) =>
+                              titleValuefunc({
+                                ...titleValue,
+                                [index]: e.target.value,
+                              })
+                            }
+                          />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  {/* {titleValueInput[0].visibility && (
+                      <span
+                        onClick={() =>
+                          addInputField(titleValueInput, settitleValueInput)
+                        }
+                      >
+                        Add
+                      </span>
+                    )} */}
+                  {/* </div> */}
                 </div>
-                {titleValueInput[0].visibility && (
-                  <span
-                    onClick={() =>
-                      addInputField(titleValueInput, settitleValueInput)
-                    }
-                  >
-                    Add
-                  </span>
-                )}
-              </div>
 
-              
-
-              {/* to upload the course videos (send to the API as "coursecontent") */}
-              <label>Upload Videos</label>
-              <div className="array-input">
-                <div className="array-input-course-content">
-                  {courseContentValuesInput.map((eachContent, index) => (
-                    <div key={index}>
-                      {courseContentValuesInput[index].visibility && (
-                        <input
-                          type="file"
-                          value={courseContentValues[index]}
-                          onChange={(e) =>
-                            cofunc({
-                              ...courseContentValues,
-                              [index]: e.target.value,
-                            })
-                          }
-                        />
-                      )}
-                    </div>
-                  ))}
+                <div className="each">
+                  {/* to upload the course videos (send to the API as "coursecontent") */}
+                  <label>Upload Videos</label>
+                  {/* <div className="array-input"> */}
+                  <div>
+                    {courseContentValuesInput.map((eachContent, index) => (
+                      <>
+                        {courseContentValuesInput[index].visibility && (
+                          <div key={index} className="content-upload-area">
+                            {eachContent.visibility &&
+                            courseContentValues[index] ? (
+                              <>
+                              <p>{courseContentValues[index].name} uploaded </p>
+                                {/* <button className="changeImg">
+                                  <input
+                                    type="file"
+                                    onChange={(e) => handleCoverImageUpload(e)}
+                                  />
+                                  Change image
+                                </button> */}
+                              </>
+                              // <p>uploaded!</p>
+                            ) : (
+                              <>
+                                <p>
+                                  <BsPlus fontSize={20} /> Tap to upload file
+                                </p>
+                                <input
+                                  type="file"
+                                  value={courseContentValues[index]}
+                                  onChange={(e) => handleCourseVideoUpload(e)}
+                                />
+                              </>
+                            )}
+                          </div>
+                        )}
+                      </>
+                    ))}
+                  </div>
+                  {/* {courseContentValuesInput[0].visibility && (
+                      <span
+                        onClick={() =>
+                          addInputField(
+                            courseContentValuesInput,
+                            setCourseContentInput
+                          )
+                        }
+                      >
+                        Add
+                      </span>
+                    )} */}
+                  {/* </div> */}
                 </div>
                 {courseContentValuesInput[0].visibility && (
                   <span
-                    onClick={() =>
-                      addInputField(
-                        courseContentValuesInput,
-                        setCourseContentInput
-                      )
-                    }
+                    onClick={addNewCourseContent}
+                    className="addCourseContent"
                   >
                     Add
                   </span>
@@ -1131,4 +1275,4 @@ const ProfileBody = ({ setLoginStatus }) => {
   );
 };
 
-export default ProfileBody
+export default ProfileBody;

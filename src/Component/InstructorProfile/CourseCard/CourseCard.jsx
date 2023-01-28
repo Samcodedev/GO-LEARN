@@ -61,11 +61,11 @@ const CourseCard = (props) => {
   // }
   const setSelectedCourse = props.setSelectedCourse;
 
-  function deleteCourse() {    
-    props.del();
-    setSelectedCourse(props.id);
-    console.log('Selected course id: ', props.id);
-  }
+  // function deleteCourse() {    
+  //   props.del();
+  //   setSelectedCourse(props.id);
+  //   console.log('Selected course id: ', props.id);
+  // }
 
   return (
     <div className="cardContainer">
