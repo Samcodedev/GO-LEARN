@@ -5,33 +5,38 @@ import "./courseCard.css";
 import { HiOutlineUser } from "react-icons/hi";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
+// import axios from "axios";
 
 const CourseCard = (props) => {
-  // console.log(props.data);
 
+  let [pup, pupfunc] = React.useState(true);
+
+  function pupF() {
+    pupfunc(!pup);
+  }
+  // console.log(props.data);
+  let id = props.id
   
 
-  // let [del, delFunc] = React.useState()
-  // const deleteCourse = async () => {
-  //   const config = {
-  //     headers: {
-  //       "content-Type": "application/json",
-  //       'Accept': 'application/json',
-  //       'Access-Control-Allow-Origin': '*',
-  //       Authorization: "Bearer " + localStorage.getItem("token"),
-  //     },
-  //   };
-  //   let result = await fetch(
-  //     `https://golearn.up.railway.app/api/v1/course/${del}`,
-  //     {
-  //       method: "DELETE",
-  //       config,
-  //     }
-  //   );
-  //   result = await result.json();
-  //   console.warn(result);
-  //   console.log(result);
-  // };
+  let deleteCourse = async () => {
+    const config = {
+      headers: {        
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/${props.id}`,
+      config,
+      {
+        credentials: "include",
+        method: 'DELETE',
+      }
+    );
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+  };
 
 
   // function setDele(){
@@ -39,20 +44,28 @@ const CourseCard = (props) => {
   //     props.id
   //    )
   // }
+  const setSelectedCourse = props.setSelectedCourse;
+
+  // function deleteCourse() {    
+  //   props.del();
+  //   setSelectedCourse(props.id);
+  //   console.log('Selected course id: ', props.id);
+  // }
+
   return (
     <div className="cardContainer">
       <div className="cardContainer__topArea">
         <div className="thumbnail">
           <img
             src="https://go-learn.online/wp-content/uploads/2021/04/pexels-worldspectrum-844124-1.jpg"
-            alt="thumbnail"
+            alt="course_image"
           />
         </div>
         <div className="bookmarkBox">
           {/* <FiBookmark /> */}
           {props.icon}
           <ul>
-            <li onClick={props.del}>Delete</li>
+            <li onClick={deleteCourse}>Delete</li>
             <li>Update</li>
           </ul>
         </div>
@@ -85,6 +98,25 @@ const CourseCard = (props) => {
         <Link to="/DecFinance" state={{ id: props.data }}>
           <button className="btn">Enroll Course</button>
         </Link>
+      </div>
+
+
+      {/* -- pup up box -- */}
+      <div
+        className="pup-up"
+        id="pupUp"
+        style={{ display: pup ? "none" : "flex" }}
+      >
+        <div className="pup-box">
+          <h4>
+            You're about to delete the following course click CONFIRM to
+            delete and CANCEL to abort.
+          </h4>
+          <div className="button">
+            <button onClick={deleteCourse}>Confirm</button>
+            <button onClick={pupF}>Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
   );

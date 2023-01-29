@@ -1,7 +1,7 @@
 import React from 'react';
 import './Executive.css'
 import { Link } from 'react-router-dom';
-import img from './img/olubori-free2.png'
+import img from './img/about-3.jfif'
 
 const Executive = () => {
     return(

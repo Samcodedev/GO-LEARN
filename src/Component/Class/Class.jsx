@@ -167,6 +167,29 @@ const Class = () => {
     )
   })
 
+
+
+  
+
+  const courseId = datah._id;
+  const handleCart = async (e) => {
+    e.preventDefault();
+    let result = await fetch("`https://golearn.up.railway.app/api/v1/cart", {
+      method: "post",
+      credencials: "include",
+      body: JSON.stringify({
+        courseId,
+      }),
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+  };
+
   return (
     <div className="class">
       <div className="sub-class">
@@ -182,8 +205,8 @@ const Class = () => {
               <p>{datah.courseTitle}</p>
             </div>
             <div className="second">
-              <span>Your Progress: 0 of 11 (0%)</span>
-              <button>Mark as Complete</button>
+              {/* <span>Your Progress: 0 of 11 (0%)</span> */}
+              <button onClick={handleCart}>Add to profile</button>
             </div>
           </div>
           <iframe src={videoData[nextForward]} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

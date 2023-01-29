@@ -1,7 +1,7 @@
 import React from "react";
 import "../OnlineBlog/OnlineBlog.css";
 import "./DistanceLearn.css";
-import img from "./img/man-with-laptop-olubori.png";
+import img from "./img/golearn-1.jpg";
 import { Link } from "react-router-dom";
 
 const DistanceLearn = () => {

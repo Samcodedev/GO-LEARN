@@ -1,6 +1,6 @@
 import React from "react";
 import "./OnlineBlog.css";
-import img from "./img/olubori-free2.png";
+import img from "./img/golearn-2.jpg";
 import { Link } from "react-router-dom";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { FaChalkboardTeacher } from "react-icons/fa";

@@ -7,12 +7,23 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 import useResponsive from "../custom-hooks/UseResponsive";
 import { BsThreeDots } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaTimes } from "react-icons/fa";
+import { useState } from "react";
 
 const NavBar = ({loginStatus}) => {
   console.log(window.innerWidth);
 
   const onMobile = useResponsive();
+
+  const [dropdown, dropdownFunct] = useState(false)
+
+  function dropdownOpen() {
+    dropdownFunct(!dropdown)
+  }
+
+  function dropdownClose() {
+    dropdownFunct(!dropdown)
+  }
 
   return (
     <>
@@ -62,9 +73,6 @@ const NavBar = ({loginStatus}) => {
                 <Link to="Blog">Blog</Link>
               </li>
             </ul>
-            {/* <div id="nav">
-              <img src={nav} alt="" />
-            </div> */}
           </div>
           <div className="register">
             {/* Conditional rendering using login status  */}
@@ -90,11 +98,7 @@ const NavBar = ({loginStatus}) => {
                 />
               </div>
             )}
-            {/* <div className="option">
-              <img src={option} alt="" />
-            </div> */}
           </div>
-          {/* </div> */}
         </div>
       )}
       {onMobile && (
@@ -108,7 +112,7 @@ const NavBar = ({loginStatus}) => {
 
           {/* Naviagtion area */}
           <div className="navigation">
-            <ul className="main" id="list">
+            <ul className="main" id="list" style={{display: dropdown? "flex" : "none"}}>
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -146,8 +150,7 @@ const NavBar = ({loginStatus}) => {
             </ul>
             {/* Nav icon */}
             <div id="nav">
-              {/* <img src={nav} alt="" /> */}
-              <GiHamburgerMenu fontSize={22} />
+              {dropdown? <FaTimes fontSize={22} onClick={dropdownClose} /> : <GiHamburgerMenu fontSize={22} onClick={dropdownOpen} />  }
             </div>
           </div>
 
