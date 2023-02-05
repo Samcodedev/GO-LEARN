@@ -124,7 +124,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     console.log("Fetching instructor courses");
     let retrievedCredentials = JSON.parse(localStorage.getItem(MemoryKeys.UserCredentials));
     let userId;
-    if (retrievedCredentials && retrievedCredentials != null || retrievedCredentials !== undefined) {
+    if (retrievedCredentials && (retrievedCredentials != null || retrievedCredentials !== undefined)) {
       userId = retrievedCredentials._id; 
     } else {
       userId = det._id;
@@ -1157,7 +1157,7 @@ const ProfileBody = ({ setLoginStatus }) => {
                   {/* <div className="array-input"> */}
                   <div>
                     {courseContentValuesInput.map((eachContent, index) => (
-                      <>
+                      <div key={index}> 
                         {courseContentValuesInput[index].visibility && (
                           <div key={index} className="content-upload-area">
                             {eachContent.visibility &&
@@ -1215,7 +1215,7 @@ const ProfileBody = ({ setLoginStatus }) => {
                             )}
                           </div>
                         )}
-                      </>
+                      </div>
                     ))}
                   </div>
                   {/* {courseContentValuesInput[0].visibility && (
