@@ -14,8 +14,6 @@ const CourseCard = (props) => {
   function pupF() {
     pupfunc(!pup);
   }
-  // console.log(props.data);
-  let id = props.id
   
 
   let deleteCourse = async () => {
@@ -38,26 +36,12 @@ const CourseCard = (props) => {
     console.log(result);
   };
 
-
-  // function setDele(){
-  //    delFunc(
-  //     props.id
-  //    )
-  // }
-  const setSelectedCourse = props.setSelectedCourse;
-
-  // function deleteCourse() {    
-  //   props.del();
-  //   setSelectedCourse(props.id);
-  //   console.log('Selected course id: ', props.id);
-  // }
-
   return (
     <div className="cardContainer">
       <div className="cardContainer__topArea">
         <div className="thumbnail">
           <img
-            src="https://go-learn.online/wp-content/uploads/2021/04/pexels-worldspectrum-844124-1.jpg"
+            src={`${props.data.courseImage ? `${props.data.courseImage}` : '/logo.png'}`}
             alt="course_image"
           />
         </div>
@@ -73,15 +57,15 @@ const CourseCard = (props) => {
       <div className="cardContainer__details">
         <div className="ratings">
           {/* Ratings */}
-          ⭐⭐⭐⭐⭐
-          <p>2.64 (11)</p>
+          {/* ⭐⭐⭐⭐⭐
+          <p>2.64 (11)</p> */}
         </div>
         <div className="courseInfo">
           <h2>{props.courseTitle}</h2>
           <div className="courseInfo__details">
-            <span className="users">
+            {/* <span className="users">
               <HiOutlineUser /> 223
-            </span>
+            </span> */}
             <span className="duration">
               <BsClock /> {props.duration}
             </span>
