@@ -164,8 +164,14 @@ const ProfileBody = ({ setLoginStatus }) => {
   // }, [det.role]);
 
   useEffect(() => {
-    det.role === "user" && handlecart();
-    det.role === "publisher" && handleinstructorCourse();
+    if(det.role === "user") {
+      handlecart();
+      return;
+    }
+    if(det.role === "publisher") {
+      handleinstructorCourse();
+    }
+    // det.role === "publisher" && handleinstructorCourse();
   }, [det.role]);
 
   // useEffect(() => {
