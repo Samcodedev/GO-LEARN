@@ -162,17 +162,24 @@ const ProfileBody = ({ setLoginStatus }) => {
     handleLogin();
   }, []);
 
+  // det.role === "user" && handlecart();
+  // det.role === "publisher" && handleinstructorCourse();
+  
+  let retrievalCheck = false;
+
   useEffect(() => {
-    if(det.role === "user") {
+    if (det.role === "user" && !retrievalCheck) {
       handlecart();
+      retrievalCheck = true;
       return;
     }
-    if(det.role === "publisher") {
+    if (det.role === "publisher" && !retrievalCheck) {
       handleinstructorCourse();
+      retrievalCheck = true;
       return;
     }
     // det.role === "publisher" && handleinstructorCourse();
-  }, []);
+  }, [retrievalCheck]);
 
   // useEffect(() => {
   //   // if (det.role === "publisher") {
