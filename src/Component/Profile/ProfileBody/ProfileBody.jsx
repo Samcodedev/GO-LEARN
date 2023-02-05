@@ -182,7 +182,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       }
     }
     // det.role === "publisher" && handleinstructorCourse();
-  });
+  }, [retrievalCheck, det.role, handleinstructorCourse]);
 
   // useEffect(() => {
   //   // if (det.role === "publisher") {
