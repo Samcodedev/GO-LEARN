@@ -166,18 +166,23 @@ const ProfileBody = ({ setLoginStatus }) => {
   // det.role === "publisher" && handleinstructorCourse();
 
   // let retrievalCheck = false;
+  const [retrievalCheck, setRetrievalCheck] = useState(false);
 
   useEffect(() => {
-    if (det && det.role === "user") {
-      handlecart();
-      return;
-    }
-    if (det && det.role === "publisher") {
-      handleinstructorCourse();
-      return;
+    if (!retrievalCheck) {
+      if (det.role === "user") {
+        setRetrievalCheck(true);
+        handlecart();
+        return;
+      }
+      if (det.role === "publisher") {
+        setRetrievalCheck(true);
+        handleinstructorCourse();
+        return;
+      }
     }
     // det.role === "publisher" && handleinstructorCourse();
-  }, [det]);
+  });
 
   // useEffect(() => {
   //   // if (det.role === "publisher") {
