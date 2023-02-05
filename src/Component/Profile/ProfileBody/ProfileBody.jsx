@@ -132,15 +132,12 @@ const ProfileBody = ({ setLoginStatus }) => {
         },
       }
     );
+    
     result = await result.json();
-    // console.warn(result);
     console.log("courses", result);
 
-    result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result);
-
-    // instructCourseAvailability = true;
-
-    return;
+    result.data && instructCourseFunc(result.data);
+    !result.data && instructorErrorFunc(result);
   };
 
   const courseCreatedCard = instructCourse.map((item, index) => {
@@ -166,23 +163,18 @@ const ProfileBody = ({ setLoginStatus }) => {
   // det.role === "publisher" && handleinstructorCourse();
 
   // let retrievalCheck = false;
-  const [retrievalCheck, setRetrievalCheck] = useState(false);
 
   useEffect(() => {
-    if (!retrievalCheck) {
       if (det.role === "user") {
-        setRetrievalCheck(true);
         handlecart();
         return;
       }
       if (det.role === "publisher") {
-        setRetrievalCheck(true);
         handleinstructorCourse();
         return;
       }
-    }
     // det.role === "publisher" && handleinstructorCourse();
-  }, [retrievalCheck, det.role, handleinstructorCourse]);
+  }, [det.role]);
 
   // useEffect(() => {
   //   // if (det.role === "publisher") {

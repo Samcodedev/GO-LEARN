@@ -102,7 +102,7 @@ function Component() {
       console.log("TOKEN IS AVAILABLE");
       // Call function to fetch courses
       const fetchCourses = async () => {
-        let result = await fetch("https://golearn.onrender.com/api/v1/course", {
+        let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
           method: "get",
           credencials: "include",
         });
