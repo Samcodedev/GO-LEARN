@@ -19,3 +19,14 @@
     margin-left: auto;
     text-align: center;
 }
+.bloghead .sub-bloghead .text h1 {
+    margin-bottom: 4px;
+}
+.bloghead .sub-bloghead .text p {
+    margin-top: 2px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.bloghead .sub-bloghead .text p:hover {
+    color: #007bff; 
+}
