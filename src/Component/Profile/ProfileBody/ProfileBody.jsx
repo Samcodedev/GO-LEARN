@@ -172,7 +172,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       return;
     }
     // det.role === "publisher" && handleinstructorCourse();
-  });
+  }, [det]);
 
   // useEffect(() => {
   //   // if (det.role === "publisher") {

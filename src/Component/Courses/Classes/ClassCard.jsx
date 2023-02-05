@@ -11,7 +11,10 @@ const ClassCard = (props) => {
   return (
     <div className="card">
       <div className="img-div">
-        <img src={img} alt="" />
+        <img 
+        // src={img} 
+        src={`${props.data.courseImage ? `${props.data.courseImage}` : '/logo.png'}`}
+        alt="" />
       </div>
       <div className="content-div">
         {/* <span>

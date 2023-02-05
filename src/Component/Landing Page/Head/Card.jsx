@@ -15,7 +15,10 @@ const Card = ({data, hideBottomVisibility}) => {
   return (
     <div className="card">
       <div className="card-img">
-        <img src={forex} alt="" />
+        <img 
+        // src={forex} 
+        src={`${data.courseImage ? `${data.courseImage}` : '/logo.png'}`}
+        alt="" />
       </div>
       <div className="cont">
         <div className="card-prof">
