@@ -193,7 +193,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   let [titleValue, titleValuefunc] = React.useState([]);
 
   // this is used to get the course id so as to update it with the "coursecontent" and "videos" at handleUploadCourseContent
-  const [createCou, createCoufunc] = React.useState();
+  // const [createCou, createCoufunc] = React.useState();
 
   const whatToLearn = Object.values(whatToLearnValues);
   const requirement = Object.values(requirementValues);
@@ -203,7 +203,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   const courseContent = Object.values(courseContentValues);
 
   const [courseImage, courseImageFunc] = React.useState(null);
-  const [courseImageFile, setcourseImageFile] = React.useState(null);
+  // const [courseImageFile, setcourseImageFile] = React.useState(null);
 
   // function update() {
   // createCou? handleUploadCourseContent() : alert("don't call")
@@ -268,7 +268,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     result = await result.json();
     console.warn(result);
     console.log(result);
-    createCoufunc(result.data._id);
+    // createCoufunc(result.data._id);
 
     if (result.success === true) {
       // Upload course content
@@ -593,7 +593,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   };
 
   const handleCourseContentUpload = (e, type) => {
-    if (type == "video") {
+    if (type === "video") {
       // let _courseContentValues = courseContentValues;
 
       // _courseContentValues.push(e.target.files[0]);
@@ -607,7 +607,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       // console.log(courseContentValues);
       return;
     }
-    if (type == "link") {
+    if (type === "link") {
 
       cofunc([...courseContentValues, e.target.value]);
       
