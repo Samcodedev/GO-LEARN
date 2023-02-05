@@ -114,7 +114,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     pupfunc(!pup);
   }
 
-  let instructCourseAvailability = false;
+  // let instructCourseAvailability = false;
   const [instructCourse, instructCourseFunc] = useState([]);
   const [instructorError, instructorErrorFunc] = useState([]);
 
@@ -138,7 +138,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result);
 
-    instructCourseAvailability = true;
+    // instructCourseAvailability = true;
 
     return;
   };
@@ -1260,9 +1260,9 @@ const ProfileBody = ({ setLoginStatus }) => {
                 height: "fit-content",
               }}
             >
-              {instructCourseAvailability &&
+              {/* {instructCourseAvailability &&
                 !instructorError.error &&
-                "Loading courses..."}
+                "Loading courses..."} */}
             </h4>
           </div>
           {/* <div
