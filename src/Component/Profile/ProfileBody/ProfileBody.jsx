@@ -147,7 +147,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     result.data && instructCourseFunc(result.data);
     !result.data && instructorErrorFunc(result);
-  }, []);
+  }, [det._id]);
 
   const courseCreatedCard = instructCourse.map((item, index) => {
     return (
