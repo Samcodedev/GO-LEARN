@@ -57,7 +57,7 @@ const Login = ({ setLoginStatus }) => {
         <p>Hi, Welcome back!</p>
         <input
           type="text"
-          placeholder="Username or Email Address"
+          placeholder="Username"
           value={userName}
           id="valid1"
           onChange={(e) => efunc(e.target.value)}
