@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./ProfileBody.css";
 import img from "./img/Group 1.png";
 
@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import CourseCard from "../../InstructorProfile/CourseCard/CourseCard";
 import { BsPlus } from "react-icons/bs";
+import MemoryKeys from "../../models/MemoryKeys";
 
 const ProfileBody = ({ setLoginStatus }) => {
   let [savedCourses, setSavedCourses] = React.useState([]);
@@ -67,6 +68,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     // console.warn(result);
     console.log(result);
     effunc(result.data);
+    localStorage.setItem(MemoryKeys.UserCredentials, JSON.stringify(result.data));
   };
 
   const [cart, cartfunc] = React.useState([]);
@@ -118,11 +120,18 @@ const ProfileBody = ({ setLoginStatus }) => {
   const [instructCourse, instructCourseFunc] = useState([]);
   const [instructorError, instructorErrorFunc] = useState([]);
 
-  const handleinstructorCourse = async () => {
+  const handleinstructorCourse = useCallback(async () => {
     console.log("Fetching instructor courses");
+    let retrievedCredentials = JSON.parse(localStorage.getItem(MemoryKeys.UserCredentials));
+    let userId;
+    if (retrievedCredentials && retrievedCredentials != null || retrievedCredentials !== undefined) {
+      userId = retrievedCredentials._id; 
+    } else {
+      userId = det._id;
+    }
 
     let result = await fetch(
-      `https://golearn.up.railway.app/api/v1/course/publisher/${det._id}`,
+      `https://golearn.up.railway.app/api/v1/course/publisher/${userId}`,
       {
         method: "get",
         headers: {
@@ -132,13 +141,13 @@ const ProfileBody = ({ setLoginStatus }) => {
         },
       }
     );
-    
+
     result = await result.json();
     console.log("courses", result);
 
     result.data && instructCourseFunc(result.data);
     !result.data && instructorErrorFunc(result);
-  };
+  }, []);
 
   const courseCreatedCard = instructCourse.map((item, index) => {
     return (
@@ -165,16 +174,16 @@ const ProfileBody = ({ setLoginStatus }) => {
   // let retrievalCheck = false;
 
   useEffect(() => {
-      if (det.role === "user") {
-        handlecart();
-        return;
-      }
-      if (det.role === "publisher") {
-        handleinstructorCourse();
-        return;
-      }
+    if (det && det.role === "user") {
+      handlecart();
+      return;
+    }
+    if (det && det.role === "publisher") {
+      handleinstructorCourse();
+      return;
+    }
     // det.role === "publisher" && handleinstructorCourse();
-  }, [det.role]);
+  }, [det, det.role, handleinstructorCourse]);
 
   // useEffect(() => {
   //   // if (det.role === "publisher") {
