@@ -164,22 +164,20 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   // det.role === "user" && handlecart();
   // det.role === "publisher" && handleinstructorCourse();
-  
-  let retrievalCheck = false;
+
+  // let retrievalCheck = false;
 
   useEffect(() => {
-    if (det.role === "user" && !retrievalCheck) {
+    if (det && det.role === "user") {
       handlecart();
-      retrievalCheck = true;
       return;
     }
-    if (det.role === "publisher" && !retrievalCheck) {
+    if (det && det.role === "publisher") {
       handleinstructorCourse();
-      retrievalCheck = true;
       return;
     }
     // det.role === "publisher" && handleinstructorCourse();
-  }, [retrievalCheck]);
+  }, [det]);
 
   // useEffect(() => {
   //   // if (det.role === "publisher") {
