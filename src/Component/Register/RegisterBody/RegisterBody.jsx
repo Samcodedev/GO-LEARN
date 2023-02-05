@@ -39,13 +39,13 @@ const RegisterBody = ({ userRegistration, setUserRegistration }) => {
     let successful = result.success;
     let token = result.token;
 
-    if (result.success === false) {
+    if (successful === false) {
       ///TODO: Replace next line with toast card
       document.getElementById("message").innerHTML =
         "There was an error while creating your account. Please try again.";
       document.getElementById("message").style.color = "red";
       return;
-    } else if (result.success === true) {
+    } else if (successful === true) {
       document.getElementById("message").innerHTML =
         "Account created successfully!";
       document.getElementById("message").style.color = "green";

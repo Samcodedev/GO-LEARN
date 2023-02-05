@@ -157,23 +157,18 @@ const ProfileBody = ({ setLoginStatus }) => {
     );
   });
 
+  // useEffect(() => {
+  //   handleLogin();
+  //   det.role === "user" && handlecart();
+  // }, [det.role]);
+
   useEffect(() => {
-    handleLogin();
-    // det.role === "publisher" && handleinstructorCourse();
-    // : console.log("Hello loading");
     det.role === "user" && handlecart();
-    //  : console.log("publisher");
-  }, []);
-
-  useEffect(() => {
-      det.role === "user" && handlecart();
   }, [det.role]);
 
   useEffect(() => {
-      det.role === "publisher" && handleinstructorCourse();
+    det.role === "publisher" && handleinstructorCourse();
   }, [det.role]);
-
-  // console.log(det);
 
   const [isVideoCourseContentUploadType, setIsVideoCourseContentUploadType] =
     useState(true);
@@ -193,7 +188,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   let [titleValue, titleValuefunc] = React.useState([]);
 
   // this is used to get the course id so as to update it with the "coursecontent" and "videos" at handleUploadCourseContent
-  const [createCou, createCoufunc] = React.useState();
+  // const [createCou, createCoufunc] = React.useState();
 
   const whatToLearn = Object.values(whatToLearnValues);
   const requirement = Object.values(requirementValues);
@@ -203,7 +198,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   const courseContent = Object.values(courseContentValues);
 
   const [courseImage, courseImageFunc] = React.useState(null);
-  const [courseImageFile, setcourseImageFile] = React.useState(null);
+  // const [courseImageFile, setcourseImageFile] = React.useState(null);
 
   // function update() {
   // createCou? handleUploadCourseContent() : alert("don't call")
@@ -268,7 +263,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     result = await result.json();
     console.warn(result);
     console.log(result);
-    createCoufunc(result.data._id);
+    // createCoufunc(result.data._id);
 
     if (result.success === true) {
       // Upload course content
@@ -383,7 +378,9 @@ const ProfileBody = ({ setLoginStatus }) => {
     document.getElementById("create").style.display = "none";
     document.getElementById("cart").style.display = "flex";
 
-    {det.role === "publisher" ? handleinstructorCourse() : handlecart()}
+    {
+      det.role === "publisher" ? handleinstructorCourse() : handlecart();
+    }
   }
 
   // State that handles course content input
@@ -593,7 +590,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   };
 
   const handleCourseContentUpload = (e, type) => {
-    if (type == "video") {
+    if (type === "video") {
       // let _courseContentValues = courseContentValues;
 
       // _courseContentValues.push(e.target.files[0]);
@@ -607,10 +604,9 @@ const ProfileBody = ({ setLoginStatus }) => {
       // console.log(courseContentValues);
       return;
     }
-    if (type == "link") {
-
+    if (type === "link") {
       cofunc([...courseContentValues, e.target.value]);
-      
+
       return;
     }
   };
@@ -820,8 +816,16 @@ const ProfileBody = ({ setLoginStatus }) => {
                 </div>
               </div>
             </div>
-            <h4>In Progress Courses</h4>
-            <div className="course-progress">{carts}</div>
+            {det.role === "user" && (
+              <>
+                <h4>In Progress Courses</h4>
+                <div className="course-progress">
+                  {carts && carts.length < 1
+                    ? "No enrolled courses yet"
+                    : carts}
+                </div>
+              </>
+            )}
           </div>
           <div className="profile" id="profile">
             <div className="data">
@@ -1231,6 +1235,9 @@ const ProfileBody = ({ setLoginStatus }) => {
             }}
           >
             {det.role === "publisher" ? courseCreatedCard : carts}
+            {det.role === "user" && carts && carts.length < 1
+              ? "No enrolled courses yet"
+              : carts}
             <h4
               style={{
                 textAlign: "center",
@@ -1238,7 +1245,9 @@ const ProfileBody = ({ setLoginStatus }) => {
                 height: "fit-content",
               }}
             >
-              {instructCourseAvailability && !instructorError.error && 'Loading courses...'}
+              {instructCourseAvailability &&
+                !instructorError.error &&
+                "Loading courses..."}
             </h4>
           </div>
           {/* <div

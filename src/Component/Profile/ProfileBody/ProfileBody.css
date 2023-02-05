@@ -65,6 +65,8 @@
 .profilebody .sub-profilebody .top .profileDetails .img-div img {
   border-radius: 50%;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .profilebody .sub-profilebody .top .profileDetails .text-div {
   display: flex;

@@ -39,25 +39,29 @@ const ProfileCard = (props) => {
   // }
 
   let [getCourse, getCourseFunc] = React.useState();
-  const fetchCourse = async () => {
-    let result = await fetch(
-      `https://golearn.up.railway.app/api/v1/course/${data.courseId}`,
-      {
-        method: "get",
-      }
-    );
-    result = await result.json();
-    console.warn(result);
-    console.log("fetched course", result.data);
-
-    getCourseFunc(result.data);
-  };
 
   useEffect(() => {
+
+    async function fetchCourse() {
+      let result = await fetch(
+        `https://golearn.up.railway.app/api/v1/course/${data.courseId}`,
+        {
+          method: "get",
+        }
+      );
+      result = await result.json();
+      console.warn(result);
+      console.log("fetched course", result.data);
+  
+      getCourseFunc(result.data);
+
+      return;
+    };
+
     if (!getCourse) {
       fetchCourse();
     }
-  }, []);
+  }, [getCourse]);
 
   return (
     <div className="cardContainer">

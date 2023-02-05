@@ -2,7 +2,6 @@ import React from "react";
 // import { Link } from 'react-router-dom';
 import "./courseCard.css";
 // import { FiBookmark } from "react-icons/fi";
-import { HiOutlineUser } from "react-icons/hi";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 // import axios from "axios";
