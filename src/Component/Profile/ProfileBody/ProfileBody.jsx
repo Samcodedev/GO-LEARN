@@ -158,10 +158,9 @@ const ProfileBody = ({ setLoginStatus }) => {
     );
   });
 
-  // useEffect(() => {
-  //   handleLogin();
-  //   det.role === "user" && handlecart();
-  // }, [det.role]);
+  useEffect(() => {
+    handleLogin();
+  }, []);
 
   useEffect(() => {
     if(det.role === "user") {
@@ -170,9 +169,10 @@ const ProfileBody = ({ setLoginStatus }) => {
     }
     if(det.role === "publisher") {
       handleinstructorCourse();
+      return;
     }
     // det.role === "publisher" && handleinstructorCourse();
-  }, [det.role]);
+  }, [det, det.role]);
 
   // useEffect(() => {
   //   // if (det.role === "publisher") {
