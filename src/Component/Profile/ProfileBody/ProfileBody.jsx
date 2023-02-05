@@ -139,7 +139,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result);
 
     instructCourseAvailability = true;
-    
+
     return;
   };
 
@@ -165,15 +165,16 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   useEffect(() => {
     det.role === "user" && handlecart();
+    det.role === "publisher" && handleinstructorCourse();
   }, [det.role]);
 
-  useEffect(() => {
-    if (det.role === "publisher") {
-      handleinstructorCourse();
-      return;
-    }
-    // det.role === "publisher" && handleinstructorCourse();
-  }, [det.role]);
+  // useEffect(() => {
+  //   // if (det.role === "publisher") {
+  //   //   handleinstructorCourse();
+  //   //   return;
+  //   // }
+  //   det.role === "publisher" && handleinstructorCourse();
+  // }, [det.role]);
 
   const [isVideoCourseContentUploadType, setIsVideoCourseContentUploadType] =
     useState(true);
