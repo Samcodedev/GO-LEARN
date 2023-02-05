@@ -108,7 +108,7 @@ const ProfileBody = ({ setLoginStatus }) => {
   });
 
   let [pup, pupfunc] = React.useState(true);
-  let [selectedCourse, setSelectedCourse] = React.useState();
+  // let [selectedCourse, setSelectedCourse] = React.useState();
 
   function pupF() {
     pupfunc(!pup);
@@ -139,6 +139,8 @@ const ProfileBody = ({ setLoginStatus }) => {
     result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result);
 
     instructCourseAvailability = true;
+
+    return;
   };
 
   const courseCreatedCard = instructCourse.map((item, index) => {
@@ -151,24 +153,34 @@ const ProfileBody = ({ setLoginStatus }) => {
         icon={<SlOptionsVertical />}
         data={item}
         del={pupF}
-        setSelectedCourse={setSelectedCourse}
         key={index}
       />
     );
   });
 
+  useEffect(() => {
+    handleLogin();
+  }, []);
+
+  useEffect(() => {
+    if(det.role === "user") {
+      handlecart();
+      return;
+    }
+    if(det.role === "publisher") {
+      handleinstructorCourse();
+      return;
+    }
+    // det.role === "publisher" && handleinstructorCourse();
+  });
+
   // useEffect(() => {
-  //   handleLogin();
-  //   det.role === "user" && handlecart();
+  //   // if (det.role === "publisher") {
+  //   //   handleinstructorCourse();
+  //   //   return;
+  //   // }
+  //   det.role === "publisher" && handleinstructorCourse();
   // }, [det.role]);
-
-  useEffect(() => {
-    det.role === "user" && handlecart();
-  }, [det.role]);
-
-  useEffect(() => {
-    det.role === "publisher" && handleinstructorCourse();
-  }, [det.role]);
 
   const [isVideoCourseContentUploadType, setIsVideoCourseContentUploadType] =
     useState(true);
@@ -378,9 +390,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     document.getElementById("create").style.display = "none";
     document.getElementById("cart").style.display = "flex";
 
-    {
-      det.role === "publisher" ? handleinstructorCourse() : handlecart();
-    }
+    det.role === "publisher" ? handleinstructorCourse() : handlecart();
   }
 
   // State that handles course content input
@@ -597,7 +607,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
       cofunc([...courseContentValues, e.target.files[0]]);
 
-      const videoURL = URL.createObjectURL(e.target.files[0]);
+      // const videoURL = URL.createObjectURL(e.target.files[0]);
 
       // setVideoFiles(videoURL);
 
@@ -875,7 +885,7 @@ const ProfileBody = ({ setLoginStatus }) => {
                   // <p>Cover image uploaded!</p>
                   <>
                     <div className="selectedImg">
-                      <img src={coverImage} alt="selected display photo" />
+                      <img src={coverImage} alt="selected display" />
                     </div>
                     <button className="changeImg">
                       <input
