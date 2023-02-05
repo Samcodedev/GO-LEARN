@@ -7,11 +7,8 @@ import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const ProfileCard = (props) => {
-
-  let data = props.data
+  let data = props.data;
   // console.log(props.data);
-
-  
 
   // let [del, delFunc] = React.useState()
   // const deleteCourse = async () => {
@@ -35,15 +32,13 @@ const ProfileCard = (props) => {
   //   console.log(result);
   // };
 
-
   // function setDele(){
   //    delFunc(
   //     props.id
   //    )
   // }
 
-
-  let [getCourse, getCourseFunc] = React.useState()
+  let [getCourse, getCourseFunc] = React.useState();
   const fetchCourse = async () => {
     let result = await fetch(
       `https://golearn.up.railway.app/api/v1/course/${data.courseId}`,
@@ -55,13 +50,14 @@ const ProfileCard = (props) => {
     console.warn(result);
     console.log("fetched course", result.data);
 
-    getCourseFunc(result.data)
+    getCourseFunc(result.data);
   };
 
   useEffect(() => {
-    fetchCourse()
-  }, [])
-
+    if (!getCourse) {
+      fetchCourse();
+    }
+  }, []);
 
   return (
     <div className="cardContainer">
@@ -90,16 +86,19 @@ const ProfileCard = (props) => {
               <HiOutlineUser /> 223
             </span> */}
             <span className="duration">
-              <BsClock /> 
-              { getCourse? getCourse.courseDuration : " "}
+              <BsClock />
+              {getCourse ? getCourse.courseDuration : " "}
             </span>
           </div>
         </div>
         <div className="tutorInfo">
           <div className="tutorInfo__image">
-            <img src="https://go-learn.online/wp-content/uploads/2021/05/golearn-walter-150x150.jpg" alt="" />
+            <img
+              src="https://go-learn.online/wp-content/uploads/2021/05/golearn-walter-150x150.jpg"
+              alt=""
+            />
           </div>
-          <span>By { getCourse? getCourse.publisherName: " "}</span>
+          <span>By {getCourse ? getCourse.publisherName : " "}</span>
         </div>
       </div>
       <div className="bottom">
