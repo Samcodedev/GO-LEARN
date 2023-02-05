@@ -61,7 +61,7 @@ const ProfileCard = (props) => {
     if (!getCourse) {
       fetchCourse();
     }
-  }, [getCourse]);
+  }, [getCourse, data.courseId]);
 
   return (
     <div className="cardContainer">

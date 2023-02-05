@@ -139,6 +139,8 @@ const ProfileBody = ({ setLoginStatus }) => {
     result.data ? instructCourseFunc(result.data) : instructorErrorFunc(result);
 
     instructCourseAvailability = true;
+    
+    return;
   };
 
   const courseCreatedCard = instructCourse.map((item, index) => {
