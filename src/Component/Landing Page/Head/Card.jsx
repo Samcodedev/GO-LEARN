@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BiBookAlt } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
-import forex from "./img/Forex.png";
 import prof from "./img/Group 1.png";
 
 const Card = ({data, hideBottomVisibility}) => {
