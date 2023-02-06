@@ -1,11 +1,7 @@
 import React from 'react';
 import './PupCourse.css'
-// import forex from './img/Forex.png'
-import crypt from './img/download 2.png'
 import prof from './img/Group 1.png'
 import { Link } from 'react-router-dom';
-// import { BiBookAlt } from 'react-icons/bi'
-// import { HiUserGroup } from 'react-icons/hi'
 
 const Card = (props) => {
     let data = props.data
@@ -13,7 +9,10 @@ const Card = (props) => {
         <div className="card-wrapper">
             <div className="card">
                 <div className="card-img">
-                    <img src={crypt} alt=""/>
+                    <img 
+                    // src={crypt} 
+                    src={`${data.courseImage ? `${data.courseImage}` : '/logo.png'}`}
+                    alt=""/>
                 </div>
                 <div className="cont">
                     <div className="card-prof">
