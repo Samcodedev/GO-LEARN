@@ -13,7 +13,10 @@ const Card = (props) => {
         <div className="card-wrapper">
             <div className="card">
                 <div className="card-img">
-                    <img src={crypt} alt=""/>
+                    <img 
+                    // src={crypt} 
+                    src={`${data.courseImage ? `${data.courseImage}` : '/logo.png'}`}
+                    alt=""/>
                 </div>
                 <div className="cont">
                     <div className="card-prof">
