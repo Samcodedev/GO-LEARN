@@ -1,6 +1,5 @@
 import React from "react";
 import "./Classes.css";
-import img from "./img/360_F_392755534_r5mtZvJFFJk5JCi9aUpMojIvpnt98Lfq.png";
 import profile from "./img/Group 1.png";
 import { Link } from "react-router-dom";
 // import { FaStar } from "react-icons/fa";
@@ -11,7 +10,10 @@ const ClassCard = (props) => {
   return (
     <div className="card">
       <div className="img-div">
-        <img src={img} alt="" />
+        <img 
+        // src={img} 
+        src={`${props.data.courseImage ? `${props.data.courseImage}` : '/logo.png'}`}
+        alt="" />
       </div>
       <div className="content-div">
         {/* <span>

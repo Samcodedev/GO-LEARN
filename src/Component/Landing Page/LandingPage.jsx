@@ -42,7 +42,7 @@ function LandingPage() {
   console.log('Courses: ', courses);
   console.log('landingCourses: ', landingCourses);
 
-  fetchCourses();
+  // fetchCourses();
 
   useEffect(() => {
     !courses && fetchCourses();

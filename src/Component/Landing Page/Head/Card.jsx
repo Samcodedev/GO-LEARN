@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BiBookAlt } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
-import forex from "./img/Forex.png";
 import prof from "./img/Group 1.png";
 
 const Card = ({data, hideBottomVisibility}) => {
@@ -15,7 +14,10 @@ const Card = ({data, hideBottomVisibility}) => {
   return (
     <div className="card">
       <div className="card-img">
-        <img src={forex} alt="" />
+        <img 
+        // src={forex} 
+        src={`${data.courseImage ? `${data.courseImage}` : '/logo.png'}`}
+        alt="" />
       </div>
       <div className="cont">
         <div className="card-prof">

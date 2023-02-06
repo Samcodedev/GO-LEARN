@@ -25,15 +25,16 @@ const Head = ({ landingCourses }) => {
 
   const course = JSON.parse(localStorage.getItem("courses"));
 
-  const fashionCourses = course.filter(word => word.category === "Forex" || word.category === "Finance");
+  // const marketingCourses = course.filter(word => word.category === "Marketing");
+  const personalDevelopmentCourses = course.filter(word => word.category === "Personal Development");
+  const iTCourses = course.filter(word => word.category === "Design and IT");
 
-  console.log('fashionCourses: ', fashionCourses);
+  console.log('filtered courses: ', {'personal development courses': personalDevelopmentCourses, 'iTCourses': iTCourses});
 
-  let data1 = fashionCourses[0];
-  let data2 = fashionCourses[1];
+  let data1 = personalDevelopmentCourses[Math.floor(Math.random() * (personalDevelopmentCourses.length))];
+  let data2 = iTCourses[Math.floor(Math.random() * (iTCourses.length))];
 
-  // console.log("Data 1: ", data1);
-  // console.log("Data 2: ", data2);
+  // console.log([Math.floor(Math.random() * (fashionCourses.length))]); 
 
   // useeffect hook to get token from localStorage and set token availability 
   useEffect(() => {
