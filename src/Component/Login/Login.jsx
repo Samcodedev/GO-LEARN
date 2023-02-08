@@ -33,6 +33,7 @@ const Login = ({ setLoginStatus }) => {
     console.log(result);
 
     if (result.success === true) {
+      loadfun(false);
       valid1.style.border = "1px solid green";
       valid2.style.border = "1px solid green";
       error.innerHTML = "Welcome Back";
@@ -44,6 +45,7 @@ const Login = ({ setLoginStatus }) => {
       }, 3000);
       localStorage.setItem("token", result.token);
     } else if (result.success === false) {
+      loadfun(false);
       valid1.style.border = "1px solid red";
       valid2.style.border = "1px solid red";
       error.innerHTML = `${result.error}`;

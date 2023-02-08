@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./Head.css";
 import { Link } from "react-router-dom";
-import Course from "../.././Courses";
 import { BsPerson } from "react-icons/bs";
 import Card from "./Card";
 import { useState } from "react";
@@ -9,34 +8,99 @@ import { useEffect } from "react";
 
 const Head = ({ landingCourses }) => {
   const [tokenAvailability, setTokenAvailability] = useState(false);
+  // const [firstDataIsAvailable, setFirstDataIsAvailable] = useState(false);
+  // const [secondDataIsAvailable, setSecondDataIsAvailable] = useState(false);
 
-  const data = [
-    {
-      title: "Cryptocurrency Trading Course",
-      star: "**********",
-    },
-  ];
+  let course = JSON.parse(localStorage.getItem("courses"));
 
-  data.map((item) => {
-    return <Course title={item.title} star={item.star} />;
-  });
+  const [data1, setData1] = useState();
+  const [data2, setData2] = useState();
 
-  // console.log("landingCourses: ", landingCourses);
+  const fetchCourses = useCallback(async () => {
+    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
+      method: "get",
+      credencials: "include",
+    });
+    result = await result.json();
 
-  const course = JSON.parse(localStorage.getItem("courses"));
+    const data = result.data;
 
-  // const marketingCourses = course.filter(word => word.category === "Marketing");
-  const personalDevelopmentCourses = course.filter(word => word.category === "Personal Development");
-  const iTCourses = course.filter(word => word.category === "Design and IT");
+    console.log("RESULT: ", data);
 
-  console.log('filtered courses: ', {'personal development courses': personalDevelopmentCourses, 'iTCourses': iTCourses});
+    localStorage.setItem("courses", JSON.stringify(data));
 
-  let data1 = personalDevelopmentCourses[Math.floor(Math.random() * (personalDevelopmentCourses.length))];
-  let data2 = iTCourses[Math.floor(Math.random() * (iTCourses.length))];
+    let personalDevelopmentCourses = data.filter(
+      (word) => word.category === "Personal Development"
+    );
+    let iTCourses = data.filter((word) => word.category === "Design and IT");
 
-  // console.log([Math.floor(Math.random() * (fashionCourses.length))]); 
+    console.log("filtered courses: ", {
+      "personal development courses": personalDevelopmentCourses,
+      iTCourses: iTCourses,
+    });
 
-  // useeffect hook to get token from localStorage and set token availability 
+    setData1(
+      personalDevelopmentCourses[
+        Math.floor(Math.random() * personalDevelopmentCourses.length)
+      ]
+    );
+    setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
+  }, []);
+
+  useEffect(() => {
+    if (course) {
+      // const marketingCourses = course.filter(word => word.category === "Marketing");
+      let personalDevelopmentCourses = course.filter(
+        (word) => word.category === "Personal Development"
+      );
+      let iTCourses = course.filter(
+        (word) => word.category === "Design and IT"
+      );
+
+      console.log("filtered courses: ", {
+        "personal development courses": personalDevelopmentCourses,
+        iTCourses: iTCourses,
+      });
+      
+      if (!data1 && data2) {
+        setData1(
+          personalDevelopmentCourses[
+            Math.floor(Math.random() * personalDevelopmentCourses.length)
+          ]
+        );
+
+        setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
+        console.log("data: ", { "Data 1": data1, "Data 2 ": data2 });
+        return;
+      }
+
+      if (!data1) {
+        setData1(
+          personalDevelopmentCourses[
+            Math.floor(Math.random() * personalDevelopmentCourses.length)
+          ]
+        );
+
+        console.log("Data 1 set: ", { "Data": data1,});
+        return;
+      }
+
+      if (!data2) {
+        setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
+
+        console.log("Data 2 set: ", { "Data": data1,});
+        return;
+      }
+    }
+  }, [course, data1, data2]);
+
+  useEffect(() => {
+    if (!course) {
+      fetchCourses();
+    }
+  }, [course, fetchCourses]);
+
+  // useeffect hook to get token from localStorage and set token availability
   useEffect(() => {
     const token = localStorage.getItem("token");
     token && setTokenAvailability(true);
@@ -44,7 +108,6 @@ const Head = ({ landingCourses }) => {
 
   return (
     <div className="head">
-      {/* <div className="sub-head"> */}
       <div className="head-text">
         <h1>Nigeria's foremost Learning and Earning Platform</h1>
         <p>
@@ -67,10 +130,13 @@ const Head = ({ landingCourses }) => {
         )}
       </div>
       <div className="head-card">
-        <div className="card-wrapper">{data1 && <Card data={data1} hideBottomVisibility={true} />}</div>
-        <div className="card-wrapper">{data2 && <Card data={data2} hideBottomVisibility={true} />}</div>
+        <div className="card-wrapper">
+          <Card courseData={data1} hideBottomVisibility={true} />
+        </div>
+        <div className="card-wrapper">
+          <Card courseData={data2} hideBottomVisibility={true} />
+        </div>
       </div>
-      {/* </div> */}
     </div>
   );
 };

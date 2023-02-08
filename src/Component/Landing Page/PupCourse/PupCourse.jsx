@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import "./PupCourse.css";
 import Card from "./Card.jsx";
 // import ClassesData from '../../Courses/Data/ClassesData'
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const PupCourse = ({landingCourses}) => {
+const PupCourse = ({ landingCourses }) => {
+  const [course, setCourse] = useState();
 
-  console.log('landingCourses: ', landingCourses);
+  const fetchCourses = useCallback(async () => {
+    if (course) {
+      return;
+    }
+
+    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
+      method: "get",
+      credencials: "include",
+    });
+    result = await result.json();
+
+    const data = result.data;
+
+    console.log("RESULT: ", data);
+
+    localStorage.setItem("courses", JSON.stringify(data));
+
+    setCourse(data);
+  }, [course]);
+
+  useEffect(() => {
+    if (!course) {
+      fetchCourses();
+    }
+  }, [course, fetchCourses]);
 
   return (
     <div className="pupcourse">
@@ -20,17 +46,13 @@ const PupCourse = ({landingCourses}) => {
             it.
           </p>
         </div>
-        <div className="wrapper">
-          <Card
-            data={landingCourses[2]}
-          />
-          <Card
-            data={landingCourses[3]}
-          />
-          <Card
-            data={landingCourses[4]}
-          />
-        </div>
+        {course && (
+          <div className="wrapper">
+            <Card data={course[2]} />
+            <Card data={course[3]} />
+            <Card data={course[4]} />
+          </div>
+        )}
         <div className="pupcourse-bottom-text">
           <p>
             Enjoy top notch learning methods and achieve next level skills. You
