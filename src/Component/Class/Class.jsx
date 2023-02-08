@@ -4,11 +4,40 @@ import Module from "./Card/Module";
 import ModuleData from "./Card/ModuleData.json";
 // import ReviewData from '../Review/data/ReviewData.json'
 import StudentRev from "../Review/StudentRev";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import MemoryKeys from "../models/MemoryKeys";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Class = () => {
-  const location = useLocation();
-  let datah = location.state.id;
+  const { id } = useParams();
+  // const location = useLocation();
+  let selectedCourseId = id;
+  let courseDataId = localStorage.getItem(MemoryKeys.SelectedCourseId);
+  const [courseData, setCourseData] = useState();
+
+  /**
+   * Function to get course data
+   */
+  const handleGetCourseInfo = async () => {
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/${selectedCourseId}`,
+      {
+        method: "get",
+      }
+    );
+    result = await result.json();
+    console.log("Selected course info: ", result);
+    setCourseData(result.data);
+  };
+
+  useEffect(() => {
+    if (!courseData) {
+      handleGetCourseInfo();
+    }
+  }, [courseData]);
+
+  useEffect(() => {}, [courseDataId]);
 
   // videos nesting function
   let videoData = [
@@ -17,32 +46,21 @@ const Class = () => {
     "https://www.youtube.com/embed/xDBW8qWPkdc",
     "https://www.youtube.com/embed/qXCmc_wVA1o",
     "https://www.youtube.com/embed/RrnSHm6Lh4c",
-    "https://www.youtube.com/embed/gTtGWH8EJfA"
-  ]
-  const [nextForward, nextForwardFunc] = React.useState(0)
+    "https://www.youtube.com/embed/gTtGWH8EJfA",
+  ];
+
+  const [nextForward, nextForwardFunc] = React.useState(0);
   function next() {
-    nextForwardFunc(
-      nextForward + (nextForward <= 4? 1: 0)
-    )
+    nextForwardFunc(nextForward + (nextForward <= 4 ? 1 : 0));
     // alert(nextForward)
   }
 
   function backward() {
-    nextForwardFunc(
-      nextForward - (nextForward >= 1? 1: 0)
-    )
+    nextForwardFunc(nextForward - (nextForward >= 1 ? 1 : 0));
     // alert(nextForward)
   }
 
-  console.log("total length",videoData.length)
-
-
-  // let playVideo = ""
-
-
-
-
-  console.log(datah);
+  // console.log("total length", videoData.length);
 
   const mode = ModuleData.map((item) => {
     return <Module module={item.module} title={item.title} time={item.time} />;
@@ -91,33 +109,33 @@ const Class = () => {
   const [revew, refunct] = React.useState([]);
   const handlerev = async () => {
     let result = await fetch(
-      `https://golearn.up.railway.app/api/v1/course/${datah._id}/reviews`,
+      `https://golearn.up.railway.app/api/v1/course/${selectedCourseId}/reviews`,
       {
         method: "get",
       }
     );
     result = await result.json();
-    // console.warn(result)
     // console.log(result)
 
     refunct(result.data);
   };
   // console.log(revew)
-  handlerev();
+  // handlerev();
 
   let [pup, pupf] = React.useState("");
   let [review, refunc] = React.useState("");
   let [rating, rafunc] = React.useState("");
+
   const handlereview = async (e) => {
     e.preventDefault();
     let result2 = await fetch(
-      `https://golearn.up.railway.app/api/v1/course/${datah._id}/reviews`,
+      `https://golearn.up.railway.app/api/v1/course/${selectedCourseId}/reviews`,
       {
         method: "post",
         body: JSON.stringify({ review, rating }),
         headers: {
           "content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
         },
       }
     );
@@ -139,9 +157,11 @@ const Class = () => {
     handlerev();
   };
 
-  // useEffect(() => {
-  //     handlerev()
-  // }, [revew])
+  useEffect(() => {
+    if (!revew) {
+      handlerev();
+    }
+  }, [revew]);
 
   if (rating > 5) {
     rating = 5;
@@ -161,17 +181,16 @@ const Class = () => {
     );
   });
 
-  const materialsList = (datah.materials).map((item) => {
-    return(
-      <a href={item} target='_blank' rel="noreferrer">{item}</a>
-    )
-  })
+  const materialsList = courseData?.materials.map((item) => {
+    return (
+      <a href={item} target="_blank" rel="noreferrer">
+        {item}
+      </a>
+    );
+  });
 
+  const courseId = selectedCourseId;
 
-
-  
-
-  const courseId = datah._id;
   const handleCart = async (e) => {
     e.preventDefault();
     let result = await fetch("`https://golearn.up.railway.app/api/v1/cart", {
@@ -182,7 +201,7 @@ const Class = () => {
       }),
       headers: {
         "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
       },
     });
     result = await result.json();
@@ -202,14 +221,20 @@ const Class = () => {
         <div className="video">
           <div className="video-head">
             <div className="first">
-              <p>{datah.courseTitle}</p>
+              <p>{courseData?.courseTitle}</p>
             </div>
             <div className="second">
               {/* <span>Your Progress: 0 of 11 (0%)</span> */}
               <button onClick={handleCart}>Add to profile</button>
             </div>
           </div>
-          <iframe src={videoData[nextForward]} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe
+            src={videoData[nextForward]}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
           <div className="course-details">
             <ul>
               <li id="link1" onClick={overview}>
@@ -229,7 +254,7 @@ const Class = () => {
               </div>
               <div className="overview" id="overview">
                 <h2>About Lesson</h2>
-                <p>{datah.courseDescription}</p>
+                <p>{courseData?.courseDescription}</p>
               </div>
               <div className="file" id="file">
                 <h2>Exercise Files</h2>

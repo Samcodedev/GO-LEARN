@@ -53,7 +53,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     const config = {
       headers: {
         "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
       },
     };
     let result = await fetch(
@@ -78,7 +78,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     const config = {
       headers: {
         "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
       },
     };
 
@@ -93,7 +93,9 @@ const ProfileBody = ({ setLoginStatus }) => {
     result = await result.json();
     console.warn(result);
     console.log(result);
-    cartfunc(result.data.course);
+    if(result.success) {
+      cartfunc(result.data.course);
+    }
 
     // cartAvailability = true;
   };
@@ -279,7 +281,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       }),
       headers: {
         "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
       },
     });
 
@@ -329,7 +331,7 @@ const ProfileBody = ({ setLoginStatus }) => {
           courseContent,
         },
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
         },
       }
     );
@@ -356,7 +358,7 @@ const ProfileBody = ({ setLoginStatus }) => {
         credencials: "include",
         body: data,
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
         },
       }
     );
@@ -654,7 +656,7 @@ const ProfileBody = ({ setLoginStatus }) => {
         // }),
         body: data,
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
         },
       }
     );

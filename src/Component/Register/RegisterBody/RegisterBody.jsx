@@ -54,7 +54,7 @@ const RegisterBody = ({ userRegistration, setUserRegistration }) => {
       }, 3000);
 
       //   Save token
-      localStorage.setItem("token", token);
+      localStorage.setItem(MemoryKeys.UserToken, token);
 
       //   document.getElementById("message").innerHTML = "You have successfully Registered";
     }
@@ -109,7 +109,7 @@ const RegisterBody = ({ userRegistration, setUserRegistration }) => {
       }, 3000);
 
       //   Save token
-      localStorage.setItem("token", token);
+      localStorage.setItem(MemoryKeys.UserToken, token);
     }
   }
 

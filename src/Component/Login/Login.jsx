@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import MemoryKeys from "../models/MemoryKeys";
 import "./Login.css";
 
 const Login = ({ setLoginStatus }) => {
@@ -43,7 +44,7 @@ const Login = ({ setLoginStatus }) => {
       setTimeout(() => {
         navigate("/profile");
       }, 3000);
-      localStorage.setItem("token", result.token);
+      localStorage.setItem(MemoryKeys.UserToken, result.token);
     } else if (result.success === false) {
       loadfun(false);
       valid1.style.border = "1px solid red";

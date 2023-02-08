@@ -24,28 +24,30 @@ const Card = ({courseData, hideBottomVisibility}) => {
         </div>
         <div className="card-content">
           <h1>
-            <Link to="/DecFinance" state={{ id: course }}>
+            <Link to={`/course/${courseData?._id}`} state={{ id: course }}>
               {courseData?.courseTitle}
             </Link>
           </h1>
           <p>{courseData?.courseDescription}</p>
         </div>
-        {!hideBottomVisibility && <div className="card-bottom">
-          <ul>
-            <li>
-              <Link to="">
-                {" "}
-                <BiBookAlt fontSize="20px" color="#007bff" /> Lesson 9
-              </Link>
-            </li>
-            <li>
-              <Link to="">
-                {" "}
-                <HiUserGroup fontSize="20px" color="#007bff" /> Students 288
-              </Link>
-            </li>
-          </ul>
-        </div>}
+        {!hideBottomVisibility && (
+          <div className="card-bottom">
+            <ul>
+              <li>
+                <Link to="">
+                  {" "}
+                  <BiBookAlt fontSize="20px" color="#007bff" /> Lesson 9
+                </Link>
+              </li>
+              <li>
+                <Link to="">
+                  {" "}
+                  <HiUserGroup fontSize="20px" color="#007bff" /> Students 288
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

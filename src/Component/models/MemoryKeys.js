@@ -18,4 +18,9 @@ export default class MemoryKeys {
      * Storage key for users
      */
     static UserCredentials = "user-credentials";
+
+    /**
+     * Storage key for selected course id
+     */
+    static SelectedCourseId = "selected-course-id";
 }

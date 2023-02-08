@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ClassCard = (props) => {
   let sss = props.data;
-  console.log(sss);
+  // console.log(sss);
   return (
     <div className="card">
       <div className="img-div">

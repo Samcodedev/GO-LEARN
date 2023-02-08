@@ -5,6 +5,7 @@ import { BsPerson } from "react-icons/bs";
 import Card from "./Card";
 import { useState } from "react";
 import { useEffect } from "react";
+import MemoryKeys from "../../models/MemoryKeys";
 
 const Head = ({ landingCourses }) => {
   const [tokenAvailability, setTokenAvailability] = useState(false);
@@ -102,7 +103,7 @@ const Head = ({ landingCourses }) => {
 
   // useeffect hook to get token from localStorage and set token availability
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem(MemoryKeys.UserToken);
     token && setTokenAvailability(true);
   }, []);
 

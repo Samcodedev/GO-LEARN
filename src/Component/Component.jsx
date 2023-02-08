@@ -18,7 +18,9 @@ import Reset from "./ResetPassword/Reset";
 import Class from "./Class/Class";
 import Error from "./ErrorPage/Error";
 import InstructorProfile from "./InstructorProfile/InstructorProfile";
-import PublisherReg from "./PublisherReg/PublisherReg";
+import PublisherReg from "./PublisherReg/PublisherReg"
+import Course from "./Course/[id]";
+import MemoryKeys from "./models/MemoryKeys";
 
 function Component() {
   const API = "https://golearn.up.railway.app/api/v1/auth/";
@@ -48,7 +50,7 @@ function Component() {
   }, [savedCourses]);
 
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
+    const token = window.localStorage.getItem(MemoryKeys.UserToken);
     console.log("Token gotten");
     if (token) {
       setLoginStatus(true);
@@ -91,6 +93,7 @@ function Component() {
             <Route path="Contact-Us" element={<Contact />} />
             <Route path="instructor" element={<InstructorProfile />} />
             <Route path="construction" element={<Construction />} />
+            <Route path="course/:id" element={<Course />} />
             <Route
               path="register"
               element={<Register setLoginStatus={setLoginStatus} />}
@@ -104,7 +107,7 @@ function Component() {
               element={<Login setLoginStatus={setLoginStatus} />}
             />
             <Route path="/forget" element={<Forget />} />
-            <Route path="/class" element={<Class />} />
+            <Route path="class/:id" element={<Class />} />
             <Route path="/publisher" element={<PublisherReg />} />
             <Route path={`${API}resetpassword/:token`} element={<Reset />} />
             <Route path="*" element={<Error />} />
