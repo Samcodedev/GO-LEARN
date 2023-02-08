@@ -4,35 +4,31 @@ import { BiBookAlt } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
 import prof from "./img/Group 1.png";
 
-const Card = ({data, hideBottomVisibility}) => {
-//   console.log("Card props: ", props);
-  // console.log(props.data)
-//   let hideBottomVisibility = props.hideBottomVisibility;
-//   let course = props.data;
-  let course = data;
-//   console.log("Course: ", props.data);
+const Card = ({courseData, hideBottomVisibility}) => {
+  console.log('CARD PROPS: ', {courseData, hideBottomVisibility});
+  let course = courseData;
   return (
     <div className="card">
       <div className="card-img">
         <img 
         // src={forex} 
-        src={`${data.courseImage ? `${data.courseImage}` : '/logo.png'}`}
+        src={`${courseData?.courseImage ?? '/logo.png'}`}
         alt="" />
       </div>
       <div className="cont">
         <div className="card-prof">
           <img src={prof} alt="" />
           <span>
-            <Link to="/instructor">{course.publisherName}</Link>
+            <Link to="/instructor">{courseData?.publisherName}</Link>
           </span>
         </div>
         <div className="card-content">
           <h1>
             <Link to="/DecFinance" state={{ id: course }}>
-              {course.courseTitle}
+              {courseData?.courseTitle}
             </Link>
           </h1>
-          <p>{course.courseDescription}</p>
+          <p>{courseData?.courseDescription}</p>
         </div>
         {!hideBottomVisibility && <div className="card-bottom">
           <ul>

@@ -11,47 +11,78 @@ import DistanceLearn from "./DistanceLearn/DistanceLearn";
 import Subscribe from "./Subscribe/Subscribe";
 import Footer from "./Footer/Footer";
 import { useEffect } from "react";
-// import { useState } from "react";
-// import { useEffect } from "react";
+import { useState } from "react";
+import MemoryKeys from "../models/MemoryKeys";
 
 function LandingPage() {
-//   const API = "https://golearn.up.railway.app/api/v1/auth/";
+  //   const API = "https://golearn.up.railway.app/api/v1/auth/";
 
-//   const [landingCourses, setLandingCourses] = useState();
-  let landingCourses;
+  const [landingCourses, setLandingCourses] = useState();
+  // let landingCourses;
 
-  async function fetchCourses() {
-    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
-      method: "get",
-      credencials: "include",
-    });
-    result = await result.json();
+  // async function fetchCourses() {
+  //   let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
+  //     method: "get",
+  //     credencials: "include",
+  //   });
+  //   result = await result.json();
 
-    const data = result.data;
+  //   const data = result.data;
 
-    console.log("RESULT: ", data);
+  //   console.log("RESULT: ", data);
 
-    localStorage.setItem("courses", JSON.stringify(data));
+  //   localStorage.setItem("courses", JSON.stringify(data));
+  // }
 
-  };
-  
-  const courses = window.localStorage.getItem("courses");
+  // const courses = window.localStorage.getItem("courses");
 
-  landingCourses = JSON.parse(courses);
-  
-  console.log('Courses: ', courses);
-  console.log('landingCourses: ', landingCourses);
+  // landingCourses = JSON.parse(courses);
 
-  // fetchCourses();
+  // console.log("Courses: ", courses);
+  // console.log("landingCourses: ", landingCourses);
 
   useEffect(() => {
-    !courses && fetchCourses();
-  }, [courses])
+    /**
+     * Fetches courses
+     */
+    async function fetchCourses() {
+      // Try fetching from local storage
+      let data = localStorage.getItem(MemoryKeys.Courses);
 
+      // If the data is in local storage...
+      if (data && data !== "null" && data != "undefined") {
+        // Extract the data
+        let coursesFetched = JSON.parse(data);
+
+        // Store it in state
+        setLandingCourses(coursesFetched);
+
+        // Exit this function
+        return;
+      }
+
+      await fetch("https://golearn.up.railway.app/api/v1/course", {
+        method: "get",
+        credencials: "include",
+      })
+      .then(async (response) => {
+        console.log('response: ', response);
+      })
+      .catch(error => {
+        console.log('error: '. error);
+      })
+    }
+
+    // If we don't have the courses 
+    if(!landingCourses) {
+      // Fetch courses 
+      fetchCourses();
+    }
+  }, [landingCourses]);
 
   return (
     <div>
-      <Head landingCourses={courses} />
+      <Head landingCourses={landingCourses} />
       <Details />
       <PupCourse landingCourses={landingCourses} />
       <Olubori />

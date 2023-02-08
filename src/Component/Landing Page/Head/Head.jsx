@@ -9,42 +9,88 @@ import { useEffect } from "react";
 
 const Head = ({ landingCourses }) => {
   const [tokenAvailability, setTokenAvailability] = useState(false);
+  const [firstDataIsAvailable, setFirstDataIsAvailable] = useState(false);
+  const [secondDataIsAvailable, setSecondDataIsAvailable] = useState(false);
 
-  const data = [
-    {
-      title: "Cryptocurrency Trading Course",
-      star: "**********",
-    },
-  ];
 
-  data.map((item) => {
-    return <Course title={item.title} star={item.star} />;
-  });
 
-  // console.log("landingCourses: ", landingCourses);
+  let course = JSON.parse(localStorage.getItem("courses"));
+  let personalDevelopmentCourses;
+  let iTCourses;
+  const [data1, setData1] = useState();
+  const [data2, setData2] = useState();
 
-  const course = JSON.parse(localStorage.getItem("courses"));
+  async function fetchCourses() {
+    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
+      method: "get",
+      credencials: "include",
+    });
+    result = await result.json();
 
-  // const marketingCourses = course.filter(word => word.category === "Marketing");
-  const personalDevelopmentCourses = course.filter(word => word.category === "Personal Development");
-  const iTCourses = course.filter(word => word.category === "Design and IT");
+    const data = result.data;
 
-  console.log('filtered courses: ', {'personal development courses': personalDevelopmentCourses, 'iTCourses': iTCourses});
+    console.log("RESULT: ", data);
 
-  let data1 = personalDevelopmentCourses[Math.floor(Math.random() * (personalDevelopmentCourses.length))];
-  let data2 = iTCourses[Math.floor(Math.random() * (iTCourses.length))];
+    localStorage.setItem("courses", JSON.stringify(data));
 
-  // console.log([Math.floor(Math.random() * (fashionCourses.length))]); 
+    personalDevelopmentCourses = data.filter(
+      (word) => word.category === "Personal Development"
+    );
+    iTCourses = data.filter((word) => word.category === "Design and IT");
 
-  // useeffect hook to get token from localStorage and set token availability 
+    console.log("filtered courses: ", {
+      "personal development courses": personalDevelopmentCourses,
+      iTCourses: iTCourses,
+    });
+
+    setData1 =
+      personalDevelopmentCourses[
+        Math.floor(Math.random() * personalDevelopmentCourses.length)
+      ];
+    setData2 = iTCourses[Math.floor(Math.random() * iTCourses.length)];
+  }
+
+  useEffect(() => {
+    if (course) {
+      // const marketingCourses = course.filter(word => word.category === "Marketing");
+      personalDevelopmentCourses = course.filter(
+        (word) => word.category === "Personal Development"
+      );
+      iTCourses = course.filter((word) => word.category === "Design and IT");
+
+      setData1(personalDevelopmentCourses[Math.floor(Math.random() * personalDevelopmentCourses.length)]);
+      setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
+
+      console.log("data: ", {"Data 1": data1, "Data 2 ": data2});
+
+      console.log("filtered courses: ", {
+        "personal development courses": personalDevelopmentCourses,
+        iTCourses: iTCourses,
+      });
+    }
+
+    if (!course) {
+      fetchCourses();
+    }
+  }, []);
+
+  // useeffect hook to get token from localStorage and set token availability
   useEffect(() => {
     const token = localStorage.getItem("token");
     token && setTokenAvailability(true);
   }, []);
 
+  useEffect(() => {
+    if(data1) {
+      setFirstDataIsAvailable(true)
+    }
+    if(data2) {
+      setSecondDataIsAvailable(true)
+    }
+  }, [data1, data2])
+
   return (
     <div className="head">
-      {/* <div className="sub-head"> */}
       <div className="head-text">
         <h1>Nigeria's foremost Learning and Earning Platform</h1>
         <p>
@@ -67,10 +113,13 @@ const Head = ({ landingCourses }) => {
         )}
       </div>
       <div className="head-card">
-        <div className="card-wrapper">{data1 && <Card data={data1} hideBottomVisibility={true} />}</div>
-        <div className="card-wrapper">{data2 && <Card data={data2} hideBottomVisibility={true} />}</div>
+        <div className="card-wrapper">
+          <Card courseData={data1} hideBottomVisibility={true} />
+        </div>
+        <div className="card-wrapper">
+          <Card courseData={data2} hideBottomVisibility={true} />
+        </div>
       </div>
-      {/* </div> */}
     </div>
   );
 };
