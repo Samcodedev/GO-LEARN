@@ -32,7 +32,7 @@ const PupCourse = ({ landingCourses }) => {
     if (!course) {
       fetchCourses();
     }
-  }, [course]);
+  }, [course, fetchCourses]);
 
   return (
     <div className="pupcourse">

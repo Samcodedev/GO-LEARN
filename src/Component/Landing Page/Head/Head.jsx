@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./Head.css";
 import { Link } from "react-router-dom";
 import { BsPerson } from "react-icons/bs";
@@ -8,17 +8,18 @@ import { useEffect } from "react";
 
 const Head = ({ landingCourses }) => {
   const [tokenAvailability, setTokenAvailability] = useState(false);
-  const [firstDataIsAvailable, setFirstDataIsAvailable] = useState(false);
-  const [secondDataIsAvailable, setSecondDataIsAvailable] = useState(false);
+  // const [firstDataIsAvailable, setFirstDataIsAvailable] = useState(false);
+  // const [secondDataIsAvailable, setSecondDataIsAvailable] = useState(false);
 
 
 
   let course = JSON.parse(localStorage.getItem("courses"));
-  
+
   const [data1, setData1] = useState();
   const [data2, setData2] = useState();
 
-  async function fetchCourses() {
+  
+  const fetchCourses = useCallback(async () => {
     let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
       method: "get",
       credencials: "include",
@@ -43,7 +44,7 @@ const Head = ({ landingCourses }) => {
 
     setData1(personalDevelopmentCourses[Math.floor(Math.random() * personalDevelopmentCourses.length)])
     setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
-  }
+  }, [data1, data2]);
 
   useEffect(() => {
     if (course) {
@@ -63,11 +64,13 @@ const Head = ({ landingCourses }) => {
         "iTCourses": iTCourses,
       });
     }
+  }, []);
 
+  useEffect(() => {    
     if (!course) {
       fetchCourses();
     }
-  }, []);
+  }, [fetchCourses]);
 
   // useeffect hook to get token from localStorage and set token availability
   useEffect(() => {
@@ -75,14 +78,6 @@ const Head = ({ landingCourses }) => {
     token && setTokenAvailability(true);
   }, []);
 
-  useEffect(() => {
-    if(data1) {
-      setFirstDataIsAvailable(true)
-    }
-    if(data2) {
-      setSecondDataIsAvailable(true)
-    }
-  }, [data1, data2])
 
   return (
     <div className="head">

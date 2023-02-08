@@ -64,7 +64,7 @@ function Component() {
     return () => {
       console.log("cleanup");
     };
-  }, [savedCourses]);
+  }, [savedCourses, fetchCourses]);
 
   return (
     <>
