@@ -93,6 +93,26 @@ function Component() {
 
   //   console.log("Saved courses: ", savedCoursesArray);
   // };
+  
+  const fetchCourses = async () => {
+    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
+      method: "get",
+      credencials: "include",
+    });
+    result = await result.json();
+
+    const data = result.data;
+
+    console.log("RESULT: ", data);
+
+    setSavedCourses(data);
+
+    localStorage.setItem("courses", JSON.stringify(data));
+
+    const savedCoursesArray = savedCourses;
+
+    console.log("Saved courses: ", savedCoursesArray);
+  };
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -101,25 +121,6 @@ function Component() {
       setLoginStatus(true);
       console.log("TOKEN IS AVAILABLE");
       // Call function to fetch courses
-      const fetchCourses = async () => {
-        let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
-          method: "get",
-          credencials: "include",
-        });
-        result = await result.json();
-    
-        const data = result.data;
-    
-        console.log("RESULT: ", data);
-    
-        setSavedCourses(data);
-    
-        localStorage.setItem("courses", JSON.stringify(data));
-    
-        const savedCoursesArray = savedCourses;
-    
-        console.log("Saved courses: ", savedCoursesArray);
-      };
 
       !savedCourses && fetchCourses();
     } else {
@@ -137,7 +138,6 @@ function Component() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout loginStatus={loginStatus} />}>
-            {/* <Route path="NavBar" element={<NavBar />} /> */}
             <Route index path="/" element={<LandingPage />} />
             <Route path="About" element={<About />} />
             <Route path="Blog" element={<Blog />} />
