@@ -4,6 +4,7 @@ import "./courseCard.css";
 // import { FiBookmark } from "react-icons/fi";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import MemoryKeys from "../../models/MemoryKeys";
 // import axios from "axios";
 
 const CourseCard = (props) => {
