@@ -22,6 +22,7 @@ const DecFinanceDetails = (props) => {
   // let mate_3 = [];
   // let mate_4 = [];
   // let Requirement = [];
+  
   let tag_1 = [];
   let tag_2 = [];
   let tag_3 = [];
@@ -57,7 +58,7 @@ const DecFinanceDetails = (props) => {
     document.getElementById("rev").style.borderBottom = "2.5px solid #027dff";
   }
   let data = props.data;
-  console.log(data);
+  // console.log(data);
 
   const mode = (ModuleData).map((item) => {
     return( 
@@ -105,7 +106,7 @@ const DecFinanceDetails = (props) => {
   //     }),
   //     headers: {
   //       "content-Type": "application/json",
-  //       Authorization: "Bearer " + localStorage.getItem("token"),
+  //       Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
   //     },
   //   });
   //   result = await result.json();
@@ -133,7 +134,7 @@ const DecFinanceDetails = (props) => {
   revew.map((item) => {
     return stars.push(item.rating);
   });
-  console.log(stars);
+  // console.log(stars);
 
   let starSum = stars.reduce((add, value) => {
     return add + value;
@@ -173,7 +174,7 @@ const DecFinanceDetails = (props) => {
   let bar3 = `${((count3 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
   let bar2 = `${((count2 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
   let bar1 = `${((count1 / (count5 + count4 + count3 + count2 + count1)) * 100)}%`
-  console.log(bar5);
+  // console.log(bar5);
 
   const stu = revew.map((item) => {
     return (
