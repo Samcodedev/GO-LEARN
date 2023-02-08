@@ -1,7 +1,6 @@
 import React from "react";
 import "./Head.css";
 import { Link } from "react-router-dom";
-import Course from "../.././Courses";
 import { BsPerson } from "react-icons/bs";
 import Card from "./Card";
 import { useState } from "react";
@@ -15,8 +14,7 @@ const Head = ({ landingCourses }) => {
 
 
   let course = JSON.parse(localStorage.getItem("courses"));
-  let personalDevelopmentCourses;
-  let iTCourses;
+  
   const [data1, setData1] = useState();
   const [data2, setData2] = useState();
 
@@ -33,30 +31,27 @@ const Head = ({ landingCourses }) => {
 
     localStorage.setItem("courses", JSON.stringify(data));
 
-    personalDevelopmentCourses = data.filter(
+    let personalDevelopmentCourses = data.filter(
       (word) => word.category === "Personal Development"
     );
-    iTCourses = data.filter((word) => word.category === "Design and IT");
+    let iTCourses = data.filter((word) => word.category === "Design and IT");
 
     console.log("filtered courses: ", {
       "personal development courses": personalDevelopmentCourses,
       iTCourses: iTCourses,
     });
 
-    setData1 =
-      personalDevelopmentCourses[
-        Math.floor(Math.random() * personalDevelopmentCourses.length)
-      ];
-    setData2 = iTCourses[Math.floor(Math.random() * iTCourses.length)];
+    setData1(personalDevelopmentCourses[Math.floor(Math.random() * personalDevelopmentCourses.length)])
+    setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
   }
 
   useEffect(() => {
     if (course) {
       // const marketingCourses = course.filter(word => word.category === "Marketing");
-      personalDevelopmentCourses = course.filter(
+      let personalDevelopmentCourses = course.filter(
         (word) => word.category === "Personal Development"
       );
-      iTCourses = course.filter((word) => word.category === "Design and IT");
+      let iTCourses = course.filter((word) => word.category === "Design and IT");
 
       setData1(personalDevelopmentCourses[Math.floor(Math.random() * personalDevelopmentCourses.length)]);
       setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
@@ -65,7 +60,7 @@ const Head = ({ landingCourses }) => {
 
       console.log("filtered courses: ", {
         "personal development courses": personalDevelopmentCourses,
-        iTCourses: iTCourses,
+        "iTCourses": iTCourses,
       });
     }
 

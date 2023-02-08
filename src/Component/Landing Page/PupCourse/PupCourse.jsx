@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./PupCourse.css";
 import Card from "./Card.jsx";
 // import ClassesData from '../../Courses/Data/ClassesData'
@@ -6,12 +6,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const PupCourse = ({ landingCourses }) => {
-  // console.log('landingCourses: ', landingCourses);
-
-  // let course = JSON.parse(localStorage.getItem("courses"));
   const [course, setCourse] = useState();
 
-  async function fetchCourses() {
+  const fetchCourses = useCallback(async () => {
     if (course) {
       return;
     }
@@ -29,7 +26,7 @@ const PupCourse = ({ landingCourses }) => {
     localStorage.setItem("courses", JSON.stringify(data));
 
     setCourse(data);
-  }
+  }, [course]);
 
   useEffect(() => {
     if (!course) {
