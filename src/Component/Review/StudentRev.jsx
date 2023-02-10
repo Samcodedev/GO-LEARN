@@ -5,6 +5,7 @@ import { FaStar } from 'react-icons/fa'
 import moment from "moment";
 
 const StudentRev = (props) => {
+    
     let sta = [
         <FaStar fill='rgb(226, 194, 12)' />,
         <FaStar fill='rgb(226, 194, 12)' />,
@@ -37,7 +38,7 @@ const StudentRev = (props) => {
             <div className="top">
                 <div className="cont">
                     <div className="img-div">
-                        <img src={profile} alt="" />
+                        <img src={props.img ?? profile} alt="" />
                     </div>
                     <div className="text-div">
                         <span>{props.name}</span>

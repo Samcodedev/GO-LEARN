@@ -35,9 +35,9 @@ const Education = () => {
     },
   ];
 
-  const Data = dd.map((items) => {
+  const Data = dd.map((items, index) => {
     return (
-      <Card title={items.title} content={items.content} icons={items.icons} />
+      <Card title={items.title} content={items.content} icons={items.icons}  key={index} />
     );
   });
 

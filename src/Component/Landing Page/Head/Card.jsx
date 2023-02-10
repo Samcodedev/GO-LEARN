@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import { BiBookAlt } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
 import prof from "./img/Group 1.png";
+import MemoryKeys from "../../models/MemoryKeys";
 
 const Card = ({courseData, hideBottomVisibility}) => {
   console.log('CARD PROPS: ', {courseData, hideBottomVisibility});
   let course = courseData;
+  let token = localStorage.getItem(MemoryKeys.UserToken);
+  console.log('token: ', token);
   return (
     <div className="card">
       <div className="card-img">
@@ -24,7 +27,7 @@ const Card = ({courseData, hideBottomVisibility}) => {
         </div>
         <div className="card-content">
           <h1>
-            <Link to={`/course/${courseData?._id}`} state={{ id: course }}>
+            <Link to={token ? `/course/${courseData?._id}` : '/login'}>
               {courseData?.courseTitle}
             </Link>
           </h1>
