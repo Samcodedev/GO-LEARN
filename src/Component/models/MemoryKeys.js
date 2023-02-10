@@ -23,4 +23,9 @@ export default class MemoryKeys {
      * Storage key for selected course id
      */
     static SelectedCourseId = "selected-course-id";
+
+    /**
+     * Storage key for selected course content
+     */
+    static SelectedCourseContent = "selected-course-content";
 }
