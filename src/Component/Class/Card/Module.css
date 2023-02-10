@@ -33,7 +33,7 @@
 .tutor-according-item .tutor-according-body{
     background-color: #ffffff;
     display: none;
-    flex-direction: row-reverse;
+    /* flex-direction: row-reverse; */
     justify-content: space-between;
     align-items: center;
     padding: 8px 16px;

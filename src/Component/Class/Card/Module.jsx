@@ -10,7 +10,7 @@ const Module = (props) => {
                 <RiArrowDownSLine />
             </div>
             <div className="tutor-according-body">
-                <span>{props.time}</span>
+                {/* <span>{props.time}</span> */}
                 <h5>{props.title}</h5>
             </div>
         </div>
