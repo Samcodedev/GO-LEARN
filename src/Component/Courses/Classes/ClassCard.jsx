@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 const ClassCard = (props) => {
   let sss = props.data;
+  // console.log(props);
   // console.log(sss);
   return (
     <div className="card">
@@ -19,9 +20,11 @@ const ClassCard = (props) => {
         {/* <span>
           <FaStar fill="#fcb303" />
         </span> */}
-        <a href={props.link}>
+        <Link to={`/course/${props.data._id}`}>
+        <a>
           <h3>{props.title}</h3>
         </a>
+        </Link>
         <div className="classDetails">
           <p>{props.time}</p>
           <p>{props.audience}</p>
@@ -37,7 +40,8 @@ const ClassCard = (props) => {
         </div>
       </div>
       <div className="enrol-div">
-        <Link to="/DecFinance" state={{ id: props.data }}>
+        {/* <Link to="/DecFinance" state={{ id: props.data }}> */}
+        <Link to={`/course/${props.data._id}`}>
           <button>Enroll Course</button>
         </Link>
       </div>
