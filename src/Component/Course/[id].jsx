@@ -15,6 +15,7 @@ const Course = () => {
   const { id } = useParams();
   const [courseData, setCourseData] = useState();
   const [courseReview, setCoureReview] = useState([]);
+  const [courseReviewCount, setCourseReviewCount] = useState();
   const [coureReviewFetched, setCoureReviewFetched] = useState(false);
   const [isReviewVisible, setIsReviewVisible] = useState(false);
   const [userData, setUserData] = useState();
@@ -49,17 +50,63 @@ const Course = () => {
     console.log("Course reviews: ", result);
 
     setCoureReview(result.data);
+    setCourseReviewCount(result.count);
     setCoureReviewFetched(true);
   };
 
-  
+  let ratings = [];
+  courseReview.map((item) => {
+    return ratings.push(item.rating);
+  });
+
+  let totalRatingSum = ratings.reduce((add, value) => {
+    return add + value;
+  }, 0);
+  // console.log(totalRatingSum);
+
+  let count5 = 0;
+  let count4 = 0;
+  let count3 = 0;
+  let count2 = 0;
+  let count1 = 0;
+
+  ratings.forEach((ratingFigure) => {
+    if (ratingFigure === 5) {
+      count5 += 1;
+    } else if (ratingFigure === 4) {
+      count4 += 1;
+    } else if (ratingFigure === 3) {
+      count3 += 1;
+    } else if (ratingFigure === 2) {
+      count2 += 1;
+    } else if (ratingFigure === 1) {
+      count1 += 1;
+    }
+  });
+
+  let bar5 = `${
+    (count5 / (count5 + count4 + count3 + count2 + count1)) * 100
+  }%`;
+  let bar4 = `${
+    (count4 / (count5 + count4 + count3 + count2 + count1)) * 100
+  }%`;
+  let bar3 = `${
+    (count3 / (count5 + count4 + count3 + count2 + count1)) * 100
+  }%`;
+  let bar2 = `${
+    (count2 / (count5 + count4 + count3 + count2 + count1)) * 100
+  }%`;
+  let bar1 = `${
+    (count1 / (count5 + count4 + count3 + count2 + count1)) * 100
+  }%`;
+
   /**
    * Function to get user info
    */
   const handleUserInfoRetrieval = async () => {
     const token = localStorage.getItem(MemoryKeys.UserToken);
     console.log(token);
-    
+
     const config = {
       headers: {
         "content-Type": "application/json",
@@ -75,11 +122,14 @@ const Course = () => {
       }
     );
     result = await result.json();
-    console.log('User info: ', result);
+    console.log("User info: ", result);
 
     setUserData(result.data);
-    
-    localStorage.setItem(MemoryKeys.UserCredentials, JSON.stringify(result.data));
+
+    localStorage.setItem(
+      MemoryKeys.UserCredentials,
+      JSON.stringify(result.data)
+    );
   };
 
   useEffect(() => {
@@ -98,7 +148,7 @@ const Course = () => {
     if (!userData) {
       handleUserInfoRetrieval();
     }
-  }, [userData]); 
+  }, [userData]);
 
   return (
     <>
@@ -131,7 +181,7 @@ const Course = () => {
               <li onClick={() => setIsReviewVisible(true)}>Reviews</li>
             </nav>
 
-            {!isReviewVisible ? (
+            {!isReviewVisible && (
               // COURSE INFO SECTION
               <div className="course-info" id="info">
                 <div className="about">
@@ -140,7 +190,7 @@ const Course = () => {
                   <p>{courseData?.courseDescription}</p>
                   <h4>Who This Course is for</h4>
                   {courseData?.audience.map((eachAudienceValue, index) => (
-                    <p key={index}>{eachAudienceValue}</p>
+                    <ul key={index}>{eachAudienceValue}</ul>
                   ))}
                 </div>
                 <div className="gain">
@@ -156,21 +206,35 @@ const Course = () => {
                   <div className="tutor-according">- course content data</div>
                 </div>
               </div>
-            ) : (
+            )}
+            {isReviewVisible && (
               // REVIEW SECTION
               <div className="reviews" id="review">
                 <h3>Student Ratings & Reviews</h3>
                 <div className="chat">
                   <div className="total-rating">
-                    <h1> - Total rating value</h1>
+                    <h1>{courseReview.length}</h1>
+                    <p>{courseReview.length < 2 ? "rating" : "ratings"}</p>
                     <span>
-                      <FaStar fill="rgb(226, 194, 12)" />
-                      <FaStar fill="rgb(226, 194, 12)" />
-                      <FaStar fill="rgb(226, 194, 12)" />
-                      <FaStar fill="rgb(226, 194, 12)" />
-                      <FaStar fill="rgb(226, 194, 12)" />
+                      {[
+                        ...Array(
+                          `${Math.floor(totalRatingSum / courseReviewCount)}`
+                        ),
+                      ].map((each, index) => (
+                        <div key={index} style={{ display: "inline-flex" }}>
+                          <FaStar fill="rgb(226, 194, 12)" />
+                        </div>
+                      ))}
                     </span>
-                    <p>Total 5 Ratings</p>
+                    {courseReviewCount == 0 ? (
+                      <p>
+                        0 Ratings
+                      </p>
+                    ) : (
+                      <p>
+                        {totalRatingSum / courseReviewCount} average Ratings
+                      </p>
+                    )}
                   </div>
                   <div className="rating-bar">
                     <div className="column">
@@ -183,13 +247,13 @@ const Course = () => {
                       <div className="bar">
                         <div
                           className="prog"
-                          // style={{ width: bar5 === "NaN%" ? "0%" : bar5 }}
-                          style={{ width: "0%" }}
+                          style={{ width: bar5 === "NaN%" ? "0%" : bar5 }}
+                          // style={{ width: "0%" }}
                         ></div>
                       </div>
-                      <div className="rate">
+                      {/* <div className="rate">
                         <p>5 Rating</p>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="column">
                       <div className="star">
@@ -199,11 +263,15 @@ const Course = () => {
                         <p>4</p>
                       </div>
                       <div className="bar">
-                        <div className="prog" style={{ width: "0%" }}></div>
+                        <div
+                          className="prog"
+                          style={{ width: bar4 === "NaN%" ? "0%" : bar4 }}
+                          // style={{ width: "0%" }}
+                        ></div>
                       </div>
-                      <div className="rate">
+                      {/* <div className="rate">
                         <p>4 Rating</p>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="column">
                       <div className="star">
@@ -213,11 +281,14 @@ const Course = () => {
                         <p>3</p>
                       </div>
                       <div className="bar">
-                        <div className="prog" style={{ width: "0%" }}></div>
+                        <div
+                          className="prog"
+                          style={{ width: bar3 === "NaN%" ? "0%" : bar3 }}
+                        ></div>
                       </div>
-                      <div className="rate">
+                      {/* <div className="rate">
                         <p>3 Rating</p>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="column">
                       <div className="star">
@@ -227,11 +298,14 @@ const Course = () => {
                         <p>2</p>
                       </div>
                       <div className="bar">
-                        <div className="prog" style={{ width: "0%" }}></div>
+                        <div
+                          className="prog"
+                          style={{ width: bar2 === "NaN%" ? "0%" : bar2 }}
+                        ></div>
                       </div>
-                      <div className="rate">
+                      {/* <div className="rate">
                         <p>2 Rating</p>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="column">
                       <div className="star">
@@ -241,11 +315,14 @@ const Course = () => {
                         <p>1</p>
                       </div>
                       <div className="bar">
-                        <div className="prog" style={{ width: "0%" }}></div>
+                        <div
+                          className="prog"
+                          style={{ width: bar1 === "NaN%" ? "0%" : bar1 }}
+                        ></div>
                       </div>
-                      <div className="rate">
+                      {/* <div className="rate">
                         <p>1 Rating</p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -258,6 +335,7 @@ const Course = () => {
                       time={eachReview.createdAt}
                       review={eachReview.review}
                       star={eachReview.rating}
+                      img={userData.displayPicture}
                     />
                   ))}
                 </div>
@@ -300,7 +378,12 @@ const Course = () => {
               <div className="course-top">
                 <h3>A course by</h3>
                 <div className="profile">
-                  <img src={userData?.displayPicture ?? "/avatar.png"} alt="" />
+                  <div className="profileImg">
+                    <img
+                      src={userData?.displayPicture ?? "/avatar.png"}
+                      alt=""
+                    />
+                  </div>
                   <div className="content">
                     <Link to="/construction">{courseData?.publisherName}</Link>
                     <span>{courseData?.category} instructor</span>
