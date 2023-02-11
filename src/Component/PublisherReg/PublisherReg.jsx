@@ -1,6 +1,7 @@
 import React from 'react';
 import './PublisherReg.css'
 import { useNavigate } from 'react-router-dom';
+import MemoryKeys from '../models/MemoryKeys';
 
 
 
@@ -41,7 +42,7 @@ const PublisherReg = () => {
             setTimeout(() => {
                 navigate('/profile')
             }, 3000);
-            localStorage.setItem("token", token )
+            localStorage.setItem(MemoryKeys.UserToken, token )
             document.getElementById("message").innerHTML="You have successfully Registered"
         }
     }

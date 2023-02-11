@@ -31,14 +31,14 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     setSavedCourses(data);
 
-    localStorage.setItem("courses", JSON.stringify(data));
+    localStorage.setItem(MemoryKeys.Courses, JSON.stringify(data));
 
     // console.log("RESULT: ", data);
   };
 
   const savedCoursesArray = savedCourses;
   if (savedCoursesArray && savedCoursesArray !== []) {
-    localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
+    localStorage.setItem(MemoryKeys.Courses, JSON.stringify(savedCoursesArray));
   }
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     const config = {
       headers: {
         "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
       },
     };
     let result = await fetch(
@@ -68,7 +68,10 @@ const ProfileBody = ({ setLoginStatus }) => {
     // console.warn(result);
     console.log(result);
     effunc(result.data);
-    localStorage.setItem(MemoryKeys.UserCredentials, JSON.stringify(result.data));
+    localStorage.setItem(
+      MemoryKeys.UserCredentials,
+      JSON.stringify(result.data)
+    );
   };
 
   const [cart, cartfunc] = React.useState([]);
@@ -78,7 +81,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     const config = {
       headers: {
         "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
       },
     };
 
@@ -93,7 +96,9 @@ const ProfileBody = ({ setLoginStatus }) => {
     result = await result.json();
     console.warn(result);
     console.log(result);
-    cartfunc(result.data.course);
+    if (result.success) {
+      cartfunc(result.data.course);
+    }
 
     // cartAvailability = true;
   };
@@ -122,11 +127,21 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   const handleinstructorCourse = useCallback(async () => {
     console.log("Fetching instructor courses");
-    let retrievedCredentials = JSON.parse(localStorage.getItem(MemoryKeys.UserCredentials));
+    let retrievedCredentials = JSON.parse(
+      localStorage.getItem(MemoryKeys.UserCredentials)
+    );
     let userId;
-    if (retrievedCredentials && (retrievedCredentials != null || retrievedCredentials !== undefined)) {
-      userId = retrievedCredentials._id; 
+
+    if (
+      retrievedCredentials &&
+      retrievedCredentials != null &&
+      retrievedCredentials !== undefined
+    ) {
+      userId = retrievedCredentials._id;
     } else {
+      if(!det) {
+        handleLogin();
+      }
       userId = det._id;
     }
 
@@ -147,7 +162,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     result.data && instructCourseFunc(result.data);
     !result.data && instructorErrorFunc(result);
-  }, [det._id]);
+  }, [det]);
 
   const courseCreatedCard = instructCourse.map((item, index) => {
     return (
@@ -165,263 +180,39 @@ const ProfileBody = ({ setLoginStatus }) => {
   });
 
   useEffect(() => {
+    let userDetails = localStorage.getItem(MemoryKeys.UserCredentials);
+    if (userDetails && userDetails !== null && userDetails !== undefined) {
+      console.log("Parsed: ", JSON.parse(userDetails));
+      effunc(JSON.parse(userDetails));
+      return;
+    }
+
     handleLogin();
   }, []);
 
-  // det.role === "user" && handlecart();
-  // det.role === "publisher" && handleinstructorCourse();
-
-  // let retrievalCheck = false;
-
   useEffect(() => {
-    if (det && det.role === "user") {
-      handlecart();
-      return;
+    if(det) {
+      det.role === "user" && handlecart();
+      det.role === "publisher" && handleinstructorCourse();
     }
-    if (det && det.role === "publisher") {
-      handleinstructorCourse();
-      return;
-    }
+    // if (det && det.role === "user") {
+    //   handlecart();
+    //   return;
+    // }
+    // if (det && det.role === "publisher") {
+    //   handleinstructorCourse();
+    //   return;
+    // }
     // det.role === "publisher" && handleinstructorCourse();
-  }, [det, det.role, handleinstructorCourse]);
-
-  // useEffect(() => {
-  //   // if (det.role === "publisher") {
-  //   //   handleinstructorCourse();
-  //   //   return;
-  //   // }
-  //   det.role === "publisher" && handleinstructorCourse();
-  // }, [det.role]);
-
-  const [isVideoCourseContentUploadType, setIsVideoCourseContentUploadType] =
-    useState(true);
-
-  let [courseTitle, ctfunc] = React.useState("");
-  let [courseDescription, codfunc] = React.useState("");
-  let [courseDuration, cdfunc] = React.useState("");
-  let [category, cafunc] = React.useState("");
-  let [whatToLearnValues, whfunc] = React.useState([]);
-  let [requirementValues, refunc] = React.useState([]);
-  let [audienceValues, aufunc] = React.useState([]);
-  let [materialsValues, mafunc] = React.useState([]);
-
-  let [courseContentValues, cofunc] = React.useState([]);
-  // let [videoFiles, setVideoFiles] = React.useState([]);
-  let [tags, tafunc] = React.useState([]);
-  let [titleValue, titleValuefunc] = React.useState([]);
-
-  // this is used to get the course id so as to update it with the "coursecontent" and "videos" at handleUploadCourseContent
-  // const [createCou, createCoufunc] = React.useState();
-
-  const whatToLearn = Object.values(whatToLearnValues);
-  const requirement = Object.values(requirementValues);
-  const audience = Object.values(audienceValues);
-  const materials = Object.values(materialsValues);
-  const title = Object.values(titleValue);
-  const courseContent = Object.values(courseContentValues);
-
-  const [courseImage, courseImageFunc] = React.useState(null);
-  // const [courseImageFile, setcourseImageFile] = React.useState(null);
-
-  // function update() {
-  // createCou? handleUploadCourseContent() : alert("don't call")
-  // }
-
-  const [responseMessage, setResponseMessage] = useState();
-
-  const handleCreateCourse = async (e) => {
-    e.preventDefault();
-
-    // console.log("Form inputs: ", {
-    //   courseTitle,
-    //   courseDescription,
-    //   courseDuration,
-    //   category,
-    //   whatToLearnValues,
-    //   requirementValues,
-    //   audienceValues,
-    //   materialsValues,
-
-    //   courseContentValues,
-    //   courseContent,
-    //   whatToLearn,
-    //   requirement,
-    //   audience,
-    // });
-
-    console.log("Form inputs: ", {
-      courseTitle,
-      courseDescription,
-      courseDuration,
-      category,
-      whatToLearn,
-      requirement,
-      audience,
-      materials,
-      title,
-      courseContent,
-    });
-
-    // return;
-
-    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
-      method: "post",
-      credencials: "include",
-      body: JSON.stringify({
-        courseTitle,
-        courseDescription,
-        courseDuration,
-        category,
-        whatToLearn,
-        requirement,
-        audience,
-        materials,
-      }),
-      headers: {
-        "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-
-    result = await result.json();
-    console.warn(result);
-    console.log(result);
-    // createCoufunc(result.data._id);
-
-    if (result.success === true) {
-      // Upload course content
-      handleUploadCourseContent(result.data._id);
-      // Upload course image
-      handleCourseImage(result.data._id);
-      setResponseMessage(
-        `You have successfully created ${courseTitle} course.`
-      );
-      // document.getElementById(
-      //   "message"
-      // ).innerHTML = `You have successfully created ${courseTitle} course.`;
-      document.getElementById("message").style.color = "green";
-    } else if (result.success === false) {
-      setResponseMessage(
-        "An error occured, please fill in all fields, and try again."
-      );
-      // document.getElementById(
-      //   "message"
-      // ).innerHTML = `An error occured, please fill in all fields, and try again.`;
-      document.getElementById("message").style.color = "red";
-    }
-
-    // call handleUploadCourseContent() to update the course (to upload course content and videos) immediately after course is created
-    // createCou ? handleUploadCourseContent() : console.log("no course created");
-  };
-
-  const handleUploadCourseContent = async (courseId) => {
-    // const data1 = new FormData();
-    // data1.append("displaypicture", imageFile);
-    // console.log("courseContent: ", courseContent);
-
-    let result = await fetch(
-      `https://golearn.up.railway.app/api/v1/course/uploadcontent/${courseId}`,
-      {
-        method: "post",
-        credencials: "include",
-        body: {
-          title,
-          courseContent,
-        },
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    result = await result.json();
-    console.warn(result);
-    console.log(result);
-  };
-
-  const handleCourseImage = async (courseId) => {
-    console.log("Image file: ", coverImageFile);
-    courseImageFunc(!courseImage);
-
-    // const data = new FormData();
-    // data.append("File", imageFile);
-
-    const data = new FormData();
-    data.append("courseimage", coverImageFile);
-    console.log("data: ", data);
-
-    let result = await fetch(
-      `https://golearn.up.railway.app/api/v1/course/uploadcourseimage/${courseId}`,
-      {
-        method: "post",
-        credencials: "include",
-        body: data,
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    console.log("Loading");
-    result = await result.json();
-    console.warn(result);
-    console.log(result);
-    console.log("DATA: ", data);
-
-    handleLogin();
-    // console.log(displaypicture);
-  };
-
-  function dashboard() {
-    document.getElementById("dashboard").style.display = "flex";
-    document.getElementById("profile").style.display = "none";
-    document.getElementById("create").style.display = "none";
-    document.getElementById("cart").style.display = "none";
-    //   document.getElementById("first").style.backgroundColor = "#007bff";
-    //   document.getElementById("first").style.color = "#ffffff";
-    //   document.getElementById("second").style.backgroundColor = "transparent";
-    //   document.getElementById("sixth").style.backgroundColor = "transparent";
-  }
-
-  function profile() {
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("profile").style.display = "block";
-    document.getElementById("create").style.display = "none";
-    document.getElementById("cart").style.display = "none";
-  }
-
-  function create() {
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("profile").style.display = "none";
-    document.getElementById("create").style.display = "block";
-    document.getElementById("cart").style.display = "none";
-  }
-
-  function course() {
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("profile").style.display = "none";
-    document.getElementById("create").style.display = "none";
-    document.getElementById("cart").style.display = "flex";
-
-    det.role === "publisher" ? handleinstructorCourse() : handlecart();
-  }
+  }, [det, handleinstructorCourse]);
 
   // State that handles course content input
   const [courseContentValuesInput, setCourseContentInput] = useState([
     {
       visibility: true,
     },
-    // {
-    //   visibility: false,
-    // },
-    // {
-    //   visibility: false,
-    // },
-    // {
-    //   visibility: false,
-    // },
-    // {
-    //   visibility: false,
-    // },
   ]);
+  const [courseContentInputError, setCourseContentInputError] = useState();
 
   // State that handles what to learn input
   const [whatToLearnValuesInput, setWhatToLearnInput] = useState([
@@ -518,6 +309,250 @@ const ProfileBody = ({ setLoginStatus }) => {
     },
   ]);
 
+  const [isVideoCourseContentUploadType, setIsVideoCourseContentUploadType] =
+    useState(true);
+
+  let [courseTitle, ctfunc] = React.useState("");
+  let [courseDescription, codfunc] = React.useState("");
+  let [courseDuration, cdfunc] = React.useState("");
+  let [category, cafunc] = React.useState("");
+  let [whatToLearnValues, whfunc] = React.useState([]);
+  let [requirementValues, refunc] = React.useState([]);
+  let [audienceValues, aufunc] = React.useState([]);
+  let [materialsValues, mafunc] = React.useState([]);
+  let [tag, tafunc] = React.useState([]);
+
+  let [courseContentValues, cofunc] = React.useState([]);
+  let [titleValue, titleValuefunc] = React.useState([]);
+
+  const whatToLearn = Object.values(whatToLearnValues);
+  const requirement = Object.values(requirementValues);
+  const audience = Object.values(audienceValues);
+  const materials = Object.values(materialsValues);
+  const title = Object.values(titleValue);
+  const coursecontent = Object.values(courseContentValues);
+  const tags = Object.values(tag);
+  const courseContent = title.map((title, index) => ({
+    title,
+    coursecontent: coursecontent[index],
+  }));
+
+  // console.log("courseContent data: ", data);
+
+  // console.log({ tag, tags });
+  console.log("updated coursecontent: ", courseContent);
+
+  const [courseImage, courseImageFunc] = React.useState(null);
+  // const [courseImageFile, setcourseImageFile] = React.useState(null);
+
+  // function update() {
+  // createCou? handleUploadCourseContent() : alert("don't call")
+  // }
+
+  const [responseMessage, setResponseMessage] = useState();
+  const [courseContentResponseMessage, setCourseContentResponseMessage] =
+    useState();
+
+  const handleCreateCourse = async (e) => {
+    e.preventDefault();
+    setCourseContentResponseMessage("");
+    setResponseMessage("");
+
+    // console.log("Form inputs: ", {
+    //   courseTitle,
+    //   courseDescription,
+    //   courseDuration,
+    //   category,
+    //   whatToLearnValues,
+    //   requirementValues,
+    //   audienceValues,
+    //   materialsValues,
+
+    //   courseContentValues,
+    //   content,
+    //   whatToLearn,
+    //   requirement,
+    //   audience,
+    // });
+
+    console.log("Form inputs: ", {
+      courseTitle,
+      courseDescription,
+      courseDuration,
+      category,
+      whatToLearn,
+      requirement,
+      audience,
+      materials,
+      title,
+      coursecontent,
+      tags,
+    });
+
+    // return;
+
+    let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
+      method: "post",
+      credencials: "include",
+      body: JSON.stringify({
+        courseTitle,
+        courseDescription,
+        courseDuration,
+        category,
+        whatToLearn,
+        requirement,
+        audience,
+        materials,
+        tags,
+      }),
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
+      },
+    });
+
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+    // createCoufunc(result.data._id);
+
+    if (result.success === true) {
+      // Upload course image
+      await handleCourseImage(result.data._id);
+      // Upload course content
+      await handleUploadCourseContent(result.data._id);
+
+      localStorage.removeItem(MemoryKeys.Courses);
+
+      setResponseMessage(
+        `You have successfully created ${courseTitle} course.`
+      );
+      // document.getElementById(
+      //   "message"
+      // ).innerHTML = `You have successfully created ${courseTitle} course.`;
+      document.getElementById("message").style.color = "green";
+    } else if (result.success === false) {
+      setResponseMessage(
+        "An error occured, please fill in all fields, and try again."
+      );
+      // document.getElementById(
+      //   "message"
+      // ).innerHTML = `An error occured, please fill in all fields, and try again.`;
+      document.getElementById("message").style.color = "red";
+    }
+
+    // call handleUploadCourseContent() to update the course (to upload course content and videos) immediately after course is created
+    // createCou ? handleUploadCourseContent() : console.log("no course created");
+  };
+
+  const handleUploadCourseContent = async (courseId) => {
+    console.log("courseContentup: ", courseContent);
+
+    const courseContentData = new FormData();
+    courseContent.forEach((content) => {
+      if (!content) {
+        console.error("The contents for courseContent is undefined");
+        return;
+      }
+      courseContentData.append("title", content.title);
+      courseContentData.append("youtube", content.coursecontent);
+    });
+    console.log(courseContentData);
+
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/uploadcontent/${courseId}`,
+      {
+        method: "post",
+        credencials: "include",
+        body: courseContentData,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
+        },
+      }
+    );
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+    if (result.successful) {
+      document.getElementById("courseContentResponseMessage").style.color =
+        "green";
+      setCourseContentResponseMessage(
+        "Course content was uploaded successfully"
+      );
+    } else {
+      document.getElementById("courseContentResponseMessage").style.color =
+        "red";
+      setCourseContentResponseMessage("Course content upload failed");
+      return false;
+    }
+  };
+
+  const handleCourseImage = async (courseId) => {
+    console.log("Image file: ", coverImageFile);
+    courseImageFunc(!courseImage);
+
+    // const data = new FormData();
+    // data.append("File", imageFile);
+
+    const data = new FormData();
+    data.append("courseimage", coverImageFile);
+    console.log("data: ", data);
+
+    let result = await fetch(
+      `https://golearn.up.railway.app/api/v1/course/uploadcourseimage/${courseId}`,
+      {
+        method: "post",
+        credencials: "include",
+        body: data,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
+        },
+      }
+    );
+    console.log("Loading");
+    result = await result.json();
+    console.warn(result);
+    console.log(result);
+    console.log("DATA: ", data);
+
+    handleLogin();
+    // console.log(displaypicture);
+  };
+
+  function dashboard() {
+    document.getElementById("dashboard").style.display = "flex";
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("create").style.display = "none";
+    document.getElementById("cart").style.display = "none";
+    //   document.getElementById("first").style.backgroundColor = "#007bff";
+    //   document.getElementById("first").style.color = "#ffffff";
+    //   document.getElementById("second").style.backgroundColor = "transparent";
+    //   document.getElementById("sixth").style.backgroundColor = "transparent";
+  }
+
+  function profile() {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("profile").style.display = "block";
+    document.getElementById("create").style.display = "none";
+    document.getElementById("cart").style.display = "none";
+  }
+
+  function create() {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("create").style.display = "block";
+    document.getElementById("cart").style.display = "none";
+  }
+
+  function course() {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("create").style.display = "none";
+    document.getElementById("cart").style.display = "flex";
+
+    det.role === "publisher" ? handleinstructorCourse() : handlecart();
+  }
+
   /**
    *
    * @param {state name} contentName holds name of the state
@@ -548,19 +583,27 @@ const ProfileBody = ({ setLoginStatus }) => {
    * Function to add new course content field
    */
   function addNewCourseContent() {
-    // Create instance of state
-    let _courseContentValuesInput = courseContentValuesInput;
+    // Set latest input
+    const latestTitle = titleValue[courseContentValuesInput.length - 1];
+    const latestVideo =
+      courseContentValues[courseContentValuesInput.length - 1];
 
-    // Create instance of state object
-    let _courseContentValuesInputObj = {
-      visibility: true,
-    };
+    // If the title and video do not have a value
+    if (!latestTitle && !latestVideo) {
+      setCourseContentInputError(
+        "Fill in complete course content before adding a new one."
+      );
+      return;
+    }
 
-    // Push object instance into state instance
-    _courseContentValuesInput.push(_courseContentValuesInputObj);
-
-    // Set state
-    setCourseContentInput(_courseContentValuesInput);
+    setCourseContentInputError("");
+    // Else, add new visibility status to show next field
+    setCourseContentInput([
+      ...courseContentValuesInput,
+      {
+        visibility: true,
+      },
+    ]);
 
     console.log(courseContentValuesInput);
 
@@ -610,13 +653,14 @@ const ProfileBody = ({ setLoginStatus }) => {
     setCoverImage(imgURL);
   };
 
-  const handleCourseContentUpload = (e, type) => {
-    if (type === "video") {
+  const handleCourseContentUpload = (e) => {
+    if (isVideoCourseContentUploadType) {
       // let _courseContentValues = courseContentValues;
 
       // _courseContentValues.push(e.target.files[0]);
 
       cofunc([...courseContentValues, e.target.files[0]]);
+      console.log("courseContentValues: ", courseContentValues);
 
       // const videoURL = URL.createObjectURL(e.target.files[0]);
 
@@ -625,7 +669,7 @@ const ProfileBody = ({ setLoginStatus }) => {
       // console.log(courseContentValues);
       return;
     }
-    if (type === "link") {
+    if (!isVideoCourseContentUploadType) {
       cofunc([...courseContentValues, e.target.value]);
 
       return;
@@ -654,7 +698,7 @@ const ProfileBody = ({ setLoginStatus }) => {
         // }),
         body: data,
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
         },
       }
     );
@@ -708,7 +752,7 @@ const ProfileBody = ({ setLoginStatus }) => {
           </div>
           <div className="profileDetails">
             <div className="img-div">
-              <img src={det.displayPicture ? det.displayPicture : img} alt="" />
+              <img src={det.displayPicture ?? img} alt="" />
               <span
                 style={{ color: "#fff" }}
                 onClick={() => setEditProfilePicture(true)}
@@ -893,7 +937,6 @@ const ProfileBody = ({ setLoginStatus }) => {
               <label>Course Cover image</label>
               <div className="content-upload-area">
                 {coverImage ? (
-                  // <p>Cover image uploaded!</p>
                   <>
                     <div className="selectedImg">
                       <img src={coverImage} alt="selected display" />
@@ -1108,10 +1151,10 @@ const ProfileBody = ({ setLoginStatus }) => {
                       {eachContent.visibility && (
                         <input
                           type="text"
-                          value={tags[index]}
+                          value={tag[index]}
                           onChange={(e) =>
                             tafunc({
-                              ...tags,
+                              ...tag,
                               [index]: e.target.value,
                             })
                           }
@@ -1127,122 +1170,127 @@ const ProfileBody = ({ setLoginStatus }) => {
                 )}
               </div>
 
-              <div className="double-array-input">
-                <div className="each">
-                  {/* to upload the course content */}
-                  <label>Course Content</label>
-                  <div className="array-input-course-content">
-                    {courseContentValuesInput.map((eachContent, index) => (
-                      <div key={index}>
-                        {eachContent.visibility && (
-                          <input
-                            type="text"
-                            value={titleValue[index]}
-                            onChange={(e) =>
-                              titleValuefunc({
-                                ...titleValue,
-                                [index]: e.target.value,
-                              })
-                            }
-                          />
-                        )}
-                      </div>
-                    ))}
+              <div>
+                <span className="linksPasteInfo">
+                  In case of links upload make sure to paste{" "}
+                  <span>(not type)</span> the youtube links
+                </span>
+                <div className="double-array-input">
+                  <div className="each">
+                    {/* to upload the course content */}
+                    <label>Course Content</label>
+                    <div className="array-input-course-content">
+                      {courseContentValuesInput.map((eachContent, index) => (
+                        <div key={index}>
+                          {eachContent.visibility && (
+                            <input
+                              type="text"
+                              value={titleValue[index]}
+                              onChange={(e) =>
+                                titleValuefunc({
+                                  ...titleValue,
+                                  [index]: e.target.value,
+                                })
+                              }
+                            />
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                <div className="each">
-                  {/* to upload the course videos (send to the API as "coursecontent") */}
-                  <label>Upload Videos / links</label>
-                  {/* <div className="array-input"> */}
-                  <div>
-                    {courseContentValuesInput.map((eachContent, index) => (
-                      <div key={index}> 
-                        {courseContentValuesInput[index].visibility && (
-                          <div key={index} className="content-upload-area">
-                            {eachContent.visibility &&
-                            courseContentValues[index] ? (
-                              <>
+                  <div className="each">
+                    {/* to upload the course videos (send to the API as "coursecontent") */}
+                    <label>Upload Videos / links</label>
+                    {/* <div className="array-input"> */}
+                    <div>
+                      {courseContentValuesInput.map((eachContent, index) => (
+                        <div key={index}>
+                          {courseContentValuesInput[index].visibility && (
+                            <div key={index} className="content-upload-area">
+                              {eachContent.visibility &&
+                              courseContentValues[index] ? (
+                                // <p>{courseContentValues[index]} uploaded</p>
                                 <p>
-                                  {courseContentValues[index].name} uploaded{" "}
+                                  <p className="uploadedContent">
+                                    {courseContentValues[index].name ??
+                                      courseContentValues[index]}
+                                  </p>
+                                  uploaded
                                 </p>
-                              </>
-                            ) : (
-                              // <p>uploaded!</p>
-                              <>
-                                {isVideoCourseContentUploadType ? (
-                                  <>
-                                    <p className="tapArea">
-                                      <BsPlus fontSize={20} /> Tap to upload
-                                      file
+                              ) : (
+                                // <p>uploaded!</p>
+                                <>
+                                  {isVideoCourseContentUploadType ? (
+                                    <>
+                                      <p className="tapArea">
+                                        <BsPlus fontSize={20} /> Tap to upload
+                                        file
+                                        <input
+                                          type="file"
+                                          value={courseContentValues[index]}
+                                          onChange={(e) =>
+                                            handleCourseContentUpload(e)
+                                          }
+                                        />
+                                      </p>
+                                      <p
+                                        className="uploadOptions"
+                                        onClick={() =>
+                                          setIsVideoCourseContentUploadType(
+                                            false
+                                          )
+                                        }
+                                      >
+                                        Upload link instead
+                                      </p>
+                                    </>
+                                  ) : (
+                                    <>
                                       <input
-                                        type="file"
-                                        value={courseContentValues[index]}
+                                        type="text"
+                                        // value={courseContentValues[index]}
                                         onChange={(e) =>
                                           handleCourseContentUpload(e)
                                         }
                                       />
-                                    </p>
-                                    <p
-                                      className="uploadOptions"
-                                      onClick={() =>
-                                        setIsVideoCourseContentUploadType(false)
-                                      }
-                                    >
-                                      Upload link instead
-                                    </p>
-                                  </>
-                                ) : (
-                                  <>
-                                    <input
-                                      type="text"
-                                      // value={courseContentValues[index]}
-                                      onChange={(e) =>
-                                        handleCourseContentUpload(e)
-                                      }
-                                    />
-                                    <p
-                                      className="uploadOptions"
-                                      onClick={() =>
-                                        setIsVideoCourseContentUploadType(true)
-                                      }
-                                    >
-                                      Upload video instead
-                                    </p>
-                                  </>
-                                )}
-                              </>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                                      <p
+                                        className="uploadOptions"
+                                        onClick={() =>
+                                          setIsVideoCourseContentUploadType(
+                                            true
+                                          )
+                                        }
+                                      >
+                                        Upload video instead
+                                      </p>
+                                    </>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  {/* {courseContentValuesInput[0].visibility && (
-                      <span
-                        onClick={() =>
-                          addInputField(
-                            courseContentValuesInput,
-                            setCourseContentInput
-                          )
-                        }
-                      >
-                        Add
-                      </span>
-                    )} */}
-                  {/* </div> */}
+                  <p>{courseContentInputError}</p>
+
+                  {courseContentValuesInput[0].visibility && (
+                    <span
+                      onClick={addNewCourseContent}
+                      className="addCourseContent"
+                    >
+                      Add
+                    </span>
+                  )}
                 </div>
-                {courseContentValuesInput[0].visibility && (
-                  <span
-                    onClick={addNewCourseContent}
-                    className="addCourseContent"
-                  >
-                    Add
-                  </span>
-                )}
               </div>
 
               <span id="message">{responseMessage}</span>
+              <span id="courseContentResponseMessage">
+                {courseContentResponseMessage}
+              </span>
               <input type="submit" value="Create" className="submit" />
             </form>
           </div>

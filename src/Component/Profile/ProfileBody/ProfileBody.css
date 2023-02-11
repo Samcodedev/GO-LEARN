@@ -438,6 +438,15 @@
   gap: 20px;
   /* border: 1px solid; */
 }
+.profilebody .sub-profilebody .dashboard .create-course form .linksPasteInfo {
+  font-size: 14px;
+  text-transform: none;
+}
+.profilebody .sub-profilebody .dashboard .create-course form .linksPasteInfo span {
+  color: #007bff;
+  display: inline-flex;
+  text-transform: none;
+}
 .profilebody .sub-profilebody .dashboard .create-course form .double-array-input {
   display: flex;
   align-items: center;
@@ -505,17 +514,30 @@
   gap: 12px;
   /* align-items: center; */
 }
+
+.content-upload-area .uploadedContent{
+  max-width: 240px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 .content-upload-area .selectedImg {
   height: 120px;
-  width: 120px;
+  width: 100%;
+  max-width: 240px;
   display: flex;
   border-radius: 6px;
   overflow: hidden;
+  cursor: pointer;
+}
+.content-upload-area .selectedImg:hover img {
+  scale: 0.8;  
 }
 .content-upload-area img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  transition: all 300ms;
 }
 .content-upload-area .changeImg {
   background-color: #007bff;

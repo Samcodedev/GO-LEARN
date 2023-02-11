@@ -17,7 +17,7 @@ const ProfileCard = (props) => {
   //       "content-Type": "application/json",
   //       'Accept': 'application/json',
   //       'Access-Control-Allow-Origin': '*',
-  //       Authorization: "Bearer " + localStorage.getItem("token"),
+  //       Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
   //     },
   //   };
   //   let result = await fetch(

@@ -26,6 +26,8 @@
 .studentrev .top .cont .img-div{
     width: 60px;
     height: 60px;
+    border-radius: 100%;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,6 +37,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 .studentrev .top .cont .text-div{
     display: flex;

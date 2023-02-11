@@ -4,6 +4,7 @@ import "./courseCard.css";
 // import { FiBookmark } from "react-icons/fi";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import MemoryKeys from "../../models/MemoryKeys";
 // import axios from "axios";
 
 const CourseCard = (props) => {
@@ -19,7 +20,7 @@ const CourseCard = (props) => {
     const config = {
       headers: {        
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
       },
     };
     let result = await fetch(

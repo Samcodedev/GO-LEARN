@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 // import { FaStar } from "react-icons/fa";
 
 const ClassCard = (props) => {
-  let sss = props.data;
-  console.log(sss);
+  
   return (
     <div className="card">
       <div className="img-div">
@@ -19,9 +18,9 @@ const ClassCard = (props) => {
         {/* <span>
           <FaStar fill="#fcb303" />
         </span> */}
-        <a href={props.link}>
+        <Link to={`/course/${props.data._id}`}>
           <h3>{props.title}</h3>
-        </a>
+        </Link>
         <div className="classDetails">
           <p>{props.time}</p>
           <p>{props.audience}</p>
@@ -37,7 +36,8 @@ const ClassCard = (props) => {
         </div>
       </div>
       <div className="enrol-div">
-        <Link to="/DecFinance" state={{ id: props.data }}>
+        {/* <Link to="/DecFinance" state={{ id: props.data }}> */}
+        <Link to={`/course/${props.data._id}`}>
           <button>Enroll Course</button>
         </Link>
       </div>

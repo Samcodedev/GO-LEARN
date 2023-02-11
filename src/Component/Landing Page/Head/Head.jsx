@@ -5,13 +5,14 @@ import { BsPerson } from "react-icons/bs";
 import Card from "./Card";
 import { useState } from "react";
 import { useEffect } from "react";
+import MemoryKeys from "../../models/MemoryKeys";
 
 const Head = ({ landingCourses }) => {
   const [tokenAvailability, setTokenAvailability] = useState(false);
   // const [firstDataIsAvailable, setFirstDataIsAvailable] = useState(false);
   // const [secondDataIsAvailable, setSecondDataIsAvailable] = useState(false);
 
-  let course = JSON.parse(localStorage.getItem("courses"));
+  let course = JSON.parse(localStorage.getItem(MemoryKeys.Courses));
 
   const [data1, setData1] = useState();
   const [data2, setData2] = useState();
@@ -25,9 +26,9 @@ const Head = ({ landingCourses }) => {
 
     const data = result.data;
 
-    console.log("RESULT: ", data);
+    // console.log("RESULT: ", data);
 
-    localStorage.setItem("courses", JSON.stringify(data));
+    localStorage.setItem(MemoryKeys.Courses, JSON.stringify(data));
 
     let personalDevelopmentCourses = data.filter(
       (word) => word.category === "Personal Development"
@@ -62,7 +63,7 @@ const Head = ({ landingCourses }) => {
         iTCourses: iTCourses,
       });
       
-      if (!data1 && data2) {
+      if (!data1 && !data2) {
         setData1(
           personalDevelopmentCourses[
             Math.floor(Math.random() * personalDevelopmentCourses.length)
@@ -70,7 +71,7 @@ const Head = ({ landingCourses }) => {
         );
 
         setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
-        console.log("data: ", { "Data 1": data1, "Data 2 ": data2 });
+        // console.log("data: ", { "Data 1": data1, "Data 2 ": data2 });
         return;
       }
 
@@ -81,14 +82,14 @@ const Head = ({ landingCourses }) => {
           ]
         );
 
-        console.log("Data 1 set: ", { "Data": data1,});
+        // console.log("Data 1 set: ", { "Data": data1,});
         return;
       }
 
       if (!data2) {
         setData2(iTCourses[Math.floor(Math.random() * iTCourses.length)]);
 
-        console.log("Data 2 set: ", { "Data": data1,});
+        // console.log("Data 2 set: ", { "Data": data1,});
         return;
       }
     }
@@ -102,7 +103,7 @@ const Head = ({ landingCourses }) => {
 
   // useeffect hook to get token from localStorage and set token availability
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem(MemoryKeys.UserToken);
     token && setTokenAvailability(true);
   }, []);
 

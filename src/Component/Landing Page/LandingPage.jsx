@@ -39,16 +39,15 @@ function LandingPage() {
         return;
       }
 
-      await fetch("https://golearn.up.railway.app/api/v1/course", {
+      let result = await fetch("https://golearn.up.railway.app/api/v1/course", {
         method: "get",
         credencials: "include",
-      })
-      .then(async (response) => {
-        console.log('response: ', response);
-      })
-      .catch((error) => {
-        console.log('error: ', error);
-      })
+      });
+      result = await result.json();
+  
+      const fetchedCourseData = result.data;
+  
+      localStorage.setItem(MemoryKeys.Courses, JSON.stringify(fetchedCourseData));
     }
 
     // If we don't have the courses 
