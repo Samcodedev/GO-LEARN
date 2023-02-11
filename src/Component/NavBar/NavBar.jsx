@@ -11,7 +11,7 @@ import { FaUser, FaTimes } from "react-icons/fa";
 import { useState } from "react";
 
 const NavBar = ({loginStatus}) => {
-  console.log(window.innerWidth);
+  // console.log(window.innerWidth);
 
   const onMobile = useResponsive();
 

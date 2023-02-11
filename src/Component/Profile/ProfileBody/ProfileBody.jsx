@@ -31,14 +31,14 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     setSavedCourses(data);
 
-    localStorage.setItem("courses", JSON.stringify(data));
+    localStorage.setItem(MemoryKeys.Courses, JSON.stringify(data));
 
     // console.log("RESULT: ", data);
   };
 
   const savedCoursesArray = savedCourses;
   if (savedCoursesArray && savedCoursesArray !== []) {
-    localStorage.setItem("courses", JSON.stringify(savedCoursesArray));
+    localStorage.setItem(MemoryKeys.Courses, JSON.stringify(savedCoursesArray));
   }
 
   useEffect(() => {
@@ -131,12 +131,17 @@ const ProfileBody = ({ setLoginStatus }) => {
       localStorage.getItem(MemoryKeys.UserCredentials)
     );
     let userId;
+
     if (
       retrievedCredentials &&
-      (retrievedCredentials != null || retrievedCredentials !== undefined)
+      retrievedCredentials != null &&
+      retrievedCredentials !== undefined
     ) {
       userId = retrievedCredentials._id;
     } else {
+      if(!det) {
+        handleLogin();
+      }
       userId = det._id;
     }
 
@@ -157,7 +162,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
     result.data && instructCourseFunc(result.data);
     !result.data && instructorErrorFunc(result);
-  }, [det._id]);
+  }, [det]);
 
   const courseCreatedCard = instructCourse.map((item, index) => {
     return (
@@ -176,7 +181,7 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   useEffect(() => {
     let userDetails = localStorage.getItem(MemoryKeys.UserCredentials);
-    if ((userDetails && userDetails !== null) || userDetails !== undefined) {
+    if (userDetails && userDetails !== null && userDetails !== undefined) {
       console.log("Parsed: ", JSON.parse(userDetails));
       effunc(JSON.parse(userDetails));
       return;
@@ -186,16 +191,20 @@ const ProfileBody = ({ setLoginStatus }) => {
   }, []);
 
   useEffect(() => {
-    if (det && det.role === "user") {
-      handlecart();
-      return;
+    if(det) {
+      det.role === "user" && handlecart();
+      det.role === "publisher" && handleinstructorCourse();
     }
-    if (det && det.role === "publisher") {
-      handleinstructorCourse();
-      return;
-    }
+    // if (det && det.role === "user") {
+    //   handlecart();
+    //   return;
+    // }
+    // if (det && det.role === "publisher") {
+    //   handleinstructorCourse();
+    //   return;
+    // }
     // det.role === "publisher" && handleinstructorCourse();
-  }, [det, det.role, handleinstructorCourse]);
+  }, [det, handleinstructorCourse]);
 
   // State that handles course content input
   const [courseContentValuesInput, setCourseContentInput] = useState([
@@ -327,7 +336,7 @@ const ProfileBody = ({ setLoginStatus }) => {
     title,
     coursecontent: coursecontent[index],
   }));
-  
+
   // console.log("courseContent data: ", data);
 
   // console.log({ tag, tags });
@@ -346,8 +355,8 @@ const ProfileBody = ({ setLoginStatus }) => {
 
   const handleCreateCourse = async (e) => {
     e.preventDefault();
-    setCourseContentResponseMessage('');
-    setResponseMessage('');
+    setCourseContentResponseMessage("");
+    setResponseMessage("");
 
     // console.log("Form inputs: ", {
     //   courseTitle,
@@ -437,12 +446,12 @@ const ProfileBody = ({ setLoginStatus }) => {
   };
 
   const handleUploadCourseContent = async (courseId) => {
-    console.log('courseContentup: ', courseContent);
+    console.log("courseContentup: ", courseContent);
 
     const courseContentData = new FormData();
     courseContent.forEach((content) => {
-      if(!content) {
-        console.error('The contents for courseContent is undefined');
+      if (!content) {
+        console.error("The contents for courseContent is undefined");
         return;
       }
       courseContentData.append("title", content.title);
@@ -743,7 +752,7 @@ const ProfileBody = ({ setLoginStatus }) => {
           </div>
           <div className="profileDetails">
             <div className="img-div">
-              <img src={det.displayPicture ? det.displayPicture : img} alt="" />
+              <img src={det.displayPicture ?? img} alt="" />
               <span
                 style={{ color: "#fff" }}
                 onClick={() => setEditProfilePicture(true)}

@@ -122,6 +122,7 @@
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-top h3{
     color: #606060;
+    margin-bottom: 12px;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-top .profile{
     display: flex;
@@ -154,49 +155,50 @@
 
 
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer{
-    /* width: fit-content; */
-    /* border: 1px solid #cdcfd5; */
-    border-top: none;
-    /* width: 100%; */
-    position: relative;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 24px 0;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first{
     padding-top: 24px;
     padding-bottom: 24px;
-    padding: 16px 32px;
+    padding: 0px 32px;
     margin: 0;
     background-color: #FCFCFD;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first h3{
     color: #606060;
+    margin-bottom: 8px;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first ul{
-    line-height: 1.6;
+    /* line-height: 1.6; */
     font-size: 1rem;
     color: #606060;
+    margin-top: 0px;
+    list-style: none;
+    padding-inline-start: 10px;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first .tags{
     /* background-color: burlywood; */
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    gap: 8px;
+    /* justify-content: space-around; */
     flex-wrap: wrap;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first .tags button{
     display: block;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 26px;
     text-decoration: none;
-    padding: 7px 23px;
+    padding: 4px 16px;
     border: 1px solid #cdcfd5;
     color: #41454F;
     border-radius: 6px;
     transition: 200ms;
     cursor: pointer;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 .DecFinanceDetails .sub-DecFinanceDetails .sub-detail .course-detail .course-footer .first .tags button:hover{
     border: 1px solid #027dff;
@@ -302,7 +304,8 @@
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .about p{
     color: #606060;
-    margin-bottom: 15px;
+    margin: 0;
+    margin-bottom: 16px;
     line-height: 1.7;
     font-size: 16px;
 }
@@ -311,21 +314,29 @@
     color: #221638;
     font-size: 1.75rem;
 }
-.DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .gain h3{
-    font-weight: bold;
-    color: #221638;
-    font-size: 1.75rem;
+.DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .about h4{
+    margin-bottom: 8px;
+}
+.DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .about ul{
+    margin: 0;
+    margin-bottom: 16px;
+    padding-inline-start: 12px;
+}
+.DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .gain h4{
+    margin-bottom: 8px;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .gain ul{
-    /* padding: 0; */
-    justify-content: space-between;
-    line-height: 1.6;
-    font-size: 1rem;
     color: #606060;
+    margin: 0;
+    margin-bottom: 16px;
+    padding-inline-start: 12px;
 }
 .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .gain ul li{
     margin-bottom: 12px;
     list-style: disc;
+}
+.DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content h4{
+    margin-bottom: 8px;
 }
 /* .DecFinanceDetails .sub-DecFinanceDetails .main-detail .course-info .course-content{
     background-color: cornflowerblue;

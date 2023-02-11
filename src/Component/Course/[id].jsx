@@ -1,6 +1,5 @@
-import axios from "axios";
 import moment from "moment";
-import React from "react";
+import React, { useCallback } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { FaStar } from "react-icons/fa";
@@ -23,7 +22,11 @@ const Course = () => {
   /**
    * Function to get course data
    */
-  const handleGetCourseInfo = async () => {
+  const handleGetCourseInfo = useCallback(async () => {
+    if (courseData) {
+      return;
+    }
+
     let result = await fetch(
       `https://golearn.up.railway.app/api/v1/course/${id}`,
       {
@@ -34,12 +37,16 @@ const Course = () => {
     console.log("Course info: ", result);
     setCourseData(result.data);
     localStorage.setItem(MemoryKeys.SelectedCourseId, id);
-  };
+  }, [courseData, id]);
 
   /**
    * Function to get course review(s)
    */
-  const handleCourseReview = async () => {
+  const handleCourseReview = useCallback(async () => {
+    if (coureReviewFetched) {
+      return;
+    }
+
     let result = await fetch(
       `https://golearn.up.railway.app/api/v1/course/${id}/reviews`,
       {
@@ -52,7 +59,7 @@ const Course = () => {
     setCoureReview(result.data);
     setCourseReviewCount(result.count);
     setCoureReviewFetched(true);
-  };
+  }, [coureReviewFetched, id]);
 
   let ratings = [];
   courseReview.map((item) => {
@@ -136,13 +143,13 @@ const Course = () => {
     if (!courseData) {
       handleGetCourseInfo();
     }
-  }, [courseData]);
+  }, [courseData, handleGetCourseInfo]);
 
   useEffect(() => {
     if (courseReview.length < 1 && !coureReviewFetched) {
       handleCourseReview();
     }
-  }, [courseReview, coureReviewFetched]);
+  }, [courseReview, coureReviewFetched, handleCourseReview]);
 
   useEffect(() => {
     if (!userData) {
@@ -226,10 +233,8 @@ const Course = () => {
                         </div>
                       ))}
                     </span>
-                    {courseReviewCount == 0 ? (
-                      <p>
-                        0 Ratings
-                      </p>
+                    {totalRatingSum === 0 ? (
+                      <p>0 Ratings</p>
                     ) : (
                       <p>
                         {totalRatingSum / courseReviewCount} average Ratings
@@ -328,9 +333,9 @@ const Course = () => {
                 </div>
                 <div className="wrap">
                   {/* {[...Array(5)].map((eachReview, index) => ( */}
-                  {courseReview.map((eachReview, index) => (
+                  {courseReview.map((eachReview, index) => ( 
                     <StudentRev
-                      key={eachReview._id}
+                      key={index}
                       name={eachReview.userName}
                       time={eachReview.createdAt}
                       review={eachReview.review}

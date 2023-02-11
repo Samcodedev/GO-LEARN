@@ -35,7 +35,7 @@ const Classes = ({ loginStatus }) => {
     vaFunc(true);
   },[]);
 
-  let datas = courses && courses.map((items) => {
+  let datas = courses && courses.map((items, index) => {
     return (
       <ClassCard
         title={items.courseTitle}
@@ -44,6 +44,7 @@ const Classes = ({ loginStatus }) => {
         category={items.category}
         author={items.publisherName}
         data={items}
+        key={index}
       />
     );
   });

@@ -6,10 +6,10 @@ import prof from "./img/Group 1.png";
 import MemoryKeys from "../../models/MemoryKeys";
 
 const Card = ({courseData, hideBottomVisibility}) => {
-  console.log('CARD PROPS: ', {courseData, hideBottomVisibility});
-  let course = courseData;
+  // console.log('CARD PROPS: ', {courseData, hideBottomVisibility});
   let token = localStorage.getItem(MemoryKeys.UserToken);
-  console.log('token: ', token);
+  // console.log('token: ', token);
+
   return (
     <div className="card">
       <div className="card-img">

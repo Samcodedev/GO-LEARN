@@ -4,6 +4,7 @@ import Card from "./Card.jsx";
 // import ClassesData from '../../Courses/Data/ClassesData'
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import MemoryKeys from "../../models/MemoryKeys";
 
 const PupCourse = ({ landingCourses }) => {
   const [course, setCourse] = useState();
@@ -21,9 +22,9 @@ const PupCourse = ({ landingCourses }) => {
 
     const data = result.data;
 
-    console.log("RESULT: ", data);
+    // console.log("RESULT: ", data);
 
-    localStorage.setItem("courses", JSON.stringify(data));
+    localStorage.setItem(MemoryKeys.Courses, JSON.stringify(data));
 
     setCourse(data);
   }, [course]);
@@ -59,7 +60,7 @@ const PupCourse = ({ landingCourses }) => {
             are the creator of your own career and we will guide you through it.
             <Link to="/register">Register Free Now!</Link>{" "}
           </p>
-          <Link to="/Courses">
+          <Link to="/courses">
             <button>VIEW MORE COURSES</button>
           </Link>
         </div>

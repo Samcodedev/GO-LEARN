@@ -1,26 +1,27 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./Class.css";
 import Module from "./Card/Module";
-import ModuleData from "./Card/ModuleData.json";
-// import ReviewData from '../Review/data/ReviewData.json'
 import StudentRev from "../Review/StudentRev";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import MemoryKeys from "../models/MemoryKeys";
 import { useState } from "react";
 import { useEffect } from "react";
 
 const Class = () => {
   const { id } = useParams();
-  // const location = useLocation();
   let selectedCourseId = id;
-  let courseDataId = localStorage.getItem(MemoryKeys.SelectedCourseId);
+
   const [courseData, setCourseData] = useState();
   const [courseContent, setCourseContent] = useState([]);
 
   /**
    * Function to get course data
    */
-  const handleGetCourseInfo = async () => {
+  const handleGetCourseInfo = useCallback(async () => {
+    if (courseData) {
+      return;
+    }
+
     let result = await fetch(
       `https://golearn.up.railway.app/api/v1/course/${selectedCourseId}`,
       {
@@ -34,13 +35,15 @@ const Class = () => {
       MemoryKeys.SelectedCourseContent,
       JSON.stringify(result.data.courseContent)
     );
-  };
+  }, [courseData, selectedCourseId]);
+  // const handleGetCourseInfo = async () => {
+  // };
 
   useEffect(() => {
     if (!courseData) {
       handleGetCourseInfo();
     }
-  }, [courseData]);
+  }, [courseData, handleGetCourseInfo]);
 
   useEffect(() => {
     const retrievedCourseContent = localStorage.getItem(
@@ -61,7 +64,7 @@ const Class = () => {
     }
 
     handleGetCourseInfo();
-  }, []);
+  }, [handleGetCourseInfo, courseContent]);
 
   // useEffect(() => {
 
@@ -107,13 +110,15 @@ const Class = () => {
       />
     );
   }
-    
+
   const handleNext = () => {
-    setCurrentVideoIndex(prevIndex => (prevIndex + 1) % videoData.length);
+    setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoData.length);
   };
-  
+
   const handlePrevious = () => {
-    setCurrentVideoIndex(prevIndex => (prevIndex - 1 + videoData.length) % videoData.length);
+    setCurrentVideoIndex(
+      (prevIndex) => (prevIndex - 1 + videoData.length) % videoData.length
+    );
   };
 
   // function ConditionalRenderVideo(array) {
@@ -135,22 +140,22 @@ const Class = () => {
   //   });
   // }
 
-  const [nextForward, nextForwardFunc] = React.useState(0);
-  function next() {
-    nextForwardFunc(nextForward + (nextForward <= 4 ? 1 : 0));
-    // alert(nextForward)
-  }
+  // const [nextForward, nextForwardFunc] = React.useState(0);
+  // function next() {
+  //   nextForwardFunc(nextForward + (nextForward <= 4 ? 1 : 0));
+  // alert(nextForward)
+  // }
 
-  function backward() {
-    nextForwardFunc(nextForward - (nextForward >= 1 ? 1 : 0));
-    // alert(nextForward)
-  }
+  // function backward() {
+  //   nextForwardFunc(nextForward - (nextForward >= 1 ? 1 : 0));
+  //   // alert(nextForward)
+  // }
 
   // console.log("total length", videoData.length);
 
-  const mode = ModuleData.map((item) => {
-    return <Module module={item.module} title={item.title} time={item.time} />;
-  });
+  // const mode = ModuleData.map((item) => {
+  //   return <Module module={item.module} title={item.title} time={item.time} />;
+  // });
 
   function overview() {
     document.getElementById("overview").style.display = "flex";
@@ -193,7 +198,11 @@ const Class = () => {
   }
 
   const [revew, refunct] = React.useState([]);
-  const handlerev = async () => {
+
+  const handlerev = useCallback(async () => {
+    if (revew) {
+      return;
+    }
     let result = await fetch(
       `https://golearn.up.railway.app/api/v1/course/${selectedCourseId}/reviews`,
       {
@@ -204,9 +213,7 @@ const Class = () => {
     // console.log(result)
 
     refunct(result.data);
-  };
-  // console.log(revew)
-  // handlerev();
+  }, [revew, selectedCourseId]);
 
   let [pup, pupf] = React.useState("");
   let [review, refunc] = React.useState("");
@@ -248,7 +255,7 @@ const Class = () => {
     if (!revew) {
       handlerev();
     }
-  }, [revew]);
+  }, [revew, handlerev]);
 
   useEffect(() => {
     if (!courseContent) {
@@ -273,33 +280,31 @@ const Class = () => {
     );
   });
 
-  const materialsList = courseData?.materials.map((item) => {
+  const materialsList = courseData?.materials.map((item, index) => {
     return (
-      <a href={item} target="_blank" rel="noreferrer">
+      <a href={item} target="_blank" rel="noreferrer" key={index}>
         {item}
       </a>
     );
   });
 
-  const courseId = selectedCourseId;
+  // const courseId = selectedCourseId;
 
-  const handleCart = async (e) => {
-    e.preventDefault();
-    let result = await fetch("`https://golearn.up.railway.app/api/v1/cart", {
-      method: "post",
-      credencials: "include",
-      body: JSON.stringify({
-        courseId,
-      }),
-      headers: {
-        "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
-      },
-    });
-    result = await result.json();
-    console.warn(result);
-    console.log(result);
-  };
+  // const handleCart = async (e) => {
+  //   e.preventDefault();
+  //   let result = await fetch("`https://golearn.up.railway.app/api/v1/cart", {
+  //     method: "post",
+  //     credencials: "include",
+  //     body: JSON.stringify(courseId),
+  //     headers: {
+  //       "content-Type": "application/json",
+  //       Authorization: "Bearer " + localStorage.getItem(MemoryKeys.UserToken),
+  //     },
+  //   });
+  //   result = await result.json();
+  //   console.warn(result);
+  //   console.log(result);
+  // };
 
   return (
     <div className="class">
@@ -317,7 +322,7 @@ const Class = () => {
               key={index}
             />
           ))}
-          {courseContent.length < 1 && 'No course content added yet'}
+          {courseContent.length < 1 && "No course content added yet"}
         </div>
         <div className="video">
           <div className="video-head">
